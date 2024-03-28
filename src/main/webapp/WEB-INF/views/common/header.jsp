@@ -18,7 +18,7 @@
           <div class="menu_title" onclick="location.href='lost_item_search';" style="cursor: pointer;">
             습득물 찾기
           </div>
-          <div class="menu_title" onclick="location.href='write_view';" style="cursor: pointer; ">
+          <div class="menu_title" onclick="location.href='lost_item_write_view';" style="cursor: pointer; ">
             분실물 등록
           </div>
           <div class="menu_title" onclick="location.href='rescue_ani_search_page';" style="cursor: pointer; ">

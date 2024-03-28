@@ -22,7 +22,7 @@ public class AnimalController {
 	public String missing_ani_write_view(Model model, @SessionAttribute(name = "userId", required = false) String userId){
 		String result = "";
 			if (userId != null) {
-				result = "animal/missing_ani_write_page";
+				result = "missing_ani.write_page.실종동물 등록 페이지.1";
 			} else if (userId == null) {
 				System.out.println("로그인 해야만 작성이 가능합니다.");
 				result = "redirect:loginform";

@@ -30,17 +30,17 @@ public class ItemController {
 		ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
 		
 		model.addAttribute("itemList", itemList);
-		return "item/lost_item_search_page";
+		return "lost_item.search_page.습득물 검색 페이지.1";
 	}
 	
-	@RequestMapping("write_view")
+	@RequestMapping("lost_item_write_view")
 	public String lost_item_write_view(Model model, @SessionAttribute(name = "userId", required = false) String userId){
 		String result = "";
 			if(userId!=null) {
-				result = "lost_item/lost_item_write_page";
+				result = "lost_item.write_page.분실물 등록 페이지.2";
 			}else if(userId==null) {
 				System.out.println("로그인 해야만 작성이 가능합니다.");
-				result = "login/loginform_page";
+				result = "redirect:loginform";
 			}
 		return result;
 	}

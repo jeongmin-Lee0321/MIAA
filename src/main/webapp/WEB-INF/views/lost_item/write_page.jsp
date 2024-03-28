@@ -6,17 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<title>분실물 등록 페이지</title>
 </head>
 <body>
+	<div>
 	<h2>분실물 등록</h2><br>
 	잃어버리신 물품을 등록하시면 내정보 알림게시판에서 습득물에 대한 정보를 받아보실 수 있습니다.<br>
 	*표시는 필수 입력란입니다
@@ -27,7 +22,7 @@
 				비공개<input type="radio" name="openclose" value="false"> <br>
 		<hr>
 		<h3>분실 일시 및 장소</h3>
-		분실날짜 : <input type="text" id="lostday" name="lostday"> <br>
+		분실날짜 : <input type="date" id="lostday" name="lostday"> <br>
 		분실장소 <br> <input type="text" id="sample6_address" name="address" placeholder="주소"> 
 		<input type="hidden" id="sample6_extraAddress" name="address2" placeholder="참고항목">
 		<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -76,7 +71,7 @@
 		<input type="hidden" name="userId" value="${userId }">
 		<br> <input type="submit" value="등록하기">
 	</form>
-
+</div>
 <script>
 	//주소록 찾기 
 	function sample6_execDaumPostcode() {
@@ -112,12 +107,6 @@
 						}
 					}).open();
 		}
-</script>
-<script>
-	// 달력 날짜 선택
-	$(function() {
-		$("#lostday").datepicker();
-	});
 </script>
 <script>
 	//분류표 선택 
