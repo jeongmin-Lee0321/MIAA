@@ -1,0 +1,41 @@
+package com.tech.miaa.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.tech.miaa.service.AnimalService;
+import com.tech.miaa.serviceInter.AnimalServiceInter;
+
+@Controller
+public class AnimalController {
+	@Autowired
+	private SqlSession sqlSession;
+
+	AnimalServiceInter animalService;
+	@RequestMapping("missing_ani_write_view")
+	public String missing_ani_write_view(Model model, @SessionAttribute(name = "userId", required = false) String userId){
+		String result = "";
+			if (userId != null) {
+				result = "animal/missing_ani_write_page";
+			} else if (userId == null) {
+				System.out.println("로그인 해야만 작성이 가능합니다.");
+				result = "redirect:loginform";
+			}
+		return result;
+	}
+
+	@RequestMapping("missing_ani_write")
+	public String missing_ani_write(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+
+		animalService = new AnimalService();
+		String result=animalService.missing_ani_write(model);
+		return result;
+	}
+}

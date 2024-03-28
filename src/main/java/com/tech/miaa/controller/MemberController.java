@@ -1,0 +1,112 @@
+package com.tech.miaa.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.tech.miaa.service.MemberService;
+import com.tech.miaa.serviceInter.MemberServiceInter;
+
+@Controller
+public class MemberController {
+	@Autowired
+	private SqlSession sqlSession;
+	
+	MemberServiceInter memberServiceInter;
+	
+	@RequestMapping("loginform")
+	public String loginform(HttpServletRequest request, Model model) {
+		return "login.loginform_page.로그인 페이지.1";
+	}
+	@RequestMapping("joinform")
+	public String joinform(HttpServletRequest request, Model model) {
+		return "login.joinform_page.회원가입 페이지.1";
+	}
+	@RequestMapping("searchidform")
+	public String searchidform(HttpServletRequest request, Model model) {
+		return "login/searchidform";
+	}
+	@RequestMapping("searchpwform")
+	public String searchpwform(HttpServletRequest request, Model model) {
+		return "login/searchpwform";
+	}
+
+	@ResponseBody
+	@RequestMapping("idcheck")
+	public int idcheck(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		int num=memberServiceInter.idchek(model);
+		
+		return num;
+	}
+	
+	@ResponseBody
+	@RequestMapping("emailchk")
+	public int emailchk(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		int num=memberServiceInter.emailchk(model);
+		
+		return num;
+	}
+
+	@ResponseBody
+	@RequestMapping("searchid")
+	public String searchid(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		String fineid=memberServiceInter.searchid(model);
+		
+		return fineid;
+	}
+	
+	@ResponseBody
+	@RequestMapping("searchpw")
+	public String searchpw(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		String finepw = memberServiceInter.searchpw(model);
+		
+		return finepw;
+	}
+	
+	@RequestMapping("join")
+	public String join(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		String result=memberServiceInter.join(model);
+		
+		return result;
+	}
+	
+	@RequestMapping("login")
+	public String login(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		String result=memberServiceInter.login(model);
+		
+		return result;
+	}
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request, @SessionAttribute(name = "userId", required = false) String userId) {
+		HttpSession session = request.getSession(false);
+		if(userId != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
+}
