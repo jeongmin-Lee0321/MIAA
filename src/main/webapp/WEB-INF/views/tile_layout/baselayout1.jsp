@@ -33,6 +33,7 @@ body {
 }
 
 #main-body {
+	position: relative;
 	padding-top: 62px;
 	margin-left: auto;
 	margin-right: auto;
@@ -43,6 +44,7 @@ body {
 
 
 #main-grid {
+	position: relative;
 	display: grid;
 	/* grid-template-columns: 15.38% 84.72%; */
 	grid-template-columns: 220px 1220px;
