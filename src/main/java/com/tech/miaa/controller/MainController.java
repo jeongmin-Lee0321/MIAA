@@ -33,15 +33,5 @@ public class MainController {
 		model.addAttribute("userId", userId);
 		return "main_page.메인페이지.1";
 	}
-	@RequestMapping(value = "/rescue_ani_search_page", method = RequestMethod.GET)
-	public String rescue_ani_search_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
-		if(userId != null){
-			System.out.println("로그인 유저의 id : "+userId);
-		}else if(userId == null){
-			System.out.println("로그인 하지 않았습니다.");
-		}
-		model.addAttribute("userId", userId);
-		
-		return "rescue_ani.search_page.보호동물 검색.3";
-	}
+
 }

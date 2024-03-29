@@ -15,16 +15,16 @@
       </div>
       <div class="nologo_container">
         <div class="menu_cotainer">
-          <div class="menu_title" onclick="location.href='lost_item_search';" style="cursor: pointer;">
+          <div class="menu_title" onclick="location.href='found_item_search_page';" style="cursor: pointer;">
             습득물 찾기
           </div>
-          <div class="menu_title" onclick="location.href='write_view';" style="cursor: pointer; ">
+          <div class="menu_title" onclick="location.href='lost_item_search_page';" style="cursor: pointer; ">
             분실물 등록
           </div>
           <div class="menu_title" onclick="location.href='rescue_ani_search_page';" style="cursor: pointer; ">
             보호동물 찾기
           </div>
-          <div class="menu_title" onclick="location.href='missing_ani_write_view';" style="cursor: pointer; ">
+          <div class="menu_title" onclick="location.href='missing_ani_search_page';" style="cursor: pointer; ">
             실종동물 등록
           </div>
         </div>

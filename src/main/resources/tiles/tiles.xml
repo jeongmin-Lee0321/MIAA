@@ -57,6 +57,14 @@
 	</definition>
 
 
+	<definition name="*.*.*.2" extends="baselayout2">
+		<put-attribute name="title" value="{3}" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/{1}/side.jsp" />
+		<put-attribute name="main_contents"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
 	<definition name="*.*.*.1" extends="baselayout1">
 		<put-attribute name="title" value="{3}" />
 		<put-attribute name="main_contents"
