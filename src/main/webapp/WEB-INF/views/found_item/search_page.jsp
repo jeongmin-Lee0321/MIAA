@@ -5,28 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>습득물 찾기</title>
-</head>
-<body>
-		<table width="500" border="1">
-			<tr>
-				<td>이름</td>
-				<td>위치</td>
-				<td>분실일</td>
-			</tr>
-			<c:forEach items="${itemList }" var="dto">
-			<tr>
-				<td>${dto.item_name }</td>
-				<td>${dto.address }</td>
-				<td>${dto.lostday }</td>
-			</tr>
-			</c:forEach>
-		</table>
-</body>
-</html>
-=======
 <link rel="stylesheet" href="resources/css/main_contents.css" />
 <title>Insert title here</title>
 </head>
@@ -44,14 +22,14 @@
                 <input type="date" name="" id="">
                 <span>~</span>
                 <input type="date" name="" id="">
-                <span>(분실일 기준)</span>
+                <span>(습득일 기준)</span>
               </div>
             </div>
 
             <!-- 멀티그룹묶음 -->
             <div class="searchbar-mutil-group">
               <div class="searchbar-title">
-                <span>분실지역</span>
+                <span>습득지역</span>
               </div>
               <div class="searchbar-select-group">
                 <div class="searchbar-title">
@@ -106,7 +84,7 @@
 
             <div class="searchbar-select-group">
               <div class="searchbar-title">
-                <span>분실물명</span>
+                <span>습득물명</span>
               </div>
               <div class="searchbar-content">
                 <input type="search" name="q" id="q" style="min-width: 300px; ">
@@ -137,7 +115,6 @@
           <div class="result-list">
 
             <!-- 목록1개가 list-card -->
-
             <div class="list-card">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
@@ -147,14 +124,13 @@
                   <span>남성용 반지갑 </span>
                 </div>
                 <ul class="item-details">
-                  <li><span class="detail-title">분실날짜:</span><span>2024-03-15</span></li>
+                  <li><span>F2018080900000674</span></li>
                   <li><span class="detail-title">물품분류:</span><span>지갑>기타지갑</span></li>
-                  <li><span class="detail-title">분실장소:</span><span>삼랑진읍 천태로47.. overflow</span></li>
-                  <li><span class="detail-title">특징:</span><span>갈색무늬에 사이즈는...overflow </span></li>
+                  <li><span class="detail-title">보관장소:</span><span>서울 은평 경찰서 </span></li>
+                  <li><span class="detail-title">습득날짜:</span><span>2024-03-15 </span></li>
                 </ul>
               </div>
             </div>
-
 
           </div>
           <!-- 검색결과 리스트 프레임 끝 -->
@@ -192,4 +168,3 @@
         <!-- result-container끝 -->
       </div>
 </body>
->>>>>>> c4b2b53391cf954636b642ba24bbb1dbe4036ea9

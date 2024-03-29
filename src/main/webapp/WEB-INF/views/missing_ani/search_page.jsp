@@ -5,28 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>습득물 찾기</title>
-</head>
-<body>
-		<table width="500" border="1">
-			<tr>
-				<td>이름</td>
-				<td>위치</td>
-				<td>분실일</td>
-			</tr>
-			<c:forEach items="${itemList }" var="dto">
-			<tr>
-				<td>${dto.item_name }</td>
-				<td>${dto.address }</td>
-				<td>${dto.lostday }</td>
-			</tr>
-			</c:forEach>
-		</table>
-</body>
-</html>
-=======
 <link rel="stylesheet" href="resources/css/main_contents.css" />
 <title>Insert title here</title>
 </head>
@@ -44,15 +22,12 @@
                 <input type="date" name="" id="">
                 <span>~</span>
                 <input type="date" name="" id="">
-                <span>(분실일 기준)</span>
+                <span>(실종일기준)</span>
               </div>
             </div>
 
             <!-- 멀티그룹묶음 -->
             <div class="searchbar-mutil-group">
-              <div class="searchbar-title">
-                <span>분실지역</span>
-              </div>
               <div class="searchbar-select-group">
                 <div class="searchbar-title">
                   <span>시도</span>
@@ -80,7 +55,7 @@
             <div class="searchbar-mutil-group">
               <div class="searchbar-select-group">
                 <div class="searchbar-title">
-                  <span>품목</span>
+                  <span>축종 및 품종</span>
                 </div>
                 <div class="searchbar-content">
                   <select name="" id="">
@@ -94,22 +69,13 @@
               </div>
               <div class="searchbar-select-group">
                 <div class="searchbar-title">
-                  <span>색상</span>
+                  <span>성별</span>
                 </div>
                 <div class="searchbar-content">
                   <select name="" id="">
-                    <option value="전체">검정</option>
+                    <option value="전체">수컷</option>
                   </select>
                 </div>
-              </div>
-            </div>
-
-            <div class="searchbar-select-group">
-              <div class="searchbar-title">
-                <span>분실물명</span>
-              </div>
-              <div class="searchbar-content">
-                <input type="search" name="q" id="q" style="min-width: 300px; ">
               </div>
             </div>
 
@@ -137,24 +103,22 @@
           <div class="result-list">
 
             <!-- 목록1개가 list-card -->
-
             <div class="list-card">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
               </div>
               <div class="content-items">
                 <div class="item-title">
-                  <span>남성용 반지갑 </span>
+                  <span>믹스견</span>
                 </div>
                 <ul class="item-details">
-                  <li><span class="detail-title">분실날짜:</span><span>2024-03-15</span></li>
-                  <li><span class="detail-title">물품분류:</span><span>지갑>기타지갑</span></li>
-                  <li><span class="detail-title">분실장소:</span><span>삼랑진읍 천태로47.. overflow</span></li>
-                  <li><span class="detail-title">특징:</span><span>갈색무늬에 사이즈는...overflow </span></li>
+                  <li><span class="detail-title">실종날짜:</span><span>2024-03-15</span></li>
+                  <li><span class="detail-title">성별:</span><span>남성</span></li>
+                  <li><span class="detail-title">발견장소:</span><span>삼랑진읍 천태로 overflow확인 </span></li>
+                  <li><span class="detail-title">특징:</span><span>온순한 아이, 보호 overflow확인 </span></li>
                 </ul>
               </div>
             </div>
-
 
           </div>
           <!-- 검색결과 리스트 프레임 끝 -->
@@ -192,4 +156,4 @@
         <!-- result-container끝 -->
       </div>
 </body>
->>>>>>> c4b2b53391cf954636b642ba24bbb1dbe4036ea9
+</html>
