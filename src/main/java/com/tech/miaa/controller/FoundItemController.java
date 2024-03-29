@@ -25,4 +25,11 @@ public class FoundItemController {
 		
 		return "found_item.search_page.습득물 상세검색.3";
 	}
+
+	//JeongMin
+	@RequestMapping(value = "/found_item_detail_page", method = RequestMethod.GET)
+	public String found_item_detail_page(HttpServletRequest request, Model model ) {
+
+		return "found_item.detail_page.습득물 상세페이지.2";
+	}
 }
