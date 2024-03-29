@@ -11,9 +11,8 @@
 <body>
 <div class="side-nav-container">
         <ul class="side-nav">
-          <li class="menu-title">실종동물</li>
+          <li class="menu-title">보호동물</li>
           <li class="menu-item"><a href="#">상세검색</a></li>
-          <li class="menu-item"><a href="#">분실물 등록</a></li>
         </ul>
       </div>
 </body>
