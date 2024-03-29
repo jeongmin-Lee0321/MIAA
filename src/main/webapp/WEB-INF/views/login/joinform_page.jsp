@@ -16,7 +16,7 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-
+<main>
 	<div class="main-selection">
 		<div class="selection-name">
 			<span>가입하기</span>
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="join_insert"
-		style="width: 100%; height: 100%; border: 1px solid red; margin: auto; margin-top: 20px; text-align: center;">
+		style="width: 100%; height: 100%;  margin: auto; margin-top: 20px; text-align: center;">
 
 		<form action="join">
 
@@ -38,7 +38,7 @@
 						for="id">아이디</label>
 				</div>
 				<div class="button-container">
-					<input type="button" id="idchk" onclick="idchk();" value="아이디 중복확인">
+					<input type="button" id="idchk" onclick="idchk();" value="아이디 중복확인" style="cursor: pointer;">
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 					<label for="pw">비밀번호 확인</label>
 				</div>
 				<div class="button-container">
-					<input type="button" id="pwchk" name="pwchk" value="비밀번호 확인">
+					<input type="button" id="pwchk" name="pwchk" value="비밀번호 확인" style="cursor: pointer;">
 				</div>
 			</div>
 
@@ -66,7 +66,7 @@
 				</div>
 				<div class="button-container">
 					<input type="button" id="emailchk" onclick="emailchk();"
-						value="이메일 중복확인">
+						value="이메일 중복확인" style="cursor: pointer;">
 				</div>
 			</div>
 
@@ -77,7 +77,7 @@
 				</div>
 				<div class="button-container">
 					<input type="button" id="postchk"
-						onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+						onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="cursor: pointer;">
 				</div>
 			</div>
 
@@ -98,7 +98,7 @@
 			</div>
 
 			<div class="joinBtn-container">
-				<input type="submit" id="join" value="회원가입">
+				<input type="submit" id="join" value="회원가입" style="cursor: pointer;">
 			</div>
 
 			<script>
@@ -205,5 +205,6 @@
 				})
 			</script>
 		</form>
+		</main>
 </body>
 </html>

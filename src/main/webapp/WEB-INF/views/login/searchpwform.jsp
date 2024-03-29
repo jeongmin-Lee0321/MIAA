@@ -30,7 +30,7 @@
 	<main>
 
 		<div class="searchid_insert"
-			style="width: 100%; height: 400px; border: 1px solid red; display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; text-align: center;">
+			style="width: 100%; height: 400px;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; text-align: center;">
 			<form action="loginform">
 				<div class="input-box">
 					<input type="text" id="id" name="id" placeholder="아이디" /> <label
@@ -43,8 +43,8 @@
 				<div
 					style="display: flex; justify-content: flex-start; margin-top: 40px;">
 					<input type="button" id="searchpw" name="searchpw"
-						onclick="searchpw();" value="찾기"> <input type="submit"
-						id="searchpw" value="확인" style="margin-left: 10px;">
+						onclick="searchpw();" value="찾기" style="cursor: pointer;"> <input type="submit"
+						id="searchpw" value="확인" style="margin-left: 10px; cursor: pointer;">
 				</div>
 
 			</form>
