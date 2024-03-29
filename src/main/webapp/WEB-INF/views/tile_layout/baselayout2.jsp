@@ -30,6 +30,7 @@ body {
 	margin: 0px;
 	padding: 0px;
 	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+	z-index: 1;
 }
 
 #main-body {
