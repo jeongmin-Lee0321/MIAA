@@ -16,7 +16,7 @@
 	잃어버리신 물품을 등록하시면 내정보 알림게시판에서 습득물에 대한 정보를 받아보실 수 있습니다.<br>
 	*표시는 필수 입력란입니다
 	<h3>분실자 정보</h3>
-	<form action="lost_item_write">
+	<form action="lost_item_write" enctype="multipart/form-data">
 		연락처 : <input type="text" id="tel" name="tel"> <br>
 		공개여부 : 공개<input type="radio" name="openclose" value="true"> 
 				비공개<input type="radio" name="openclose" value="false"> <br>
@@ -30,44 +30,31 @@
 		<h3>분실물품 정보</h3>
 		품명 : <input type="text" name="itemname"> <br> 
 		품목/종류 : <select onchange="animalkind(this)" id=itemkind1 name="itemkind1">
-			<option>품목을 선택하세요</option>
-			<option value="PRI000">컴퓨터</option>
-			<option value="PRJ000">휴대폰</option>
-			<option value="PRH000">지갑</option>
-			<option value="PRG000">전자기기</option>
-			<option value="PRD000">산업용품</option>
-			<option value="PRO000">귀금속</option>
-			<option value="PRZ000">기타물품</option>
-			<option value="PRE000">스포츠용품</option>
-			<option value="PRF000">자동차</option>
-			<option value="PRL000">현금</option>
-			<option value="PRK000">의류</option>
-			<option value="PRQ000">쇼핑백</option>
-			<option value="PRR000">악기</option>
-			<option value="PRP000">카드</option>
-			<option value="PRM000">유가증권</option>
-			<option value="PRN000">증명서</option>
-			<option value="PRA000">가방</option>
-			<option value="PRB000">도서용품</option>
-			<option value="PRX000">유류품</option>
+			<option>품목을 선택하세요</option> <option value="PRI000">컴퓨터</option>
+			<option value="PRJ000">휴대폰</option> <option value="PRH000">지갑</option>
+			<option value="PRG000">전자기기</option> <option value="PRD000">산업용품</option>
+			<option value="PRO000">귀금속</option> <option value="PRZ000">기타물품</option>
+			<option value="PRE000">스포츠용품</option> <option value="PRF000">자동차</option>
+			<option value="PRL000">현금</option> <option value="PRK000">의류</option>
+			<option value="PRQ000">쇼핑백</option> <option value="PRR000">악기</option>
+			<option value="PRP000">카드</option> <option value="PRM000">유가증권</option>
+			<option value="PRN000">증명서</option> <option value="PRA000">가방</option>
+			<option value="PRB000">도서용품</option> <option value="PRX000">유류품</option>
 		</select> <select id=itemkind2 name="itemkind2">
 			<option>종류를 선택하세요</option>
 		</select> <br> 
 		색상 : <select name="colorCd" id="colorCd">
 			<option>색상을 선택하세요</option>
-			<option value="CL1001">흰색</option>
-			<option value="CL1002">검정</option>
-			<option value="CL1003">빨강</option>
-			<option value="CL1004">주황</option>
-			<option value="CL1005">노랑</option>
-			<option value="CL1006">초록</option>
-			<option value="CL1007">파랑</option>
-			<option value="CL1008">갈색</option>
-			<option value="CL1009">보라</option>
-			<option value="CL1010">핑크</option>
+			<option value="CL1001">흰색</option> <option value="CL1002">검정</option>
+			<option value="CL1003">빨강</option> <option value="CL1004">주황</option>
+			<option value="CL1005">노랑</option> <option value="CL1006">초록</option>
+			<option value="CL1007">파랑</option> <option value="CL1008">갈색</option>
+			<option value="CL1009">보라</option> <option value="CL1010">핑크</option>
 			<option value="CL1011">기타</option>
 		</select><br> 
-		특징 : <input type="text" name="sepcialMark"><br> 
+		특징 : <input type="text" name="sepcialMark"><br>
+		<c:if test=""></c:if>
+		<input type="file" name="imgfile"/> <br>
 		<input type="hidden" name="userId" value="${userId }">
 		<br> <input type="submit" value="등록하기">
 	</form>

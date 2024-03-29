@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tech.miaa.dao.ItemDao;
 import com.tech.miaa.dto.ItemDto;
@@ -20,6 +22,7 @@ public class ItemService implements ItemServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		MultipartHttpServletRequest multi = (MultipartHttpServletRequest) map.get("multi");
 		String result="";
 		
 		String tel=request.getParameter("tel");
@@ -32,13 +35,18 @@ public class ItemService implements ItemServiceInter {
 		String colorCd=request.getParameter("colorCd");
 		String sepcialMark=request.getParameter("sepcialMark");
 		String userId=request.getParameter("userId");
+		MultipartFile file = multi.getFile("imgfile");
+		System.out.println(file);
+		if(file.getSize()==0) {
+			file=null;
+		}
 		
 		if(lostday==""|| address==""|| itemname==""|| itemkind2=="") {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_write_view";
 		}else {
 			ItemDao dao = sqlSession.getMapper(ItemDao.class);
-			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId);
+			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId, file);
 			System.out.println("등록되었습니다.");
 			result="redirect:/";
 		}

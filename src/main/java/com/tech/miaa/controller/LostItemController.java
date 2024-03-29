@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.service.ItemService;
 import com.tech.miaa.serviceInter.ItemServiceInter;
 
 @Controller
-public class ItemController {
+public class LostItemController {
 	@Autowired
 	private SqlSession sqlSession;
 	
@@ -45,9 +46,9 @@ public class ItemController {
 		return result;
 	}
 	@RequestMapping("lost_item_write")
-	public String lost_item_write(HttpServletRequest request, Model model){
+	public String lost_item_write(HttpServletRequest request, Model model, MultipartHttpServletRequest multi){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
-		
+		model.addAttribute("multi", multi);
 		itemService=new ItemService();
 		String result=itemService.lost_item_write(model);
 		

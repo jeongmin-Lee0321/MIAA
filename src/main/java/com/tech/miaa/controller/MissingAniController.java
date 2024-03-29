@@ -13,7 +13,7 @@ import com.tech.miaa.service.AnimalService;
 import com.tech.miaa.serviceInter.AnimalServiceInter;
 
 @Controller
-public class AnimalController {
+public class MissingAniController {
 	@Autowired
 	private SqlSession sqlSession;
 
