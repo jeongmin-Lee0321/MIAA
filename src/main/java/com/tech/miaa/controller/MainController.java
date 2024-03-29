@@ -33,8 +33,5 @@ public class MainController {
 		model.addAttribute("userId", userId);
 		return "main_page.메인페이지.1";
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> c4b2b53391cf954636b642ba24bbb1dbe4036ea9
 }
