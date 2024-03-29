@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.tech.miaa.service.AnimalService;
@@ -45,10 +44,5 @@ public class MissingAniController {
 		String result=animalService.missing_ani_write(model);
 		return result;
 	}
-	//JeongMin
-	@RequestMapping(value = "/missing_ani_detail_page", method = RequestMethod.GET)
-	public String missing_ani_detail_page(HttpServletRequest request, Model model ) {
-
-		return "missing_ani.detail_page.보호동물 상세페이지.2";
-	}
+	
 }
