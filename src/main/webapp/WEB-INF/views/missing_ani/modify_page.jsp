@@ -31,15 +31,15 @@
   <div class="main-container">
     <div class="main-selection">
       <div class="index">
-        <span>실종동물</span><span>></span><span>실종동물 등록</span>
+        <span>실종동물</span><span>></span><span>상세검색</span><span>></span><span>실종동물 상세페이지</span><span>></span><span>실종동물 수정</span>
       </div>
       <div class="main-selection-flex">
         <div class="main-selection-ex">
           <div class="title">
-            실종동물 등록
+            실종동물 수정
           </div>
           <div class="describe">
-            실종된 동물을 등록하시면 내정보 알림게시판에서 보호동물에 대한 정보를 받아보실 수 있습니다.
+	등록하신 실종동물에 대해 변경사항을 수정하실 수 있습니다. 내정보의 알림은 수정된 내용을 기반으로 초기화 됩니다.
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
 
     <div class="main-contents">
       <ul class="top-btns">
-        <li><button type="submit">게시물 등록</button></li>
+        <li><button type="submit">수정완료</button></li>
         <li><button type="button">취소하기</button></li>
       </ul>
       <div class="essential">
@@ -200,7 +200,7 @@
         </div>
 
         <ul class="bottom-btns">
-          <li><button type="submit">게시물 등록</button></li>
+          <li><button type="submit">수정완료</button></li>
           <li><button type="button">취소하기</button></li>
         </ul>
         <!-- hidden 세션로그인 id -->

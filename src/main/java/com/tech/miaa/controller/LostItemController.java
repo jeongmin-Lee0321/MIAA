@@ -31,12 +31,12 @@ public class LostItemController {
 	@RequestMapping(value = "/lost_item_search_page", method = RequestMethod.GET)
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("sqlSession", sqlSession);
-		
-		 itemService = new ItemService(); 
-		 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
+		/*
+		 itemService = new ItemService(); ArrayList<ItemDto>
+		 itemList=itemService.lost_item_search(model);
 		 
 		 model.addAttribute("itemList", itemList);
-
+		 */
 		return "lost_item.search_page.분실물 상세검색.3";
 	}
 
@@ -53,6 +53,7 @@ public class LostItemController {
 			}
 		return result;
 	}
+	
 	@RequestMapping("lost_item_write")
 	public String lost_item_write(HttpServletRequest request, Model model, @RequestParam("files") ArrayList<MultipartFile> files){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
@@ -65,6 +66,13 @@ public class LostItemController {
 		return result;
 	}
 	
+//	김영빈 분실물 수정페이지
+	@RequestMapping("lost_item_modify_page")
+	public String lost_item_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
+		String result = "";
+				result = "lost_item.modify_page.분실물 수정.2";
+		return result;
+	}
 	//JeongMin
 	@RequestMapping(value = "/lost_item_detail_page", method = RequestMethod.GET)
 	public String lost_item_detail_page(HttpServletRequest request, Model model ) {

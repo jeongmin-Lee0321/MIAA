@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="resources/css/missing_ani_write_page.css">
+  <link rel="stylesheet" href="resources/css/lost_item_write_page.css">
   <title>Document</title>
   <style>
     body {
@@ -31,15 +31,15 @@
   <div class="main-container">
     <div class="main-selection">
       <div class="index">
-        <span>실종동물</span><span>></span><span>실종동물 등록</span>
+         <span>분실물</span><span>></span><span>상세검색</span><span>></span><span>분실물 상세페이지</span><span>></span><span>분실물 수정</span>
       </div>
       <div class="main-selection-flex">
         <div class="main-selection-ex">
           <div class="title">
-            실종동물 등록
+            분실물 수정
           </div>
           <div class="describe">
-            실종된 동물을 등록하시면 내정보 알림게시판에서 보호동물에 대한 정보를 받아보실 수 있습니다.
+           등록하신 분실물에 대해 변경사항을 수정하실 수 있습니다. 내정보의 알림은 수정된 내용을 기반으로 초기화 됩니다.
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
 
     <div class="main-contents">
       <ul class="top-btns">
-        <li><button type="submit">게시물 등록</button></li>
+        <li><button type="submit">수정완료</button></li>
         <li><button type="button">취소하기</button></li>
       </ul>
       <div class="essential">
@@ -57,7 +57,7 @@
       <form action="missing_ani_write">
         <!-- table1 -->
         <div class="table-container">
-          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>보호자 정보</span></div>
+          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>분실자 정보</span></div>
           <div class="table">
             <div class="table-row">
               <div class="row-title"><span>연락처</span></div>
@@ -77,14 +77,14 @@
         </div>
         <!-- table2 -->
         <div class="table-container">
-          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>실종일시 및 장소</span></div>
+          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>분실일시 및 장소</span></div>
           <div class="table">
             <div class="table-row">
-              <div class="row-title"><span>실종날짜*</span></div>
+              <div class="row-title"><span>분실날짜*</span></div>
               <div class="row-content"><input type="date" name="lostday" id="lostday"></div>
             </div>
             <div class="table-row">
-              <div class="row-title"><span>실종장소*</span></div>
+              <div class="row-title"><span>분실장소*</span></div>
               <div class="col-content">
                 <div class="zip-container">
                   <input type="text" id="zip-code" placeholder="우편번호" readonly>
@@ -111,26 +111,41 @@
         </div>
         <!-- table3 -->
         <div class="table-container">
-          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>실종동물 정보</span></div>
+          <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>분실물품 정보</span></div>
           <div class="table">
 
             <div class="table-row">
-              <div class="row-title"><span>이름*</span></div>
-              <div class="row-content"><input type="text" name="animalname" id="animalname"></div>
+              <div class="row-title"><span>품명*</span></div>
+              <div class="row-content"><input type="text" name="itemname" id="itemname"></div>
             </div>
             <div class="table-row">
-              <div class="row-title"><span>품종*</span></div>
+              <div class="row-title"><span>품목*</span></div>
               <div class="row-content">
-                <select onchange="animalkind(this)" id=animalkind1 name="animalkind1">
-                  <option>축종 선택</option>
-                  <option value="a">강아지</option>
-                  <option value="b">고양이</option>
-                  <option value="c">기타</option>
+                <select onchange="itemkind(this)" id=itemkind1 name="itemkind1">
+                  <option>대분류</option>
+                  <option value="PRI000">컴퓨터</option>
+                  <option value="PRJ000">휴대폰</option>
+                  <option value="PRH000">지갑</option>
+                  <option value="PRG000">전자기기</option>
+                  <option value="PRD000">산업용품</option>
+                  <option value="PRO000">귀금속</option>
+                  <option value="PRZ000">기타물품</option>
+                  <option value="PRE000">스포츠용품</option>
+                  <option value="PRF000">자동차</option>
+                  <option value="PRL000">현금</option>
+                  <option value="PRK000">의류</option>
+                  <option value="PRQ000">쇼핑백</option>
+                  <option value="PRR000">악기</option>
+                  <option value="PRP000">카드</option>
+                  <option value="PRM000">유가증권</option>
+                  <option value="PRN000">증명서</option>
+                  <option value="PRA000">가방</option>
+                  <option value="PRB000">도서용품</option>
+                  <option value="PRX000">유류품</option>
                 </select>
-                <select name="animalkind2" id="animalkind2">
-                  <option>품종 선택</option>
+                <select name="itemkind2" id="itemkind2">
+                  <option>중분류</option>
                 </select>
-                <input type="text" placeholder="축종기타 선택시 입력" readonly style="width: 222px;">
               </div>
             </div>
             <div class="table-row">
@@ -148,16 +163,18 @@
                 <div class="row-content">
                   <select name="colorCd" id="colorCd">
                     <option>색상을 선택하세요</option>
-                    <option value="흰색">흰색</option>
-                    <option value="검은색">검은색</option>
-                    <option value="갈색">갈색</option>
+                    <option value="CL1001">흰색</option>
+                    <option value="CL1002">검정</option>
+                    <option value="CL1003">빨강</option>
+                    <option value="CL1004">주황</option>
+                    <option value="CL1005">노랑</option>
+                    <option value="CL1006">초록</option>
+                    <option value="CL1007">파랑</option>
+                    <option value="CL1008">갈색</option>
+                    <option value="CL1009">보라</option>
+                    <option value="CL1010">핑크</option>
+                    <option value="CL1011">기타</option>
                   </select>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="row-title"><span>나이*</span></div>
-                <div class="row-content">
-                  <input type="text" name="age" id="age">
                 </div>
               </div>
             </div>
@@ -200,7 +217,7 @@
         </div>
 
         <ul class="bottom-btns">
-          <li><button type="submit">게시물 등록</button></li>
+          <li><button type="submit">수정완료</button></li>
           <li><button type="button">취소하기</button></li>
         </ul>
         <!-- hidden 세션로그인 id -->
@@ -247,30 +264,79 @@
         }).open();
     }
   </script>
-  <script>
-    //분류표 선택 
-    function animalkind(e) {
-      var kind_a = ["요크셔테리어", "불독", "진도개"];
-      var kind_b = ["집고양이", "거리고양이", "점박고양이"];
-      var kind_c = ["새", "물고기", "곤충"];
-      var target = document.getElementById("animalkind2");
-
-      if (e.value == "a")
-        var d = kind_a;
-      else if (e.value == "b")
-        var d = kind_b;
-      else if (e.value == "c")
-        var d = kind_c;
-      target.options.length = 0;
-
-      for (x in d) {
-        var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-        target.appendChild(opt);
-      }
-    }
-  </script>
+ <script>
+	//분류표 선택 
+	function itemkind(e) {
+		var kind_PRI000 = ["삼성노트북", "LG노트북", "삼보노트북","기타","HP노트북","애플노트북"];
+		var kind_PRJ000 = [ "삼성휴대폰", "LG휴대폰", "스카이휴대폰", "아이폰", "기타통신기기", "모토로라휴대폰", "기타휴대폰"];
+		var kind_PRH000 = [ "여성용 지갑", "남성용 지갑", "기타 지갑"];
+		var kind_PRG000 = [ "PMP", "MP3", "PDA", "카메라", "전자수첩", "기타용품", "태블릿", "스마트워치", "무선이어폰"];
+		var kind_PRD000 = [ "기타물품"];
+		var kind_PRO000 = ["반지", "목걸이", "귀걸이","시계" ,"기타"];
+		var kind_PRZ000 = ["기타", "매장문화재", "선글라스","안경"];
+		var kind_PRC000 = ["서류", "기타물품"];
+		var kind_PRE000 = ["스포츠용품", "수영복", "수영물품"];
+		var kind_PRF000 = ["자동차열쇠", "네비게이션", "자동차번호판", "기타용품", "임시번호판"];
+		var kind_PRL000 = ["현금", "수표", "기타", "외화"];
+		var kind_PRK000 = ["여성의류", "남성의류", "아기의류", "기타의류", "모자", "신발"];
+		var kind_PRQ000 = ["쇼핑백"];
+		var kind_PRR000 = ["건반악기","관악기","타악기","현악기","기타악기"];
+		var kind_PRP000 = ["신용(체크)카드","일반카드","기타카드"];
+		var kind_PRM000 = ["어음","상품권","채권","기타"];
+		var kind_PRN000 = ["신분증","면허증","여권","기타","판결문"];
+		var kind_PRA000 = ["여성용가방","남성용가방","기타가방"];
+		var kind_PRB000 = ["학습서적","소설","컴퓨터서적","만화책","기타서적"];
+		var kind_PRX000 = ["유류품"];
+		var target = document.getElementById("itemkind2");
+		if (e.value == "PRI000")
+			var d = kind_PRI000;
+		else if (e.value == "PRJ000")
+			var d = kind_PRJ000;
+		else if (e.value == "PRH000")
+			var d = kind_PRH000;
+		else if (e.value == "PRG000")
+			var d = kind_PRG000;
+		else if (e.value == "PRD000")
+			var d = kind_PRD000;
+		else if (e.value == "PRO000")
+			var d = kind_PRO000;
+		else if (e.value == "PRZ000")
+			var d = kind_PRZ000;
+		else if (e.value == "PRC000")
+			var d = kind_PRC000;
+		else if (e.value == "PRE000")
+			var d = kind_PRE000;
+		else if (e.value == "PRF000")
+			var d = kind_PRF000;
+		else if (e.value == "PRL000")
+			var d = kind_PRL000;
+		else if (e.value == "PRK000")
+			var d = kind_PRK000;
+		else if (e.value == "PRQ000")
+			var d = kind_PRQ000;
+		else if (e.value == "PRR000")
+			var d = kind_PRR000;
+		else if (e.value == "PRP000")
+			var d = kind_PRP000;
+		else if (e.value == "PRM000")
+			var d = kind_PRM000;
+		else if (e.value == "PRN000")
+			var d = kind_PRN000;
+		else if (e.value == "PRA000")
+			var d = kind_PRA000;
+		else if (e.value == "PRB000")
+			var d = kind_PRB000;
+		else if (e.value == "PRX000")
+			var d = kind_PRX000;
+		target.options.length = 0;
+		for (x in d) {
+			var opt = document.createElement("option");
+			opt.value = d[x];
+			opt.innerHTML = d[x];
+			target.appendChild(opt);
+	}
+}
+</script>
 </body>
 
 </html>
