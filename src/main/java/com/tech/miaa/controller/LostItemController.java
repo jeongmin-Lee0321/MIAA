@@ -1,5 +1,6 @@
 package com.tech.miaa.controller;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tech.miaa.dto.ItemDto;
@@ -51,16 +54,17 @@ public class LostItemController {
 		return result;
 	}
 	@RequestMapping("lost_item_write")
-	public String lost_item_write(HttpServletRequest request, Model model, MultipartHttpServletRequest multi){
+	public String lost_item_write(HttpServletRequest request, Model model, @RequestParam("files") ArrayList<MultipartFile> files){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
-		model.addAttribute("multi", multi);
-		
+		model.addAttribute("files", files);
 		itemService=new ItemService();
+
+
 		String result=itemService.lost_item_write(model);
 		
 		return result;
 	}
-
+	
 	//JeongMin
 	@RequestMapping(value = "/lost_item_detail_page", method = RequestMethod.GET)
 	public String lost_item_detail_page(HttpServletRequest request, Model model ) {

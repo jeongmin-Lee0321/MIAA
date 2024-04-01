@@ -2,98 +2,87 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/mypage_post_list_page.css">
+    <link rel="stylesheet" href="resources/css/mypage_matching_alarm_list_detail_page.css">
 </head>
-<body>
 <div class="main-body">
     <div class="main-selection">
         <div class="page-route">
-            <span>내정보>등록 게시물 관리</span>
+            <span>내정보>매칭 알림 목록>알림목록상세</span>
         </div>
         <div class="selection-name">
-            <span>등록 게시물 관리</span>
+            <span>알람목록상세</span>
+        </div>
+        <div class="selection-explain">
+            <span>더 이상 해당 알람을 받고 싶지 않으시면 등록게시물 관리 또는 현재 페이지에서 제거 가능 합니다.</span>
         </div>
     </div>
+
     <div class="content-selection">
 
-        <div class="search-container">
-            <select name="" id="">
-                <option value="전체">전체</option>
-                <option value="제목">제목</option>
-                <option value="내용">내용</option>
-            </select>
-            <div class="searchbar-content">
-                <input type="search" name="q" id="q" style="min-width: 300px; " placeholder="Search">
-                <img src="search.png" alt="">
-            </div>
-        </div>
-
-        <div class="keyword-container">
-            <a href="">등록된키워드(5개)</a>
-        </div>
-
         <div class="content-container">
+
             <div class="list-control-container">
-                <select name="" id="content-select">
-                    <option value="전체">전체</option>
-                    <option value="물건">물건</option>
-                    <option value="동물">동물</option>
-                </select>
-                <button class="btn-list" id="btn-set-alert">
-                    <img src="resources/img/Bell.png" alt="">
-                    알림설정
-                </button>
+                <span id="item-name-text">분실물명 :</span>
+                <span id="item-name-value">에어팟</span>
                 <button class="btn-list" id="btn-off-alert">
                     <img src="resources/img/bell-off.png" alt="">
                     알림제거
                 </button>
-                <button class="btn-list" id="btn-delete">삭제하기</button>
+                <button class="btn-list" id="btn-delete">선택 목록 삭제</button>
             </div>
+            <div class="registrationed_alarm_keywords_list">
+                <a href="$$$" class="item_tag">물건</a>
+                <a href="$$$" class="item_tag">에어팟</a>
+                <a href="$$$" class="item_tag">2024-03-06시경</a>
+                <a href="$$$" class="item_tag">전자기기 > 무선이어폰</a>
+                <a href="$$$" class="item_tag">월게,이마트,트레이더스</a>
+                <a href="$$$" class="show_all_result">매칭된 게시물 총(49개)</a>
+            </div>
+
+
             <table class="info-table">
                 <tr>
                     <th class="table-check">
                         <input type="checkbox" name="" id="" class="table-check-box">
                     </th>
-                    <th class="table-classification">분류</th>
                     <th class="table-img">사진</th>
                     <th class="table-title">게시 제목</th>
                     <th class="table-happen-dt">사건일자</th>
-                    <th class="table-happen-place">사건장소</th>
-                    <th class="table-alert-yn">알람설정</th>
+                    <th class="table-happen-place">보관장소/관리번호</th>
                     <th class="table-ctrl"></th>
                 </tr>
                 <tr>
                     <td class="table-check">
                         <input type="checkbox" name="" id="" class="table-check-box">
                     </td>
-                    <td class="table-classification">분류</td>
                     <td class="table-img">
                         <img src="resources/img/image_no.png" alt="" class="item-image">
                     </td>
                     <td class="table-title">게시 제목</td>
                     <td class="table-happen-dt">사건일자</td>
-                    <td class="table-happen-place">사건장소</td>
-                    <td class="table-alert-yn">알람설정</td>
+                    <td class="table-happen-place">
+                        <span class="happen-place-value">서울은평경찰서</span>
+                        <span class="admin-value">F12391273091724081270</span>
+                    </td>
                     <td class="table-ctrl">
-                        <img src="resources/img/trash_icn.png" alt="" class="ctrl-icon">
-                        <img src="resources/img/write_icon.png" alt="" class="ctrl-icon">
+                        <img src="resources/img/trash_icon.png" alt="" class="ctrl-icon">
                     </td>
                 </tr>
                 <tr>
                     <td class="table-check">
                         <input type="checkbox" name="" id="" class="table-check-box">
                     </td>
-                    <td class="table-classification">분류</td>
                     <td class="table-img">
                         <img src="resources/img/image_no.png" alt="" class="item-image">
                     </td>
                     <td class="table-title">게시 제목</td>
                     <td class="table-happen-dt">사건일자</td>
-                    <td class="table-happen-place">사건장소</td>
-                    <td class="table-alert-yn">알람설정</td>
+                    <td class="table-happen-place">
+                        <span class="happen-place-value">서울은평경찰서</span>
+                        <span class="admin-value">F12391273091724081270</span>
+                    </td>
                     <td class="table-ctrl">
-                        <img src="resources/img/trash_icn.png" alt="" class="ctrl-icon">
-                        <img src="resources/img/write_icon.png" alt="" class="ctrl-icon">
+                        <img src="resources/img/trash_icon.png" alt="" class="ctrl-icon">
                     </td>
                 </tr>
             </table>
@@ -131,6 +120,6 @@
             </ul>
         </div>
     </div>
+
 </div>
-</body>
 </html>

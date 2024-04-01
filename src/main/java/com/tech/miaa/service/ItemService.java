@@ -1,29 +1,33 @@
 
 package com.tech.miaa.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tech.miaa.dao.ItemDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.serviceInter.ItemServiceInter;
 
 public class ItemService implements ItemServiceInter {
-
+	
+	private String filePath="C:\\23setspring\\springwork23\\MIAA\\src\\main\\webapp\\resources\\item_img";
+	
 	@Override
-	public String lost_item_write(Model model) {
+	public String lost_item_write(Model model){
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		MultipartHttpServletRequest multi = (MultipartHttpServletRequest) map.get("multi");
-		String result="";
+		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
+		String result=""; ItemDao dao = sqlSession.getMapper(ItemDao.class);
 		
 		String tel=request.getParameter("tel");
 		String openclose=request.getParameter("openclose");
@@ -35,19 +39,29 @@ public class ItemService implements ItemServiceInter {
 		String colorCd=request.getParameter("colorCd");
 		String sepcialMark=request.getParameter("sepcialMark");
 		String userId=request.getParameter("userId");
-		MultipartFile file = multi.getFile("imgfile");
-		System.out.println(file);
-		if(file.getSize()==0) {
-			file=null;
-		}
-		
+
 		if(lostday==""|| address==""|| itemname==""|| itemkind2=="") {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_write_view";
 		}else {
-			ItemDao dao = sqlSession.getMapper(ItemDao.class);
-			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId, file);
-			System.out.println("등록되었습니다.");
+			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId);
+			for (int i = 0; i < files.size(); i++) {
+				if(files.get(i).getOriginalFilename()=="") {
+					continue;
+				}else {
+					try {
+						UUID uuid=UUID.randomUUID();
+						String fileName=uuid+"_"+files.get(i).getOriginalFilename();
+						File saveFile = new File(filePath, fileName);
+						files.get(i).transferTo(saveFile);
+						dao.imgUpLoad(userId,itemname,fileName);
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			result="redirect:/";
 		}
 		return result;

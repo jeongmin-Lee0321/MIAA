@@ -16,7 +16,7 @@
 	잃어버리신 물품을 등록하시면 내정보 알림게시판에서 습득물에 대한 정보를 받아보실 수 있습니다.<br>
 	*표시는 필수 입력란입니다
 	<h3>분실자 정보</h3>
-	<form action="lost_item_write" enctype="multipart/form-data">
+	<form action="lost_item_write" method="post" enctype="multipart/form-data">
 		연락처 : <input type="text" id="tel" name="tel"> <br>
 		공개여부 : 공개<input type="radio" name="openclose" value="true"> 
 				비공개<input type="radio" name="openclose" value="false"> <br>
@@ -52,9 +52,14 @@
 			<option value="CL1009">보라</option> <option value="CL1010">핑크</option>
 			<option value="CL1011">기타</option>
 		</select><br> 
-		특징 : <input type="text" name="sepcialMark"><br>
-		<c:if test=""></c:if>
-		<input type="file" name="imgfile"/> <br>
+		특징 : <input type="text" name="sepcialMark"> <br>
+		사진등록<br>
+		<input type="file" name="files"/> <br>
+		<input type="file" name="files"/> <br>
+		<input type="file" name="files"/> <br>
+		<input type="file" name="files"/> <br>
+		<input type="file" name="files"/> <br>
+		
 		<input type="hidden" name="userId" value="${userId }">
 		<br> <input type="submit" value="등록하기">
 	</form>
