@@ -3,6 +3,7 @@ package com.tech.miaa.serviceInter;
 import java.util.ArrayList;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dto.ItemDto;
 
