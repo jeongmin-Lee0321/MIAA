@@ -16,5 +16,7 @@
 		<a href="missing_ani_detail_page">missing_ani_detail_page</a><br>
 		<a href="found_item_detail_page">found_item_detail_page</a><br>
 		<a href="lost_item_detail_page">lost_item_detail_page</a><br>
+		<a href="mypage_post">mypage_post</a><br>
+
 </body>
 </html>
