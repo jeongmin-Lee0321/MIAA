@@ -31,11 +31,19 @@ public class MemberController {
 	}
 	@RequestMapping("searchidform")
 	public String searchidform(HttpServletRequest request, Model model) {
-		return "login/searchidform";
+		return "login.searchidform.아이디 찾기 페이지.1";
 	}
 	@RequestMapping("searchpwform")
 	public String searchpwform(HttpServletRequest request, Model model) {
-		return "login/searchpwform";
+		return "login.searchpwform.비밀번호 찾기 페이지.1";
+	}
+	@RequestMapping("mypageform")
+	public String mypageform(HttpServletRequest request, Model model) {
+		return "login.mypageform.마이 페이지.3";
+	}
+	@RequestMapping("mypage_delete_account_page")
+	public String mypage_delete_account_page(HttpServletRequest request, Model model) {
+		return "login.mypage_delete_account_page.마이 페이지.3";
 	}
 
 	@ResponseBody
