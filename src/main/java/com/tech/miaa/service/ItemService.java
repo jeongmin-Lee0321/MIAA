@@ -46,17 +46,21 @@ public class ItemService implements ItemServiceInter {
 		}else {
 			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId);
 			for (int i = 0; i < files.size(); i++) {
+				if(files.get(i).getOriginalFilename()=="") {
+					continue;
+				}else {
 					try {
 						UUID uuid=UUID.randomUUID();
 						String fileName=uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-//						dao.imgUpLoad(userId, itemname,fileName);
+						dao.imgUpLoad(userId,itemname,fileName);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
 			}
 			result="redirect:/";
 		}
