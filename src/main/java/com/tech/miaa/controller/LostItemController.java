@@ -50,6 +50,7 @@ public class LostItemController {
 			}
 		return result;
 	}
+	
 	@RequestMapping("lost_item_write")
 	public String lost_item_write(HttpServletRequest request, Model model){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
@@ -57,6 +58,14 @@ public class LostItemController {
 		itemService=new ItemService();
 		String result=itemService.lost_item_write(model);
 		
+		return result;
+	}
+	
+//	김영빈 분실물 수정페이지
+	@RequestMapping("lost_item_modify_page")
+	public String lost_item_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
+		String result = "";
+				result = "lost_item.modify_page.분실물 수정.2";
 		return result;
 	}
 }

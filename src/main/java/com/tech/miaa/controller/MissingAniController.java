@@ -45,4 +45,12 @@ public class MissingAniController {
 		return result;
 	}
 	
+//	김영빈 실종동물 수정페이지
+	@RequestMapping("missing_ani_modify_page")
+	public String missing_ani_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
+		String result = "";
+				result = "missing_ani.modify_page.실종동물 수정.2";
+		return result;
+	}
+	
 }
