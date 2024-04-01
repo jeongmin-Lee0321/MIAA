@@ -32,11 +32,11 @@
 <c:if test= "${userId == null}">
         <div class="header-btn-container">
           <div class="btn-container">
-            <button class="btn-login">
-              <div class="text-btn-login" onclick="location.href='loginform';" style="cursor: pointer;">로그인</div>
+            <button class="btn-login" style="cursor: pointer;">
+              <div class="text-btn-login" onclick="location.href='loginform';" >로그인</div>
             </button>
-            <button class="btn-reg">
-              <div class="text-btn-reg" onclick="location.href='joinform';" style="cursor: pointer;">회원가입</div>
+            <button class="btn-reg" style="cursor: pointer;">
+              <div class="text-btn-reg" onclick="location.href='joinform';" >회원가입</div>
             </button>
 </c:if>
 		<!-- 로그인 후 -->
@@ -49,11 +49,12 @@
             <div class="nav-list-item"></div>
           </div>
           <div class="btn-container">
-            <button class="btn-login">
-              <div class="text-btn-login" onclick="location.href='logout';" style="cursor: pointer;">로그아웃</div>
+            <button class="btn-login" style="cursor: pointer;">
+              <div class="text-btn-login" onclick="location.href='logout';" >로그아웃</div>
             </button>
-            <button class="btn-reg">
-              <div class="text-btn-reg" style="cursor: pointer;">내정보</div>
+            <button class="btn-reg" style="cursor: pointer;">
+            <!-- 원진호  -->
+              <div class="text-btn-reg" onclick="location.href='list';" >내정보</div>
             </button>
 </c:if>         
           </div>

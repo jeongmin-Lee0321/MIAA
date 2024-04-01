@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -31,11 +32,19 @@ public class MemberController {
 	}
 	@RequestMapping("searchidform")
 	public String searchidform(HttpServletRequest request, Model model) {
-		return "login/searchidform";
+		return "login.searchidform.아이디 찾기 페이지.1";
 	}
 	@RequestMapping("searchpwform")
 	public String searchpwform(HttpServletRequest request, Model model) {
-		return "login/searchpwform";
+		return "login.searchpwform.비밀번호 찾기 페이지.1";
+	}
+	@RequestMapping("mypageform")
+	public String mypageform(HttpServletRequest request, Model model) {
+		return "login.mypageform.마이 페이지.3";
+	}
+	@RequestMapping("mypage_delete_account_page")
+	public String mypage_delete_account_page(HttpServletRequest request, Model model) {
+		return "login.mypage_delete_account_page.마이 페이지.3";
 	}
 
 	@ResponseBody
@@ -109,4 +118,25 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	
+	
+	/* 원진호_알림 목록_0329추가 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		/*
+		 * if(userId != null){ System.out.println("로그인 유저의 id : "+userId); }else
+		 * if(userId == null){ System.out.println("로그인 하지 않았습니다."); }
+		 * model.addAttribute("userId", userId);
+		 */
+		return "mypage_matching_alarm.list.알림 목록.2";
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
 }
