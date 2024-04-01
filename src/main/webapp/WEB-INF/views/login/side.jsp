@@ -21,7 +21,7 @@
           <li class="menu-item"><a href="#">문의 내역</a></li>
           <li class="menu-item"><a href="#">문의글 등록</a></li>
           <li class="menu-title">회원정보수정</li>
-          <li class="menu-item"><a href="#">회원정보수정</a></li>
+          <li class="menu-item"><a href="mypage_modify_account_page">회원정보수정</a></li>
           <li class="menu-title">회원탈퇴</li>
           <li class="menu-item"><a href="mypage_delete_account_page">회원탈퇴</a></li>
         </ul>

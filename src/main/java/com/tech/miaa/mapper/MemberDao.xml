@@ -8,7 +8,9 @@
 	<insert id="join">
 		INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
 	</insert>
-	
+	<delete id="del_account">
+		DELETE FROM MEMBER WHERE USER_BCPWD = #{param1} AND USER_ID = #{param2}
+	</delete>
 	<select id="idcheck" resultType="Integer">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1}
 	</select>
