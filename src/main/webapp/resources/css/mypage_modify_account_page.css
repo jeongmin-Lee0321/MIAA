@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#join , #idchk , #pwchk , #emailchk , #postchk{
+#modify , #idchk , #pwchk , #emailchk , #postchk{
 	font-size: 15px;
 	background-color: #0066FF;
 	color: white;
@@ -28,7 +28,7 @@
 	display : flex;
 	justify-content: flex-start;
 }
-.joinBtn-container{
+.modifyBtn-container{
 	display :flex;
 	justify-content: flex-start;
 	margin-top : 40px;
