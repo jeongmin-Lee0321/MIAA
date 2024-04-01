@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -117,4 +118,25 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	
+	
+	/* 원진호_알림 목록_0329추가 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		/*
+		 * if(userId != null){ System.out.println("로그인 유저의 id : "+userId); }else
+		 * if(userId == null){ System.out.println("로그인 하지 않았습니다."); }
+		 * model.addAttribute("userId", userId);
+		 */
+		return "mypage_matching_alarm.list.알림 목록.2";
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
 }
