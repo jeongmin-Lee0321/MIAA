@@ -8,8 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/main_selection.css" />
-<link rel="stylesheet" href="resources/css/joinform.css" />
+<link rel="stylesheet" href="resources/css/mypage_modify_account_page.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -17,30 +16,13 @@
 </head>
 <body>
 <main>
-	<div class="main-selection">
-		<div class="selection-name">
-			<span>가입하기</span>
-		</div>
-		<div class="selection-explain">
-			<span> 이미 사용 중인 계정이 있다면 <a href="loginform"
-				style="color: #0066FF; text-decoration: underline;">로그인</a> 하세요
-			</span>
-		</div>
-	</div>
-	<div class="join_insert"
+
+	<div class="modify_insert"
 		style="width: 100%; height: 100%;  margin: auto; margin-top: 20px; text-align: center;">
 
 		<form action="join">
 
-			<div class="inputbox-container">
-				<div class="input-box">
-					<input type="text" id="id" name="id" placeholder="아이디" required="required" /> <label
-						for="id">아이디</label>
-				</div>
-				<div class="button-container">
-					<input type="button" id="idchk" onclick="idchk();" value="아이디 중복확인" style="cursor: pointer;">
-				</div>
-			</div>
+			
 
 			<div class="inputbox-container">
 				<div class="input-box">
@@ -98,7 +80,7 @@
 			</div>
 
 			<div class="joinBtn-container">
-				<input type="submit" id="join" value="회원가입" style="cursor: pointer;">
+				<input type="submit" id="join" value="수정" style="cursor: pointer;">
 			</div>
 
 			<script>
@@ -142,7 +124,7 @@
 							}).open();
 				}
 			</script>
-			<script>
+			<!-- <script>
 				$(document).ready(function() {
 					$("#idchk").click(idchk);
 
@@ -166,7 +148,7 @@
 						}
 					});
 				}
-			</script>
+			</script> -->
 			<script>
 				$(document).ready(function() {
 					$("#emailchk").click(emailchk);

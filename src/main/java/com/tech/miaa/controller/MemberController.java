@@ -38,12 +38,18 @@ public class MemberController {
 		return "login.searchpwform.비밀번호 찾기 페이지.1";
 	}
 	@RequestMapping("mypageform")
-	public String mypageform(HttpServletRequest request, Model model) {
+	public String mypageform(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		HttpSession session = request.getSession(false);
+		model.addAttribute("userId",userId);
 		return "login.mypageform.마이 페이지.3";
 	}
 	@RequestMapping("mypage_delete_account_page")
 	public String mypage_delete_account_page(HttpServletRequest request, Model model) {
 		return "login.mypage_delete_account_page.마이 페이지.3";
+	}
+	@RequestMapping("mypage_modify_account_page")
+	public String mypage_modify_account_page(HttpServletRequest request, Model model) {
+		return "login.mypage_modify_account_page.회원정보수정.3";
 	}
 
 	@ResponseBody
@@ -98,6 +104,20 @@ public class MemberController {
 		String result=memberServiceInter.join(model);
 		
 		return result;
+	}
+	
+	@RequestMapping("del_account")
+	public String del_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		HttpSession session = request.getSession(false);
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		memberServiceInter=new MemberService();
+		
+		memberServiceInter.del_account(model);
+		
+		session.invalidate();	
+		return "redirect:/";
 	}
 	
 	@RequestMapping("login")

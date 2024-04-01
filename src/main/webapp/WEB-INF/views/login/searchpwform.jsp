@@ -37,11 +37,11 @@
 			style="width: 100%; height: 400px;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; text-align: center;">
 			<form action="loginform">
 				<div class="input-box">
-					<input type="text" id="id" name="id" placeholder="아이디" /> <label
+					<input type="text" id="id" name="id" placeholder="아이디" required="required"/> <label
 						for="id">아이디</label>
 				</div>
 				<div class="input-box">
-					<input type="text" id="email" name="email" placeholder="이메일" /> <label
+					<input type="text" id="email" name="email" placeholder="이메일" required="required"/> <label
 						for="email">이메일</label>
 				</div>
 				<div
