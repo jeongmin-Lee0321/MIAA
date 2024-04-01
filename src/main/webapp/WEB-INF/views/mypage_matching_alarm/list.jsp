@@ -5,16 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>알림 목록(전체필터)</title>
+<title>알림 목록</title>
 <link rel="stylesheet" href="resources/css/footer.css" />
 <link rel="stylesheet" href="resources/css/header.css" />
 <link rel="stylesheet"
 	href="resources/css/mypage_matching_alarm_list_page.css">
 </head>
 <body>
-	<!-- <h3>mypage_matching_alarm_list_page.jsp</h3>
-알림 목록(전체필터) -->
-
 	<div class="mypage_matching_alarm_list_page_table">	
 		<div class="page_root">내정보>내칭 알림 목록</div>
 		<div class="page_titles">

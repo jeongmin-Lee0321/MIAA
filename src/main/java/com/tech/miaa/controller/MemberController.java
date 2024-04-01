@@ -119,24 +119,5 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-	/* 원진호_알림 목록_0329추가 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
-		/*
-		 * if(userId != null){ System.out.println("로그인 유저의 id : "+userId); }else
-		 * if(userId == null){ System.out.println("로그인 하지 않았습니다."); }
-		 * model.addAttribute("userId", userId);
-		 */
-		return "mypage_matching_alarm.list.알림 목록.2";
-	}
 
-
-	
-	
-	
-	
-	
-	
-	
 }
