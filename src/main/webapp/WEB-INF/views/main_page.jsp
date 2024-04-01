@@ -36,6 +36,12 @@
 
 
 		</div>
+<<<<<<< HEAD
+		<a href="rescue_ani_detail_page">rescue_ani_detail_page</a><br>
+		<a href="missing_ani_detail_page">missing_ani_detail_page</a><br>
+		<a href="found_item_detail_page">found_item_detail_page</a><br>
+		<a href="lost_item_detail_page">lost_item_detail_page</a><br>
+=======
 		</div>
 		<div
 			style="width: 100%; height: 65%;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; margin-top: 80px; margin-bottom: 80px; ">
@@ -67,5 +73,6 @@
 
 	</main>
 </div>
+>>>>>>> release/MSW
 </body>
 </html>

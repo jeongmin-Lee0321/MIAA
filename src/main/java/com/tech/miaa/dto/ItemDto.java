@@ -2,6 +2,8 @@ package com.tech.miaa.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +27,6 @@ public class ItemDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
+	//원진호_0401추가
+	private MultipartFile file;
 }

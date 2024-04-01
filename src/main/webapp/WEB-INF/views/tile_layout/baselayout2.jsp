@@ -30,9 +30,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+	z-index: 1;
 }
 
 #main-body {
+	position: relative;
 	padding-top: 62px;
 	margin-left: auto;
 	margin-right: auto;
@@ -43,6 +45,7 @@ body {
 
 
 #main-grid {
+	position: relative;
 	display: grid;
 	/* grid-template-columns: 15.38% 84.72%; */
 	grid-template-columns: 220px 1220px;

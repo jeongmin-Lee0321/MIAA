@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/main_selection.css" />
+<link rel="stylesheet" href="resources/css/main_selection.css?after" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,6 +15,7 @@
       </div>
       <div class="selection-explain">
         <span> 회원님들 자신이 실종된 동물을 등록한내역입니다</span>
+        <span> 등록과 등록을 기반한 알림은 회원만 가능합니다.</span>
       </div>
     </div>
 </body>
