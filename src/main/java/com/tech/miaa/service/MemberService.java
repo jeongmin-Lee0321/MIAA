@@ -158,7 +158,7 @@ public class MemberService implements MemberServiceInter {
 			e.printStackTrace();
 		}
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		
+		dao.del_account(bcpwd, id);
 		
 		return result;
 	}
