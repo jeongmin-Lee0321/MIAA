@@ -53,7 +53,8 @@
               <div class="text-btn-login" onclick="location.href='logout';" >로그아웃</div>
             </button>
             <button class="btn-reg" style="cursor: pointer;">
-              <div class="text-btn-reg" onclick="location.href='mypageform';" >내정보</div>
+            <!-- 원진호  -->
+              <div class="text-btn-reg" onclick="location.href='list';" >내정보</div>
             </button>
 </c:if>         
           </div>

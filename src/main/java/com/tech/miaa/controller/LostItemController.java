@@ -1,5 +1,6 @@
 package com.tech.miaa.controller;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tech.miaa.dto.ItemDto;
@@ -28,12 +31,12 @@ public class LostItemController {
 	@RequestMapping(value = "/lost_item_search_page", method = RequestMethod.GET)
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("sqlSession", sqlSession);
-		
-		 itemService = new ItemService(); 
-		 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
+		/*
+		 itemService = new ItemService(); ArrayList<ItemDto>
+		 itemList=itemService.lost_item_search(model);
 		 
 		 model.addAttribute("itemList", itemList);
-
+		 */
 		return "lost_item.search_page.분실물 상세검색.3";
 	}
 
@@ -50,21 +53,35 @@ public class LostItemController {
 			}
 		return result;
 	}
+	
 	@RequestMapping("lost_item_write")
-	public String lost_item_write(HttpServletRequest request, Model model, MultipartHttpServletRequest multi){
+	public String lost_item_write(HttpServletRequest request, Model model, @RequestParam("files") ArrayList<MultipartFile> files){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
-		model.addAttribute("multi", multi);
-		
+		model.addAttribute("files", files);
 		itemService=new ItemService();
+
+
 		String result=itemService.lost_item_write(model);
 		
 		return result;
 	}
-
+	
+//	김영빈 분실물 수정페이지
+	@RequestMapping("lost_item_modify_page")
+	public String lost_item_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
+		String result = "";
+				result = "lost_item.modify_page.분실물 수정.2";
+		return result;
+	}
 	//JeongMin
 	@RequestMapping(value = "/lost_item_detail_page", method = RequestMethod.GET)
 	public String lost_item_detail_page(HttpServletRequest request, Model model ) {
 
 		return "lost_item.detail_page.분실물 상세페이지.2";
+	}
+	@RequestMapping(value = "/mypage_post", method = RequestMethod.GET)
+	public String mypage_post(HttpServletRequest request, Model model ) {
+
+		return "mypage_post.list_page.등록 게시물.2";
 	}
 }
