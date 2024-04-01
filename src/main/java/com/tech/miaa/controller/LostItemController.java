@@ -64,4 +64,16 @@ public class LostItemController {
 		
 		return result;
 	}
+	
+	//JeongMin
+	@RequestMapping(value = "/lost_item_detail_page", method = RequestMethod.GET)
+	public String lost_item_detail_page(HttpServletRequest request, Model model ) {
+
+		return "lost_item.detail_page.분실물 상세페이지.2";
+	}
+	@RequestMapping(value = "/mypage_post", method = RequestMethod.GET)
+	public String mypage_post(HttpServletRequest request, Model model ) {
+
+		return "mypage_post.list_page.등록 게시물.2";
+	}
 }

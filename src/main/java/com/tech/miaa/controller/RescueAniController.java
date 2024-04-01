@@ -25,4 +25,11 @@ public class RescueAniController {
 		
 		return "rescue_ani.search_page.보호동물 검색.3";
 	}
+
+	//JeongMin
+	@RequestMapping(value = "/rescue_ani_detail_page", method = RequestMethod.GET)
+	public String rescue_ani_detail_page(HttpServletRequest request, Model model ) {
+
+		return "rescue_ani.detail_page.보호동물 상세페이지.2";
+	}
 }
