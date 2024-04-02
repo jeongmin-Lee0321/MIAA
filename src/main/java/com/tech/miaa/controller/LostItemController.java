@@ -31,12 +31,12 @@ public class LostItemController {
 	@RequestMapping(value = "/lost_item_search_page", method = RequestMethod.GET)
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("sqlSession", sqlSession);
-		/*
-		 itemService = new ItemService(); ArrayList<ItemDto>
-		 itemList=itemService.lost_item_search(model);
+		
+		 itemService = new ItemService(); 
+		 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
 		 
 		 model.addAttribute("itemList", itemList);
-		 */
+		 
 		return "lost_item.search_page.분실물 상세검색.3";
 	}
 
@@ -60,9 +60,7 @@ public class LostItemController {
 		model.addAttribute("files", files);
 		itemService=new ItemService();
 
-
 		String result=itemService.lost_item_write(model);
-		
 		return result;
 	}
 	
