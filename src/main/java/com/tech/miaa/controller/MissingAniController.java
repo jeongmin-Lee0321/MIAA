@@ -2,6 +2,8 @@ package com.tech.miaa.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.tech.miaa.abdmApi.AbandonmentPublicSrvc;
+import com.tech.miaa.abdmApi.AbdmSido;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,6 @@ public class MissingAniController {
 	AnimalServiceInter animalService;
 	@RequestMapping("missing_ani_search_page")
 	public String missing_ani_search_page(HttpServletRequest request, Model model) {
-		
 		return "missing_ani.search_page.실종동물 상세검색.3";
 	}
 
