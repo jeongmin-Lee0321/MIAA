@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="side-nav-container">
+	  <div class="side-nav-container">
         <ul class="side-nav">
           <li class="menu-title">알림 페이지</li>
           <li class="menu-item"><a href="#">매칭된 알림 목록</a></li>
