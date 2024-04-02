@@ -45,9 +45,9 @@
       </div>
     </div>
 
-    <div class="main-contents">
       <!-- form 시작 -->
       <form action="lost_item_write" method="post" enctype="multipart/form-data">
+    <div class="main-contents">
       <ul class="top-btns">
         <li><button type="submit">게시물 등록</button></li>
         <li><button type="button" onclick="location.href='lost_item_search_page';">취소하기</button></li>
@@ -213,10 +213,31 @@
         </ul>
         <!-- hidden 세션로그인 id -->
         <input type="hidden" name="userId" value="${userId }">
+    </div>
       </form>
       <!-- form 끝 -->
-    </div>
   </div>
+  <!-- 전화번호에 숫자만 입력 -->
+  <script>
+    $(document).on("keypress keyup keydown", "input[type='tel']", function () {
+      $("input[type='tel']").keyup(function () {
+        var replace_text = $(this).val().replace(/[^-0-9]/g, "");
+        $(this).val(replace_text);
+      });
+    });
+  </script>
+  <!-- 날짜 제한 -->
+  <script>
+    $(document).ready(function () {//로드완료시
+        var now_utc = Date.now() // 지금 날짜를 밀리초로
+        // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+        var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+        // new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+        var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+        document.getElementById("lostday").setAttribute("max", today); //선택날짜 최대값 오늘날짜로 제한
+        document.getElementById("lostday").setAttribute("value", today);//파일로드시 오늘날짜로 설정
+    });
+  </script>
   <script>
     //주소록 찾기
     function sample6_execDaumPostcode() {
