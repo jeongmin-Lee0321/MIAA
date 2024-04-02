@@ -50,7 +50,7 @@
       <form action="lost_item_write" method="post" enctype="multipart/form-data">
       <ul class="top-btns">
         <li><button type="submit">게시물 등록</button></li>
-        <li><button type="button" onclick="location.href='lost_item_search_page';">취소하기</button></li>
+        <li><button type="button" onclick="location.href='lost_item_search_page';" style="cursor: pointer;">취소하기</button></li>
       </ul>
       <div class="essential">
         <span>*는 필수 입력사항 입니다</span>
@@ -209,7 +209,7 @@
 
         <ul class="bottom-btns">
           <li><button type="submit">게시물 등록</button></li>
-          <li><button type="button" onclick="location.href='lost_item_search_page';">취소하기</button></li>
+          <li><button type="button" onclick="location.href='lost_item_search_page';" style="cursor: pointer;">취소하기</button></li>
         </ul>
         <!-- hidden 세션로그인 id -->
         <input type="hidden" name="userId" value="${userId }">

@@ -12,6 +12,13 @@
 						#{param1},#{param3}) 
 </insert>
 
-<select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto"> SELECT * FROM ITEM ORDER BY ITEM_ID 
+<select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto"> 
+	SELECT * FROM ITEM ORDER BY ITEM_ID 
+</select>
+<select id="totalCount" resultType="Integer">
+	SELECT count(*) FROM ITEM
+</select>
+<select id="lost_item_detail_page" resultType="com.tech.miaa.dto.ItemDto">
+	SELECT * FROM ITEM WHERE ITEM_ID= #{param1}
 </select>
 </mapper>

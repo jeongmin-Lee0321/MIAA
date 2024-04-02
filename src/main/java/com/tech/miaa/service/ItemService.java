@@ -76,7 +76,26 @@ public class ItemService implements ItemServiceInter {
 		
 		ItemDao dao = sqlSession.getMapper(ItemDao.class);
 		ArrayList<ItemDto> itemList = dao.itemlistview();
-		
+		int totalCount=dao.totalCount();
+		model.addAttribute("totalCount", totalCount);
 		return itemList;
+	}
+
+	@Override
+	public ItemDto lost_item_detail_page(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		
+		String item_id = request.getParameter("item_id");
+		System.out.println(item_id);
+		
+		ItemDao dao = sqlSession.getMapper(ItemDao.class);
+		ItemDto dto = null;
+		try {
+			dto=dao.lost_item_detail_page(item_id);
+		} catch (Exception e) {}
+		
+		return dto;
 	}
 }

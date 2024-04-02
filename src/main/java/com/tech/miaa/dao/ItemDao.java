@@ -11,4 +11,6 @@ public interface ItemDao {
 	public void itemWrite(String tel,String openclose, String lostday,String address,String itemname,
 			String itemkind1,String itemkind2,String colorCd,String sepcialMark,String userId);
 	public ArrayList<ItemDto> itemlistview();
+	public int totalCount();
+	public ItemDto lost_item_detail_page(String item_id);
 }
