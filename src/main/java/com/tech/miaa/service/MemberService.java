@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.tech.miaa.dao.MemberDao;
 import com.tech.miaa.dto.MemberDto;
@@ -127,12 +128,38 @@ public class MemberService implements MemberServiceInter {
 				if (pw.equals(pw2)) {
 					System.out.println("회원가입을 축하드립니다.");
 					dao.join(id, shpwd, bcpwd, email, postcode, address, detailAddress);
-					result = "redirect:/";
+					result = "redirect:loginform";
 				} else {
 					System.out.println("비밀번호를 확인해주세요.");
 				}
 			}
 		}
+		return result;
+	}
+	
+	@Override
+	public String del_account(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpSession session=request.getSession();
+		
+		String pw = request.getParameter("pw");
+		String shpwd = ""; String bcpwd = "";
+		String result = "redirect:/";
+		String id = (String) session.getAttribute("userId");
+		
+		
+		// 암호화 처리
+		try {
+			shpwd = CryptoUtil.sha512(pw);
+			bcpwd = CryptoUtil.encryptAES256(pw, shpwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		dao.del_account(bcpwd, id);
+		
 		return result;
 	}
 

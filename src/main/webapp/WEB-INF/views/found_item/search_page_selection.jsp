@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/main_selection.css" />
+<link rel="stylesheet" href="resources/css/main_selection.css?after" />
 <title>Insert title here</title>
 </head>
 <body>

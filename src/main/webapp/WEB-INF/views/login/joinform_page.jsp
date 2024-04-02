@@ -34,7 +34,7 @@
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="text" id="id" name="id" placeholder="아이디" /> <label
+					<input type="text" id="id" name="id" placeholder="아이디" required="required" /> <label
 						for="id">아이디</label>
 				</div>
 				<div class="button-container">
@@ -44,14 +44,14 @@
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw" name="pw" placeholder="비밀번호" /> <label
+					<input type="password" id="pw" name="pw" placeholder="비밀번호" required="required" /> <label
 						for="pw">비밀번호</label>
 				</div>
 			</div>
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw2" name="pw2" placeholder="비밀번호 확인" />
+					<input type="password" id="pw2" name="pw2" placeholder="비밀번호 확인" required="required" />
 					<label for="pw">비밀번호 확인</label>
 				</div>
 				<div class="button-container">
@@ -61,7 +61,7 @@
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="email" id="email" name="email" placeholder="이메일" /> <label
+					<input type="email" id="email" name="email" placeholder="이메일" required="required"/> <label
 						for="email">이메일</label>
 				</div>
 				<div class="button-container">
@@ -73,7 +73,7 @@
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="text" id="sample6_postcode" name="postcode"
-						placeholder="우편번호" /> <label for="postcode">우편번호</label>
+						placeholder="우편번호" required="required"/> <label for="postcode">우편번호</label>
 				</div>
 				<div class="button-container">
 					<input type="button" id="postchk"
@@ -84,14 +84,14 @@
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="text" id="sample6_address" name="address"
-						placeholder="주소" /> <label for="postcode">주소</label>
+						placeholder="주소" required="required"/> <label for="postcode">주소</label>
 				</div>
 			</div>
 
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="text" id="sample6_detailAddress" name="detailAddress"
-						placeholder="상세주소" /> <label for="postcode">상세주소</label> <input
+						placeholder="상세주소" required="required"/> <label for="postcode">상세주소</label> <input
 						type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 				</div>
 
