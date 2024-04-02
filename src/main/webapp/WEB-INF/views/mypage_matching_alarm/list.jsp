@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
       <div class="main-contents">
         <!-- 검색창과 검색결과 -->
         <!-- result-container시작 -->
