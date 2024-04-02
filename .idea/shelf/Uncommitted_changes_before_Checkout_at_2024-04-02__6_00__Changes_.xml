@@ -1,0 +1,74 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]" date="1712048415776" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2024-04-02 오후 6:00 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/service/ItemService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/service/ItemService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/ItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/controller/MainController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/controller/MainController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MainController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dao/ItemDao.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dao/ItemDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/ItemDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dto/ItemDto.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dto/ItemDto.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/ItemDto.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dao/MemberDao.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dao/MemberDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MemberDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dto/AnimalDto.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dto/AnimalDto.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/AnimalDto.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/service/AnimalService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/service/AnimalService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/AnimalService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/serviceInter/MemberServiceInter.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/serviceInter/MemberServiceInter.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MemberServiceInter.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/service/MemberService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/service/MemberService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MemberService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/controller/MissingAniController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/controller/MissingAniController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MissingAniController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/controller/FoundItemController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/controller/FoundItemController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/FoundItemController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/ItemServiceInter.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/controller/RescueAniController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/controller/RescueAniController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/RescueAniController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dto/MemberDto.class" />
+    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dto/MemberDto.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-02_오후_6_00_[Changes]/MemberDto.class" />
+  </binary>
+</changelist>
