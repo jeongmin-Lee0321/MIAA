@@ -173,33 +173,35 @@
             <div class="table-row">
               <div class="row-title"><span>특징*</span></div>
               <div class="row-content" id="textarea-content">
-                <!-- 텍스트제한 표시 추가 필요 -->
                 <textarea name="sepcialMark" id="sepcialMark" maxlength="300" placeholder="텍스트를 입력하세요."></textarea>
+                <div class="textLengthWrap">
+                  <span class="textCount">0자</span>
+                  <span class="textTotal">/300자</span>
+                </div>
               </div>
             </div>
-            <!-- 파일형식 제한 필요 -->
             <div class="table-row">
               <div class="row-title"><span>사진첨부</span></div>
               <div class="col-content">
                 <div class="in-row-content">
-                  <input type="file" name="files" id="files1" accept="image/*">
-                  <label for="files1">사진첨부</label>
+                  <input type="file" name="" id="file1" accept="image/*">
+                  <label for="file1">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="files" id="files2" accept="image/*">
-                  <label for="files2">사진첨부</label>
+                  <input type="file" name="" id="file2" accept="image/*">
+                  <label for="file2">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="files" id="files3" accept="image/*">
-                  <label for="files3">사진첨부</label>
+                  <input type="file" name="" id="file3" accept="image/*">
+                  <label for="file3">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="files" id="files4" accept="image/*">
-                  <label for="files4">사진첨부</label>
+                  <input type="file" name="" id="file4" accept="image/*">
+                  <label for="file4">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="files" id="files5" accept="image/*">
-                  <label for="files5">사진첨부</label>
+                  <input type="file" name="" id="file5" accept="image/*">
+                  <label for="file5">사진첨부</label>
                 </div>
                 <div class="image-ex-text">*첨부파일은 한개당 3mb까지 제한되고 확장자는 JPEG,GIF,PNG로 제한됩니다. </div>
               </div>
@@ -217,13 +219,11 @@
       </form>
       <!-- form 끝 -->
   </div>
-  <!-- 전화번호에 숫자만 입력 -->
+ <!-- 전화번호에 숫자만 입력 -->
   <script>
-    $(document).on("keypress keyup keydown", "input[type='tel']", function () {
-      $("input[type='tel']").keyup(function () {
-        var replace_text = $(this).val().replace(/[^-0-9]/g, "");
-        $(this).val(replace_text);
-      });
+    $(document).on("keypress keyup keydown change", "input[type='tel']", function () {
+      var replace_text = $(this).val().replace(/[^-0-9]/g, "");
+      $(this).val(replace_text);
     });
   </script>
   <!-- 날짜 제한 -->
@@ -236,6 +236,53 @@
         var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
         document.getElementById("lostday").setAttribute("max", today); //선택날짜 최대값 오늘날짜로 제한
         document.getElementById("lostday").setAttribute("value", today);//파일로드시 오늘날짜로 설정
+    });
+  </script>
+  <!-- 파일크기 제한 -->
+  <script>
+    $(document).on("change", "input[type='file']", function () {
+      var fileVal = $(this).val();
+      if (fileVal != "") {
+        var ext = fileVal.split('.').pop().toLowerCase(); //확장자분리
+        //아래 확장자가 있는지 체크
+        if ($.inArray(ext, ['jpg', 'jpeg', 'gif', 'png']) == -1) {
+          alert('jpg,gif,jpeg,png 파일만 업로드 할수 있습니다.');
+          $(this).val("");
+          return;
+        }
+        const inputValue = event.target.value;
+        console.log(inputValue);
+        console.log(event.target.files);
+        var maxSize = 3 * 1024 * 1024; // 3MB
+        var fileSize = $(this)[0].files[0].size;
+        if (fileSize > maxSize) {
+          alert("첨부파일 사이즈는 3MB 이내로 등록 가능합니다.");
+          $(this).val("");
+          return;
+        }
+      }
+
+    });
+  </script>
+  <!-- 글자수 제한 표현 -->
+  <script>
+    $(document).on("keydown change", "#sepcialMark", function () {
+      let content = $(this).val();
+
+      // 글자수 세기
+      if (content.length == 0 || content == '') {
+        $('.textCount').text('0자');
+      } else {
+        $('.textCount').text(content.length + '자');
+      }
+
+      // 글자수 제한
+      if (content.length > 300) {
+        // 300자 부터는 타이핑 되지 않도록
+        $(this).val($(this).val().substring(0, 300));
+        // 300자 넘으면 알림창 뜨도록
+        alert('글자수는 300자까지 입력 가능합니다.');
+      };
     });
   </script>
   <script>
