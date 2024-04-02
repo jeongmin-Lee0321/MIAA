@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- dao의 인터페이스 주소 -->
+<mapper namespace="com.tech.miaa.dao.MemberDao">
+	<insert id="join">
+		INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+	</insert>
+	
+	<select id="idcheck" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1}
+	</select>
+	<select id="emailcheck" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL=#{param1}
+	</select>
+	<select id="searchid" resultType="String">
+		SELECT USER_ID FROM MEMBER WHERE USER_EMAIL=#{param2}
+	</select>
+	<select id="searchpw1" resultType="String">
+		SELECT USER_BCPWD FROM MEMBER WHERE USER_ID=#{param1} AND USER_EMAIL=#{param2}
+	</select>
+	<select id="searchpw2" resultType="String">
+		SELECT USER_SHPWD FROM MEMBER WHERE USER_ID=#{param1} AND USER_EMAIL=#{param2}
+	</select>
+	<select id="login1" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
+	</select>
+	<select id="login2" resultType="com.tech.miaa.dto.MemberDto">
+		SELECT * FROM MEMBER WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
+	</select>
+</mapper>
