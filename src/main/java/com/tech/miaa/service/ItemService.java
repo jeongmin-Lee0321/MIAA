@@ -29,7 +29,7 @@ public class ItemService implements ItemServiceInter {
 		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
 		String result=""; ItemDao dao = sqlSession.getMapper(ItemDao.class);
 		
-		String tel=request.getParameter("tel");
+		String tel=request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String openclose=request.getParameter("openclose");
 		String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address");
@@ -39,10 +39,11 @@ public class ItemService implements ItemServiceInter {
 		String colorCd=request.getParameter("colorCd");
 		String sepcialMark=request.getParameter("sepcialMark");
 		String userId=request.getParameter("userId");
-
-		if(lostday==""|| address==""|| itemname==""|| itemkind2=="") {
+		
+		
+		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind2.equals("중분류") || colorCd.equals("색상을 선택하세요")) {
 			System.out.println("필수 입력란을 모두 기입하세요.");
-			result="redirect:lost_item_write_view";
+			result="redirect:lost_item_write_page";
 		}else {
 			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId);
 			for (int i = 0; i < files.size(); i++) {
@@ -62,6 +63,7 @@ public class ItemService implements ItemServiceInter {
 					}
 				}
 			}
+			System.out.println("등록되었습니다.");
 			result="redirect:/";
 		}
 		return result;

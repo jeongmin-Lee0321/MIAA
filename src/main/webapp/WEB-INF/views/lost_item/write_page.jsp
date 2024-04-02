@@ -46,30 +46,30 @@
     </div>
 
     <div class="main-contents">
+      <!-- form 시작 -->
+      <form action="lost_item_write" method="post" enctype="multipart/form-data">
       <ul class="top-btns">
         <li><button type="submit">게시물 등록</button></li>
-        <li><button type="button">취소하기</button></li>
+        <li><button type="button" onclick="location.href='lost_item_search_page';">취소하기</button></li>
       </ul>
       <div class="essential">
         <span>*는 필수 입력사항 입니다</span>
       </div>
-      <!-- form 시작 -->
-      <form action="missing_ani_write">
         <!-- table1 -->
         <div class="table-container">
           <div class="table-title"><img src="resources/img/clipboard.png" alt=""><span>분실자 정보</span></div>
           <div class="table">
             <div class="table-row">
               <div class="row-title"><span>연락처</span></div>
-              <div class="row-content"><input type="tel" name="tel" id="tel">-<input type="tel" name="tel"
-                  id="tel">-<input type="tel" name="tel" id="tel"></div>
+              <div class="row-content"><input type="tel" name="tel1" id="tel" maxlength="3">-<input type="tel" name="tel2"
+                  id="tel" maxlength="4">-<input type="tel" name="tel3" id="tel" maxlength="4"></div>
             </div>
             <div class="table-row">
               <div class="row-title"><span>공개여부*</span></div>
               <div class="row-content">
                 <div class="radio-container"><input type="radio" name="openclose" id="openclose"
-                    value="open"><span>공개</span></div>
-                <div class="radio-container"><input type="radio" name="openclose" id="openclose" value="close"
+                    value="true"><span>공개</span></div>
+                <div class="radio-container"><input type="radio" name="openclose" id="openclose" value="false"
                     checked><span>비공개</span></div>
               </div>
             </div>
@@ -81,7 +81,7 @@
           <div class="table">
             <div class="table-row">
               <div class="row-title"><span>분실날짜*</span></div>
-              <div class="row-content"><input type="date" name="lostday" id="lostday"></div>
+              <div class="row-content"><input type="date" name="lostday" id="lostday" ></div>
             </div>
             <div class="table-row">
               <div class="row-title"><span>분실장소*</span></div>
@@ -148,15 +148,6 @@
                 </select>
               </div>
             </div>
-            <div class="table-row">
-              <div class="row-title"><span>성별*</span></div>
-              <div class="row-content">
-                <div class="radio-container"><input type="radio" name="sexCd" id="sexCd" value="F"
-                    checked><span>암컷</span></div>
-                <div class="radio-container"><input type="radio" name="sexCd" id="sexCd" value="M"><span>수컷</span></div>
-              </div>
-            </div>
-
             <div class="table-multi-row">
               <div class="table-row">
                 <div class="row-title"><span>색상*</span></div>
@@ -191,24 +182,24 @@
               <div class="row-title"><span>사진첨부</span></div>
               <div class="col-content">
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
-                  <label for="file1">사진첨부</label>
+                  <input type="file" name="files" id="files1" accept="image/*">
+                  <label for="files1">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
-                  <label for="file1">사진첨부</label>
+                  <input type="file" name="files" id="files2" accept="image/*">
+                  <label for="files2">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
-                  <label for="file1">사진첨부</label>
+                  <input type="file" name="files" id="files3" accept="image/*">
+                  <label for="files3">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
-                  <label for="file1">사진첨부</label>
+                  <input type="file" name="files" id="files4" accept="image/*">
+                  <label for="files4">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
-                  <label for="file1">사진첨부</label>
+                  <input type="file" name="files" id="files5" accept="image/*">
+                  <label for="files5">사진첨부</label>
                 </div>
                 <div class="image-ex-text">*첨부파일은 한개당 3mb까지 제한되고 확장자는 JPEG,GIF,PNG로 제한됩니다. </div>
               </div>
@@ -218,7 +209,7 @@
 
         <ul class="bottom-btns">
           <li><button type="submit">게시물 등록</button></li>
-          <li><button type="button">취소하기</button></li>
+          <li><button type="button" onclick="location.href='lost_item_search_page';">취소하기</button></li>
         </ul>
         <!-- hidden 세션로그인 id -->
         <input type="hidden" name="userId" value="${userId }">
@@ -268,10 +259,10 @@
 	//분류표 선택 
 	function itemkind(e) {
 		var kind_PRI000 = ["삼성노트북", "LG노트북", "삼보노트북","기타","HP노트북","애플노트북"];
-		var kind_PRJ000 = [ "삼성휴대폰", "LG휴대폰", "스카이휴대폰", "아이폰", "기타통신기기", "모토로라휴대폰", "기타휴대폰"];
-		var kind_PRH000 = [ "여성용 지갑", "남성용 지갑", "기타 지갑"];
-		var kind_PRG000 = [ "PMP", "MP3", "PDA", "카메라", "전자수첩", "기타용품", "태블릿", "스마트워치", "무선이어폰"];
-		var kind_PRD000 = [ "기타물품"];
+		var kind_PRJ000 = ["삼성휴대폰", "LG휴대폰", "스카이휴대폰", "아이폰", "기타통신기기", "모토로라휴대폰", "기타휴대폰"];
+		var kind_PRH000 = ["여성용 지갑", "남성용 지갑", "기타 지갑"];
+		var kind_PRG000 = ["PMP", "MP3", "PDA", "카메라", "전자수첩", "기타용품", "태블릿", "스마트워치", "무선이어폰"];
+		var kind_PRD000 = ["기타물품"];
 		var kind_PRO000 = ["반지", "목걸이", "귀걸이","시계" ,"기타"];
 		var kind_PRZ000 = ["기타", "매장문화재", "선글라스","안경"];
 		var kind_PRC000 = ["서류", "기타물품"];
