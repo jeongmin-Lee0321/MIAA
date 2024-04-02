@@ -295,25 +295,28 @@
 			<!-- 검색 결과 리스트프레임 -->
 			<div class="result-list">
 
-				<!-- 목록1개가 list-card -->
-				<div class="list-card">
-					<div class="card-photo">
-						<img src="resources/img/null_img_icon.png" alt="">
-					</div>
-					<div class="content-items">
-						<div class="item-title">
-							<span>남성용 반지갑 </span>
+
+				<c:forEach items="${list }" var="dto">
+					<!-- 목록1개가 list-card -->
+					<div class="list-card">
+						<div class="card-photo">
+							<img src="${dto.fdFilePathImg}" alt="">
 						</div>
-						<ul class="item-details">
-							<li><span>F2018080900000674</span></li>
-							<li><span class="detail-title">물품분류:</span><span>지갑>기타지갑</span></li>
-							<li><span class="detail-title">보관장소:</span><span>서울
-									은평 경찰서 </span></li>
-							<li><span class="detail-title">습득날짜:</span><span>2024-03-15
-							</span></li>
-						</ul>
+						<div class="content-items">
+							<div class="item-title">
+								<span>${dto.fdPrdtNm}</span>
+							</div>
+							<ul class="item-details">
+								<li><span>${dto.atcid}</span></li>
+								<li><span class="detail-title">물품분류:</span><span>${dto.prdtClNm}</span></li>
+								<li><span class="detail-title">보관장소:</span><span>${dto.depPlace}</span></li>
+								<li><span class="detail-title">습득날짜:</span><span>${dto.fdYmd}
+								</span></li>
+							</ul>
+						</div>
 					</div>
-				</div>
+				</c:forEach>
+
 
 			</div>
 			<!-- 검색결과 리스트 프레임 끝 -->
