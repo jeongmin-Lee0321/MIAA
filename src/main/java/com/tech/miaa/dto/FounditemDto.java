@@ -28,6 +28,9 @@ public class FounditemDto {
 //		this.clrNm = clrNm;
 //	}
 	
+	
+	
+	
 	public String getFdSn() {
 		return fdSn;
 	}
