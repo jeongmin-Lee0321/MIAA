@@ -27,6 +27,4 @@ public class ItemDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
-	//원진호_0401추가
-	private MultipartFile file;
 }
