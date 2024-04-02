@@ -158,7 +158,7 @@
 	<div class="main-contents">
 		<!-- 검색창과 검색결과 -->
 		<div class="searchbar-container">
-			<form action="#">
+			<form action="found_item_search1">
 				<!-- 서치바 셀렉 그룹시작 -->
 				<div class="searchbar-select-group">
 					<div class="searchbar-title">
@@ -296,24 +296,25 @@
 			<div class="result-list">
 
 				<!-- 목록1개가 list-card -->
+				<c:forEach items="${list }" var="dto">
 				<div class="list-card">
 					<div class="card-photo">
-						<img src="resources/img/null_img_icon.png" alt="">
+						<img src="${dto.fdFilePathImg}" alt="">
 					</div>
 					<div class="content-items">
 						<div class="item-title">
-							<span>남성용 반지갑 </span>
+							<span>$"dto.fdPrdtNm"</span>
 						</div>
 						<ul class="item-details">
-							<li><span>F2018080900000674</span></li>
-							<li><span class="detail-title">물품분류:</span><span>지갑>기타지갑</span></li>
-							<li><span class="detail-title">보관장소:</span><span>서울
-									은평 경찰서 </span></li>
-							<li><span class="detail-title">습득날짜:</span><span>2024-03-15
-							</span></li>
+							<li><span>${dto.atcid}</span></li>
+							<li><span class="detail-title">물품분류:</span><span>${dto.prdtClNm}</span></li>
+							<li><span class="detail-title">보관장소:</span><span>${dto.depPlace} </span></li>
+							<li><span class="detail-title">습득날짜:</span><span>${dto.fdYmd}</span></li>
 						</ul>
 					</div>
 				</div>
+				</c:forEach>
+				
 
 			</div>
 			<!-- 검색결과 리스트 프레임 끝 -->

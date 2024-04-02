@@ -138,6 +138,36 @@ public class MemberService implements MemberServiceInter {
 	}
 	
 	@Override
+	public String modify_account(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpSession session=request.getSession();
+		
+		String id = (String) session.getAttribute("userId");
+		String pw = request.getParameter("pw"); String pw2 = request.getParameter("pw2");
+		String shpwd = ""; String bcpwd = "";
+		String email = request.getParameter("email");
+		String postcode = request.getParameter("postcode");
+		String address = request.getParameter("address");
+		String detailAddress = request.getParameter("detailAddress");
+		
+		String result = "redirect:mypageform";
+		
+		try {
+			shpwd = CryptoUtil.sha512(pw);
+			bcpwd = CryptoUtil.encryptAES256(pw, shpwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(bcpwd);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		dao.modify_account(id, shpwd, bcpwd, email, postcode, address, detailAddress);
+		
+		return result;
+	}
+	
+	@Override
 	public String del_account(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");

@@ -18,8 +18,8 @@
           <li class="menu-item"><a href="#">&nbsp;&nbsp;분실물</a></li>
           <li class="menu-item"><a href="#">&nbsp;&nbsp;실종동물</a></li>
           <li class="menu-title">1대1 문의 게시판</li>
-          <li class="menu-item"><a href="#">문의 내역</a></li>
-          <li class="menu-item"><a href="#">문의글 등록</a></li>
+          <li class="menu-item"><a href="mypage_customer_inquiry_list_page">문의 내역</a></li>
+          <li class="menu-item"><a href="mypage_customer_inquiry_write_page">문의글 등록</a></li>
           <li class="menu-title">회원정보수정</li>
           <li class="menu-item"><a href="mypage_modify_account_page">회원정보수정</a></li>
           <li class="menu-title">회원탈퇴</li>

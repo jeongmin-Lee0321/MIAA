@@ -106,6 +106,17 @@ public class MemberController {
 		
 		return result;
 	}
+	@RequestMapping("modify_account")
+	public String modify_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		model.addAttribute("request", request); 
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		memberServiceInter=new MemberService();
+		
+		String result=memberServiceInter.modify_account(model);
+		
+		return result;
+	}
 	
 	@RequestMapping("del_account")
 	public String del_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
@@ -138,6 +149,4 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
-	
-
 }

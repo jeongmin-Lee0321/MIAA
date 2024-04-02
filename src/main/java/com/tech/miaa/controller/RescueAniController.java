@@ -2,12 +2,16 @@ package com.tech.miaa.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.tech.miaa.abdmApi.AbandonmentPublicSrvc;
+import com.tech.miaa.abdmApi.AbdmSido;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.tech.miaa.service.AnimalService;
@@ -22,7 +26,10 @@ public class RescueAniController {
 
 	@RequestMapping(value = "/rescue_ani_search_page", method = RequestMethod.GET)
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
-		
+		AbdmSido sido = AbandonmentPublicSrvc.getSido();
+		AbandonmentPublicSrvc.abandonmentPublic();
+
+		model.addAttribute("sidolist",sido.getItems());
 		return "rescue_ani.search_page.보호동물 검색.3";
 	}
 

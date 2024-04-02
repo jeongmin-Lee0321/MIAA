@@ -25,6 +25,16 @@ public class FoundItemController {
 		
 		return "found_item.search_page.습득물 상세검색.3";
 	}
+	
+	//mhs
+	@RequestMapping(value = "found_item_search1", method = RequestMethod.GET)
+	public String found_item_search1(HttpServletRequest request, Model model ) {
+		
+		
+		
+		
+		return "found_item.search_page.습득물 상세검색.3";
+	}
 
 	//JeongMin
 	@RequestMapping(value = "/found_item_detail_page", method = RequestMethod.GET)
