@@ -145,7 +145,6 @@ public class MemberService implements MemberServiceInter {
 		HttpSession session=request.getSession();
 		
 		String id = (String) session.getAttribute("userId");
-//		String id = request.getParameter("id");
 		String pw = request.getParameter("pw"); String pw2 = request.getParameter("pw2");
 		String shpwd = ""; String bcpwd = "";
 		String email = request.getParameter("email");
@@ -155,7 +154,6 @@ public class MemberService implements MemberServiceInter {
 		
 		String result = "redirect:mypageform";
 		
-		// 암호화 처리
 		try {
 			shpwd = CryptoUtil.sha512(pw);
 			bcpwd = CryptoUtil.encryptAES256(pw, shpwd);
@@ -166,29 +164,6 @@ public class MemberService implements MemberServiceInter {
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		dao.modify_account(id, shpwd, bcpwd, email, postcode, address, detailAddress);
 		
-		
-//		int idcheck = dao.idcheck(id);
-//		int emailcheck = dao.emailcheck(email);
-//		
-//		if (id != "" && email != "" && postcode != "" && pw != "") {
-//			// 가입가능여부 확인 (아이디, 이메일 중복확인)
-//			if (idcheck >= 1 && emailcheck >= 1) {
-//				System.out.println("아이디와 이메일이 중복됩니다.");
-//			} else if (idcheck == 0 && emailcheck >= 1) {
-//				System.out.println("이메일이 중복됩니다.");
-//			} else if (idcheck >= 1 && emailcheck == 0) {
-//				System.out.println("아이디가 중복됩니다.");
-//			} else {
-//				// 가입가능여부 확인 (비밀번호와 비밀번호 확인 같은지 확인)
-//				if (pw.equals(pw2)) {
-//					System.out.println("회원가입을 축하드립니다.");
-//					dao.join(id, shpwd, bcpwd, email, postcode, address, detailAddress);
-//					result = "redirect:loginform";
-//				} else {
-//					System.out.println("비밀번호를 확인해주세요.");
-//				}
-//			}
-//		}
 		return result;
 	}
 	

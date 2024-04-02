@@ -21,15 +21,15 @@
 		<form action="modify_account">
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw" name="pw" placeholder="비밀번호" required="required" /> <label
-						for="pw">비밀번호</label>
+					<input type="password" id="pw" name="pw" placeholder="새 비밀번호" required="required" /> <label
+						for="pw">새 비밀번호</label>
 				</div>
 			</div>
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw2" name="pw2" placeholder="비밀번호 확인" required="required" />
-					<label for="pw">비밀번호 확인</label>
+					<input type="password" id="pw2" name="pw2" placeholder="새 비밀번호 확인" required="required" />
+					<label for="pw">새 비밀번호 확인</label>
 				</div>
 				<div class="button-container">
 					<input type="button" id="pwchk" name="pwchk" value="비밀번호 확인" style="cursor: pointer;">
