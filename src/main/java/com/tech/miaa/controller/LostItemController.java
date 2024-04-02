@@ -32,10 +32,14 @@ public class LostItemController {
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("sqlSession", sqlSession);
 		
-		 itemService = new ItemService(); 
-		 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
-		 
-		 model.addAttribute("itemList", itemList);
+		 try {
+			itemService = new ItemService(); 
+			 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
+			 
+			 model.addAttribute("itemList", itemList);
+		} catch (Exception e) {
+			System.out.println("itemList테이블 없음");
+		}
 		 
 		return "lost_item.search_page.분실물 상세검색.3";
 	}
