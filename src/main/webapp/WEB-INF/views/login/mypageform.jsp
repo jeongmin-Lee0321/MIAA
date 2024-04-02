@@ -10,8 +10,10 @@
 </head>
 <body>
 
-<div>
-내용
+<div style="text-align: center; font-size: 60px; margin-top: 50px;">
+
+
+<p style="color: blue;"><%= request.getAttribute("userId") %></p> 회원님 환영합니다 !  
 
 </div>
 </body>

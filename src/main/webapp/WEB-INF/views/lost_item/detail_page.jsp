@@ -17,7 +17,7 @@
             <span>소중한 물건이 분실되었습니다. 아래와 같은 물건을 발견하셨다면 기재된 연락처로 연락해주시기 바랍니다.</span>
         </div>
         <div class="btn-top-container">
-            <button class="btn-list" id="btn-top-rescue-list">목록으로</button>
+            <button class="btn-list" id="btn-top-rescue-list" onclick="location.href='lost_item_search_page';" style="cursor: pointer;">목록으로</button>
         </div>
     </div>
 
@@ -41,7 +41,7 @@
                 <th class="info-table-name">분실물명</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="ist_prdt_nm">
-                        주민등록증
+                        ${dto.item_name }
                     </div>
                 </td>
             </tr>
@@ -49,7 +49,7 @@
                 <th class="info-table-name">분실일자</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="ist_hor">
-                        2024-02-29
+                        ${dto.lostday }
                     </div>
                 </td>
             </tr>
@@ -57,19 +57,19 @@
                 <th class="info-table-name">분실장소</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="ist_place">
-                        노상
+                        ${dto.address }
                     </div>
                 </td>
                 <th class="info-table-name">물품분류</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="prdt_cl_nm">증명서>신분증</div>
+                    <div class="table-value-container" id="prdt_cl_nm">${dto.upr_cd }</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">연락처</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="user_tel">
-                        010-xxxx-xxxx
+                        ${dto.user_tel }
                     </div>
                 </td>
             </tr>
@@ -77,7 +77,7 @@
                 <th class="info-table-name" rowspan="3">특징</th>
                 <td class="info-table-value" colspan="3" rowspan="3">
                     <div class="table-value-container" id="ist_uniq">
-                        주민등록증
+                        ${dto.sepcialmark }
                     </div>
                 </td>
             </tr>
@@ -87,7 +87,7 @@
     </div>
 
     <div class="btn-bottom-container">
-        <button class="btn-list" id="btn-bottom-list">목록으로</button>
+        <button class="btn-list" id="btn-bottom-list" onclick="location.href='lost_item_search_page';" style="cursor: pointer;">목록으로</button>
     </div>
 </div>
 </body>

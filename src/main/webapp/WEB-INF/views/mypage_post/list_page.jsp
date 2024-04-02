@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="resources/css/mypage_post_list_page.css">
 </head>
 <body>
-<body>
 <div class="main-body">
     <div class="main-selection">
         <div class="page-route">
@@ -132,9 +131,6 @@
             </ul>
         </div>
     </div>
-
 </div>
-</body>
-
 </body>
 </html>

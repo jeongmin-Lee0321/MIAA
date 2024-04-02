@@ -39,12 +39,18 @@ public class MemberController {
 		return "login.searchpwform.비밀번호 찾기 페이지.1";
 	}
 	@RequestMapping("mypageform")
-	public String mypageform(HttpServletRequest request, Model model) {
+	public String mypageform(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		HttpSession session = request.getSession(false);
+		model.addAttribute("userId",userId);
 		return "login.mypageform.마이 페이지.3";
 	}
 	@RequestMapping("mypage_delete_account_page")
 	public String mypage_delete_account_page(HttpServletRequest request, Model model) {
 		return "login.mypage_delete_account_page.마이 페이지.3";
+	}
+	@RequestMapping("mypage_modify_account_page")
+	public String mypage_modify_account_page(HttpServletRequest request, Model model) {
+		return "login.mypage_modify_account_page.회원정보수정.3";
 	}
 
 	@ResponseBody
@@ -100,6 +106,31 @@ public class MemberController {
 		
 		return result;
 	}
+	@RequestMapping("modify_account")
+	public String modify_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		model.addAttribute("request", request); 
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		memberServiceInter=new MemberService();
+		
+		String result=memberServiceInter.modify_account(model);
+		
+		return result;
+	}
+	
+	@RequestMapping("del_account")
+	public String del_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		HttpSession session = request.getSession(false);
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		memberServiceInter=new MemberService();
+		
+		memberServiceInter.del_account(model);
+		
+		session.invalidate();	
+		return "redirect:/";
+	}
 	
 	@RequestMapping("login")
 	public String login(HttpServletRequest request, Model model) {
@@ -119,7 +150,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
+
 	/* 원진호_알림 목록_0329추가 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
@@ -127,11 +158,4 @@ public class MemberController {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
 }

@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-=======
+
 <link rel="stylesheet" href="resources/css/main_selection.css" />
 <link rel="stylesheet" href="resources/css/searchpwform.css" />
 <script
@@ -18,7 +18,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
 	rel='stylesheet' type='text/css'>
->>>>>>> release/MSW
+
 </head>
 <body>
 
@@ -37,11 +37,11 @@
 			style="width: 100%; height: 400px;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; text-align: center;">
 			<form action="loginform">
 				<div class="input-box">
-					<input type="text" id="id" name="id" placeholder="아이디" /> <label
+					<input type="text" id="id" name="id" placeholder="아이디" required="required"/> <label
 						for="id">아이디</label>
 				</div>
 				<div class="input-box">
-					<input type="text" id="email" name="email" placeholder="이메일" /> <label
+					<input type="text" id="email" name="email" placeholder="이메일" required="required"/> <label
 						for="email">이메일</label>
 				</div>
 				<div
@@ -80,6 +80,5 @@
 			});
 		}
 	</script>
-	</form>
 </body>
 </html>

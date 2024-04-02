@@ -107,7 +107,7 @@
           <!-- 결과 리스트 총 갯수 프레임 -->
           <div class="total-resultNum-wrapper">
             <div class="total-resultNum-container">
-              <span>전체 </span><span class="totalNum">223</span><span>건</span>
+              <span>전체 </span><span class="totalNum">${totalCount }</span><span>건</span>
             </div>
           </div>
 
@@ -115,24 +115,24 @@
           <div class="result-list">
 
             <!-- 목록1개가 list-card -->
-
-            <div class="list-card">
+			<c:forEach items="${itemList }" var="itemList">
+            <div class="list-card" onclick="location.href='lost_item_detail_page?item_id=${itemList.item_id }';" style="cursor: pointer;">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
               </div>
               <div class="content-items">
                 <div class="item-title">
-                  <span>남성용 반지갑 </span>
+                  <span>${itemList.item_name } </span>
                 </div>
                 <ul class="item-details">
-                  <li><span class="detail-title">분실날짜:</span><span>2024-03-15</span></li>
-                  <li><span class="detail-title">물품분류:</span><span>지갑>기타지갑</span></li>
-                  <li><span class="detail-title">분실장소:</span><span>삼랑진읍 천태로47.. overflow</span></li>
-                  <li><span class="detail-title">특징:</span><span>갈색무늬에 사이즈는...overflow </span></li>
+                  <li><span class="detail-title">분실날짜:</span><span>${itemList.lostday }</span></li>
+                  <li><span class="detail-title">물품분류:</span><span>${itemList.upr_cd }</span></li>
+                  <li><span class="detail-title">분실장소:</span><span>${itemList.address }</span></li>
+                  <li><span class="detail-title">특징:</span><span>${itemList.sepcialmark }</span></li>
                 </ul>
               </div>
             </div>
-
+			</c:forEach>
 
           </div>
           <!-- 검색결과 리스트 프레임 끝 -->
