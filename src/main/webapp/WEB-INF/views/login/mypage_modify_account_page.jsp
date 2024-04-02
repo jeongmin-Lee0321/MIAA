@@ -16,25 +16,20 @@
 </head>
 <body>
 <main>
-
 	<div class="modify_insert"
 		style="width: 100%; height: 100%;  margin: auto; margin-top: 20px; text-align: center;">
-
-		<form action="join">
-
-			
-
+		<form action="modify_account">
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw" name="pw" placeholder="비밀번호" required="required" /> <label
-						for="pw">비밀번호</label>
+					<input type="password" id="pw" name="pw" placeholder="새 비밀번호" required="required" /> <label
+						for="pw">새 비밀번호</label>
 				</div>
 			</div>
 
 			<div class="inputbox-container">
 				<div class="input-box">
-					<input type="password" id="pw2" name="pw2" placeholder="비밀번호 확인" required="required" />
-					<label for="pw">비밀번호 확인</label>
+					<input type="password" id="pw2" name="pw2" placeholder="새 비밀번호 확인" required="required" />
+					<label for="pw">새 비밀번호 확인</label>
 				</div>
 				<div class="button-container">
 					<input type="button" id="pwchk" name="pwchk" value="비밀번호 확인" style="cursor: pointer;">
@@ -79,8 +74,8 @@
 
 			</div>
 
-			<div class="joinBtn-container">
-				<input type="submit" id="join" value="수정" style="cursor: pointer;">
+			<div class="modifyBtn-container">
+				<input type="submit" id="modify" value="수정" style="cursor: pointer;">
 			</div>
 
 			<script>

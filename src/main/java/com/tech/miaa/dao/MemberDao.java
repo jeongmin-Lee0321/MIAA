@@ -5,6 +5,8 @@ import com.tech.miaa.dto.MemberDto;
 public interface MemberDao {
 	public void join(String id, String shpwd, String bcpwd,
 	String email, String postcode, String address, String detailAddress);
+	public void modify_account(String id, String shpwd, String bcpwd,
+			String email, String postcode, String address, String detailAddress);
 	public int idcheck(String id);
 	public int emailcheck(String email);
 	public String searchid(String email);

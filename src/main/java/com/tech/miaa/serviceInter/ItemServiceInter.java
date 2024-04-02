@@ -10,4 +10,5 @@ import com.tech.miaa.dto.ItemDto;
 public interface ItemServiceInter {
 	public ArrayList<ItemDto> lost_item_search(Model model);
 	public String lost_item_write(Model model);
+	public ItemDto lost_item_detail_page(Model model);
 }
