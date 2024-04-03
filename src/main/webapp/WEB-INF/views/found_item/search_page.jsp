@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +14,13 @@
 		var prd_subCategory = document.getElementById("prd_subCategory");
 		switch (mainCategory) {
 		case 'PRI000': // 컴퓨터
-			prd_subCategory.innerHTML = '<option value="삼성 노트북">삼성 노트북</option><option value="LG 노트북">LG 노트북</option><option value="삼보 노트북">삼보 노트북</option><option value="기타">기타</option><option value="HP 노트북">HP 노트북</option><option value="애플 노트북">애플 노트북</option>';
+			prd_subCategory.innerHTML = '<option value="삼성노트북">삼성 노트북</option><option value="LG노트북">LG노트북</option><option value="삼보노트북">삼보 노트북</option><option value="기타">기타</option><option value="HP노트북">HP노트북</option><option value="애플노트북">애플 노트북</option>';
 			break;
 		case 'PRJ000': // 휴대폰
-			prd_subCategory.innerHTML = '<option value="삼성 휴대폰">삼성 휴대폰</option><option value="LG 휴대폰">LG 휴대폰</option><option value="스카이 휴대폰">스카이 휴대폰</option><option value="아이폰">아이폰</option><option value="기타 통신기기">기타 통신기기</option><option value="모토로라 휴대폰">모토로라 휴대폰</option><option value="기타 휴대폰">기타 휴대폰</option>';
+			prd_subCategory.innerHTML = '<option value="삼성휴대폰">삼성 휴대폰</option><option value="LG휴대폰">LG휴대폰</option><option value="스카이휴대폰">스카이휴대폰</option><option value="아이폰">아이폰</option><option value="기타통신기기">기타통신기기</option><option value="모토로라 휴대폰">모토로라 휴대폰</option><option value="기타 휴대폰">기타 휴대폰</option>';
 			break;
 		case 'PRH000': // 지갑
-			prd_subCategory.innerHTML = '<option value="남성용 지갑">남성용 지갑</option><option value="여성용 지갑">여성용 지갑</option><option value="어린이용 지갑">어린이용 지갑</option>';
+			prd_subCategory.innerHTML = '<option value="남성용지갑">남성용 지갑</option><option value="여성용지갑">여성용 지갑</option><option value="어린이용지갑">어린이용 지갑</option>';
 			break;
 		case 'PRG000': // 전자기기
 			prd_subCategory.innerHTML = '<option value="PMP">PMP</option><option value="MP3">MP3</option><option value="PDA">PDA</option><option value="카메라">카메라</option><option value="전자수첩">전자수첩</option><option value="기타용품">기타용품</option><option value="태블릿">태블릿</option><option value="스마트워치">스마트워치</option><option value="무선이어폰">무선이어폰</option>';
@@ -288,15 +289,6 @@
 					</div>
 				</div>
 
-				<div class="searchbar-select-group">
-					<div class="searchbar-title">
-						<span>습득물명</span>
-					</div>
-					<div class="searchbar-content">
-						<input type="search" name="q" id="q" style="min-width: 300px;">
-					</div>
-				</div>
-
 				<!-- form 조회용 버튼 -->
 				<div class="search-btn-block">
 					<button>
@@ -314,7 +306,10 @@
 			<!-- 결과 리스트 총 갯수 프레임 -->
 			<div class="total-resultNum-wrapper">
 				<div class="total-resultNum-container">
-					<span> </span><span class="totalNum">"${total}"</span><span>건</span>
+					<span> </span><span class="totalNum">${total}</span>
+					<c:if test="${not empty total}">
+					<span>건</span>
+					</c:if>
 				</div>
 			</div>
 
@@ -350,11 +345,22 @@
 				<div class="currentOftotal">
 					<span>Page</span><span class="current-page">${pageNum+1}</span><span>of</span><span
 						class="total-page"> <c:choose>
-							<c:when test="${total%10==0 }">
-								${total/10}
-							</c:when>
+							<c:when test="${empty total}">
+        						1
+    						</c:when>
+							<c:when test="${total == 0}">
+        						1
+    						</c:when>
 							<c:otherwise>
-								${(total/10)+1}
+								<c:set var="result" value="${total / 10}" />
+								<c:choose>
+									<c:when test="${total % 10 == 0}">
+                						${total/10}
+            						</c:when>
+									<c:otherwise>
+            							${String.valueOf(Math.ceil(result)).replaceAll("\\.0$", "")}
+            						</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 					</span>
@@ -363,29 +369,35 @@
 					<%-- 					<c:if test="${total>=0}">
 						<c:forEach begin="1" end="${ }" var="i"> --%>
 					<li class="btn-prev"><a class="test" href="#"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
-					<li><a href="#">1</a></li>
-					<c:if test="${not empty xml_code}">
-						<li><form id="pageForm" action="found_item_view">
+							src="resources/img/chevron-left.png" alt=""></a>
+							<%-- </li>
+					<form id="pageForm" action="found_item_view" method="post">
 								<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-							<%-- 	<input type="hidden" name="xml_code" value="<%=xml_code%>" /> --%>
+									<input type="hidden" name="xml_code" value="${fn:escapeXml(xml_code)}" />
 								<input type="hidden" name="page" value="1" />
 								<!-- submit 버튼 -->
 								<input type="submit" value="2" />
+							</form></li> --%>
+					<c:if test="${not empty xml_code}">
+					<c:if test="${Math.ceil(total/10)>=10}">
+					<c:forEach var="i" begin="0" end="9">
+						<li><form id="pageForm" action="found_item_view" method="post">
+								<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+									<input type="hidden" name="xml_code" value="${fn:escapeXml(xml_code)}" />
+								<input type="hidden" name="page" value="${i}" />
+								<!-- submit 버튼 -->
+								<input type="submit" value="${i+1}" />
 							</form></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<li><a href="#">10</a></li>
+					</c:forEach>
 					</c:if>
+					</c:if>
+						<!-- <li><a href="#">10</a></li> -->
 					<%-- 						</c:forEach>
 					</c:if> --%>
+					<c:if test="${Math.ceil(total/10)>10}">
 					<li class="btn-next"><a href="#"><img
 							src="resources/img/chevron-left.png" alt=""></a></li>
+					</c:if>
 				</ul>
 
 				<ul class="switchBtn-container">
