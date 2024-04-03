@@ -184,23 +184,23 @@
               <div class="row-title"><span>사진첨부</span></div>
               <div class="col-content">
                 <div class="in-row-content">
-                  <input type="file" name="" id="file1" accept="image/*">
+                  <input type="file" name="files" id="file1" accept="image/*">
                   <label for="file1">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file2" accept="image/*">
+                  <input type="file" name="files" id="file2" accept="image/*">
                   <label for="file2">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file3" accept="image/*">
+                  <input type="file" name="files" id="file3" accept="image/*">
                   <label for="file3">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file4" accept="image/*">
+                  <input type="file" name="files" id="file4" accept="image/*">
                   <label for="file4">사진첨부</label>
                 </div>
                 <div class="in-row-content">
-                  <input type="file" name="" id="file5" accept="image/*">
+                  <input type="file" name="files" id="file5" accept="image/*">
                   <label for="file5">사진첨부</label>
                 </div>
                 <div class="image-ex-text">*첨부파일은 한개당 3mb까지 제한되고 확장자는 JPEG,GIF,PNG로 제한됩니다. </div>
