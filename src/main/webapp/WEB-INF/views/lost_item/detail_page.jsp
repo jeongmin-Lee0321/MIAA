@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% int a=0; %>
+
 <html>
 <head>
 <title>Title</title>
@@ -25,9 +25,9 @@
 	
     <div class="image-selection">
         <div class="image-container">
-            <img src="resources/img/chevron-left.png" id="chevron-left" style="cursor: pointer;" onclick=";">
-            <img src="${imgDtos.get(a).getFilename()}" id="ani-image">
-            <img src="resources/img/chevron-right.png" id="chevron-right" style="cursor: pointer;" onclick=";">
+            <img src="resources/img/chevron-left.png" id="chevron-left" style="cursor: pointer;" onclick="i--;">
+            <img src="${imgDtos.get(0).getFilename()}" id="ani-image">
+            <img src="resources/img/chevron-right.png" id="chevron-right" style="cursor: pointer;" onclick="i++;">
         </div>
     </div>
     <div class="found-item-info">
