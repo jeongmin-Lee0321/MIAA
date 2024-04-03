@@ -41,42 +41,42 @@ public class FounditemService implements FounditemServiceInter {
 		PrdCode prd = new PrdCode();
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String bid = request.getParameter("bid");
 		String result_code = ""; // 전체 결과값
-		System.out.println(request.getParameter("prd_mainCategory") + " : " + request.getParameter("prd_subCategory"));
-		System.out.println(prd.getPrdCode(request.getParameter("prd_subCategory")).toString());
-		String PRDT_CL_CD_01 = request.getParameter("prd_mainCategory"); // 대분류
-		String PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory")).toString(); // 중분류
-		String FD_COL_CD = request.getParameter("FD_COL_CD"); // 색상코드
-		String START_YMD = request.getParameter("START_YMD"); // 시작일
-		String END_YMD = request.getParameter("END_YMD"); // 종료일
-		String N_FD_LCT_CD; // 습득지역(코드)
+		String PRDT_CL_CD_01 = ""; // 대분류
+		String PRDT_CL_CD_02 = ""; // 중분류
+//		String FD_COL_CD = ""; // 색상코드
+		String START_YMD = ""; // 시작일
+		String END_YMD = ""; // 종료일
+		String N_FD_LCT_CD=""; // 습득지역(코드)
+		
 		System.out.println(request.getParameter("cityname") + " , " + request.getParameter("cityname2"));
-		if (request.getParameter("cityname2").equals(""))
+		
+		if (request.getParameter("cityname2").equals("") && !request.getParameter("cityname").equals(""))
 			N_FD_LCT_CD = request.getParameter("cityname");
-		else
+		else if(!request.getParameter("cityname2").equals("") && !request.getParameter("cityname2").isEmpty())
 			N_FD_LCT_CD = request.getParameter("cityname2");
 		String pageNo = request.getParameter("pageNo");
 
-		if (PRDT_CL_CD_01 == null)
-			PRDT_CL_CD_01 = "";
-		if (PRDT_CL_CD_02 == null)
-			PRDT_CL_CD_02 = "";
-		if (FD_COL_CD == null)
-			FD_COL_CD = "";
-		if (START_YMD == null)
-			START_YMD = "";
-		if (END_YMD == null)
-			END_YMD = "";
-		if (N_FD_LCT_CD == null)
-			N_FD_LCT_CD = "";
+		if ((!request.getParameter("prd_mainCategory").equals(""))&&(!request.getParameter("prd_mainCategory").isEmpty()))
+			PRDT_CL_CD_01 = request.getParameter("prd_mainCategory");
+		
+		System.out.println("중분류원제목 : "+request.getParameter("prd_subCategory"));
+		System.out.println("중분류코드:"+PRDT_CL_CD_02);
+		if ((!request.getParameter("prd_subCategory").equals(""))&&(!request.getParameter("prd_subCategory").isEmpty()))
+			PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory").replace(" ","")).toString();
+		System.out.println("중분류코드:"+PRDT_CL_CD_02);
+//		if (!request.getParameter("FD_COL_CD").equals(""))
+//			FD_COL_CD = request.getParameter("FD_COL_CD");
+		if (!request.getParameter("START_YMD").equals(""))
+			START_YMD = request.getParameter("START_YMD");
+		if (!request.getParameter("END_YMD").equals(""))
+			END_YMD = request.getParameter("END_YMD");
+		
 		if (pageNo == null || pageNo.equals(""))
 			pageNo = "1";
 
 		System.out.println("인터내부\n" + "대분류 : " + PRDT_CL_CD_01 + "\n중분류 : " + PRDT_CL_CD_02 + "\n시작종료일 : " + START_YMD
 				+ "~" + END_YMD + "\n도시 : " + N_FD_LCT_CD);
-//		START_YMD="20240101";
-//		END_YMD="20240301";
 
 		try {
 			StringBuilder urlBuilder = new StringBuilder(
@@ -104,6 +104,7 @@ public class FounditemService implements FounditemServiceInter {
 					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8")); /* 페이지 번호 */
 			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
 					+ URLEncoder.encode("100", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
+			System.out.println(urlBuilder.toString());
 			URL url = new URL(urlBuilder.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
