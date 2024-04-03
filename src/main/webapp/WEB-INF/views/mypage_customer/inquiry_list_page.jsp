@@ -58,7 +58,7 @@
 						<td>Jan 4, 2022</td>
 						<td>Jan 8, 2022</td>	
 						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon"></td>
+							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
 					</tr>
 				</table>
 			</div>
@@ -95,7 +95,6 @@
 				</ul>
 			</div>
 		</div>
-
 
 	</div>
 </body>
