@@ -1,0 +1,101 @@
+Index: src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n\tpageEncoding=\"UTF-8\"%>\r\n<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"UTF-8\">\r\n<link rel=\"stylesheet\" href=\"resources/css/main_contents.css\" />\r\n\t<script src=\"value=\"/resources/js/jquery-3.7.1.min.js\"></script>\r\n<script type=\"text/javascript\">\r\n/* \tfunction selectedSido(obj) {\r\n\t\talert(obj.value);\r\n\t} */\r\n\t$(\"#SidoSelectBox\").on(\"change\",function(){\r\n\t\talert();\r\n\t\t\r\n\t});\r\n</script>\r\n\r\n<title>Insert title here</title>\r\n</head>\r\n<body>\r\n\t<div class=\"main-contents\">\r\n\t\t<!-- 검색창과 검색결과 -->\r\n\t\t<div class=\"searchbar-container\">\r\n\t\t\t<form action=\"#\">\r\n\t\t\t\t<!-- 서치바 셀렉 그룹시작 -->\r\n\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t<span>기간</span>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t<input type=\"date\" name=\"\" id=\"\"> <span>~</span> <input\r\n\t\t\t\t\t\t\ttype=\"date\" name=\"\" id=\"\"> <span>(접수일기준)</span>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<!-- 멀티그룹묶음 -->\r\n\t\t\t\t<div class=\"searchbar-mutil-group\">\r\n\t\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t\t<span>시도</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t\t<select name=\"SidoSelectBox\" id=\"SidoSelectBox\" onchange=\"javascript:selectedSido(this);\">\r\n\t\t\t\t\t\t\t\t<c:forEach items=\"${sidolist }\" var=\"sido\">\r\n\t\t\t\t\t\t\t\t\t<option value=\"${sido.getOrgdownNm() }\">${sido.getOrgdownNm() }</option>\r\n\t\t\t\t\t\t\t\t</c:forEach>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t\t<span>시군구</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t\t<select name=\"\" id=\"\">\r\n\t\t\t\t\t\t\t\t<option value=\"구로구\">구로구</option>\r\n\t\t\t\t\t\t\t\t<option value=\"영등포구\">영등포구</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t\t<span>보호센터</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t\t<select name=\"\" id=\"\">\r\n\t\t\t\t\t\t\t\t<option value=\"전체\">전체</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"searchbar-mutil-group\">\r\n\t\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t\t<span>축종 및 품종</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t\t<select name=\"\" id=\"\">\r\n\t\t\t\t\t\t\t\t<option value=\"전체\">전체</option>\r\n\t\t\t\t\t\t\t</select> <span>-</span> <select name=\"\" id=\"\">\r\n\t\t\t\t\t\t\t\t<option value=\"전체\">전체</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"searchbar-select-group\">\r\n\t\t\t\t\t\t<div class=\"searchbar-title\">\r\n\t\t\t\t\t\t\t<span>성별</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"searchbar-content\">\r\n\t\t\t\t\t\t\t<select name=\"\" id=\"\">\r\n\t\t\t\t\t\t\t\t<option value=\"전체\">수컷</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<!-- form 조회용 버튼 -->\r\n\t\t\t\t<div class=\"search-btn-block\">\r\n\t\t\t\t\t<button>\r\n\t\t\t\t\t\t조회<img src=\"resources/img/searchIcon.png\" alt=\"\">\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t</div>\r\n\t\t<!-- 검색창과 검색결과 끝 -->\r\n\r\n\t\t<!-- result-container시작 -->\r\n\r\n\t\t<div class=\"result-container\">\r\n\t\t\t<!-- 결과 리스트 총 갯수 프레임 -->\r\n\t\t\t<div class=\"total-resultNum-wrapper\">\r\n\t\t\t\t<div class=\"total-resultNum-container\">\r\n\t\t\t\t\t<span>전체 </span><span class=\"totalNum\">223</span><span>건</span>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<!-- 검색 결과 리스트프레임 -->\r\n\t\t\t<div class=\"result-list\">\r\n\r\n\t\t\t\t<!-- 목록1개가 list-card -->\r\n\t\t\t\t<div class=\"list-card\">\r\n\t\t\t\t\t<div class=\"card-photo\">\r\n\t\t\t\t\t\t<img src=\"resources/img/null_img_icon.png\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"content-items\">\r\n\t\t\t\t\t\t<div class=\"item-title\">\r\n\t\t\t\t\t\t\t<span>믹스견</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<ul class=\"item-details\">\r\n\t\t\t\t\t\t\t<li><span class=\"detail-title\">구조날짜:</span><span>2024-03-15</span></li>\r\n\t\t\t\t\t\t\t<li><span class=\"detail-title\">공고번호:</span><span>경북-구미-2024-00092</span></li>\r\n\t\t\t\t\t\t\t<li><span class=\"detail-title\">성별:</span><span>남성</span></li>\r\n\t\t\t\t\t\t\t<li><span class=\"detail-title\">발견날짜:</span><span>삼랑진읍\r\n\t\t\t\t\t\t\t\t\t천태로 overflow확인 </span></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t\t<!-- 검색결과 리스트 프레임 끝 -->\r\n\t\t\t<!-- 페이징 프레임시작 -->\r\n\t\t\t<div class=\"page-container\">\r\n\t\t\t\t<div class=\"currentOftotal\">\r\n\t\t\t\t\t<span>Page</span><span class=\"current-page\">1</span><span>of</span><span\r\n\t\t\t\t\t\tclass=\"total-page\">10</span>\r\n\t\t\t\t</div>\r\n\t\t\t\t<ul class=\"pagelist-container\">\r\n\t\t\t\t\t<li class=\"btn-prev\"><a class=\"test\" href=\"#\"><img\r\n\t\t\t\t\t\t\tsrc=\"resources/img/chevron-left.png\" alt=\"\"></a></li>\r\n\t\t\t\t\t<li><a href=\"#\">1</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">2</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">3</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">4</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">5</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">6</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">7</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">8</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">9</a></li>\r\n\t\t\t\t\t<li><a href=\"#\">10</a></li>\r\n\t\t\t\t\t<li class=\"btn-next\"><a href=\"#\"><img\r\n\t\t\t\t\t\t\tsrc=\"resources/img/chevron-left.png\" alt=\"\"></a></li>\r\n\t\t\t\t</ul>\r\n\r\n\t\t\t\t<ul class=\"switchBtn-container\">\r\n\t\t\t\t\t<li class=\"btn-prev-group\"><a href=\"#\">Previous</a></li>\r\n\t\t\t\t\t<li class=\"btn-next-group\"><a href=\"#\">Next</a></li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t\t<!-- 페이징 프레임 끝 -->\r\n\t\t</div>\r\n\t\t<!-- result-container끝 -->\r\n\t</div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp b/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp
+--- a/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp	(revision 662f02a8e0096f63b680985caf8124fb07b24a47)
++++ b/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp	(date 1712048169287)
+@@ -6,15 +6,33 @@
+ <head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" href="resources/css/main_contents.css" />
+-	<script src="value="/resources/js/jquery-3.7.1.min.js"></script>
+-<script type="text/javascript">
+-/* 	function selectedSido(obj) {
+-		alert(obj.value);
+-	} */
+-	$("#SidoSelectBox").on("change",function(){
+-		alert();
+-		
++	<script src="/resources/js/jquery-3.7.1.min.js"></script>
++	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
++<script>
++	// $(document).ready(function (){
++	// 	$("SidoSelectBox").onchange(alert("ADSf"));
++	// });
++	// $("SidoSelectBox").onchange(alert("ADSfddddd"));
++	$(document).ready(function (){
++		$("SidoSelectBox").onchange(selectedSido(val));
+ 	});
++	function selectedSido(val){
++		alert(val);
++		$.ajax({
++			url : "selectedsido",
++			type : "post",
++			// dataType : "json",
++			data : {
++				"btn" : id, "btnValue":val
++			},
++			success : function() {
++				alert("성공");
++			},
++			error: function (){
++				alert("실패");
++			}
++		});
++	}
+ </script>
+ 
+ <title>Insert title here</title>
+@@ -42,7 +60,7 @@
+ 							<span>시도</span>
+ 						</div>
+ 						<div class="searchbar-content">
+-							<select name="SidoSelectBox" id="SidoSelectBox" onchange="javascript:selectedSido(this);">
++							<select name="" id="SidoSelectBox" onchange="selectedSido(this.value);">
+ 								<c:forEach items="${sidolist }" var="sido">
+ 									<option value="${sido.getOrgdownNm() }">${sido.getOrgdownNm() }</option>
+ 								</c:forEach>
+Index: src/main/java/com/tech/miaa/controller/RescueAniController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tech.miaa.controller;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\n\r\nimport com.tech.miaa.abdmApi.AbandonmentPublicSrvc;\r\nimport com.tech.miaa.abdmApi.AbdmSido;\r\nimport org.apache.ibatis.session.SqlSession;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.ui.Model;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RequestMethod;\r\nimport org.springframework.web.bind.annotation.RequestParam;\r\nimport org.springframework.web.bind.annotation.ResponseBody;\r\nimport org.springframework.web.bind.annotation.SessionAttribute;\r\n\r\nimport com.tech.miaa.service.AnimalService;\r\nimport com.tech.miaa.serviceInter.AnimalServiceInter;\r\n\r\n@Controller\r\npublic class RescueAniController {\r\n\t@Autowired\r\n\tprivate SqlSession sqlSession;\r\n\r\n\r\n\r\n\t@RequestMapping(value = \"/rescue_ani_search_page\", method = RequestMethod.GET)\r\n\tpublic String rescue_ani_search_page(HttpServletRequest request, Model model ) {\r\n\t\tAbdmSido sido = AbandonmentPublicSrvc.getSido();\r\n\t\tAbandonmentPublicSrvc.abandonmentPublic();\r\n\r\n\t\tmodel.addAttribute(\"sidolist\",sido.getItems());\r\n\t\treturn \"rescue_ani.search_page.보호동물 검색.3\";\r\n\t}\r\n\r\n\t//JeongMin\r\n\t@RequestMapping(value = \"/rescue_ani_detail_page\", method = RequestMethod.GET)\r\n\tpublic String rescue_ani_detail_page(HttpServletRequest request, Model model ) {\r\n\r\n\t\treturn \"rescue_ani.detail_page.보호동물 상세페이지.2\";\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/tech/miaa/controller/RescueAniController.java b/src/main/java/com/tech/miaa/controller/RescueAniController.java
+--- a/src/main/java/com/tech/miaa/controller/RescueAniController.java	(revision 662f02a8e0096f63b680985caf8124fb07b24a47)
++++ b/src/main/java/com/tech/miaa/controller/RescueAniController.java	(date 1712047810689)
+@@ -39,4 +39,12 @@
+ 
+ 		return "rescue_ani.detail_page.보호동물 상세페이지.2";
+ 	}
++
++	@ResponseBody
++	@RequestMapping("selectedsido")
++	public String selectedSido(HttpServletRequest request, Model model){
++		String a = request.getParameter("btn");
++		System.out.println(a);
++		return "";
++	}
+ }
+Index: target/m2e-wtp/web-resources/META-INF/maven/com.tech/sprjt09/pom.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Generated by Maven Integration for Eclipse\r\n#Tue Apr 02 10:58:41 KST 2024\r\nm2e.projectLocation=C\\:\\\\MIAA\r\nm2e.projectName=MIAA\r\ngroupId=com.tech\r\nartifactId=sprjt09\r\nversion=1.0.0-BUILD-SNAPSHOT\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/target/m2e-wtp/web-resources/META-INF/maven/com.tech/sprjt09/pom.properties b/target/m2e-wtp/web-resources/META-INF/maven/com.tech/sprjt09/pom.properties
+--- a/target/m2e-wtp/web-resources/META-INF/maven/com.tech/sprjt09/pom.properties	(revision 662f02a8e0096f63b680985caf8124fb07b24a47)
++++ b/target/m2e-wtp/web-resources/META-INF/maven/com.tech/sprjt09/pom.properties	(date 1712039271417)
+@@ -1,5 +1,5 @@
+ #Generated by Maven Integration for Eclipse
+-#Tue Apr 02 10:58:41 KST 2024
++#Tue Apr 02 15:26:59 KST 2024
+ m2e.projectLocation=C\:\\MIAA
+ m2e.projectName=MIAA
+ groupId=com.tech
