@@ -116,9 +116,9 @@
 
             <!-- 목록1개가 list-card -->
 			<c:forEach items="${itemList }" var="itemList">
-            <div class="list-card" onclick="location.href='lost_item_detail_page?item_id=${itemList.item_id }';" style="cursor: pointer;">
+            <div class="list-card" onclick="location.href='lost_item_detail_page?total_id=${itemList.total_id }';" style="cursor: pointer;">
               <div class="card-photo">
-                <img src="resources/img/null_img_icon.png" alt="">
+              	<img src="${imgDtoall.get(0).getFilename()}">
               </div>
               <div class="content-items">
                 <div class="item-title">
