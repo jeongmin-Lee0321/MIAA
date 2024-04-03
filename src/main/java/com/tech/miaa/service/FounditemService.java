@@ -18,6 +18,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.ui.Model;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -30,7 +32,7 @@ public class FounditemService implements FounditemServiceInter {
 
 	public static String ServiceKey = "XDBJ0UVn425mRe%2Fi9JDxdSEyLFFr1xKIRRPGJGZDKuR6QfNj4CbpIg0V%2FGxI6VbU8FM6e3tr70yQNMZ13cd%2BJw%3D%3D"; // 서비스키
 	private int total = 0;
-	
+
 	@Override
 	// 분류별, 지역별, 기간별 습득물 정보 조회
 	// GetLosfundInfoAccToClAreaPd
@@ -41,19 +43,19 @@ public class FounditemService implements FounditemServiceInter {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String bid = request.getParameter("bid");
 		String result_code = ""; // 전체 결과값
-		System.out.println(request.getParameter("prd_mainCategory")+" : "+request.getParameter("prd_subCategory"));
+		System.out.println(request.getParameter("prd_mainCategory") + " : " + request.getParameter("prd_subCategory"));
 		System.out.println(prd.getPrdCode(request.getParameter("prd_subCategory")).toString());
 		String PRDT_CL_CD_01 = request.getParameter("prd_mainCategory"); // 대분류
 		String PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory")).toString(); // 중분류
 		String FD_COL_CD = request.getParameter("FD_COL_CD"); // 색상코드
 		String START_YMD = request.getParameter("START_YMD"); // 시작일
 		String END_YMD = request.getParameter("END_YMD"); // 종료일
-		String N_FD_LCT_CD;	// 습득지역(코드)
-		System.out.println(request.getParameter("cityname")+" , "+request.getParameter("cityname2"));
-		if(request.getParameter("cityname2").equals(""))
+		String N_FD_LCT_CD; // 습득지역(코드)
+		System.out.println(request.getParameter("cityname") + " , " + request.getParameter("cityname2"));
+		if (request.getParameter("cityname2").equals(""))
 			N_FD_LCT_CD = request.getParameter("cityname");
 		else
-			N_FD_LCT_CD = request.getParameter("cityname2");		
+			N_FD_LCT_CD = request.getParameter("cityname2");
 		String pageNo = request.getParameter("pageNo");
 
 		if (PRDT_CL_CD_01 == null)
@@ -70,12 +72,12 @@ public class FounditemService implements FounditemServiceInter {
 			N_FD_LCT_CD = "";
 		if (pageNo == null || pageNo.equals(""))
 			pageNo = "1";
-		
-		
-		System.out.println("인터내부\n"+"대분류 : "+PRDT_CL_CD_01+"\n중분류 : "+PRDT_CL_CD_02+"\n시작종료일 : "+START_YMD+"~"+END_YMD+"\n도시 : "+N_FD_LCT_CD);
+
+		System.out.println("인터내부\n" + "대분류 : " + PRDT_CL_CD_01 + "\n중분류 : " + PRDT_CL_CD_02 + "\n시작종료일 : " + START_YMD
+				+ "~" + END_YMD + "\n도시 : " + N_FD_LCT_CD);
 //		START_YMD="20240101";
 //		END_YMD="20240301";
-		
+
 		try {
 			StringBuilder urlBuilder = new StringBuilder(
 					"http://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd"); /* URL */
@@ -101,7 +103,7 @@ public class FounditemService implements FounditemServiceInter {
 			urlBuilder.append(
 					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8")); /* 페이지 번호 */
 			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-					+ URLEncoder.encode("10", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
+					+ URLEncoder.encode("100", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
 			URL url = new URL(urlBuilder.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -167,8 +169,8 @@ public class FounditemService implements FounditemServiceInter {
 						+ URLEncoder.encode(DEP_PLACE, "UTF-8")); /* 보관장소 */
 			urlBuilder.append(
 					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8")); /* 페이지 번호 */
-			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-					+ URLEncoder.encode("10", "UTF-8")); /* 목록 건수 */
+			urlBuilder.append(
+					"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /* 목록 건수 */
 			URL url = new URL(urlBuilder.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -201,72 +203,72 @@ public class FounditemService implements FounditemServiceInter {
 		return result_code;
 	}
 
-	public ArrayList<FounditemDto> getlstList(String rsCode, String sel) {
+	private static String getElementValue(Element parentElement, String tagName) {
+		NodeList nodeList = parentElement.getElementsByTagName(tagName);
+		if (nodeList.getLength() > 0) {
+			Node node = nodeList.item(0);
+			if (node.getFirstChild() != null) {
+				return node.getFirstChild().getNodeValue();
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<FounditemDto> getFoundList(String rsCode) {
 
 		ArrayList<FounditemDto> list = new ArrayList<FounditemDto>();
-		
 
 		try {
+			// XML 문자열을 Document 객체로 파싱
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(new InputSource(new StringReader(rsCode)));
-			/*
-			 * 각 item별로 List형태로 저장
-			 */
-			NodeList atcidList = doc.getElementsByTagName("atcId"); // 관리번호
-//			NodeList clrNmList = doc.getElementsByTagName("clrNm"); // 색상명
-			NodeList depPlaceList = doc.getElementsByTagName("depPlace"); // 보관장소
-			NodeList fdFilePathImgList = null;
-			NodeList addrList = null;
-			NodeList fdPrdtNmList = doc.getElementsByTagName("fdPrdtNm"); // 물품명
-			NodeList prdtClNmList = doc.getElementsByTagName("prdtClNm"); // 물품 분류명
-			NodeList fdSbjtList = doc.getElementsByTagName("fdSbjt"); // 게시제목
-			NodeList fdSnList = doc.getElementsByTagName("fdSn"); // 습득순번
-			NodeList fdYmdList = doc.getElementsByTagName("fdYmd"); // 습득일자
-			NodeList rnumList = doc.getElementsByTagName("rnum"); // 일련번호
-			if (sel.equals("AreaPd") || sel.equals("Place"))
-				fdFilePathImgList = doc.getElementsByTagName("fdFilePathImg"); // 습득물 이미지
-			else if (sel.equals("AccToLc"))
-				addrList = doc.getElementsByTagName("addr"); // 기관도로명주소
+
+			// <item> 요소들을 NodeList로 가져옴
+			NodeList itemList = doc.getElementsByTagName("item");
 			NodeList totalCountList = doc.getElementsByTagName("totalCount"); // 검색결과 갯수
-			total = Integer.parseInt(totalCountList.item(0).toString());
+			total = Integer.parseInt(totalCountList.item(0).getTextContent());
 
-			/*
-			 * list내 각item별 출력
-			 */
+			// <item> 요소들을 순회하며 파싱
+			for (int i = 0; i < itemList.getLength(); i++) {
+				Node itemNode = itemList.item(i);
+				if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element itemElement = (Element) itemNode;
+					FounditemDto fitem = new FounditemDto();
+					// 각 요소의 값 가져오기
+					String atcId = getElementValue(itemElement, "atcId");
+					String clrNm = getElementValue(itemElement, "clrNm");
+					String depPlace = getElementValue(itemElement, "depPlace");
+					String fdFilePathImg = getElementValue(itemElement, "fdFilePathImg");
+					String fdPrdtNm = getElementValue(itemElement, "fdPrdtNm");
+					String fdSbjt = getElementValue(itemElement, "fdSbjt");
+					String fdSn = getElementValue(itemElement, "fdSn");
+					String fdYmd = getElementValue(itemElement, "fdYmd");
+					String prdtClNm = getElementValue(itemElement, "prdtClNm");
+					String rnum = getElementValue(itemElement, "rnum");
+					String addr = getElementValue(itemElement, "addr");
 
-			for (int i = 0; i < atcidList.getLength(); i++) {
-				FounditemDto fitem = new FounditemDto();
-				fitem.setRnum(rnumList.item(i).getTextContent()); // 검색결과 중 글번호
-				if (sel.equals("AreaPd") || sel.equals("Place"))
-					fitem.setFdFilePathImg(fdFilePathImgList.item(i).getTextContent()); // 이미지
-				else
-					fitem.setFdFilePathImg("https://www.lost112.go.kr/lostnfs/images/sub/img02_no_img.gif");
-				if (sel.equals("AccToLc"))
-					fitem.setAddr(addrList.item(i).getTextContent());
-				else
-					fitem.setAddr("");
-				fitem.setAtcid(atcidList.item(i).getTextContent());
-				fitem.setFdSbjt(fdSbjtList.item(i).getTextContent());
-				fitem.setFdPrdtNm(fdPrdtNmList.item(i).getTextContent());
-				fitem.setPrdtClNm(prdtClNmList.item(i).getTextContent());
-				fitem.setFdYmd(fdYmdList.item(i).getTextContent());
-				fitem.setDepPlace(depPlaceList.item(i).getTextContent());
-				fitem.setFdSn(fdSnList.item(i).getTextContent());
+					// Item 객체 생성하여 리스트에 추가
+					fitem.setAtcid(atcId);
+					fitem.setFdSbjt(clrNm);
+					fitem.setDepPlace(depPlace);
+					if (fdFilePathImg.isEmpty())
+						fitem.setFdFilePathImg("https://www.lost112.go.kr/lostnfs/images/sub/img02_no_img.gif");
+					else
+						fitem.setFdFilePathImg(fdFilePathImg);
+					fitem.setFdPrdtNm(fdPrdtNm);
+					fitem.setFdSbjt(fdSbjt);
+					fitem.setFdSn(fdSn);
+					fitem.setFdYmd(fdYmd);
+					fitem.setPrdtClNm(prdtClNm);
+					fitem.setRnum(rnum);
+					fitem.setAddr(addr);
 
-				list.add(fitem);
+					list.add(fitem);
+				}
 			}
-
-			System.out.println("검색결과 : 총" + totalCountList.item(0).getTextContent() + "개");
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 
 		return list;
@@ -276,7 +278,76 @@ public class FounditemService implements FounditemServiceInter {
 	public int getTotal() {
 		return total;
 	}
-	
-	
+
+//	public ArrayList<FounditemDto> getlstList(String rsCode, String sel) {
+//
+//		ArrayList<FounditemDto> list = new ArrayList<FounditemDto>();
+//
+//		try {
+//			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//			DocumentBuilder builder = factory.newDocumentBuilder();
+//			Document doc = builder.parse(new InputSource(new StringReader(rsCode)));
+//			/*
+//			 * 각 item별로 List형태로 저장
+//			 */
+//			NodeList atcidList = doc.getElementsByTagName("atcId"); // 관리번호
+////			NodeList clrNmList = doc.getElementsByTagName("clrNm"); // 색상명
+//			NodeList depPlaceList = doc.getElementsByTagName("depPlace"); // 보관장소
+//			NodeList fdFilePathImgList = null;
+//			NodeList addrList = null;
+//			NodeList fdPrdtNmList = doc.getElementsByTagName("fdPrdtNm"); // 물품명
+//			NodeList prdtClNmList = doc.getElementsByTagName("prdtClNm"); // 물품 분류명
+//			NodeList fdSbjtList = doc.getElementsByTagName("fdSbjt"); // 게시제목
+//			NodeList fdSnList = doc.getElementsByTagName("fdSn"); // 습득순번
+//			NodeList fdYmdList = doc.getElementsByTagName("fdYmd"); // 습득일자
+//			NodeList rnumList = doc.getElementsByTagName("rnum"); // 일련번호
+//			if (sel.equals("AreaPd") || sel.equals("Place"))
+//				fdFilePathImgList = doc.getElementsByTagName("fdFilePathImg"); // 습득물 이미지
+//			else if (sel.equals("AccToLc"))
+//				addrList = doc.getElementsByTagName("addr"); // 기관도로명주소
+//			NodeList totalCountList = doc.getElementsByTagName("totalCount"); // 검색결과 갯수
+//			total = Integer.parseInt(totalCountList.item(0).getTextContent());
+//
+//			/*
+//			 * list내 각item별 출력
+//			 */
+//
+//			for (int i = 0; i < atcidList.getLength(); i++) {
+//				FounditemDto fitem = new FounditemDto();
+//				fitem.setRnum(rnumList.item(i).getTextContent()); // 검색결과 중 글번호
+//				if (sel.equals("AreaPd") || sel.equals("Place"))
+//					fitem.setFdFilePathImg(fdFilePathImgList.item(i).getTextContent()); // 이미지
+//				else
+//					fitem.setFdFilePathImg("https://www.lost112.go.kr/lostnfs/images/sub/img02_no_img.gif");
+//				if (sel.equals("AccToLc"))
+//					fitem.setAddr(addrList.item(i).getTextContent());
+//				else
+//					fitem.setAddr("");
+//				fitem.setAtcid(atcidList.item(i).getTextContent());
+//				fitem.setFdSbjt(fdSbjtList.item(i).getTextContent());
+//				fitem.setFdPrdtNm(fdPrdtNmList.item(i).getTextContent());
+//				fitem.setPrdtClNm(prdtClNmList.item(i).getTextContent());
+//				fitem.setFdYmd(fdYmdList.item(i).getTextContent());
+//				fitem.setDepPlace(depPlaceList.item(i).getTextContent());
+//				fitem.setFdSn(fdSnList.item(i).getTextContent());
+//
+//				list.add(fitem);
+//			}
+//
+//			System.out.println("검색결과 : 총" + totalCountList.item(0).getTextContent() + "개");
+//		} catch (SAXException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ParserConfigurationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return list;
+//
+//	}
 
 }

@@ -37,11 +37,14 @@ public class FoundItemController {
 		String xml_code=fservice.found_item_search_AreaPd(model);
 		System.out.println(xml_code);
 		ArrayList<FounditemDto> list;
-		list=fservice.getlstList(xml_code,"AreaPd");
+		list=fservice.getFoundList(xml_code);
 		int total = fservice.getTotal();
 		model.addAttribute("list",list);
-		model.addAttribute("total",total);
+		model.addAttribute("total",total);	
+		model.addAttribute("xml_code",xml_code);
+		model.addAttribute("pageNum","0");
 		System.out.println(list);
+		System.out.println(total);
 
 		return "found_item.search_page.습득물 상세검색.3";
 	}
@@ -55,10 +58,29 @@ public class FoundItemController {
 		fservice = new FounditemService();
 		String xml_code=fservice.found_item_search_Place(model);
 		ArrayList<FounditemDto> list;
-		list=fservice.getlstList(xml_code, "Place");
+		list=fservice.getFoundList(xml_code);
 		int total = fservice.getTotal();
 		model.addAttribute("list",list);
 		model.addAttribute("total",total);
+		model.addAttribute("xml_code",xml_code);
+
+		return "found_item.search_page.습득물 상세검색.3";
+	}
+	
+	// mhs
+	@RequestMapping(value = "found_item_view",method = RequestMethod.GET)
+	public String found_item_view(HttpServletRequest request, Model model) {
+		String page = request.getParameter("page");
+		String xml_code = request.getParameter("xml_code");
+		System.out.println("페이지값 : "+page);
+		System.out.println("코드 : "+xml_code);
+		/*
+		 * // 데이터가져오기 model.addAttribute("request", request); fservice = new
+		 * FounditemService(); ArrayList<FounditemDto> list;
+		 * list=fservice.getFoundList(xml_code); int total = fservice.getTotal();
+		 * model.addAttribute("list",list); model.addAttribute("total",total);
+		 * model.addAttribute("xml_code",xml_code); model.addAttribute("pageNum",page);
+		 */
 
 		return "found_item.search_page.습득물 상세검색.3";
 	}
