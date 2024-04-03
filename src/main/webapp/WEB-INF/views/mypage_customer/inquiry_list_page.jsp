@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>Title</title>
@@ -27,39 +28,20 @@
 						<th>답변 날짜</th>
 						<th></th>
 					</tr>
+					<c:forEach items="${list }" var="list">
 					<tr>
 						<td><input type="checkbox" name="" id=""
 							class="table-check-box"></td>
-						<td>1</td>
-						<td class="table-title">작성된 게시물이 보이지 않습니다</td>
-						<td>답변완료</td>
-						<td>Jan 4, 2022</td>
-						<td>Jan 4, 2022</td>						
+						<td>${list.rownum}</td>
+						<td class="table-title">${list.board_title}</td>
+						<td>${list.board_reply_status}</td>
+						<td>${list.board_registration_date}</td>
+						<td>-</td>						
 						<td><img src="resources/img/write_icon.png" alt=""
 							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
 					</tr>
-					<tr>
-						<td><input type="checkbox" name="" id=""
-							class="table-check-box"></td>
-						<td>2</td>
-						<td class="table-title">등록된 알람 검색을 어디서 하나요</td>
-						<td>처리중</td>
-						<td>Jan 4, 2022</td>
-						<td>-</td>	
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="" id=""
-							class="table-check-box"></td>
-						<td>1000</td>
-						<td class="table-title">빠른 답변 부탁드립니다</td>
-						<td>답변완료</td>
-						<td>Jan 4, 2022</td>
-						<td>Jan 8, 2022</td>	
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
-					</tr>
+					</c:forEach>
+					
 				</table>
 			</div>
 		</div>
