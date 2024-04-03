@@ -201,6 +201,14 @@ public class XmlParser {
     public AbdmPublic abdmPublicParsing(HeaderResult headerResult) {
         AbdmPublic abdmPublic = new AbdmPublic();
         abdmPublic.setHeaderResult(headerResult);
+        NodeList bodyList = doc.getElementsByTagName("body");
+        for (int i = 0; i < bodyList.getLength(); i++) {
+            Node bodyNode = bodyList.item(i);
+            Element element = (Element) bodyNode;
+            abdmPublic.setNumOfRows(getTagValue(AbdmPublic.NUMOFROWS, element));
+            abdmPublic.setPageNo(getTagValue(AbdmPublic.PAGENO, element));
+            abdmPublic.setTotalCount(getTagValue(AbdmPublic.TOTALCOUNT, element));
+        }
 
         ArrayList<AbdmPublicItem> abdmPublicItems = new ArrayList<AbdmPublicItem>();
         NodeList itemsList = doc.getElementsByTagName("item");
@@ -214,7 +222,7 @@ public class XmlParser {
             abdmPublicItem.setHappenPlace(getTagValue(AbdmPublicItem.HAPPENPLACE,element));
             abdmPublicItem.setKindCd(getTagValue(AbdmPublicItem.KINDCD,element));
             abdmPublicItem.setColorCd(getTagValue(AbdmPublicItem.COLORCD,element));
-            abdmPublicItem.setAge(getTagValue(AbdmPublicItem.AGE,element));            abdmPublicItem.setAge(getTagValue(AbdmPublicItem.AGE,element));
+            abdmPublicItem.setAge(getTagValue(AbdmPublicItem.AGE,element));
             abdmPublicItem.setWeight(getTagValue(AbdmPublicItem.WEIGHT,element));
             abdmPublicItem.setNoticeNo(getTagValue(AbdmPublicItem.NOTICENO,element));
             abdmPublicItem.setNoticeSdt(getTagValue(AbdmPublicItem.NOTICESDT,element));
@@ -231,9 +239,6 @@ public class XmlParser {
             abdmPublicItem.setChargeNm(getTagValue(AbdmPublicItem.CHARGENM,element));
             abdmPublicItem.setOfficetel(getTagValue(AbdmPublicItem.OFFICETEL,element));
             abdmPublicItem.setNoticeComment(getTagValue(AbdmPublicItem.NOTICECOMMENT,element));
-            abdmPublicItem.setNumOfRows(getTagValue(AbdmPublicItem.NUMOFROWS,element));
-            abdmPublicItem.setPageNo(getTagValue(AbdmPublicItem.PAGENO,element));
-            abdmPublicItem.setTotalCount(getTagValue(AbdmPublicItem.TOTALCOUNT,element));
 
             abdmPublicItems.add(abdmPublicItem);
         }
