@@ -55,4 +55,18 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		
 		
 	}
+	@Override
+	public void delete(String string, Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpSession session=request.getSession();
+		
+		String id = (String) session.getAttribute("userId");
+		
+		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
+		dao.delete(string,id);
+		
+	}
+
 }

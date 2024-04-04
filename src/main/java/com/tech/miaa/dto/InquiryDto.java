@@ -12,6 +12,7 @@ import lombok.Setter;
 public class InquiryDto {
 	private String rownum;
 	private String user_id;
+	private String board_num;
 	private String board_title;
 	private String board_content;
 	private String board_registration_date;
