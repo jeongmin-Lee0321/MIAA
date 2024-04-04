@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.tech.miaa.dto.FounddetailDto;
 import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.service.FounditemService;
 import com.tech.miaa.serviceInter.FounditemServiceInter;
@@ -69,29 +70,43 @@ public class FoundItemController {
 	}
 	
 	// mhs
-	@RequestMapping(value = "found_item_view",method = RequestMethod.POST)
-	public String found_item_view(HttpServletRequest request, Model model) {
-		String page = request.getParameter("page");
-		String xml_code = request.getParameter("xml_code");
-		System.out.println("페이지값 : "+page);
-		System.out.println("코드 : "+xml_code);
+		@RequestMapping(value = "found_item_view",method = RequestMethod.POST)
+		public String found_item_view(HttpServletRequest request, Model model) {
+			String page = request.getParameter("page");
+			String xml_code = request.getParameter("xml_code");
+			System.out.println("페이지 : "+(Integer.parseInt(page)+1)+"page(index:"+page+")");
+			System.out.println("코드 : "+xml_code);
+			
+			  // 데이터가져오기
+			  ArrayList<FounditemDto> list;
+			  list=fservice.getFoundList(xml_code);
+			  model.addAttribute("list",list); 
+			  int total = fservice.getTotal();
+			  model.addAttribute("total",total);
+			  model.addAttribute("xml_code",xml_code);
+			  model.addAttribute("pageNum",page);
+
+			return "found_item.search_page.습득물 상세검색.3";
+		}
 		
-		  // 데이터가져오기
-		  ArrayList<FounditemDto> list;
-		  list=fservice.getFoundList(xml_code);
-		  model.addAttribute("list",list); 
-		  int total = fservice.getTotal();
-		  model.addAttribute("total",total);
-		  model.addAttribute("xml_code",xml_code);
-		  model.addAttribute("pageNum",page);
-
-		return "found_item.search_page.습득물 상세검색.3";
-	}
-
-	// JeongMin
-	@RequestMapping(value = "/found_item_detail_page", method = RequestMethod.GET)
+	
+	// mhs
+	@RequestMapping(value = "/found_item_detail_page",method = RequestMethod.GET)
 	public String found_item_detail_page(HttpServletRequest request, Model model) {
-
+		
+		String atcid = request.getParameter("atcid");
+		String fdSn = request.getParameter("fdsn");
+		FounddetailDto dto = fservice.found_item_detailview(atcid, fdSn);
+		System.out.println("하나만 test : "+dto.getAtcId());
+		model.addAttribute("dto", dto);
+		
 		return "found_item.detail_page.습득물 상세페이지.2";
 	}
+
+//	// JeongMin
+//	@RequestMapping(value = "/found_item_detail_page", method = RequestMethod.GET)
+//	public String found_item_detail_page(HttpServletRequest request, Model model) {
+//
+//		return "found_item.detail_page.습득물 상세페이지.2";
+//	}
 }
