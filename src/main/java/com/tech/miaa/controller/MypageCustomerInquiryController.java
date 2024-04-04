@@ -47,6 +47,25 @@ public class MypageCustomerInquiryController {
 			
 		return "mypage_customer.inquiry_list_page.문의내역.3";
 	}
+//	수정 페이지
+	@RequestMapping("mypage_customer_inquiry_modify_page")
+	public String mypage_customer_inquiry_modify_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		
+		mypageCustomerInquiryServiceInter=new InquiryService();
+		try {
+			ArrayList<InquiryDto> list=mypageCustomerInquiryServiceInter.inquiry_list(model);
+			model.addAttribute("list",list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "mypage_customer.inquiry_list_page.문의내역.3";
+	}
 	
 //	게시물 작성
 	@RequestMapping("inquiry_write")

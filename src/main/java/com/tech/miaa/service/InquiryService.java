@@ -40,6 +40,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpSession session=request.getSession();
 		
+		String board_num=request.getParameter("board_num");
 		String id = (String) session.getAttribute("userId");
 		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);

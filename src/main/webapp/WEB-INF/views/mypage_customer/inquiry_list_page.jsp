@@ -101,8 +101,7 @@
 						<td>${list.board_reply_status}</td>
 						<td>${list.board_registration_date}</td>
 						<td>-</td>						
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
+						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.board_num}';" style="cursor: pointer;" /></td>
 					</tr>
 					</c:forEach>
 					
