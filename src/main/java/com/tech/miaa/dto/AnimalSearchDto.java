@@ -20,4 +20,27 @@ public class AnimalSearchDto {
 	private String upKindSelectBox;
 	private String kindSelectedBox;
 	private String sexSelectedBox;
+
+	public String getSearch_str_date() {
+		return search_str_date;
+	}
+	public void setSearch_str_date(String search_str_date) {
+		String charsToRemove = "-";
+		for (char c : charsToRemove.toCharArray()) {
+			search_str_date = search_str_date.replace(String.valueOf(c), "");
+		}
+		this.search_str_date = search_str_date;
+	}
+
+	public String getSearch_end_date() {
+		return search_end_date;
+	}
+
+	public void setSearch_end_date(String search_end_date) {
+		String charsToRemove = "-";
+		for (char c : charsToRemove.toCharArray()) {
+			search_end_date = search_end_date.replace(String.valueOf(c), "");
+		}
+		this.search_end_date = search_end_date;
+	}
 }

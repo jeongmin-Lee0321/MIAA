@@ -14,7 +14,7 @@
     <script type="text/javascript">
         function selectedSido(val) {
             var optionTag = document.getElementById("sigunguSelectBox");
-            optionTag.innerHTML = '<option value="0000000">-전체-</option>';
+            optionTag.innerHTML = '<option value="">-전체-</option>';
 
             switch (val) {
                 case "6110000" : {
@@ -372,14 +372,14 @@
 <div class="main-contents">
     <!-- 검색창과 검색결과 -->
     <div class="searchbar-container">
-        <form action="/rescue_ani_search" method="post">
+        <form action="/rescue_ani_search_page" method="post">
             <!-- 서치바 셀렉 그룹시작 -->
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
                     <span>기간</span>
                 </div>
                 <div class="searchbar-content">
-                    <input type="date" name="search_str_date"> <span>~</span> <input
+                    <input type="date" name="search_str_date" > <span>~</span> <input
                         type="date" name="search_end_date"> <span>(접수일기준)</span>
                 </div>
             </div>
@@ -391,8 +391,8 @@
                         <span>시도</span>
                     </div>
                     <div class="searchbar-content">
-                        <select name="sidoSelectBox" id="sidoSelectBox" onchange="selectedSido(this.value);">
-                            <option value="0">-전체-</option>
+                        <select name="sidoSelectBox" id="sidoSelectBox" onchange="selectedSido(this.value);" onselect="{$dto.getsidoSelectBox() }">
+                            <option value="">-전체-</option>
                             <option value="6110000">서울특별시</option>
                             <option value="6260000">부산광역시</option>
                             <option value="6270000">대구광역시</option>
@@ -419,21 +419,19 @@
                     </div>
                     <div class="searchbar-content">
                         <select name="sigunguSelectBox" id="sigunguSelectBox" onchange="selectedSidogun(this.value);">
-                            <option value="0">-전체-</option>
-
                         </select>
                     </div>
                 </div>
-                <div class="searchbar-select-group">
-                    <div class="searchbar-title">
-                        <span>보호센터</span>
-                    </div>
-                    <div class="searchbar-content">
-                        <select name="shelterSelectBox" id="shelterSelectBox">
-                            <option value="0">-전체-</option>
-                        </select>
-                    </div>
-                </div>
+<%--                <div class="searchbar-select-group">--%>
+<%--                    <div class="searchbar-title">--%>
+<%--                        <span>보호센터</span>--%>
+<%--                    </div>--%>
+<%--                    <div class="searchbar-content">--%>
+<%--                        <select name="shelterSelectBox" id="shelterSelectBox">--%>
+<%--                            <option value="">-전체-</option>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
 
             <div class="searchbar-mutil-group">
@@ -443,14 +441,14 @@
                     </div>
                     <div class="searchbar-content">
                         <select name="upKindSelectBox">
-                            <option value="0">-전체-</option>
+                            <option value="">-전체-</option>
                             <option value="417000">개</option>
                             <option value="422400">고양이</option>
                             <option value="429900">기타</option>
                         </select>
                         <span>-</span>
                         <select name="kindSelectedBox">
-                            <option value="0">-전체-</option>
+                            <option value="">-전체-</option>
                         </select>
                     </div>
                 </div>
@@ -460,7 +458,7 @@
                     </div>
                     <div class="searchbar-content">
                         <select name="sexSelectedBox" id="sexSelectedBox">
-                            <option value="0">-전체-</option>
+                            <option value="">-전체-</option>
                             <option value="1">수컷</option>
                             <option value="2">암컷</option>
                             <option value="3">미상</option>
@@ -485,7 +483,7 @@
         <!-- 결과 리스트 총 갯수 프레임 -->
         <div class="total-resultNum-wrapper">
             <div class="total-resultNum-container">
-                <span>전체 </span><span class="totalNum">223</span><span>건</span>
+                <span>전체 </span><span class="totalNum">${totalCount }</span><span>건</span>
             </div>
         </div>
 
@@ -517,29 +515,39 @@
         <!-- 페이징 프레임시작 -->
         <div class="page-container">
             <div class="currentOftotal">
-                <span>Page</span><span class="current-page">1</span><span>of</span><span
-                    class="total-page">10</span>
+                <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
+                    class="total-page">${pageVO.totPage}</span>
             </div>
             <ul class="pagelist-container">
-                <li class="btn-prev"><a class="test" href="#"><img
+                <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${pageVO.page - 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="#">8</a></li>
-                <li><a href="#">9</a></li>
-                <li><a href="#">10</a></li>
-                <li class="btn-next"><a href="#"><img
+                <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
+                    <c:choose>
+                        <c:when test="${i eq pageVO.page}">
+                            <li><a href="#" style="color: red">${i}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+<%--                <li><a href="#">1</a></li>--%>
+<%--                <li><a href="#">2</a></li>--%>
+<%--                <li><a href="#">3</a></li>--%>
+<%--                <li><a href="#">4</a></li>--%>
+<%--                <li><a href="#">5</a></li>--%>
+<%--                <li><a href="#">6</a></li>--%>
+<%--                <li><a href="#">7</a></li>--%>
+<%--                <li><a href="#">8</a></li>--%>
+<%--                <li><a href="#">9</a></li>--%>
+<%--                <li><a href="#">10</a></li>--%>
+                <li class="btn-next"><a href="rescue_ani_search_page?page=${pageVO.page + 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
             </ul>
 
             <ul class="switchBtn-container">
-                <li class="btn-prev-group"><a href="#">Previous</a></li>
-                <li class="btn-next-group"><a href="#">Next</a></li>
+                <li class="btn-prev-group"><a href="rescue_ani_search_page?page=${pageVO.page - 1}">Previous</a></li>
+                <li class="btn-next-group"><a href="rescue_ani_search_page?page=${pageVO.page + 1}">Next</a></li>
             </ul>
         </div>
         <!-- 페이징 프레임 끝 -->

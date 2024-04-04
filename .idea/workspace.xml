@@ -10,59 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="수정진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/vopage/PageVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbdmPublic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbdmPublic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbdmPublicItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbdmPublicItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/XmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/XmlParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/detail_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/detail_page.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/side.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/side.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmKind.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmKind.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmKindItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmKindItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmPublic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmPublic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmPublicItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmPublicItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmShelter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmShelter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmShelterItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmShelterItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSido.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSidoItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSidoItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSigungu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSigungu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSigunguItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbdmSigunguItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/HeaderResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/HeaderResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/XmlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/XmlParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCd.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCdItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCdItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCdService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/CmmnCdService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/ThngClCd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/ThngClCd.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/ThngClCdItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/cmmnApi/ThngClCdItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/FoundItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/FoundItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/LostItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/LostItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MemberController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MissingAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MissingAniController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/InquiryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/InquiryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/ItemDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/MemberDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/MemberDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/FounditemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/FounditemDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/InquiryDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/InquiryDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/ItemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/ItemDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/AnimalService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/AnimalService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/FounditemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/FounditemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/InquiryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/InquiryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MemberService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/FounditemServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/FounditemServiceInter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MemberServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MemberServiceInter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageCustomerInquiryServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageCustomerInquiryServiceInter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +125,7 @@
       <recent name="C:\MIAA\src\main\webapp\resources\css\rescue_ani" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tech.miaa.vopage" />
       <recent name="com.tech.miaa.dto" />
       <recent name="com.tech.miaa.abdmApi" />
     </key>
@@ -482,7 +438,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="development" />
+                        <option value="realease/resueani-search" />
                       </list>
                     </value>
                   </entry>
