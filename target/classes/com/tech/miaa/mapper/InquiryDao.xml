@@ -11,7 +11,16 @@
 	<select id="inquiry_list" resultType="com.tech.miaa.dto.InquiryDto">
 		SELECT BOARD_NUM,ROWNUM,BOARD_TITLE,BOARD_REPLY_STATUS,TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE FROM USER_INQUIRY_BOARD WHERE USER_ID=#{param1} ORDER BY ROWNUM DESC
 	</select>
+	<select id="modify_list" resultType="com.tech.miaa.dto.InquiryDto">
+		SELECT BOARD_NUM,BOARD_TITLE,BOARD_CONTENT,BOARD_FILESRC FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</select>
 	<delete id="delete">
 		DELETE FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
 	</delete>
+	<update id="inquiry_modify">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4},BOARD_FILESRC=#{param5} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</update>
+	<update id="inquiry_modify_present">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4},BOARD_FILESRC=#{param5} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</update>
 </mapper>
