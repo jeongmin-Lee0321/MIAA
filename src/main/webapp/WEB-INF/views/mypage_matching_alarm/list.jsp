@@ -6,9 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/mypage_matching_alarm_list_page.css"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+
       <div class="main-contents">
         <!-- 검색창과 검색결과 -->
         <!-- result-container시작 -->
@@ -33,22 +37,87 @@
 			  </div>
 	         <button class="alarm_delete">알림제거</button>
          	</div>
-         </div>
-                    
+         </div>                                    
+      <table id="total_lost_item_list_content">                   
           <div class="registrationed_alarm_keywords">
 				<a href="###">등록된 알림 키워드(5개)</a>
 		  </div>
           <div class="registrationed_alarm_keywords_list">
-				<input type="checkbox" class="lost_item_name">
-					분실물명 : 에어팟 
-				<a href="$$$" class="item_tag_01">물건</a> 
-				<a href="$$$" class="item_tag_02">에어팟</a> 
-				<a href="$$$" class="item_tag_03">2024-03-06시경</a>
-				<a href="$$$" class="item_tag_04">전자기기 > 무선이어폰</a> 
-				<a href="$$$" class="item_tag_05">월게,이마트,트레이더스</a> 
-				<a href="$$$" class="show_all_result">모두 보기(49개)</a>
-		  </div>       
-          
+			  <c:forEach items="${list }" var="list">
+					<input type="checkbox" class="lost_item_name" id="lost_item_name" value="lost_item_name">
+						${list.item_name}			
+					<a href="$$$" class="item_tag_01">물건</a> 
+					<a href="$$$" class="item_tag_02">${list.item_name}</a> 
+ 					<a href="$$$" class="item_tag_03">${list.lostday}</a> 					
+					<c:set var="upperkind" value="${list.upkind}"/>
+					
+					<c:choose>
+						<c:when test="${upperkind == 'PRB000'}">
+							<c:set var="upperkind" value="도서용품"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRC000'}">
+							<c:set var="upperkind" value="서류"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRD000'}">
+							<c:set var="upperkind" value="산업용품"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRE000'}">
+							<c:set var="upperkind" value="스포츠용품"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRF000'}">
+							<c:set var="upperkind" value="자동차"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRG000'}">
+							<c:set var="upperkind" value="전자기기"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRH000'}">
+							<c:set var="upperkind" value="지갑"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRI000'}">
+							<c:set var="upperkind" value="컴퓨터"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRJ000'}">
+							<c:set var="upperkind" value="휴대폰"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRK000'}">
+							<c:set var="upperkind" value="의류"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRL000'}">
+							<c:set var="upperkind" value="현금"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRM000'}">
+							<c:set var="upperkind" value="유가증권"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRN000'}">
+							<c:set var="upperkind" value="증명서"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRO000'}">
+							<c:set var="upperkind" value="귀금속"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRP000'}">
+							<c:set var="upperkind" value="카드"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRQ000'}">
+							<c:set var="upperkind" value="쇼핑백"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRR000'}">
+							<c:set var="upperkind" value="악기"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRX000'}">
+							<c:set var="upperkind" value="유류품"/>
+						</c:when>
+						<c:when test="${upperkind == 'PRZ000'}">
+							<c:set var="upperkind" value="기타물품"/>
+						</c:when>
+					</c:choose>	
+									
+					<c:set var="lowerkind" value="${list.upr_cd}"/>	
+					<a href="$$$" class="item_tag_04">${upperkind} > ${lowerkind}</a> 
+		<%-- 			<a href="$$$" class="item_tag_04">${list.upkind} > ${list.upr_cd}</a>  --%>
+					<a href="$$$" class="item_tag_05">${list.address}</a> 
+					<a href="list02" class="show_all_result">모두 보기(49개)</a>
+			  </c:forEach>
+		  </div>         
           <!-- 검색 결과 리스트프레임 -->
           <div class="result-list">
             <!-- 목록1개가 list-card -->
@@ -67,9 +136,7 @@
                   <li><span class="detail-title">습득날짜:</span><span>2024-03-15 </span></li>
                 </ul>
               </div>
-          	</div>
-          	
-          	
+          	</div>        	    	
             <div class="list-card">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
@@ -85,9 +152,7 @@
                   <li><span class="detail-title">습득날짜:</span><span>2024-03-15 </span></li>
                 </ul>
               </div>
-          	</div>
-          	
-          	          	
+          	</div>  	          	
             <div class="list-card">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
@@ -103,8 +168,7 @@
                   <li><span class="detail-title">습득날짜:</span><span>2024-03-15 </span></li>
                 </ul>
               </div>
-          	</div>
-          	
+          	</div>     	
             <div class="list-card">
               <div class="card-photo">
                 <img src="resources/img/null_img_icon.png" alt="">
@@ -120,9 +184,9 @@
                   <li><span class="detail-title">습득날짜:</span><span>2024-03-15 </span></li>
                 </ul>
               </div>
-          	</div>
-          
+          	</div>        
         </div>
-      
+       </table> 
+      </div>
       </div>
 </body>
