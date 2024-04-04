@@ -1,4 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -24,7 +28,7 @@
     <div class="image-selection">
         <div class="image-container">
             <img src="resources/img/chevron-left.png" alt="" id="chevron-left">
-            <img src="resources/img/media.png" alt="" id="ani-image">
+            <img src="${dto.fdFilePathImg}" alt="" id="ani-image">
             <img src="resources/img/chevron-right.png" alt="" id="chevron-right">
         </div>
 
@@ -40,7 +44,7 @@
                 <th class="info-table-name">습득물명</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="fd_prdt_nm">
-                        주민등록증
+                        ${dto.fdPrdtNm}
                     </div>
                 </td>
             </tr>
@@ -48,7 +52,7 @@
                 <th class="info-table-name">습득일자</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="fd_ymd">
-                        2024-02-29
+                        ${dto.fdYmd}
                     </div>
                 </td>
             </tr>
@@ -56,31 +60,31 @@
                 <th class="info-table-name">습득장소</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="fd_place">
-                        노상
+                  ${dto.fdPlace}      
                     </div>
                 </td>
                 <th class="info-table-name">물품분류</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="prdt_cl_nm">증명서>신분증</div>
+                    <div class="table-value-container" id="prdt_cl_nm">${dto.prdtClNm}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">관리번호</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="atc_ic">
-                        asdfasdfhjiopwqhfoiqwehfewhiaef12
+                        ${dto.atcId}
                     </div>
                 </td>
                 <th class="info-table-name">보관상태</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="cste_ste_nm">보관중</div>
+                    <div class="table-value-container" id="cste_ste_nm">${dto.csteSteNm}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name" rowspan="3">특징</th>
                 <td class="info-table-value" colspan="3" rowspan="3">
                     <div class="table-value-container" id="uniq">
-                        주민등록증
+                       ${dto.uniq}
                     </div>
                 </td>
             </tr>
@@ -101,7 +105,7 @@
                 <th class="info-table-name">보관장소</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="dep_place">
-                        주민등록증
+                        ${dto.depPlace}
                     </div>
                 </td>
             </tr>
@@ -109,7 +113,7 @@
                 <th class="info-table-name">전화번호</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="tel">
-                        주민등록증
+                        ${dto.tel}
                     </div>
                 </td>
             </tr>

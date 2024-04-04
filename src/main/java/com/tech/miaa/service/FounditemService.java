@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.ui.Model;
 import org.w3c.dom.Document;
@@ -22,8 +21,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
+import com.tech.miaa.dto.FounddetailDto;
 import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.serviceInter.FounditemServiceInter;
 import com.tech.miaa.util.PrdCode;
@@ -47,31 +46,33 @@ public class FounditemService implements FounditemServiceInter {
 //		String FD_COL_CD = ""; // 색상코드
 		String START_YMD = ""; // 시작일
 		String END_YMD = ""; // 종료일
-		String N_FD_LCT_CD=""; // 습득지역(코드)
-		
+		String N_FD_LCT_CD = ""; // 습득지역(코드)
+
 		System.out.println(request.getParameter("cityname") + " , " + request.getParameter("cityname2"));
-		
+
 		if (request.getParameter("cityname2").equals("") && !request.getParameter("cityname").equals(""))
 			N_FD_LCT_CD = request.getParameter("cityname");
-		else if(!request.getParameter("cityname2").equals("") && !request.getParameter("cityname2").isEmpty())
+		else if (!request.getParameter("cityname2").equals("") && !request.getParameter("cityname2").isEmpty())
 			N_FD_LCT_CD = request.getParameter("cityname2");
 		String pageNo = request.getParameter("pageNo");
 
-		if ((!request.getParameter("prd_mainCategory").equals(""))&&(!request.getParameter("prd_mainCategory").isEmpty()))
+		if ((!request.getParameter("prd_mainCategory").equals(""))
+				&& (!request.getParameter("prd_mainCategory").isEmpty()))
 			PRDT_CL_CD_01 = request.getParameter("prd_mainCategory");
-		
-		System.out.println("중분류원제목 : "+request.getParameter("prd_subCategory"));
-		System.out.println("중분류코드:"+PRDT_CL_CD_02);
-		if ((!request.getParameter("prd_subCategory").equals(""))&&(!request.getParameter("prd_subCategory").isEmpty()))
-			PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory").replace(" ","")).toString();
-		System.out.println("중분류코드:"+PRDT_CL_CD_02);
+
+		System.out.println("중분류원제목 : " + request.getParameter("prd_subCategory"));
+		System.out.println("중분류코드:" + PRDT_CL_CD_02);
+		if ((!request.getParameter("prd_subCategory").equals(""))
+				&& (!request.getParameter("prd_subCategory").isEmpty()))
+			PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory").replace(" ", "")).toString();
+		System.out.println("중분류코드:" + PRDT_CL_CD_02);
 //		if (!request.getParameter("FD_COL_CD").equals(""))
 //			FD_COL_CD = request.getParameter("FD_COL_CD");
 		if (!request.getParameter("START_YMD").equals(""))
 			START_YMD = request.getParameter("START_YMD");
 		if (!request.getParameter("END_YMD").equals(""))
 			END_YMD = request.getParameter("END_YMD");
-		
+
 		if (pageNo == null || pageNo.equals(""))
 			pageNo = "1";
 
@@ -280,75 +281,96 @@ public class FounditemService implements FounditemServiceInter {
 		return total;
 	}
 
-//	public ArrayList<FounditemDto> getlstList(String rsCode, String sel) {
-//
-//		ArrayList<FounditemDto> list = new ArrayList<FounditemDto>();
-//
-//		try {
-//			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//			DocumentBuilder builder = factory.newDocumentBuilder();
-//			Document doc = builder.parse(new InputSource(new StringReader(rsCode)));
-//			/*
-//			 * 각 item별로 List형태로 저장
-//			 */
-//			NodeList atcidList = doc.getElementsByTagName("atcId"); // 관리번호
-////			NodeList clrNmList = doc.getElementsByTagName("clrNm"); // 색상명
-//			NodeList depPlaceList = doc.getElementsByTagName("depPlace"); // 보관장소
-//			NodeList fdFilePathImgList = null;
-//			NodeList addrList = null;
-//			NodeList fdPrdtNmList = doc.getElementsByTagName("fdPrdtNm"); // 물품명
-//			NodeList prdtClNmList = doc.getElementsByTagName("prdtClNm"); // 물품 분류명
-//			NodeList fdSbjtList = doc.getElementsByTagName("fdSbjt"); // 게시제목
-//			NodeList fdSnList = doc.getElementsByTagName("fdSn"); // 습득순번
-//			NodeList fdYmdList = doc.getElementsByTagName("fdYmd"); // 습득일자
-//			NodeList rnumList = doc.getElementsByTagName("rnum"); // 일련번호
-//			if (sel.equals("AreaPd") || sel.equals("Place"))
-//				fdFilePathImgList = doc.getElementsByTagName("fdFilePathImg"); // 습득물 이미지
-//			else if (sel.equals("AccToLc"))
-//				addrList = doc.getElementsByTagName("addr"); // 기관도로명주소
-//			NodeList totalCountList = doc.getElementsByTagName("totalCount"); // 검색결과 갯수
-//			total = Integer.parseInt(totalCountList.item(0).getTextContent());
-//
-//			/*
-//			 * list내 각item별 출력
-//			 */
-//
-//			for (int i = 0; i < atcidList.getLength(); i++) {
-//				FounditemDto fitem = new FounditemDto();
-//				fitem.setRnum(rnumList.item(i).getTextContent()); // 검색결과 중 글번호
-//				if (sel.equals("AreaPd") || sel.equals("Place"))
-//					fitem.setFdFilePathImg(fdFilePathImgList.item(i).getTextContent()); // 이미지
-//				else
-//					fitem.setFdFilePathImg("https://www.lost112.go.kr/lostnfs/images/sub/img02_no_img.gif");
-//				if (sel.equals("AccToLc"))
-//					fitem.setAddr(addrList.item(i).getTextContent());
-//				else
-//					fitem.setAddr("");
-//				fitem.setAtcid(atcidList.item(i).getTextContent());
-//				fitem.setFdSbjt(fdSbjtList.item(i).getTextContent());
-//				fitem.setFdPrdtNm(fdPrdtNmList.item(i).getTextContent());
-//				fitem.setPrdtClNm(prdtClNmList.item(i).getTextContent());
-//				fitem.setFdYmd(fdYmdList.item(i).getTextContent());
-//				fitem.setDepPlace(depPlaceList.item(i).getTextContent());
-//				fitem.setFdSn(fdSnList.item(i).getTextContent());
-//
-//				list.add(fitem);
-//			}
-//
-//			System.out.println("검색결과 : 총" + totalCountList.item(0).getTextContent() + "개");
-//		} catch (SAXException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ParserConfigurationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return list;
-//
-//	}
+	@Override
+	public FounddetailDto found_item_detailview(String atc_id, String fd_sn) {
+		// TODO Auto-generated method stub
+		String result_code = ""; // 전체 결과값
+		FounddetailDto dto = new FounddetailDto();
+		try {
+			StringBuilder urlBuilder = new StringBuilder(
+					"http://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundDetailInfo"); /* URL */
+			urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + ServiceKey); /* Service Key */
+			urlBuilder.append(
+					"&" + URLEncoder.encode("ATC_ID", "UTF-8") + "=" + URLEncoder.encode(atc_id, "UTF-8")); /* 관리ID */
+			urlBuilder.append(
+					"&" + URLEncoder.encode("FD_SN", "UTF-8") + "=" + URLEncoder.encode(fd_sn, "UTF-8")); /* 습득순번 */
+			URL url = new URL(urlBuilder.toString());
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
+			System.out.println("Response code: " + conn.getResponseCode());
+			BufferedReader rd;
+			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			} else {
+				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			}
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+			rd.close();
+			conn.disconnect();
+			System.out.println(sb.toString());
+
+			result_code = sb.toString();
+
+			System.out.println("작동완료, 디테일코드xml : "+result_code);
+			
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(new InputSource(new StringReader(result_code)));
+
+			// <item> 요소를 NodeList로 가져옴
+			NodeList itemList = doc.getElementsByTagName("item");
+
+			// NodeList에 있는 첫 번째 <item> 요소를 가져옴
+			Node itemNode = itemList.item(0);
+
+			if (itemNode != null && itemNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element itemElement = (Element) itemNode;
+				// 각 요소의 값 가져오기
+				dto.setAtcId(getElementValue(itemElement, "atcId"));
+				dto.setCsteSteNm(getElementValue(itemElement, "csteSteNm"));
+				dto.setDepPlace(getElementValue(itemElement, "depPlace"));
+				dto.setFdFilePathImg(getElementValue(itemElement, "fdFilePathImg"));
+				dto.setFdHor(getElementValue(itemElement, "fdHor"));
+				dto.setFdPlace(getElementValue(itemElement, "fdPlace"));
+				dto.setFdPrdtNm(getElementValue(itemElement, "fdPrdtNm"));
+				dto.setFdSn(getElementValue(itemElement, "fdSn"));
+				dto.setFdYmd(getElementValue(itemElement, "fdYmd"));
+				dto.setFndKeepOrgnSeNm(getElementValue(itemElement, "fndKeepOrgnSeNm"));
+				dto.setOrgId(getElementValue(itemElement, "orgId"));
+				dto.setOrgNm(getElementValue(itemElement, "orgNm"));
+				dto.setPrdtClNm(getElementValue(itemElement, "prdtClNm"));
+				dto.setTel(getElementValue(itemElement, "tel"));
+				dto.setUniq(getElementValue(itemElement, "uniq"));
+			}
+
+			System.out.println("----------------------------------------------------");
+			System.out.println("관리ID : " + dto.getAtcId());
+			System.out.println("보관상태명 : " + dto.getCsteSteNm());
+			System.out.println("보관장소 : " + dto.getDepPlace());
+			System.out.println("습득물사진파일경로 : " + dto.getFdFilePathImg());
+			System.out.println("습득시간 : " + dto.getFdHor());
+			System.out.println("습득장소 : " + dto.getFdPlace());
+			System.out.println("물품명 : " + dto.getFdPrdtNm());
+			System.out.println("습득순번 : " + dto.getFdSn());
+			System.out.println("습득일자 : " + dto.getFdYmd());
+			System.out.println("습득물보관기관구분명 : " + dto.getFndKeepOrgnSeNm());
+			System.out.println("기관아이디 : " + dto.getOrgId());
+			System.out.println("기관명 : " + dto.getOrgNm());
+			System.out.println("물품분류명 : " + dto.getPrdtClNm());
+			System.out.println("전화번호 : " + dto.getTel());
+			System.out.println("특이사항 : " + dto.getUniq());
+			System.out.println("----------------------------------------------------");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
 
 }
