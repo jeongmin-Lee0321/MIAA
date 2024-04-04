@@ -6,6 +6,12 @@
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.InquiryDao">
 	<insert id="inquiry_wirte">
-		INSERT INTO MIAA_INQUIRY_BOARD VALUES(#{param1},#{param2},#{param3},#{param4})
+		INSERT INTO USER_INQUIRY_BOARD VALUES(#{param1},BOARD_NUM_SEQ.NEXTVAL,#{param2},#{param3},SYSDATE,DEFAULT,#{param4})
 	</insert>
+	<select id="inquiry_list" resultType="com.tech.miaa.dto.InquiryDto">
+		SELECT BOARD_NUM,ROWNUM,BOARD_TITLE,BOARD_REPLY_STATUS,TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE FROM USER_INQUIRY_BOARD WHERE USER_ID=#{param1} ORDER BY ROWNUM DESC
+	</select>
+	<delete id="delete">
+		DELETE FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</delete>
 </mapper>

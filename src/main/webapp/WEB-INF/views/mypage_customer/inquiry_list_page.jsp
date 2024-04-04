@@ -1,10 +1,75 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <title>Title</title>
 <link rel="stylesheet"
 	href="resources/css/mypage_customer_inquiry_list_page.css" />
 </head>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var chkObj = document.getElementsByName("RowCheck");
+			var rowCnt = chkObj.length;
+			
+			$("input[name='allCheck']").click(function(){
+				var chk_listArr = $("input[name='RowCheck']");
+				for (var i=0; i<chk_listArr.length; i++){
+					chk_listArr[i].checked = this.checked;
+				}
+			});
+			$("input[name='RowCheck']").click(function(){
+				if($("input[name='RowCheck']:checked").length == rowCnt){
+					$("input[name='allCheck']")[0].checked = true;
+				}
+				else{
+					$("input[name='allCheck']")[0].checked = false;
+				}
+			});
+		});
+		function deleteValue(){
+			var url = "delete";    // Controller로 보내고자 하는 URL
+			var valueArr = new Array();
+		    var list = $("input[name='RowCheck']");
+		    for(var i = 0; i < list.length; i++){
+		        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
+		            valueArr.push(list[i].value);
+		        }
+		    }
+		    if (valueArr.length == 0){
+		    	alert("선택된 글이 없습니다.");
+		    }
+		    else{
+				var chk = confirm("정말 삭제하시겠습니까?");
+				
+				if(chk)
+					{
+				$.ajax({
+				    url : url,                    // 전송 URL
+				    type : 'POST',                // POST 방식
+				    traditional : true,
+				    data : {
+				    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
+				    },
+	                success: function(jdata){
+	                    if(jdata = 1) {
+	                    	
+	                        alert("삭제 성공");
+	                        location.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
+	                    }
+	                    else{
+	                        alert("삭제 실패");
+	                    }
+	                }
+				});
+					}
+				else{
+					alert("삭제 취소");
+				}
+			}
+		}
+	</script>
 <body>
 	<div class="main-body">
 
@@ -14,11 +79,11 @@
 			<div class="content-container">
 				<div class="list-control-container">
 					<button class="btn-list" id="btn-write" onclick="location.href='mypage_customer_inquiry_write_page';" style="cursor: pointer;">문의글 등록</button>
-					<button class="btn-list" id="btn-delete" onclick="location.href=#" style="cursor: pointer;">삭제하기</button>
+					<button class="btn-list" id="btn-delete" onclick="deleteValue();" style="cursor: pointer;">삭제하기</button>
 				</div>
 				<table class="info-table">
 					<tr>
-						<th><input type="checkbox" name="" id=""
+						<th><input type="checkbox" name="allCheck" id="allCheck"
 							class="table-check-box"></th>
 						<th>글번호</th>
 						<th class="table-title">제목</th>
@@ -27,39 +92,19 @@
 						<th>답변 날짜</th>
 						<th></th>
 					</tr>
+					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><input type="checkbox" name="" id=""
-							class="table-check-box"></td>
-						<td>1</td>
-						<td class="table-title">작성된 게시물이 보이지 않습니다</td>
-						<td>답변완료</td>
-						<td>Jan 4, 2022</td>
-						<td>Jan 4, 2022</td>						
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
+						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
+							class="table-check-box"></td>							
+						<td>${list.rownum}</td>
+						<td class="table-title">${list.board_title}</td>
+						<td>${list.board_reply_status}</td>
+						<td>${list.board_registration_date}</td>
+						<td>-</td>						
+						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.board_num}';" style="cursor: pointer;" /></td>
 					</tr>
-					<tr>
-						<td><input type="checkbox" name="" id=""
-							class="table-check-box"></td>
-						<td>2</td>
-						<td class="table-title">등록된 알람 검색을 어디서 하나요</td>
-						<td>처리중</td>
-						<td>Jan 4, 2022</td>
-						<td>-</td>	
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="" id=""
-							class="table-check-box"></td>
-						<td>1000</td>
-						<td class="table-title">빠른 답변 부탁드립니다</td>
-						<td>답변완료</td>
-						<td>Jan 4, 2022</td>
-						<td>Jan 8, 2022</td>	
-						<td><img src="resources/img/write_icon.png" alt=""
-							class="ctrl-icon" onclick="location.href=#" style="cursor: pointer;"></td>
-					</tr>
+					</c:forEach>
+					
 				</table>
 			</div>
 		</div>
