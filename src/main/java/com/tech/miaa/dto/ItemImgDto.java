@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ItemImgDto {
 	private int total_id;
+	private int file_id;
 	private String user_id;
 	private String filename;
 }

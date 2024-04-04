@@ -57,7 +57,7 @@ public class ItemService implements ItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(userId,itemname,fileName);
+						dao.imgUpLoad(userId,(i+1),itemname,fileName);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
@@ -102,48 +102,49 @@ public class ItemService implements ItemServiceInter {
 			//사진이 없을 때 기본아이콘 대체
 			if (imgDtos.size()==0) {
 				if(dto.getUpkind().equals("PRI000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/노트북.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/노트북.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRJ000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/휴대폰.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/휴대폰.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRH000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/지갑.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/지갑.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRG000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/전자기기.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/전자기기.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRD000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/산업.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/산업.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRO000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/보석.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/보석.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRZ000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/기타물품.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/기타물품.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRE000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/스포츠.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/스포츠.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRF000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/자동차.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/자동차.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRL000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/현금.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/현금.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRK000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/의류.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/의류.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRQ000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/쇼핑백.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/쇼핑백.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRR000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/악기.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/악기.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRP000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/카드.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/카드.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRM000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/증권.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0, 0, null, "resources/item_default/증권.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRN000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/증명서.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0,0, null, "resources/item_default/증명서.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRA000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/가방.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0,0, null, "resources/item_default/가방.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRB000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/책.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0,0, null, "resources/item_default/책.png"); imgDtos.add(0, imgdto);
 				}else if(dto.getUpkind().equals("PRX000")) {
-					ItemImgDto imgdto = new ItemImgDto(0, null, "resources/item_default/유류물품.png"); imgDtos.add(0, imgdto);
+					ItemImgDto imgdto = new ItemImgDto(0,0, null, "resources/item_default/유류물품.png"); imgDtos.add(0, imgdto);
 				}
 			}
 		} catch (Exception e) {}
 		
 		model.addAttribute("imgDtos", imgDtos);
+		System.out.println(imgDtos.size());
 		return dto;
 	}
 
