@@ -8,8 +8,8 @@
 <insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4}, 
 						#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE) 
 </insert>
-<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param2}), 
-						#{param1},#{param3}) 
+<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3}), 
+						#{param2},#{param1},#{param4}) 
 </insert>
 
 <select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto"> 

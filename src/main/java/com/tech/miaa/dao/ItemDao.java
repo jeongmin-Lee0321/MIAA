@@ -8,7 +8,7 @@ import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
 
 public interface ItemDao {
-	public void imgUpLoad(String userId, String itemname, String fileName);
+	public void imgUpLoad(String userId, int i, String itemname, String fileName);
 	public void itemWrite(String tel,String openclose, String lostday,String address,String itemname,
 			String itemkind1,String itemkind2,String colorCd,String sepcialMark,String userId);
 	public ArrayList<ItemDto> itemlistview();
