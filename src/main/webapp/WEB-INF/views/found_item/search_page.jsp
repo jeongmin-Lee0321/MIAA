@@ -356,7 +356,7 @@
 								<c:set var="result" value="${total / 10}" />
 								<c:choose>
 									<c:when test="${total % 10 == 0}">
-                						${total/10}
+                						${String.valueOf(total/10).replaceAll("\\.0$", "")}
             						</c:when>
 									<c:otherwise>
             							${String.valueOf(Math.ceil(result)).replaceAll("\\.0$", "")}
@@ -368,26 +368,41 @@
 				</div>
 				<ul class="pagelist-container">
 
-					<li class="btn-prev"><a class="test" href="#"><img
-							src="resources/img/chevron-left.png" alt=""></a> <c:if
-							test="${not empty xml_code}">
-							<c:if test="${Math.ceil(total/10)>=10}">
-								<c:forEach var="i" begin="0" end="9">
-									<li><form id="pageForm" action="found_item_view"
-											method="post">
-											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-											<input type="hidden" name="xml_code"
-												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
-												name="page" value="${i}" />
-											<!-- submit 버튼 -->
-											<input type="submit" value="${i+1}" />
-										</form></li>
-								</c:forEach>
+					<c:if test="${total>0}">
+						<li class="btn-prev"><a class="test" href="#"><img
+								src="resources/img/chevron-left.png" alt=""></a> <c:if
+								test="${not empty xml_code}">
+								<c:if test="${Math.ceil(total/10)>=10}">
+									<c:forEach var="i" begin="0" end="9">
+										<li><form id="pageForm" action="found_item_view"
+												method="post">
+												<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+												<input type="hidden" name="xml_code"
+													value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+													name="page" value="${i}" />
+												<!-- submit 버튼 -->
+												<input type="submit" value="${i+1}" />
+											</form></li>
+									</c:forEach>
+								</c:if>
+								<c:if test="${Math.ceil(total/10)<10}">
+									<c:forEach var="i" begin="0" end="${Math.ceil(total/10)-1}">
+										<li><form id="pageForm" action="found_item_view"
+												method="post">
+												<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+												<input type="hidden" name="xml_code"
+													value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+													name="page" value="${i}" />
+												<!-- submit 버튼 -->
+												<input type="submit" value="${i+1}" />
+											</form></li>
+									</c:forEach>
+								</c:if>
+							</c:if> <c:if test="${Math.ceil(total/100)*10>10}">
+								<li class="btn-next"><a href="#"><img
+										src="resources/img/chevron-left.png" alt=""></a></li>
 							</c:if>
-						</c:if> <c:if test="${Math.ceil(total/10)>10}">
-							<li class="btn-next"><a href="#"><img
-									src="resources/img/chevron-left.png" alt=""></a></li>
-						</c:if>
+					</c:if>
 				</ul>
 				<ul class="switchBtn-container">
 					<li class="btn-prev-group"><a href="#">Previous</a></li>
