@@ -56,7 +56,7 @@ public class MypageCustomerInquiryController {
 		
 		mypageCustomerInquiryServiceInter=new InquiryService();
 		try {
-			ArrayList<InquiryDto> list=mypageCustomerInquiryServiceInter.inquiry_list(model);
+			InquiryDto list=mypageCustomerInquiryServiceInter.modify_list(model);
 			model.addAttribute("list",list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -64,7 +64,7 @@ public class MypageCustomerInquiryController {
 		}
 		
 		
-		return "mypage_customer.inquiry_list_page.문의내역.3";
+		return "mypage_customer.inquiry_modify_page.문의내역.3";
 	}
 	
 //	게시물 작성
@@ -75,6 +75,18 @@ public class MypageCustomerInquiryController {
 		model.addAttribute("userId",userId);
 		mypageCustomerInquiryServiceInter=new InquiryService();
 		mypageCustomerInquiryServiceInter.inquiry_wirte(model);
+		
+		return "redirect:mypage_customer_inquiry_list_page";
+	}
+	
+//	게시물 수정
+	@RequestMapping("inquiry_modify")
+	public String inquiry_modify(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId",userId);
+		mypageCustomerInquiryServiceInter=new InquiryService();
+		mypageCustomerInquiryServiceInter.inquiry_modify(model);
 		
 		return "redirect:mypage_customer_inquiry_list_page";
 	}
