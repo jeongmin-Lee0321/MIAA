@@ -9,7 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="수정진행중" />
+    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="수정진행중">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/vopage/PageVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +45,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="release/LJM" />
+        <entry key="$PROJECT_DIR$" value="development" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,6 +64,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -72,6 +84,7 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2eJ9TN5saqkdmzz20JMXUhV6b2R" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -81,7 +94,8 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 9.0.63.executor&quot;: &quot;Debug&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.63.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;realease/resueani-search&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/MIAA/src/main/webapp/resources&quot;,
@@ -111,6 +125,8 @@
       <recent name="C:\MIAA\src\main\webapp\resources\css\rescue_ani" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tech.miaa.vopage" />
+      <recent name="com.tech.miaa.dto" />
       <recent name="com.tech.miaa.abdmApi" />
     </key>
   </component>
@@ -292,14 +308,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-11.0.21-corretto-11.0.21-4caba194b151-9f4ef98c" />
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -313,6 +321,9 @@
       <workItem from="1711931880231" duration="9338000" />
       <workItem from="1712020325907" duration="13656000" />
       <workItem from="1712048944700" duration="423000" />
+      <workItem from="1712062508646" duration="3978000" />
+      <workItem from="1712071928908" duration="16845000" />
+      <workItem from="1712151365854" duration="1273000" />
     </task>
     <task id="LOCAL-00001" summary="Ani,Found,Lost detail view init.">
       <option name="closed" value="true" />
@@ -427,7 +438,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="development" />
+                        <option value="realease/resueani-search" />
                       </list>
                     </value>
                   </entry>
@@ -450,5 +461,19 @@
     <MESSAGE value="api추가 및 rescueAni_search_page 작업중" />
     <MESSAGE value="수정진행중" />
     <option name="LAST_COMMIT_MESSAGE" value="수정진행중" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.net.SocketException" package="java.net" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
