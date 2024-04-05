@@ -97,7 +97,7 @@
 						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
 							class="table-check-box"></td>							
 						<td>${list.rownum}</td>
-						<td class="table-title">${list.board_title}</td>
+						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.board_num}">${list.board_title}</a></td>
 						<td>${list.board_reply_status}</td>
 						<td>${list.board_registration_date}</td>
 						<td>-</td>						
@@ -112,33 +112,39 @@
 		<!-- page -->
 
 		<div class="result-container">
-			<div class="page-container">
-				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">1</span><span>of</span><span
-						class="total-page">10</span>
-				</div>
-				<ul class="pagelist-container">
-					<li class="btn-prev"><a class="test" href="#"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
-					<li class="btn-next"><a href="#"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
-				</ul>
+		
+		<!-- 페이징 프레임시작 -->
+		
+        <div class="page-container">
+            <div class="currentOftotal">
+                <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
+                    class="total-page">${pageVO.totPage}</span>
+            </div>
+            <ul class="pagelist-container">
+                <li class="btn-prev"><a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
+                        src="resources/img/chevron-left.png" alt=""></a></li>
+                <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
+                    <c:choose>
+                        <c:when test="${i eq pageVO.page}">
+                            <li><a href="#" style="color: red">${i}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <li class="btn-next"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
+                        src="resources/img/chevron-left.png" alt=""></a></li>
+            </ul>
 
-				<ul class="switchBtn-container">
-					<li class="btn-prev-group"><a href="#">Previous</a></li>
-					<li class="btn-next-group"><a href="#">Next</a></li>
-				</ul>
-			</div>
+            <ul class="switchBtn-container">
+                <li class="btn-prev-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">Previous</a></li>
+                <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>
+            </ul>
+        </div>
+        
+        <!-- 페이징 프레임 끝 -->
+        
 		</div>
 
 	</div>

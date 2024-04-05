@@ -1,6 +1,11 @@
 .main-body {
 	width: 1220px;
 }
+a:link{color: black;}
+a:visited,a:active{color: black;}
+a:hover{
+	color: #0066ff;
+}
 
 /* table */
 .content-wrapper {
@@ -92,9 +97,9 @@
 }
 
 .table-check-box {
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	border-radius: 35%;
 	border: 1px solid #999;
 	appearance: none;
 	cursor: pointer;

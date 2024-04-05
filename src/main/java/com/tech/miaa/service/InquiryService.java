@@ -90,6 +90,27 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		return list;
 	}
 	@Override
+	public InquiryDto detail_list(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpSession session=request.getSession();
+		
+		String board_num=request.getParameter("board_num");
+		String id = (String) session.getAttribute("userId");
+		
+		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
+		InquiryDto list=null;
+		try {
+			list = dao.detail_list(board_num,id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	@Override
 	public void inquiry_modify(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
