@@ -34,7 +34,6 @@ public class MypageCustomerInquiryController {
 	@RequestMapping("mypage_customer_inquiry_list_page")
 	public String mypage_customer_inquiry_list_page(HttpServletRequest request, Model model,
 			@SessionAttribute(name = "userId", required = false) String userId) {
-		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		
 		String strPage = request.getParameter("page");
 		
@@ -42,21 +41,30 @@ public class MypageCustomerInquiryController {
 			strPage = "1";
 		}
 		
+		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		int page = Integer.parseInt(strPage);
-		Integer totPage=dao.totPage();
 		
 		PageVO pageVO = new PageVO();
+		Integer total=dao.total();
 		
 		pageVO.setPage(page);
-				
+		pageVO.setDisplayRowCount(5);
+		pageVO.pageCalculate(total);
+		
+		System.out.println(""+pageVO.getRowStart());
+		System.out.println(""+pageVO.getRowEnd());
+
+						
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-		model.addAttribute("pageVO",pageVO);
+		
+		
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		
 		try {
-			ArrayList<InquiryDto> list = mypageCustomerInquiryServiceInter.inquiry_list(model);
+			ArrayList<InquiryDto> list = mypageCustomerInquiryServiceInter.inquiry_list(model,pageVO);
+			model.addAttribute("pageVO",pageVO);
 			model.addAttribute("list", list);
 
 			

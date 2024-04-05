@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
+import com.tech.miaa.vopage.PageVO;
 
 public class InquiryService implements MypageCustomerInquiryServiceInter {
 
@@ -34,18 +35,21 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		
 	}
 	@Override
-	public ArrayList<InquiryDto> inquiry_list(Model model) {
+	public ArrayList<InquiryDto> inquiry_list(Model model,PageVO pageVO) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpSession session=request.getSession();
 		
+		String getRowStart = pageVO.getRowStart().toString();
+		String getRowEnd = pageVO.getRowEnd().toString();
 		String id = (String) session.getAttribute("userId");
+		
 		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		ArrayList<InquiryDto> list=null;
 		try {
-			list = dao.inquiry_list(id);
+			list = dao.inquiry_list(id,getRowStart,getRowEnd);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -19,9 +19,9 @@ public class MypageMatchingAlarmController {
 	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 	
 	/* 원진호_0401추가 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping("mypage_matching_alarm_list_page")
 	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
-		return "mypage_matching_alarm.list.알림 목록.2";
+		return "mypage_matching.alarm_list_page.알림 목록.3";
 	}
 	
 	

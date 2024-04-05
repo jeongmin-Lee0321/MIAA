@@ -5,7 +5,7 @@
 <head>
 <title>Title</title>
 <link rel="stylesheet"
-	href="resources/css/mypage_customer_inquiry_list_page.css" />
+	href="resources/css/mypage_matching_alarm_list_page.css" />
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script type="text/javascript">
@@ -96,7 +96,7 @@
 					<tr>
 						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
 							class="table-check-box"></td>							
-						<td>${list.rnum}</td>
+						<td>${list.rownum}</td>
 						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.board_num}">${list.board_title}</a></td>
 						<td>${list.board_reply_status}</td>
 						<td>${list.board_registration_date}</td>
@@ -121,10 +121,8 @@
                     class="total-page">${pageVO.totPage}</span>
             </div>
             <ul class="pagelist-container">
-            	<c:if test="${pageVO.page > 1}">
                 <li class="btn-prev"><a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
-                </c:if>
                 <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
                     <c:choose>
                         <c:when test="${i eq pageVO.page}">
@@ -135,10 +133,8 @@
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
-                <c:if test="${pageVO.page < pageVO.pageEnd}">
                 <li class="btn-next"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
-                </c:if>
             </ul>
 
             <ul class="switchBtn-container">
