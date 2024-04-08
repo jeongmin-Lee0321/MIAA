@@ -516,7 +516,7 @@
             <!-- 결과 리스트 총 갯수 프레임 -->
             <div class="total-resultNum-wrapper">
                 <div class="total-resultNum-container">
-                    <span>전체 </span><span class="totalNum">${totalCount }</span><span>건</span>
+                    <span>전체 </span><span class="totalNum">${dto.pageVO.totRow }</span><span>건</span>
                 </div>
             </div>
 
@@ -578,17 +578,18 @@
                     <ul class="pagelist-container">
 <%--                        <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${dto.pageVO.page - 1}"><img--%>
 <%--                                src="resources/img/chevron-left.png" alt=""></a></li>--%>
-                        <button class="btn-prev" type="submit" name="pageNo" value="${dto.pageVO.page-1}"><img src="resources/img/chevron-left.png" alt=""></button>
+                        <button class="btn-prev" type="submit" name="pageVO.page" value="${dto.pageVO.page-1}"><img src="resources/img/chevron-left.png" alt=""></button>
                         <c:forEach begin="${dto.pageVO.pageStart}" end="${dto.pageVO.pageEnd}" var="i">
                             <c:choose>
                                 <c:when test="${i eq dto.pageVO.page}">
+                                    <li>${i}</li>
                                     <%--                                <li><a href="#" style="color: red">${i}</a></li>--%>
-                                    <li><button type="submit" name="pageNo" value="${dto.pageNo = i}" style="color: red">${i}</button></li>
+                                    <li><button type="submit" name="pageVO.page" value="${dto.pageVO.page = i}" style="color: red;">${i}</button></li>
                                 </c:when>
                                 <c:otherwise>
                                     <%-- <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>--%>
                                     <li>
-                                        <button type="submit" name="pageNo" value="${dto.pageNo = i}">${i}</button>
+                                        <button type="submit" name="pageVO.page" value="${dto.pageVO.page = i}">${i}</button>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
@@ -598,14 +599,14 @@
 
 <%--                        <li class="btn-next"><a href="rescue_ani_search_page?page=${dto.pageNo + 1}"><img--%>
 <%--                            src="resources/img/chevron-left.png" alt=""></a></li>--%>
-                        <button class="btn-next" type="submit" name="pageNo" value="${dto.pageVO.page+1}"><img src="resources/img/chevron-right.png" alt=""></button>
+                        <button class="btn-next" type="submit" name="pageVO.page" value="${dto.pageVO.page+1}"><img src="resources/img/chevron-right.png" alt=""></button>
                 </ul>
 
                 <ul class="switchBtn-container">
 <%--                    <li class="btn-prev-group"><a href="rescue_ani_search_page?page=${dto.pageVO.page - 1}">Previous</a></li>--%>
 <%--                    <li class="btn-next-group"><a href="rescue_ani_search_page?page=${dto.pageVO.page + 1}">Next</a></li>--%>
-                    <button class="btn-prev-group" type="submit" name="pageNo" value="${dto.pageVO.page/10+10}">Previous</button>
-                    <button class="btn-next-group" type="submit" name="pageNo" value="${dto.pageVO.page+1}">Next></button>
+                    <button class="btn-prev-group" type="submit" name="pageVO.page" value="${dto.pageVO.getPageEnd()-19}">Previous</button>
+                    <button class="btn-next-group" type="submit" name="pageVO.page" value="${dto.pageVO.getPageEnd()+1}">Next</button>
                 </ul>
             </div>
             <!-- 페이징 프레임 끝 -->

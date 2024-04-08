@@ -10,14 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="수정진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/vopage/PageVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01__11_21__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01__11_22__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01__11_22__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01__11_22__Changes_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01__12_53__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_21_[Changes]/MemberController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_21_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]/MemberController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]1/MemberController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]2/MemberController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오전_11_22_[Changes]2/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오후_12_53_[Changes]/MemberDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오후_12_53_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dto/AnimalSearchDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/InquiryDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/ItemDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MemberDao.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,29 +105,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 9.0.63.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;realease/resueani-search&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/MIAA/src/main/webapp/resources&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.Tomcat 9.0.63.executor": "Debug",
+    "git-widget-placeholder": "realease/resueani-search",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/MIAA/src/main/webapp/resources",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\MIAA\src\main\webapp\resources" />
@@ -324,6 +340,8 @@
       <workItem from="1712062508646" duration="3978000" />
       <workItem from="1712071928908" duration="16845000" />
       <workItem from="1712151365854" duration="1273000" />
+      <workItem from="1712563364608" duration="5476000" />
+      <workItem from="1712585027751" duration="1774000" />
     </task>
     <task id="LOCAL-00001" summary="Ani,Found,Lost detail view init.">
       <option name="closed" value="true" />
@@ -469,6 +487,11 @@
           <properties class="java.net.SocketException" package="java.net" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rescue_ani/search_page.jsp</url>
+          <line>585</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
