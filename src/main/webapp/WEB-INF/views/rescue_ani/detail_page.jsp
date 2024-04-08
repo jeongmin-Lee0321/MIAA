@@ -24,7 +24,7 @@
     <div class="image-selection">
         <div class="image-container">
             <img src="resources/img/chevron-left.png" alt="" id="chevron-left">
-            <img src="${item.getPopfile()}" alt="" id="ani-image">
+            <img src="${dto.item.getPopfile()}" alt="" id="ani-image">
             <img src="resources/img/chevron-right.png" alt="" id="chevron-right">
         </div>
 
@@ -40,14 +40,13 @@
                 <th class="info-table-name">공고번호</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="notice_no">
-                        ${item.getNoticeNo()}
+                        ${dto.item.getNoticeNo()}
                     </div>
                 </td>
                 <th class="info-table-name">동물종류</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="kind">
-                        개
-                        ${item.getKindCd()}
+                        ${dto.upKind }
                     </div>
                 </td>
             </tr>
@@ -55,13 +54,13 @@
                 <th class="info-table-name">품종</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="kind_cd">
-                        ${item.getKindCd()}
+                        ${dto.kind }
                     </div>
                 </td>
                 <th class="info-table-name">색상</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="color_cd">
-                        ${item.getColorCd()}
+                        ${dto.item.getColorCd()}
                     </div>
                 </td>
             </tr>
@@ -69,13 +68,13 @@
                 <th class="info-table-name">성별</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="sex_cd">
-                        ${item.getSexCd()}
+                        ${dto.item.getSexCd()}
                     </div>
                 </td>
                 <th class="info-table-name">중성화 여부</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="neuter_yn">
-                        ${item.getNeuterYn()}
+                        ${dto.item.getNeuterYn()}
                     </div>
                 </td>
             </tr>
@@ -83,19 +82,19 @@
                 <th class="info-table-name">체중</th>
                 <td class="info-table-value">
                     <div class="table-value-container" id="weight">
-                        ${item.getWeight()}
+                        ${dto.item.getWeight()}
                     </div>
                 </td>
                 <th class="info-table-name">나이</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="age">${item.getAge()}</div>
+                    <div class="table-value-container" id="age">${dto.item.getAge()}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">특징</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="special_mark">
-                        ${item.getSpecialMark()}
+                        ${dto.item.getSpecialMark()}
                     </div>
             </tr>
         </table>
@@ -111,19 +110,19 @@
             <tr>
                 <th class="info-table-name">구조일</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="happen_dt">${item.getHappenDt()}</div>
+                    <div class="table-value-container" id="happen_dt">${dto.item.getHappenDt()}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">구조장소</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="happen_place">${item.getHappenPlace()}</div>
+                    <div class="table-value-container" id="happen_place">${dto.item.getHappenPlace()}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">공고기간</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="notice">${item.getNoticeSdt()} ~ ${item.getNoticeEdt()}</div>
+                    <div class="table-value-container" id="notice">${dto.item.getNoticeSdt()} ~ ${dto.item.getNoticeEdt()}</div>
                 </td>
             </tr>
 
@@ -140,19 +139,19 @@
             <tr>
                 <th class="info-table-name">보호센터명</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="care_nm">${item.getCareNm()}</div>
+                    <div class="table-value-container" id="care_nm">${dto.item.getCareNm()}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">주소</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="care_addr">${item.getCareAddr()}</div>
+                    <div class="table-value-container" id="care_addr">${dto.item.getCareAddr()}</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">전화번호</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="care_tel">${item.getCareTel()}</div>
+                    <div class="table-value-container" id="care_tel">${dto.item.getCareTel()}</div>
                 </td>
             </tr>
 
