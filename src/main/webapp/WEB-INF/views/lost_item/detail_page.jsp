@@ -74,8 +74,12 @@
 				<tr>
 					<th class="info-table-name">연락처</th>
 					<td class="info-table-value" colspan="3">
-						<div class="table-value-container" id="user_tel">
-							${dto.user_tel }</div>
+					<c:if test="${dto.openclose eq 'true'}">
+						<div class="table-value-container" id="user_tel">${dto.user_tel }</div>
+					</c:if>
+					<c:if test="${dto.openclose eq 'false'}">
+						<div class="table-value-container" id="user_tel">***-***-****</div>
+					</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -95,8 +99,28 @@
 				onclick="location.href='lost_item_search_page';"
 				style="cursor: pointer;">목록으로</button>
 		</div>
+		<div>
+			<c:if test="${userId eq dto.user_id}">
+				<button class="btn-list" id="btn-bottom-list" onclick="modify('${dto.total_id}')" style="cursor: pointer;"> 수정하기</button>
+				<button class="btn-list" id="btn-bottom-list" onclick="deletes('${dto.total_id}')" style="cursor: pointer;">삭제하기</button>
+				</c:if>
+		</div>
 	</div>
 </body>
+<script>
+function deletes(total_id){
+	if(window.confirm("게시물을 삭제하시겠습니까?")){
+		location.href='lost_item_delete?total_id='+total_id;
+	}
+}
+</script>
+<script>
+function modify(total_id) {
+	if(window.confirm("게시물을 수정하시겠습니까?")){
+		location.href='lost_item_modify_page?total_id='+total_id;
+	}
+}
+</script>
 </html>
 <script>
 	var slideIndex = 1;
