@@ -172,8 +172,9 @@
 		}
 	};
 
-	function paging_Form() {
-		document.getElementById('pagingform').submit();
+	function paging_Form(page) {
+	    var formId = 'pagingform_' + page; // Construct form ID
+	    document.getElementById(formId).submit(); // Submit the corresponding form
 	}
 
 	function submit_prev_Form() {
@@ -181,15 +182,19 @@
 	}
 
 	function submit_next_Form() {
-		/*  var value = parseInt(pageNum);
-
-		    if (value < 9) { */
 		document.getElementById('next_form').submit();
-		/* } else if(value==9) {
-		    document.getElementById('next_search_form').submit()
-		}
-		 */
 	}
+	
+	function submit_prev_search_Form(){
+		document.getElementById('prev_search_form').submit();
+	}
+	
+	function submit_next_search_Form(){
+		document.getElementById('next_search_form').submit();
+	}
+	
+	
+	
 </script>
 <body>
 
@@ -468,7 +473,13 @@
 				<ul class="pagelist-container">
 
 					<c:if test="${total>0}">
-
+						
+						
+						<c:if test="${pageNum eq 0 && allsearchPage eq 1}">
+						<li class="btn-prev"><a class="btn-prev" href="#">
+						<img src="resources/img/chevron-left.png" alt="">
+						</a></li>
+						</c:if>
 						<c:if test="${pageNum>=1}">
 							<li class="btn-prev"><a class="btn-prev" href="#"
 								onclick="submit_prev_Form()"><img
@@ -488,19 +499,47 @@
 											type="hidden" name="Dto_color" value="${searchDto.color}" />
 									</form> </a></li>
 						</c:if>
+						<c:if test="${pageNum eq 0 && allsearchPage>=2}">
+							<li class="btn-prev"><a href="#"
+								onclick="submit_prev_search_Form()"><img
+									src="resources/img/chevron-left.png" alt="">
+									<form id="prev_search_form" action="found_item_search1" method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+											<input type="hidden"
+											name="cityname" value="${searchDto.city}" /> <input
+											type="hidden" name="START_YMD"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="END_YMD" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="prd_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="color" value="${searchDto.color}" />
+											<input
+											type="hidden" name="allsearchPage" value="${allsearchPage-1}" />
+									</form> </a></li>
+						</c:if>
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						<c:if test="${not empty xml_code}">
 							<c:if test="${Math.ceil(total/10)>=10}">
 								<c:forEach var="i" begin="0" end="9">
 									<li><c:choose>
 											<c:when test="${i eq pageNum}">
-												<a href="#" onclick="paging_Form()" style="color: red">
+												<a href="#" onclick="paging_Form('${i}')" style="color: red">
 											</c:when>
 											<c:otherwise>
-												<a href="#" onclick="paging_Form()">
+												<a href="#" onclick="paging_Form('${i}')">
 											</c:otherwise>
 										</c:choose>
 
-										<form id="pagingform" action="found_item_view" method="post">
+										<form id="pagingform_${i}" action="found_item_view" method="post">
 											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
 											<input type="hidden" name="xml_code"
 												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
@@ -549,7 +588,15 @@
 							</c:if>
 						</c:if>
 
-
+						
+						<c:if test="${total<=100  && pageNum+1 >=Math.ceil(total/10)}">
+							<li class="btn-next">
+								<a href="#" onclick="submit_next_Form()">
+								<img src="resources/img/chevron-left.png" alt="">
+						</a></li>
+						</c:if>
+						
+						
 						<c:if test="${Math.ceil(total/10)>pageNum+1  && pageNum<9}">
 							<li class="btn-next">
 							<a href="#" onclick="submit_next_Form()">
@@ -573,34 +620,24 @@
 
 						</c:if>
 
-						<c:if test="${Math.ceil(total / 100) >= 10 && pageNum eq 9}">
+						<c:if test="${Math.ceil(total/10) >= 10 && pageNum eq 9}">
 							<li class="btn-next"><a href="#"
-								onclick="submit_next_Form()"><img
+								onclick="submit_next_search_Form()"><img
 									src="resources/img/chevron-left.png" alt="">
-									<form id="next_form" action="found_item_view" method="post">
+									<form id="next_search_form" action="found_item_search1" method="post">
 										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-										<input type="hidden" name="xml_code"
-											value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
-											name="page" value="${pageNum+1}" /> <input type="hidden"
-											name="Dto_city" value="${searchDto.city}" /> <input
-											type="hidden" name="Dto_startYmd"
+											<input type="hidden"
+											name="cityname" value="${searchDto.city}" /> <input
+											type="hidden" name="START_YMD"
 											value="${searchDto.startYMD}" /> <input type="hidden"
-											name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
-											type="hidden" name="Dto_mainCategory"
+											name="END_YMD" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="prd_mainCategory"
 											value="${searchDto.mainCategory}" /> <input type="hidden"
-											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
-											type="hidden" name="Dto_color" value="${searchDto.color}" />
-									</form> <%-- 											<form id="next_search_form" action="found_item_search1"
-												method="post">
-							
-								<input type="hidden" name="cityname" value="${searchDto.city}" />
-								<input type="hidden" name="Dto_startYmd" value="${searchDto.startYMD}" />
-								<input type="hidden" name="Dto_endYmd" value="${searchDto.endYMD}" />
-								<input type="hidden" name="prd_mainCategory" value="${searchDto.mainCategory}" />
-								<input type="hidden" name="prd_subCategory" value="${searchDto.subCategory}" />
-								<input type="hidden" name="color" value="${searchDto.color}" />
-								<input type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
-											</form> --%> </a></li>
+											name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="color" value="${searchDto.color}" />
+											<input
+											type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
+									</form> </a></li>
 						</c:if>
 					</c:if>
 				</ul>

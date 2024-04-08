@@ -57,12 +57,13 @@ public class FoundItemController {
 		ArrayList<FounditemDto> list;
 		list = fservice.getFoundList(xml_code);
 		int total = fservice.getTotal();
+		int allsearchPage = fservice.getAllsearchPage();
 		model.addAttribute("list", list);
 		model.addAttribute("total", total);
 		model.addAttribute("xml_code", xml_code);
 		model.addAttribute("pageNum", 0);
 		model.addAttribute("searchDto", searchDto);
-		model.addAttribute("allsearchPage","1");
+		model.addAttribute("allsearchPage",allsearchPage);
 		System.out.println(list);
 		System.out.println(total);
 
