@@ -14,6 +14,7 @@ import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
 import com.tech.miaa.vopage.PageVO;
+import com.tech.miaa.vopage.PageVO2;
 
 public class InquiryService implements MypageCustomerInquiryServiceInter {
 
@@ -35,14 +36,14 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		
 	}
 	@Override
-	public ArrayList<InquiryDto> inquiry_list(Model model,PageVO pageVO) {
+	public ArrayList<InquiryDto> inquiry_list(Model model,PageVO2 pageVO2) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpSession session=request.getSession();
 		
-		String getRowStart = pageVO.getRowStart().toString();
-		String getRowEnd = pageVO.getRowEnd().toString();
+		String getRowStart = pageVO2.getRowStart().toString();
+		String getRowEnd = pageVO2.getRowEnd().toString();
 		String id = (String) session.getAttribute("userId");
 		
 		

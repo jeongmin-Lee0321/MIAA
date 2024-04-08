@@ -142,8 +142,12 @@
             </ul>
 
             <ul class="switchBtn-container">
+	            <c:if test="${pageVO.page > 1}">
                 <li class="btn-prev-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">Previous</a></li>
-                <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>
+                </c:if>
+                <c:if test="${pageVO.page < pageVO.pageEnd}">
+                <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>                
+                </c:if>
             </ul>
         </div>
         

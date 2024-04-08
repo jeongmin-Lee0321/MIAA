@@ -16,6 +16,7 @@ import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.service.InquiryService;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
 import com.tech.miaa.vopage.PageVO;
+import com.tech.miaa.vopage.PageVO2;
 
 @Controller
 public class MypageCustomerInquiryController {
@@ -44,7 +45,7 @@ public class MypageCustomerInquiryController {
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		int page = Integer.parseInt(strPage);
 		
-		PageVO pageVO = new PageVO();
+		PageVO2 pageVO = new PageVO2();
 		Integer total=dao.total();
 		
 		pageVO.setPage(page);
