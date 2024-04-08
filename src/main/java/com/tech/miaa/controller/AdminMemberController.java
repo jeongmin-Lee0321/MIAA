@@ -29,22 +29,17 @@ public class AdminMemberController {
 
 	@RequestMapping(value = "admin", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin) {
+			@SessionAttribute(name = "userId", required = false) String userId){
 
-		String result = "/";
-		if (isAdmin.equals("admin")) {
-			result = "admin_login.joinform_page.관리자 회원가입.1";
-		} else {
-			System.out.println("관리자아이디가 아닙니다");
-			if (userId != null) {
-				System.out.println("로그인 유저의 id : " + userId);
-			} else if (userId == null) {
-				System.out.println("로그인 하지 않았습니다.");
-			}
+		String result = "redirect:/";
+
+		if (userId != null) {
+			System.out.println("로그인 유저의 id : " + userId);
+		} else if (userId == null) {
+			System.out.println("로그인 하지 않았습니다.");
 		}
+		result = "admin_login.joinform_page.관리자 회원가입.1";
 		model.addAttribute("userId", userId);
-		model.addAttribute("IsAdmin", isAdmin);
 
 		return result;
 
