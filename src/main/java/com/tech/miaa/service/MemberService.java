@@ -10,7 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.tech.miaa.dao.AdminMemberDao;
 import com.tech.miaa.dao.MemberDao;
+import com.tech.miaa.dto.AdminMemberDto;
 import com.tech.miaa.dto.MemberDto;
 import com.tech.miaa.serviceInter.MemberServiceInter;
 import com.tech.miaa.util.CryptoUtil;
@@ -200,6 +202,7 @@ public class MemberService implements MemberServiceInter {
 		HttpSession session = null; MemberDto dto=null;
 		String id = request.getParameter("id"); String pw = request.getParameter("pw");
 		String shpwd = ""; String bcpwd = ""; String result = "redirect:loginform";
+		AdminMemberDto admin_dto= null;
 		
 		//로그인 비밀번호 아이디 공백 확인
 		if (id == "" && pw == "") {
@@ -217,17 +220,49 @@ public class MemberService implements MemberServiceInter {
 				e.printStackTrace();
 			}
 			MemberDao dao = sqlSession.getMapper(MemberDao.class);
-			//아이디와 비밀번호 일치하는지 확인
-			int num = dao.login1(id, bcpwd);
-			if (num > 0) {
-				//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
-				dto = dao.login2(id, bcpwd);
-				session = request.getSession(false);
-				session.setAttribute("userId", dto.getUser_id());
-				session.setMaxInactiveInterval(1800);
-				result = "redirect:/";
-			} else if (num == 0) {
-				System.out.println("아이디와 비밀번호를 확인하세요.");
+			
+			//추가 및 변경 김영빈 - 관리자 아이디인지 확인
+			AdminMemberDao admin_dao=sqlSession.getMapper(AdminMemberDao.class);
+			
+			int isAdmin = admin_dao.admin_login1(id, bcpwd);
+			switch (isAdmin) {
+			case 1:
+				//아이디와 비밀번호 일치하는지 확인
+				if (isAdmin > 0) {
+					//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
+					admin_dto = admin_dao.admin_login2(id, bcpwd);
+					session = request.getSession(false);
+					//---로그인아이디가 관리자일경우 isAdmin에 admin이라고 저장---
+					session.setAttribute("isAdmin", "admin");
+					
+					session.setAttribute("userId", admin_dto.getUser_id());
+					session.setMaxInactiveInterval(1800);
+					
+					
+					result = "redirect:/";
+				} else if (isAdmin == 0) {
+					System.out.println("아이디와 비밀번호를 확인하세요.");
+				}
+				
+				break;
+
+			default:
+				//일반 유저일경우
+				//아이디와 비밀번호 일치하는지 확인
+				int num = dao.login1(id, bcpwd);
+				if (num > 0) {
+					//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
+					dto = dao.login2(id, bcpwd);
+					session = request.getSession(false);
+					session.setAttribute("userId", dto.getUser_id());
+					session.setMaxInactiveInterval(1800);
+					
+					
+					result = "redirect:/";
+				} else if (num == 0) {
+					System.out.println("아이디와 비밀번호를 확인하세요.");
+				}
+				break;
 			}
 		}
 		return result;
