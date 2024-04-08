@@ -82,22 +82,34 @@
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();" style="cursor: pointer;">삭제하기</button>
 				</div>
 				<table class="info-table">
+				<div>
 					<tr>
 						<th><input type="checkbox" name="allCheck" id="allCheck"
 							class="table-check-box"></th>
-						<th class="table-title">게시 제목</th>
+						
+						<th>게시제목</th>
 						<th></th>
+						<th></th>
+						<th></th>
+						
 					</tr>
 					<c:forEach items="${list}" var="list">
 					<tr>
 						<td><input type="checkbox" name="RowCheck" value=""
 							class="table-check-box"></td>
 						<td class="table-title">
-						${list.item_name} <br />
-               	<a href="$$$" class="item_tag_01">물건</a> 
-               	<a href="$$$" class="item_tag_02">${list.item_name}</a> 
-                <a href="$$$" class="item_tag_03">${list.lostday}</a> 
-				<c:set var="upperkind" value="${list.upkind}"/>               
+							<div style="text-align : center; padding-bottom: 8px;">에어팟</div>
+							<a href="$$$" class="item_tag_01">
+							물건</a> 
+						<td class="table-title" style="text-align: center;">
+							<div style="padding-bottom: 8px;">ㅤ</div>
+						<a href="$$$" class="item_tag_02">${list.item_name}</a>						 
+						<td class="table-title" style="text-align: center;">
+						<div style="padding-bottom: 8px;">ㅤ</div>
+						<a href="$$$" class="item_tag_03">${list.lostday}</a> 
+						<td class="table-title" style="text-align: center;">
+						<div style="padding-bottom: 8px;">ㅤ</div>
+						<c:set var="upperkind" value="${list.upkind}"/>               
                <c:choose>
                   <c:when test="${upperkind == 'PRB000'}">
                      <c:set var="upperkind" value="도서용품"/>
@@ -157,8 +169,13 @@
                      <c:set var="upperkind" value="기타물품"/>
                   </c:when>
                </c:choose>
+				
                			<a href="" class="item_tag_04">${upperkind}>${list.upr_cd}</a>
-						<a href="" class="item_tag_05">${list.address}</a> </td>														
+               			</td>
+               			<td class="table-title" style="text-align: center;">
+               			<div style="padding-bottom: 8px;">ㅤ</div>
+						<a href="" class="item_tag_05">${list.address}</a>
+						 </td>														
 						<td><input type="image" src="resources/img/trash_icon.png" name=""  style="cursor: pointer;" /></td>
 					</tr>
 					</c:forEach>
