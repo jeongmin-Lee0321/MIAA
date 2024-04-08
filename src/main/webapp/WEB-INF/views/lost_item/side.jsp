@@ -12,7 +12,7 @@
 <div class="side-nav-container">
         <ul class="side-nav">
           <li class="menu-title">분실물</li>
-          <li class="menu-item"><a href="#">상세검색</a></li>
+          <li class="menu-item"><a href="lost_item_search_page">상세검색</a></li>
           <li class="menu-item"><a href="lost_item_write_page">분실물 등록</a></li>
         </ul>
       </div>

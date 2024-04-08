@@ -10,8 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InquiryDto {
-	private String inquiry_id;
-	private String inquiry_title;
-	private String inquiry_content;
-	private String inquiry_file;	
+	private String rnum;
+	private String user_id;
+	private String board_num;
+	private String board_title;
+	private String board_content;
+	private String board_registration_date;
+	private String board_reply_status;
+	private String board_filesrc;
 }

@@ -1,5 +1,6 @@
 package com.tech.miaa.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -27,4 +28,6 @@ public class ItemDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
+	private String total_id1;
+	private String filename;
 }

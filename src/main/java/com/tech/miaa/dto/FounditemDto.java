@@ -13,7 +13,7 @@ public class FounditemDto {
 	String rnum;		// 검색결과 글번호(검색 후 결과값 페이지이동시에도 보존)
 	
 	/*색상*/
-//	String clrNm;		// 색상명
+	String clrNm;		// 색상명
 	
 	/*이미지*/
 	String fdFilePathImg;	// 습득물이미지명(주소)
@@ -21,16 +21,12 @@ public class FounditemDto {
 	/*도로명주소*/
 	String addr;	// 기관도로명주소
 	
-//	public String getClrNm() {
-//		return clrNm;
-//	}
-//	public void setClrNm(String clrNm) {
-//		this.clrNm = clrNm;
-//	}
-	
-	
-	
-	
+	public String getClrNm() {
+		return clrNm;
+	}
+	public void setClrNm(String clrNm) {
+		this.clrNm = clrNm;
+	}
 	public String getFdSn() {
 		return fdSn;
 	}
