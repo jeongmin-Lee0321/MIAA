@@ -29,26 +29,26 @@ public class AbandonmentPublicSrvc {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("500", "UTF-8")); /*한 페이지 결과 수(1,000 이하)*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /*한 페이지 결과 수(1,000 이하)*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
             urlBuilder.append("&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*xml(기본값) 또는 json*/
 
             XmlParser xmlParser = new XmlParser();
 
             sido = (AbdmSido) xmlParser.parsing(urlBuilder.toString(), XmlParser.GETABDMSIDO);
-//            System.out.println(sido.getHeaderResult().getResultCode());
-//            System.out.println(sido.getHeaderResult().getResultMsg());
-//            System.out.println(sido.getHeaderResult().getReqNo());
-//
-//            for (int i =0; i<sido.getItems().size(); i++){
-//                System.out.println(sido.getItems().get(i).getOrgCd());
-//                System.out.println(sido.getItems().get(i).getOrgdownNm());
-//
-//            }
-//            System.out.println(sido.getNumOfRows());
-//            System.out.println(sido.getPageNo());
-//            System.out.println(sido.getTotalCount());
-//            System.out.println("+++++++++++++++++++++");
+            System.out.println(sido.getHeaderResult().getResultCode());
+            System.out.println(sido.getHeaderResult().getResultMsg());
+            System.out.println(sido.getHeaderResult().getReqNo());
+
+            for (int i =0; i<sido.getItems().size(); i++){
+                System.out.println(sido.getItems().get(i).getOrgCd());
+                System.out.println(sido.getItems().get(i).getOrgdownNm());
+
+            }
+            System.out.println(sido.getNumOfRows());
+            System.out.println(sido.getPageNo());
+            System.out.println(sido.getTotalCount());
+            System.out.println("+++++++++++++++++++++");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,31 +176,9 @@ public class AbandonmentPublicSrvc {
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
             urlBuilder.append("&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*xml(기본값) 또는 json*/
 
-
             XmlParser xmlParser = new XmlParser();
 
             abdmPublic = (AbdmPublic) xmlParser.parsing(urlBuilder.toString(), XmlParser.GETABDMPUBLIC);
-//
-//            System.out.println(abdmPublic.getHeaderResult().getResultCode());
-//            System.out.println(abdmPublic.getHeaderResult().getResultMsg());
-//            System.out.println(abdmPublic.getHeaderResult().getReqNo());
-//
-//            for (int i =0; i<abdmPublic.getItems().size(); i++){
-//                System.out.println(abdmPublic.getItems().get(i).getDesertionNo());
-//                System.out.println(abdmPublic.getItems().get(i).getAge());
-//                System.out.println(abdmPublic.getItems().get(i).getWeight());
-//                System.out.println(abdmPublic.getItems().get(i).getNoticeNo());
-//                System.out.println(abdmPublic.getItems().get(i).getNoticeSdt());
-//                System.out.println(abdmPublic.getItems().get(i).getNoticeEdt());
-//                System.out.println(abdmPublic.getItems().get(i).getSexCd());
-//                System.out.println(abdmPublic.getItems().get(i).getCareNm());
-//                System.out.println(abdmPublic.getItems().get(i).getFilename());
-//                System.out.println(abdmPublic.getItems().get(i).getPopfile());
-//                System.out.println("+++++++++++++++++++++");
-//            }
-//            System.out.println("nor : "+abdmPublic.getNumOfRows());
-//            System.out.println("pageno : "+abdmPublic.getPageNo());
-//            System.out.println("total : "+abdmPublic.getTotalCount());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,23 +191,32 @@ public class AbandonmentPublicSrvc {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
-            if (dto.getSearch_str_date() != null) {
-                System.out.println("dsfasdfsadfasdfasdfadsfasdasdf");
-                urlBuilder.append("&" + URLEncoder.encode("bgnde", "UTF-8") + "=" + URLEncoder.encode(dto.getSearch_str_date(), "UTF-8")); /*유기날짜(검색 시작일) (YYYYMMDD)*/
+            if (dto.getSearch_str_date() != null && !dto.getSearch_str_date().isEmpty()) {
+                String date ="";
+                String charsToRemove = "-";
+                for (char c : charsToRemove.toCharArray()) {
+                    date = dto.getSearch_str_date().replace(String.valueOf(c), "");
+                }
+                urlBuilder.append("&" + URLEncoder.encode("bgnde", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*유기날짜(검색 시작일) (YYYYMMDD)*/
             }
-            if (dto.getSearch_end_date() != null) {
-                urlBuilder.append("&" + URLEncoder.encode("endde", "UTF-8") + "=" + URLEncoder.encode(dto.getSearch_end_date(), "UTF-8")); /*유기날짜(검색 종료일) (YYYYMMDD)*/
+            if (dto.getSearch_end_date() != null && !dto.getSearch_end_date().isEmpty()) {
+                String date ="";
+                String charsToRemove = "-";
+                for (char c : charsToRemove.toCharArray()) {
+                    date = dto.getSearch_str_date().replace(String.valueOf(c), "");
+                }
+                urlBuilder.append("&" + URLEncoder.encode("endde", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*유기날짜(검색 종료일) (YYYYMMDD)*/
             }
-            if (dto.getUpKindSelectBox() != null) {
+            if (dto.getUpKindSelectBox() != null && !dto.getUpKindSelectBox().isEmpty()) {
                 urlBuilder.append("&" + URLEncoder.encode("upkind", "UTF-8") + "=" + URLEncoder.encode(dto.getUpKindSelectBox(), "UTF-8")); /*축종코드 (개 : 417000, 고양이 : 422400, 기타 : 429900)*/
             }
-            if (dto.getKindSelectedBox() != null) {
+            if (dto.getKindSelectedBox() != null && !dto.getKindSelectedBox().isEmpty()) {
                 urlBuilder.append("&" + URLEncoder.encode("kind", "UTF-8") + "=" + URLEncoder.encode(dto.getKindSelectedBox(), "UTF-8")); /*품종코드 (품종 조회 OPEN API 참조)*/
             }
-            if (dto.getSidoSelectBox() != null) {
+            if (dto.getSidoSelectBox() != null && !dto.getSidoSelectBox().isEmpty()) {
                 urlBuilder.append("&" + URLEncoder.encode("upr_cd", "UTF-8") + "=" + URLEncoder.encode(dto.getSidoSelectBox(), "UTF-8")); /*시도코드 (시도 조회 OPEN API 참조)*/
             }
-            if (dto.getSigunguSelectBox() != null) {
+            if (dto.getSigunguSelectBox() != null && !dto.getSigunguSelectBox().isEmpty()) {
                 urlBuilder.append("&" + URLEncoder.encode("org_cd", "UTF-8") + "=" + URLEncoder.encode(dto.getSigunguSelectBox(), "UTF-8")); /*시군구코드 (시군구 조회 OPEN API 참조)*/
             }
 //            if (!dto.getShelterSelectBox().isEmpty()) {
@@ -246,27 +233,27 @@ public class AbandonmentPublicSrvc {
             XmlParser xmlParser = new XmlParser();
 
             abdmPublic = (AbdmPublic) xmlParser.parsing(urlBuilder.toString(), XmlParser.GETABDMPUBLIC);
-
-            System.out.println(abdmPublic.getHeaderResult().getResultCode());
-            System.out.println(abdmPublic.getHeaderResult().getResultMsg());
-            System.out.println(abdmPublic.getHeaderResult().getReqNo());
-
-            for (int i = 0; i < abdmPublic.getItems().size(); i++) {
-                System.out.println(abdmPublic.getItems().get(i).getDesertionNo());
-                System.out.println(abdmPublic.getItems().get(i).getAge());
-                System.out.println(abdmPublic.getItems().get(i).getWeight());
-                System.out.println(abdmPublic.getItems().get(i).getNoticeNo());
-                System.out.println(abdmPublic.getItems().get(i).getNoticeSdt());
-                System.out.println(abdmPublic.getItems().get(i).getNoticeEdt());
-                System.out.println(abdmPublic.getItems().get(i).getSexCd());
-                System.out.println(abdmPublic.getItems().get(i).getCareNm());
-                System.out.println(abdmPublic.getItems().get(i).getFilename());
-                System.out.println(abdmPublic.getItems().get(i).getPopfile());
-                System.out.println("+++++++++++++++++++++");
-            }
-            System.out.println("nor : " + abdmPublic.getNumOfRows());
-            System.out.println("pageno : " + abdmPublic.getPageNo());
-            System.out.println("total : " + abdmPublic.getTotalCount());
+//
+//            System.out.println(abdmPublic.getHeaderResult().getResultCode());
+//            System.out.println(abdmPublic.getHeaderResult().getResultMsg());
+//            System.out.println(abdmPublic.getHeaderResult().getReqNo());
+//
+//            for (int i = 0; i < abdmPublic.getItems().size(); i++) {
+//                System.out.println(abdmPublic.getItems().get(i).getDesertionNo());
+//                System.out.println(abdmPublic.getItems().get(i).getAge());
+//                System.out.println(abdmPublic.getItems().get(i).getWeight());
+//                System.out.println(abdmPublic.getItems().get(i).getNoticeNo());
+//                System.out.println(abdmPublic.getItems().get(i).getNoticeSdt());
+//                System.out.println(abdmPublic.getItems().get(i).getNoticeEdt());
+//                System.out.println(abdmPublic.getItems().get(i).getSexCd());
+//                System.out.println(abdmPublic.getItems().get(i).getCareNm());
+//                System.out.println(abdmPublic.getItems().get(i).getFilename());
+//                System.out.println(abdmPublic.getItems().get(i).getPopfile());
+//                System.out.println("+++++++++++++++++++++");
+//            }
+//            System.out.println("nor : " + abdmPublic.getNumOfRows());
+//            System.out.println("pageno : " + abdmPublic.getPageNo());
+//            System.out.println("total : " + abdmPublic.getTotalCount());
 
         } catch (Exception e) {
             e.printStackTrace();

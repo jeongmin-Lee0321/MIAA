@@ -104,6 +104,8 @@ public class PageVO {
     public void setPageEnd(Integer pageEnd) {
         this.pageEnd = pageEnd;
     }
+
+    public void setNextPage() { page++; }
   
 }
 

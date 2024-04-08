@@ -6,16 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="resources/css/main_contents.css"/>
-    <script src="/resources/js/jquery-3.7.1.min.js"></script>
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="<c:url value="/resources/js/jquery-3.7.1.min.js"/>" type="text/javascript"></script>
     <script type="text/javascript">
-        function selectedSido(val) {
+        function selectedSido(val, sigungu) {
+            // document.sido_selected_code.value = val;
+            // alert(sigugun);
             var optionTag = document.getElementById("sigunguSelectBox");
             optionTag.innerHTML = '<option value="">-전체-</option>';
-
             switch (val) {
                 case "6110000" : {
                     optionTag.innerHTML += '<option value="6119999">가정보호</option>' +
@@ -339,48 +336,32 @@
 
         }
 
-        function selectedSidogun(val) {
-            var optionTag = document.getElementById("shelterSelectBox");
-            optionTag.innerHTML = '<option value="0000000">-전체-</option>';
-
+        function selectedSigugun(val) {
+            const optionTag = document.getElementById("sigunguSelectBox");
             alert(val);
-            switch (val) {
-                case "3220000" : {
-                    optionTag.innerHTML += '<option value="311322200900001">한국동물구조관리협회</option>' +
-                        '<option value="311322202000001">우리동물병원생명사회</option>' +
-                        '<option value="311322202100003">사랑이있는동물병원</option>' +
-                        '<option value="311322202100004">영국동물병원</option>' +
-                        '<option value="311322202400001">송파원동물병원</option>';
-                    break;
-                }
-                case "3240000" : {
-                    optionTag.innerHTML += '<option value="311324201600004">GD동물병원</option>' +
-                        '<option value="311324201600002">둔촌동물병원</option>' +
-                        '<option value="311324201600001">강동구청 반려동물팀</option>' +
-                        '<option value="311324201700002">강동리본센터</option>' +
-                        '<option value="311324201200001">한국동물구조관리협회</option>' +
-                        '<option value="311324202200001">가람동물병원</option>';
-                    break;
-                }
-            }
         }
     </script>
-
+    <script type="text/javascript">
+        test = document.getElementById("kindSelectedBox");
+        console.log(test.value());
+        test.value = "asdfasdf";
+        console.log(test.value);
+    </script>
     <title>Insert title here</title>
 </head>
 <body>
 <div class="main-contents">
     <!-- 검색창과 검색결과 -->
-    <div class="searchbar-container">
-        <form action="/rescue_ani_search_page" method="post">
+    <form action="/rescue_ani_search_page" method="post">
+        <div class="searchbar-container">
             <!-- 서치바 셀렉 그룹시작 -->
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
                     <span>기간</span>
                 </div>
                 <div class="searchbar-content">
-                    <input type="date" name="search_str_date" > <span>~</span> <input
-                        type="date" name="search_end_date"> <span>(접수일기준)</span>
+                    <input type="date" name="search_str_date" value="${dto.getSearch_str_date()}"> <span>~</span> <input
+                        type="date" name="search_end_date" value="${dto.getSearch_end_date()}"> <span>(접수일기준)</span>
                 </div>
             </div>
 
@@ -391,25 +372,60 @@
                         <span>시도</span>
                     </div>
                     <div class="searchbar-content">
-                        <select name="sidoSelectBox" id="sidoSelectBox" onchange="selectedSido(this.value);" onselect="{$dto.getsidoSelectBox() }">
+                        <select name="sidoSelectBox" id="sidoSelectBox" onchange="selectedSido(this.value)">
+<%--                                                            onchange="selectedSido(this.value,${dto.sigunguSelectBox});"--%>
                             <option value="">-전체-</option>
-                            <option value="6110000">서울특별시</option>
-                            <option value="6260000">부산광역시</option>
-                            <option value="6270000">대구광역시</option>
-                            <option value="6280000">인천광역시</option>
-                            <option value="6290000">광주광역시</option>
-                            <option value="5690000">세종특별자치시</option>
-                            <option value="6300000">대전광역시</option>
-                            <option value="6310000">울산광역시</option>
-                            <option value="6410000">경기도</option>
-                            <option value="6530000">강원특별자치도</option>
-                            <option value="6430000">충청북도</option>
-                            <option value="6440000">충청남도</option>
-                            <option value="6540000">전북특별자치도</option>
-                            <option value="6460000">전라남도</option>
-                            <option value="6470000">경상북도</option>
-                            <option value="6480000">경상남도</option>
-                            <option value="6500000">제주특별자치도</option>
+                            <option value="6110000"
+                                    <c:if test="${dto.sidoSelectBox == '6110000'}">selected="selected"</c:if> >서울특별시
+                            </option>
+                            <option value="6260000"
+                                    <c:if test="${dto.sidoSelectBox == '6260000'}">selected="selected"</c:if>>부산광역시
+                            </option>
+                            <option value="6270000"
+                                    <c:if test="${dto.sidoSelectBox == '6270000'}">selected="selected"</c:if>>대구광역시
+                            </option>
+                            <option value="6280000"
+                                    <c:if test="${dto.sidoSelectBox == '6280000'}">selected="selected"</c:if>>인천광역시
+                            </option>
+                            <option value="6290000"
+                                    <c:if test="${dto.sidoSelectBox == '6290000'}">selected="selected"</c:if>>광주광역시
+                            </option>
+                            <option value="5690000"
+                                    <c:if test="${dto.sidoSelectBox == '5690000'}">selected="selected"</c:if>>세종특별자치시
+                            </option>
+                            <option value="6300000"
+                                    <c:if test="${dto.sidoSelectBox == '6300000'}">selected="selected"</c:if>>대전광역시
+                            </option>
+                            <option value="6310000"
+                                    <c:if test="${dto.sidoSelectBox == '6310000'}">selected="selected"</c:if>>울산광역시
+                            </option>
+                            <option value="6410000"
+                                    <c:if test="${dto.sidoSelectBox == '6410000'}">selected="selected"</c:if>>경기도
+                            </option>
+                            <option value="6530000"
+                                    <c:if test="${dto.sidoSelectBox == '6530000'}">selected="selected"</c:if>>강원특별자치도
+                            </option>
+                            <option value="6430000"
+                                    <c:if test="${dto.sidoSelectBox == '6430000'}">selected="selected"</c:if>>충청북도
+                            </option>
+                            <option value="6440000"
+                                    <c:if test="${dto.sidoSelectBox == '6440000'}">selected="selected"</c:if>>충청남도
+                            </option>
+                            <option value="6540000"
+                                    <c:if test="${dto.sidoSelectBox == '6540000'}">selected="selected"</c:if>>전북특별자치도
+                            </option>
+                            <option value="6460000"
+                                    <c:if test="${dto.sidoSelectBox == '6460000'}">selected="selected"</c:if>>전라남도
+                            </option>
+                            <option value="6470000"
+                                    <c:if test="${dto.sidoSelectBox == '6470000'}">selected="selected"</c:if>>경상북도
+                            </option>
+                            <option value="6480000"
+                                    <c:if test="${dto.sidoSelectBox == '6480000'}">selected="selected"</c:if>>경상남도
+                            </option>
+                            <option value="6500000"
+                                    <c:if test="${dto.sidoSelectBox == '6500000'}">selected="selected"</c:if>>제주특별자치도
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -418,20 +434,28 @@
                         <span>시군구</span>
                     </div>
                     <div class="searchbar-content">
-                        <select name="sigunguSelectBox" id="sigunguSelectBox" onchange="selectedSidogun(this.value);">
+                        <select name="sigunguSelectBox" id="sigunguSelectBox" onchange="selectedSigugun(this.val)">
+<%--                            <option value="">-전체-</option>--%>
+                            <%--                            <c:forEach items="${sigunguEnums }" var="sigungu">--%>
+                            <%--                                <c:if test="${sigungu.getUprCd() == dto.sidoSelectBox}">--%>
+                            <%--                                    <option value="${sigungu.getOrgCd()}"--%>
+                            <%--                                            <c:if test="${sigungu.getOrgCd() == dto.sigunguSelectBox}">selected="selected"</c:if>>--%>
+                            <%--                                            ${sigungu.getOrgdownNm()}</option>--%>
+                            <%--                                </c:if>--%>
+                            <%--                            </c:forEach>--%>
                         </select>
                     </div>
                 </div>
-<%--                <div class="searchbar-select-group">--%>
-<%--                    <div class="searchbar-title">--%>
-<%--                        <span>보호센터</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="searchbar-content">--%>
-<%--                        <select name="shelterSelectBox" id="shelterSelectBox">--%>
-<%--                            <option value="">-전체-</option>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div class="searchbar-select-group">--%>
+                <%--                    <div class="searchbar-title">--%>
+                <%--                        <span>보호센터</span>--%>
+                <%--                    </div>--%>
+                <%--                    <div class="searchbar-content">--%>
+                <%--                        <select name="shelterSelectBox" id="shelterSelectBox">--%>
+                <%--                            <option value="">-전체-</option>--%>
+                <%--                        </select>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
             </div>
 
             <div class="searchbar-mutil-group">
@@ -449,6 +473,11 @@
                         <span>-</span>
                         <select name="kindSelectedBox">
                             <option value="">-전체-</option>
+                            <option value="1">-1-</option>
+                            <option value="2">-2-</option>
+                            <option value="3">-3-</option>
+                            <option value="4">-4-</option>
+                            <option value="5">-5</option>
                         </select>
                     </div>
                 </div>
@@ -458,10 +487,15 @@
                     </div>
                     <div class="searchbar-content">
                         <select name="sexSelectedBox" id="sexSelectedBox">
-                            <option value="">-전체-</option>
-                            <option value="1">수컷</option>
-                            <option value="2">암컷</option>
-                            <option value="3">미상</option>
+                            <c:forEach items="${sexEnum }" var="sex">
+                                <option value="${sex.getCodeValue()}"
+                                        <c:if test="${sex.getCodeValue() == dto.sexSelectedBox}">selected="selected"</c:if>>
+                                        ${sex.getValue()}</option>
+                            </c:forEach>
+                            <%--                            <option value="">-전체-</option>--%>
+                            <%--                            <option value="M">수컷</option>--%>
+                            <%--                            <option value="F">암컷</option>--%>
+                            <%--                            <option value="Q">미상</option>--%>
                         </select>
                     </div>
                 </div>
@@ -473,86 +507,111 @@
                     조회<img src="resources/img/searchIcon.png" alt="">
                 </button>
             </div>
-        </form>
-    </div>
-    <!-- 검색창과 검색결과 끝 -->
-
-    <!-- result-container시작 -->
-
-    <div class="result-container">
-        <!-- 결과 리스트 총 갯수 프레임 -->
-        <div class="total-resultNum-wrapper">
-            <div class="total-resultNum-container">
-                <span>전체 </span><span class="totalNum">${totalCount }</span><span>건</span>
-            </div>
         </div>
+        <!-- 검색창과 검색결과 끝 -->
 
-        <!-- 검색 결과 리스트프레임 -->
-        <div class="result-list">
+        <!-- result-container시작 -->
 
-            <!-- 목록1개가 list-card -->
-            <c:forEach items="${itemList }" var="item">
-                <div class="list-card" onclick="location.href='rescue_ani_detail_page?noticeNo=${item.getNoticeNo() }'" style="cursor: pointer">
-                    <div class="card-photo">
-                        <img src="${item.getFilename() }" alt="">
-                    </div>
-                    <div class="content-items">
-                        <div class="item-title">
-                            <span>${item.getKindCd() }</span>
-                        </div>
-                        <ul class="item-details">
-                            <li><span class="detail-title">구조날짜:</span><span>${item.getHappenDt() }</span></li>
-                            <li><span class="detail-title">공고번호:</span><span>${item.getNoticeNo() }</span></li>
-                            <li><span class="detail-title">성별:</span><span>${item.getSexCd() }</span></li>
-                            <li><span class="detail-title">발견장소:</span><span>${item.getHappenPlace() }</span></li>
-                        </ul>
-                    </div>
+        <div class="result-container">
+            <!-- 결과 리스트 총 갯수 프레임 -->
+            <div class="total-resultNum-wrapper">
+                <div class="total-resultNum-container">
+                    <span>전체 </span><span class="totalNum">${totalCount }</span><span>건</span>
                 </div>
-            </c:forEach>
-
-        </div>
-        <!-- 검색결과 리스트 프레임 끝 -->
-        <!-- 페이징 프레임시작 -->
-        <div class="page-container">
-            <div class="currentOftotal">
-                <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
-                    class="total-page">${pageVO.totPage}</span>
             </div>
-            <ul class="pagelist-container">
-                <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${pageVO.page - 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-                <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
-                    <c:choose>
-                        <c:when test="${i eq pageVO.page}">
-                            <li><a href="#" style="color: red">${i}</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-<%--                <li><a href="#">1</a></li>--%>
-<%--                <li><a href="#">2</a></li>--%>
-<%--                <li><a href="#">3</a></li>--%>
-<%--                <li><a href="#">4</a></li>--%>
-<%--                <li><a href="#">5</a></li>--%>
-<%--                <li><a href="#">6</a></li>--%>
-<%--                <li><a href="#">7</a></li>--%>
-<%--                <li><a href="#">8</a></li>--%>
-<%--                <li><a href="#">9</a></li>--%>
-<%--                <li><a href="#">10</a></li>--%>
-                <li class="btn-next"><a href="rescue_ani_search_page?page=${pageVO.page + 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-            </ul>
 
-            <ul class="switchBtn-container">
-                <li class="btn-prev-group"><a href="rescue_ani_search_page?page=${pageVO.page - 1}">Previous</a></li>
-                <li class="btn-next-group"><a href="rescue_ani_search_page?page=${pageVO.page + 1}">Next</a></li>
-            </ul>
+            <!-- 검색 결과 리스트프레임 -->
+            <div class="result-list">
+
+                <!-- 목록1개가 list-card -->
+                <c:forEach items="${itemList }" var="item">
+                    <div class="list-card"
+                         onclick="location.href='rescue_ani_detail_page?noticeNo=${item.getNoticeNo() }'"
+                         style="cursor: pointer">
+                        <div class="card-photo">
+                            <img src="${item.getFilename() }" alt="">
+                        </div>
+                        <div class="content-items">
+                            <div class="item-title">
+                                <span>${item.getKindCd() }</span>
+                            </div>
+                            <ul class="item-details">
+                                <li><span class="detail-title">구조날짜:</span><span>${item.getHappenDt() }</span></li>
+                                <li><span class="detail-title">공고번호:</span><span>${item.getNoticeNo() }</span></li>
+                                <li><span class="detail-title">성별:</span><span>${item.getSexCd() }</span></li>
+                                <li><span class="detail-title">발견장소:</span><span>${item.getHappenPlace() }</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </c:forEach>
+
+            </div>
+            <!-- 검색결과 리스트 프레임 끝 -->
+            <!-- 페이징 프레임시작 -->
+            <div class="page-container">
+<%--                <div class="currentOftotal">--%>
+<%--                    <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span--%>
+<%--                        class="total-page">${pageVO.totPage}</span>--%>
+<%--                </div>--%>
+<%--                <ul class="pagelist-container">--%>
+<%--                    <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${pageVO.page - 1}"><img--%>
+<%--                            src="resources/img/chevron-left.png" alt=""></a></li>--%>
+<%--                    <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">--%>
+<%--                        <c:choose>--%>
+<%--                            <c:when test="${i eq pageVO.page}">--%>
+<%--&lt;%&ndash;                                <li><a href="#" style="color: red">${i}</a></li>&ndash;%&gt;--%>
+<%--                                <li><button type="submit" name="pageNo" value="${i}" style="color: red">${i}</button></li>--%>
+<%--                            </c:when>--%>
+<%--                            <c:otherwise>--%>
+<%--                                &lt;%&ndash; <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>&ndash;%&gt;--%>
+<%--                                <li>--%>
+<%--                                    <button type="submit" name="pageNo" value="${i}">${i}</button>--%>
+<%--                                </li>--%>
+<%--                            </c:otherwise>--%>
+<%--                        </c:choose>--%>
+<%--                    </c:forEach>--%>
+
+                    <div class="currentOftotal">
+                        <span>Page</span><span class="current-page">${dto.pageVO.page}</span><span>of</span><span
+                            class="total-page">${dto.pageVO.totPage}</span>
+                    </div>
+                    <ul class="pagelist-container">
+<%--                        <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${dto.pageVO.page - 1}"><img--%>
+<%--                                src="resources/img/chevron-left.png" alt=""></a></li>--%>
+                        <button class="btn-prev" type="submit" name="pageNo" value="${dto.pageVO.page-1}"><img src="resources/img/chevron-left.png" alt=""></button>
+                        <c:forEach begin="${dto.pageVO.pageStart}" end="${dto.pageVO.pageEnd}" var="i">
+                            <c:choose>
+                                <c:when test="${i eq dto.pageVO.page}">
+                                    <%--                                <li><a href="#" style="color: red">${i}</a></li>--%>
+                                    <li><button type="submit" name="pageNo" value="${dto.pageNo = i}" style="color: red">${i}</button></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <%-- <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>--%>
+                                    <li>
+                                        <button type="submit" name="pageNo" value="${dto.pageNo = i}">${i}</button>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+
+
+<%--                        <li class="btn-next"><a href="rescue_ani_search_page?page=${dto.pageNo + 1}"><img--%>
+<%--                            src="resources/img/chevron-left.png" alt=""></a></li>--%>
+                        <button class="btn-next" type="submit" name="pageNo" value="${dto.pageVO.page+1}"><img src="resources/img/chevron-right.png" alt=""></button>
+                </ul>
+
+                <ul class="switchBtn-container">
+<%--                    <li class="btn-prev-group"><a href="rescue_ani_search_page?page=${dto.pageVO.page - 1}">Previous</a></li>--%>
+<%--                    <li class="btn-next-group"><a href="rescue_ani_search_page?page=${dto.pageVO.page + 1}">Next</a></li>--%>
+                    <button class="btn-prev-group" type="submit" name="pageNo" value="${dto.pageVO.page/10+10}">Previous</button>
+                    <button class="btn-next-group" type="submit" name="pageNo" value="${dto.pageVO.page+1}">Next></button>
+                </ul>
+            </div>
+            <!-- 페이징 프레임 끝 -->
         </div>
-        <!-- 페이징 프레임 끝 -->
-    </div>
-    <!-- result-container끝 -->
+        <!-- result-container끝 -->
+    </form>
 </div>
 </body>
 </html>
