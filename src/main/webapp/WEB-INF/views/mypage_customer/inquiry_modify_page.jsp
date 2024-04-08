@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -15,7 +16,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="resources/css/mypage_customer_inquiry_write_page.css">
+<link rel="stylesheet"
+	href="resources/css/mypage_customer_inquiry_modify_page.css">
 <title>Document</title>
 <style>
 body {
@@ -28,7 +30,54 @@ body {
 }
 </style>
 </head>
+<!-- 글자수 제한 표현 -->
+<script>
+	$(document).on("keydown change", "#inquiry_content", function() {
+		let content = $(this).val();
 
+		// 글자수 세기
+		if (content.length == 0 || content == '') {
+			$('.textCount').text('0자');
+		} else {
+			$('.textCount').text(content.length + '자');
+		}
+
+		// 글자수 제한
+		if (content.length > 300) {
+			// 300자 부터는 타이핑 되지 않도록
+			$(this).val($(this).val().substring(0, 300));
+			// 300자 넘으면 알림창 뜨도록
+			alert('글자수는 300자까지 입력 가능합니다.');
+		}
+		;
+	});
+</script>
+<!-- 파일크기 제한 -->
+<script>
+	$(document).on("change", "input[type='file']", function() {
+		var fileVal = $(this).val();
+		if (fileVal != "") {
+			var ext = fileVal.split('.').pop().toLowerCase(); //확장자분리
+			//아래 확장자가 있는지 체크
+			if ($.inArray(ext, [ 'jpg', 'jpeg', 'gif', 'png' ]) == -1) {
+				alert('jpg,gif,jpeg,png 파일만 업로드 할수 있습니다.');
+				$(this).val("");
+				return;
+			}
+			const inputValue = event.target.value;
+			console.log(inputValue);
+			console.log(event.target.files);
+			var maxSize = 3 * 1024 * 1024; // 3MB
+			var fileSize = $(this)[0].files[0].size;
+			if (fileSize > maxSize) {
+				alert("첨부파일 사이즈는 3MB 이내로 등록 가능합니다.");
+				$(this).val("");
+				return;
+			}
+		}
+
+	});
+</script>
 <body>
 	<div class="main-container">
 
@@ -48,7 +97,8 @@ body {
 							</div>
 							<div class="row-content">
 								<input type="text" name="inquiry_title" id="inquiry_title"
-									placeholder="제목을 입력하세요" required="required" value="${list.board_title}">
+									placeholder="제목을 입력하세요" required="required"
+									value="${list.board_title}">
 							</div>
 						</div>
 
@@ -58,8 +108,11 @@ body {
 							</div>
 							<div class="row-content" id="textarea-content">
 								<!-- 텍스트제한 표시 추가 필요 -->
-								<textarea name="inquiry_content" id="inquiry_content" maxlength="300"
-									placeholder="내용을 입력하세요." required="required">${list.board_content}</textarea>
+								<textarea name="inquiry_content" id="inquiry_content"
+									maxlength="300" placeholder="내용을 입력하세요." required="required">${list.board_content}</textarea>
+								<div class="textLengthWrap">
+									<span class="textCount">${fn:length(list.board_content)}자</span> <span class="textTotal">/300자</span>
+								</div>
 							</div>
 						</div>
 						<!-- 파일형식 제한 필요 -->
@@ -69,9 +122,10 @@ body {
 							</div>
 							<div class="col-content">
 								<div class="in-row-content">
-									<input type="hidden" name="inquiry_num" value="${list.board_num}" />
-									<input type="hidden" name="inquiry_file_hidden" value="${list.board_filesrc}" />
-									<input type="file" name="inquiry_file" id="file1" accept="image/*" >
+									<input type="hidden" name="inquiry_num"
+										value="${list.board_num}" /> <input type="hidden"
+										name="inquiry_file_hidden" value="${list.board_filesrc}" /> <input
+										type="file" name="inquiry_file" id="file1" accept="image/*">
 									<label for="file1">사진첨부</label>
 								</div>
 

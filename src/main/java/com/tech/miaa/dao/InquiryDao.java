@@ -8,9 +8,11 @@ public interface InquiryDao {
 
 	public void inquiry_wirte(String id, String title, String content, String file);
 	
-	public ArrayList<InquiryDto> inquiry_list(String id);
+	public ArrayList<InquiryDto> inquiry_list(String id, String getRowStart, String getRowEnd);
 	
 	public InquiryDto modify_list(String board_num, String id);
+	
+	public InquiryDto detail_list(String board_num, String id);
 
 	public void delete(String string, String id);
 
@@ -18,7 +20,8 @@ public interface InquiryDao {
 
 	public void inquiry_modify_present(String num, String id, String title, String content, String file_hidden);
 
+	public Integer total();
+
 	
-	
-	
+		
 }
