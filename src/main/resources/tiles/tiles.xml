@@ -54,6 +54,7 @@
 	</definition>
 
 
+
 	<definition name="*.*.*.2" extends="baselayout2">
 		<put-attribute name="title" value="{3}" />
 		<put-attribute name="side"
@@ -79,6 +80,20 @@
 		<put-attribute name="main_contents" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 
-
+<!--admin용 레이아웃번호에 a붙임  -->
+	<definition name="*.*.*.3a" extends="baselayout3">
+		<put-attribute name="title" value="{3}" />
+		<put-attribute name="main_selection"
+			value="/WEB-INF/views/{1}/{2}_selection.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/{1}/side.jsp" />
+		<put-attribute name="main_contents"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
+			
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin_common/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/admin_common/footer.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -28,5 +28,6 @@ public class ItemDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
-	private ArrayList<String> imgList;
+	private String total_id1;
+	private String filename;
 }

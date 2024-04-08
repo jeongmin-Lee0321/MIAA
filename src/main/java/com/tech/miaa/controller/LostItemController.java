@@ -28,10 +28,10 @@ public class LostItemController {
 	ItemServiceInter itemService;
 	
 	
-	@RequestMapping(value = "/lost_item_search_page", method = RequestMethod.GET)
+	@RequestMapping(value = "lost_item_search_page", method = RequestMethod.GET)
 	public String rescue_ani_search_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("sqlSession", sqlSession);
-		
+		model.addAttribute("request", request);
 		 try {
 			itemService = new ItemService(); 
 			 ArrayList<ItemDto> itemList=itemService.lost_item_search(model);
@@ -57,7 +57,6 @@ public class LostItemController {
 			}
 		return result;
 	}
-	
 	@RequestMapping("lost_item_write")
 	public String lost_item_write(HttpServletRequest request, Model model, @RequestParam("files") ArrayList<MultipartFile> files){
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
@@ -68,14 +67,6 @@ public class LostItemController {
 		return result;
 	}
 	
-//	김영빈 분실물 수정페이지
-	@RequestMapping("lost_item_modify_page")
-	public String lost_item_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
-		String result = "";
-				result = "lost_item.modify_page.분실물 수정.2";
-		return result;
-	}
-	//JeongMin
 	@RequestMapping(value = "/lost_item_detail_page", method = RequestMethod.GET)
 	public String lost_item_detail_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
@@ -85,6 +76,28 @@ public class LostItemController {
 		model.addAttribute("dto", dto);
 		return "lost_item.detail_page.분실물 상세페이지.2";
 	}
+	
+	@RequestMapping("lost_item_delete")
+	public String lost_item_delete(HttpServletRequest request, Model model){
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		itemService=new ItemService();
+		
+		itemService.lost_item_delete(model);
+		return "redirect:lost_item_search_page";
+	}
+	
+	@RequestMapping("lost_item_modify_page")
+	public String lost_item_modify_page(HttpServletRequest request, Model model){
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		itemService=new ItemService();
+		
+		itemService.lost_item_modify_page(model);
+		
+		return "lost_item.modify_page.분실물 수정.2";
+	}
+	
+
+	
 	@RequestMapping(value = "/mypage_post", method = RequestMethod.GET)
 	public String mypage_post(HttpServletRequest request, Model model ) {
 
