@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InquiryDto {
-	private String rownum;
+	private String rnum;
 	private String user_id;
 	private String board_num;
 	private String board_title;

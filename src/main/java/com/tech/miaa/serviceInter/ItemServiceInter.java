@@ -11,4 +11,6 @@ public interface ItemServiceInter {
 	public ArrayList<ItemDto> lost_item_search(Model model);
 	public String lost_item_write(Model model);
 	public ItemDto lost_item_detail_page(Model model);
+	public void lost_item_delete(Model model);
+	public void lost_item_modify_page(Model model);
 }
