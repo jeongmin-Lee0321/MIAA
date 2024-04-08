@@ -33,7 +33,7 @@ public class AdminInquiryController {
 		
 		mypageCustomerInquiryServiceInter=new InquiryService();
 		try {
-			ArrayList<InquiryDto> list=mypageCustomerInquiryServiceInter.inquiry_list(model);
+			ArrayList<InquiryDto> list=mypageCustomerInquiryServiceInter.inquiry_list(model, null);
 			model.addAttribute("list",list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
