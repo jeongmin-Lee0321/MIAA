@@ -154,6 +154,42 @@
 			break;
 		}
 	}
+
+	window.onload = function() {
+		// 모델에 담긴 데이터로 셀렉트 박스를 선택하고 onchange 이벤트를 발생시킴
+		var selectedMainCategory = "${searchDto.mainCategory}";
+		var selectedSubCategory = "${searchDto.subCategory}";
+		var prd_mainCategory = document.getElementById("prd_mainCategory");
+		var prd_subCategory = document.getElementById("prd_subCategory");
+
+		prd_mainCategory.value = selectedMainCategory;
+		// 서브 카테고리 업데이트 함수 호출
+		if (selectedMainCategory !== "" && selectedMainCategory !== null) {
+			// 서브 카테고리 업데이트 함수 호출
+			getSubCategories(selectedMainCategory);
+			// 서브 카테고리 선택
+			prd_subCategory.value = selectedSubCategory;
+		}
+	};
+
+	function paging_Form() {
+		document.getElementById('pagingform').submit();
+	}
+
+	function submit_prev_Form() {
+		document.getElementById('prev_form').submit();
+	}
+
+	function submit_next_Form() {
+		/*  var value = parseInt(pageNum);
+
+		    if (value < 9) { */
+		document.getElementById('next_form').submit();
+		/* } else if(value==9) {
+		    document.getElementById('next_search_form').submit()
+		}
+		 */
+	}
 </script>
 <body>
 
@@ -163,7 +199,7 @@
 
 
 			<%-- <c:if test="${searchType == 2}"> --%>
-			<form action="found_item_search2">
+			<!-- 			<form action="found_item_search2">
 				<input type="hidden" name="total" value="-1">
 				<div class="searchbar-select-group">
 					<div class="searchbar-title">
@@ -173,26 +209,28 @@
 						<input type="search" name="q" id="q" style="min-width: 300px;">
 					</div>
 				</div>
-				<!-- form 조회용 버튼 -->
+				form 조회용 버튼
 				<div class="search-btn-block">
 					<button>
 						조회<img src="resources/img/searchIcon.png" alt="">
 					</button>
 				</div>
-			</form>
+			</form> -->
 			<%-- </c:if> --%>
 
 			<%-- <c:if test="${searchType == 1}"> --%>
-			<form action="found_item_search1">
+			<form id="search_form" action="found_item_search1">
 				<!-- 서치바 셀렉 그룹시작 -->
+				<input type="hidden" name="allsearchPage" value="1" />
 				<div class="searchbar-select-group">
 					<div class="searchbar-title">
 						<span>기간</span>
 					</div>
 					<div class="searchbar-content">
-						<input type="date" name="START_YMD" id="START_YMD"> <span>~</span>
-						<input type="date" name="END_YMD" id="END_YMD"> <span>(습득일
-							기준)</span>
+						<input type="date" name="START_YMD" id="START_YMD"
+							value="${searchDto.startYMD}"> <span>~</span> <input
+							type="date" name="END_YMD" id="END_YMD"
+							value="${searchDto.endYMD}"> <span>(습득일 기준)</span>
 					</div>
 				</div>
 
@@ -207,30 +245,49 @@
 						</div>
 						<div class="searchbar-content">
 							<select name="cityname" id="cityname" onchange="updateCity2()">
-								<option value="">--도시를선택해주세요--</option>
-								<option value="LCA000">서울특별시</option>
-								<option value="LCH000">강원도</option>
-								<option value="LCI000">경기도</option>
-								<option value="LCJ000">경상남도</option>
-								<option value="LCK000">경상북도</option>
-								<option value="LCQ000">광주광역시</option>
-								<option value="LCR000">대구광역시</option>
-								<option value="LCS000">대전광역시</option>
-								<option value="LCT000">부산광역시</option>
-								<option value="LCU000">울산광역시</option>
-								<option value="LCV000">인천광역시</option>
-								<option value="LCL000">전라남도</option>
-								<option value="LCM000">전라북도</option>
-								<option value="LCN000">충청남도</option>
-								<option value="LCO000">충청북도</option>
-								<option value="LCP000">제주특별자치도</option>
-								<option value="LCW000">세종특별자치시</option>
-								<option value="LCF000">해외</option>
-								<option value="LCE000">기타</option>
+								<option value="">전체지역(all)</option>
+								<option value="LCA000"
+									${"LCA000".equals(searchDto.city) ? 'selected' : ''}>서울특별시</option>
+								<option value="LCH000"
+									${"LCH000".equals(searchDto.city) ? 'selected' : ''}>강원도</option>
+								<option value="LCI000"
+									${"LCI000".equals(searchDto.city) ? 'selected' : ''}>경기도</option>
+								<option value="LCJ000"
+									${"LCJ000".equals(searchDto.city) ? 'selected' : ''}>경상남도</option>
+								<option value="LCK000"
+									${"LCK000".equals(searchDto.city) ? 'selected' : ''}>경상북도</option>
+								<option value="LCQ000"
+									${"LCQ000".equals(searchDto.city) ? 'selected' : ''}>광주광역시</option>
+								<option value="LCR000"
+									${"LCR000".equals(searchDto.city) ? 'selected' : ''}>대구광역시</option>
+								<option value="LCS000"
+									${"LCS000".equals(searchDto.city) ? 'selected' : ''}>대전광역시</option>
+								<option value="LCT000"
+									${"LCT000".equals(searchDto.city) ? 'selected' : ''}>부산광역시</option>
+								<option value="LCU000"
+									${"LCU000".equals(searchDto.city) ? 'selected' : ''}>울산광역시</option>
+								<option value="LCV000"
+									${"LCV000".equals(searchDto.city) ? 'selected' : ''}>인천광역시</option>
+								<option value="LCL000"
+									${"LCL000".equals(searchDto.city) ? 'selected' : ''}>전라남도</option>
+								<option value="LCM000"
+									${"LCM000".equals(searchDto.city) ? 'selected' : ''}>전라북도</option>
+								<option value="LCN000"
+									${"LCN000".equals(searchDto.city) ? 'selected' : ''}>충청남도</option>
+								<option value="LCO000"
+									${"LCO000".equals(searchDto.city) ? 'selected' : ''}>충청북도</option>
+								<option value="LCP000"
+									${"LCP000".equals(searchDto.city) ? 'selected' : ''}>제주특별자치도</option>
+								<option value="LCW000"
+									${"LCW000".equals(searchDto.city) ? 'selected' : ''}>세종특별자치시</option>
+								<option value="LCF000"
+									${"LCF000".equals(searchDto.city) ? 'selected' : ''}>해외</option>
+								<option value="LCE000"
+									${"LCE000".equals(searchDto.city) ? 'selected' : ''}>기타</option>
 							</select>
 						</div>
 					</div>
-					<div class="searchbar-select-group">
+					<!-- 					<div class="searchbar-select-group">
 						<div class="searchbar-title">
 							<span>시군구</span>
 						</div>
@@ -239,7 +296,7 @@
 								<option value="">--시도를먼저선택해주세요--</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 				<div class="searchbar-mutil-group">
@@ -250,27 +307,47 @@
 						<div class="searchbar-content">
 							<select name="prd_mainCategory" id="prd_mainCategory"
 								onchange="getSubCategories(this.value)">
-								<option value="">--분류를선택해주세요--</option>
-								<option value="PRI000">컴퓨터</option>
-								<option value="PRJ000">휴대폰</option>
-								<option value="PRH000">지갑</option>
-								<option value="PRG000">전자기기</option>
-								<option value="PRD000">산업용품</option>
-								<option value="PRO000">귀금속</option>
-								<option value="PRZ000">기타물품</option>
-								<option value="PRC000">서류</option>
-								<option value="PRE000">스포츠용품</option>
-								<option value="PRF000">자동차</option>
-								<option value="PRL000">현금</option>
-								<option value="PRK000">의류</option>
-								<option value="PRQ000">쇼핑백</option>
-								<option value="PRR000">악기</option>
-								<option value="PRP000">카드</option>
-								<option value="PRM000">유가증권</option>
-								<option value="PRN000">증명서</option>
-								<option value="PRA000">가방</option>
-								<option value="PRB000">도서용품</option>
-								<option value="PRX000">유류품</option>
+								<option value="">전체분류(all)</option>
+								<option value="PRI000"
+									${"PRI000".equals(searchDto.mainCategory) ? 'selected' : ''}>컴퓨터</option>
+								<option value="PRJ000"
+									${"PRJ000".equals(searchDto.mainCategory) ? 'selected' : ''}>휴대폰</option>
+								<option value="PRH000"
+									${"PRH000".equals(searchDto.mainCategory) ? 'selected' : ''}>지갑</option>
+								<option value="PRG000"
+									${"PRG000".equals(searchDto.mainCategory) ? 'selected' : ''}>전자기기</option>
+								<option value="PRD000"
+									${"PRD000".equals(searchDto.mainCategory) ? 'selected' : ''}>산업용품</option>
+								<option value="PRO000"
+									${"PRO000".equals(searchDto.mainCategory) ? 'selected' : ''}>귀금속</option>
+								<option value="PRZ000"
+									${"PRZ000".equals(searchDto.mainCategory) ? 'selected' : ''}>기타물품</option>
+								<option value="PRC000"
+									${"PRC000".equals(searchDto.mainCategory) ? 'selected' : ''}>서류</option>
+								<option value="PRE000"
+									${"PRE000".equals(searchDto.mainCategory) ? 'selected' : ''}>스포츠용품</option>
+								<option value="PRF000"
+									${"PRF000".equals(searchDto.mainCategory) ? 'selected' : ''}>자동차</option>
+								<option value="PRL000"
+									${"PRL000".equals(searchDto.mainCategory) ? 'selected' : ''}>현금</option>
+								<option value="PRK000"
+									${"PRK000".equals(searchDto.mainCategory) ? 'selected' : ''}>의류</option>
+								<option value="PRQ000"
+									${"PRQ000".equals(searchDto.mainCategory) ? 'selected' : ''}>쇼핑백</option>
+								<option value="PRR000"
+									${"PRR000".equals(searchDto.mainCategory) ? 'selected' : ''}>악기</option>
+								<option value="PRP000"
+									${"PRP000".equals(searchDto.mainCategory) ? 'selected' : ''}>카드</option>
+								<option value="PRM000"
+									${"PRM000".equals(searchDto.mainCategory) ? 'selected' : ''}>유가증권</option>
+								<option value="PRN000"
+									${"PRN000".equals(searchDto.mainCategory) ? 'selected' : ''}>증명서</option>
+								<option value="PRA000"
+									${"PRA000".equals(searchDto.mainCategory) ? 'selected' : ''}>가방</option>
+								<option value="PRB000"
+									${"PRB000".equals(searchDto.mainCategory) ? 'selected' : ''}>도서용품</option>
+								<option value="PRX000"
+									${"PRX000".equals(searchDto.mainCategory) ? 'selected' : ''}>유류품</option>
 							</select> <span>-</span> <select name="prd_subCategory"
 								id="prd_subCategory">
 								<option value=""></option>
@@ -282,8 +359,30 @@
 							<span>색상</span>
 						</div>
 						<div class="searchbar-content">
-							<select name="" id="">
-								<option value="">검정</option>
+							<select name="color" id="color">
+								<option value="">전체색상(all)</option>
+								<option value="CL1001"
+									${"CL1001".equals(searchDto.color) ? 'selected' : ''}>화이트(흰)</option>
+								<option value="CL1002"
+									${"CL1002".equals(searchDto.color) ? 'selected' : ''}>블랙(검정)</option>
+								<option value="CL1003"
+									${"CL1003".equals(searchDto.color) ? 'selected' : ''}>레드(빨강)</option>
+								<option value="CL1004"
+									${"CL1004".equals(searchDto.color) ? 'selected' : ''}>오렌지(주황)</option>
+								<option value="CL1005"
+									${"CL1005".equals(searchDto.color) ? 'selected' : ''}>엘로우(노랑)</option>
+								<option value="CL1006"
+									${"CL1006".equals(searchDto.color) ? 'selected' : ''}>그린(초록)</option>
+								<option value="CL1007"
+									${"CL1007".equals(searchDto.color) ? 'selected' : ''}>블루(파랑)</option>
+								<option value="CL1008"
+									${"CL1008".equals(searchDto.color) ? 'selected' : ''}>브라운(갈)</option>
+								<option value="CL1009"
+									${"CL1009".equals(searchDto.color) ? 'selected' : ''}>바이올렛(보라)</option>
+								<option value="CL1011"
+									${"CL1011".equals(searchDto.color) ? 'selected' : ''}>핑크(분홍)</option>
+								<option value="CL1010"
+									${"CL1010".equals(searchDto.color) ? 'selected' : ''}>기타</option>
 							</select>
 						</div>
 					</div>
@@ -369,39 +468,140 @@
 				<ul class="pagelist-container">
 
 					<c:if test="${total>0}">
-						<li class="btn-prev"><a class="test" href="#"><img
-								src="resources/img/chevron-left.png" alt=""></a> <c:if
-								test="${not empty xml_code}">
-								<c:if test="${Math.ceil(total/10)>=10}">
-									<c:forEach var="i" begin="0" end="9">
-										<li><form id="pageForm" action="found_item_view"
-												method="post">
-												<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-												<input type="hidden" name="xml_code"
-													value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
-													name="page" value="${i}" />
-												<!-- submit 버튼 -->
-												<input type="submit" value="${i+1}" />
-											</form></li>
-									</c:forEach>
-								</c:if>
-								<c:if test="${Math.ceil(total/10)<10}">
-									<c:forEach var="i" begin="0" end="${Math.ceil(total/10)-1}">
-										<li><form id="pageForm" action="found_item_view"
-												method="post">
-												<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-												<input type="hidden" name="xml_code"
-													value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
-													name="page" value="${i}" />
-												<!-- submit 버튼 -->
-												<input type="submit" value="${i+1}" />
-											</form></li>
-									</c:forEach>
-								</c:if>
-							</c:if> <c:if test="${Math.ceil(total/100)*10>10}">
-								<li class="btn-next"><a href="#"><img
-										src="resources/img/chevron-left.png" alt=""></a></li>
+
+						<c:if test="${pageNum>=1}">
+							<li class="btn-prev"><a class="btn-prev" href="#"
+								onclick="submit_prev_Form()"><img
+									src="resources/img/chevron-left.png" alt="">
+									<form id="prev_form" action="found_item_view" method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+										<input type="hidden" name="xml_code"
+											value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+											name="page" value="${pageNum-1}" /> <input type="hidden"
+											name="Dto_city" value="${searchDto.city}" /> <input
+											type="hidden" name="Dto_startYmd"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="Dto_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="Dto_color" value="${searchDto.color}" />
+									</form> </a></li>
+						</c:if>
+						<c:if test="${not empty xml_code}">
+							<c:if test="${Math.ceil(total/10)>=10}">
+								<c:forEach var="i" begin="0" end="9">
+									<li><c:choose>
+											<c:when test="${i eq pageNum}">
+												<a href="#" onclick="paging_Form()" style="color: red">
+											</c:when>
+											<c:otherwise>
+												<a href="#" onclick="paging_Form()">
+											</c:otherwise>
+										</c:choose>
+
+										<form id="pagingform" action="found_item_view" method="post">
+											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+											<input type="hidden" name="xml_code"
+												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+												name="page" value="${i}" /> <input type="hidden"
+												name="Dto_city" value="${searchDto.city}" /> <input
+												type="hidden" name="Dto_startYmd"
+												value="${searchDto.startYMD}" /> <input type="hidden"
+												name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
+												type="hidden" name="Dto_mainCategory"
+												value="${searchDto.mainCategory}" /> <input type="hidden"
+												name="Dto_subCategory" value="${searchDto.subCategory}" />
+											<input type="hidden" name="Dto_color"
+												value="${searchDto.color}" />
+										</form> ${(allsearchPage-1)*10+i+1}</a></li>
+								</c:forEach>
+
+
 							</c:if>
+							<c:if test="${Math.ceil(total/10)<10}">
+								<c:forEach var="i" begin="0" end="${Math.ceil(total/10)-1}">
+									<li><c:choose>
+											<c:when test="${i eq pageNum}">
+												<a href="#" onclick="paging_Form()" style="color: red">
+											</c:when>
+											<c:otherwise>
+												<a href="#" onclick="paging_Form()">
+											</c:otherwise>
+										</c:choose>
+										<form id="pagingform" action="found_item_view" method="post">
+											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+											<input type="hidden" name="xml_code"
+												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+												name="page" value="${i}" /> <input type="hidden"
+												name="Dto_city" value="${searchDto.city}" /> <input
+												type="hidden" name="Dto_startYmd"
+												value="${searchDto.startYMD}" /> <input type="hidden"
+												name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
+												type="hidden" name="Dto_mainCategory"
+												value="${searchDto.mainCategory}" /> <input type="hidden"
+												name="Dto_subCategory" value="${searchDto.subCategory}" />
+											<input type="hidden" name="Dto_color"
+												value="${searchDto.color}" />
+
+										</form>${(allsearchPage-1)*10+i+1}</a></li>
+								</c:forEach>
+							</c:if>
+						</c:if>
+
+
+						<c:if test="${Math.ceil(total/10)>pageNum+1  && pageNum<9}">
+							<li class="btn-next">
+							<a href="#" onclick="submit_next_Form()">
+							<img src="resources/img/chevron-left.png" alt="">
+									<form id="next_form" action="found_item_view" method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+										<input type="hidden" name="xml_code"
+											value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+											name="page" value="${pageNum+1}" /> <input type="hidden"
+											name="Dto_city" value="${searchDto.city}" /> <input
+											type="hidden" name="Dto_startYmd"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="Dto_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="Dto_color" value="${searchDto.color}" />
+									</form> 
+									</a></li>
+
+
+						</c:if>
+
+						<c:if test="${Math.ceil(total / 100) >= 10 && pageNum eq 9}">
+							<li class="btn-next"><a href="#"
+								onclick="submit_next_Form()"><img
+									src="resources/img/chevron-left.png" alt="">
+									<form id="next_form" action="found_item_view" method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+										<input type="hidden" name="xml_code"
+											value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
+											name="page" value="${pageNum+1}" /> <input type="hidden"
+											name="Dto_city" value="${searchDto.city}" /> <input
+											type="hidden" name="Dto_startYmd"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="Dto_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="Dto_color" value="${searchDto.color}" />
+									</form> <%-- 											<form id="next_search_form" action="found_item_search1"
+												method="post">
+							
+								<input type="hidden" name="cityname" value="${searchDto.city}" />
+								<input type="hidden" name="Dto_startYmd" value="${searchDto.startYMD}" />
+								<input type="hidden" name="Dto_endYmd" value="${searchDto.endYMD}" />
+								<input type="hidden" name="prd_mainCategory" value="${searchDto.mainCategory}" />
+								<input type="hidden" name="prd_subCategory" value="${searchDto.subCategory}" />
+								<input type="hidden" name="color" value="${searchDto.color}" />
+								<input type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
+											</form> --%> </a></li>
+						</c:if>
 					</c:if>
 				</ul>
 				<ul class="switchBtn-container">
