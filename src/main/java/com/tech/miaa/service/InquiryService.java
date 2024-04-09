@@ -2,7 +2,9 @@
 package com.tech.miaa.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,8 +33,19 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		String content=request.getParameter("inquiry_content");
 		String file=request.getParameter("inquiry_file");
 		
+		//해시맵에 파람값 등록 하여 dao실행
+		HashMap<String, Object> map1= new HashMap<>();
+		map1.put("userId", id);
+		map1.put("inquiry_title", title);
+		map1.put("inquiry_content", content);
+		map1.put("inquiry_file", file);
+		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-		dao.inquiry_wirte(id,title,content,file);
+		dao.inquiry_wirte(map1);
+		
+		//시퀀스로 생성한 board_num으로 admin_inquiry 테이블에도 작성
+		System.out.println("시퀀스넘버:"+map1.get("board_num"));
+		dao.admin_inquiry_add(map1);
 		
 	}
 	@Override
