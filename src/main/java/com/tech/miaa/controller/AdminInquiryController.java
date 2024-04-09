@@ -27,7 +27,7 @@ public class AdminInquiryController {
 //	문의내역 페이지
 	@RequestMapping("admin_inquiry_list_page")
 	public String admin_inquiry_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin) {
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo) {
 		String result = "redirect:/";
 		String strPage = null;
 		
@@ -50,17 +50,19 @@ public class AdminInquiryController {
 		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("pageVo",pageVo);
 		
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
 		adminInquiryInter=new AdminInquiryService();
 		try {
-			ArrayList<AdminInquiryDto> list=adminInquiryInter.inquiry_list(model);
-			model.addAttribute("list",list);
+			adminInquiryInter.inquiry_list(model);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 		//페이징 처리
 			//시작페이지 전달
@@ -71,9 +73,16 @@ public class AdminInquiryController {
 		}
 		model.addAttribute("strPage", strPage);
 		
-		PageVO pageVo = null;
-		pageVo = adminInquiryInter.get_pagevo(model);
 		
+		
+		try {
+			pageVo = adminInquiryInter.get_pagevo(model);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("pageVo",pageVo);
 			
 		return result;
 	}

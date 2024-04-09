@@ -8,7 +8,7 @@ import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.vopage.PageVO;
 
 public interface AdminInquiryServiceInter {
-	public ArrayList<AdminInquiryDto> inquiry_list(Model model);
-	public PageVO get_pagevo(Model model);
+	public void inquiry_list(Model model);
+	public void get_pagevo(Model model);
 	
 }

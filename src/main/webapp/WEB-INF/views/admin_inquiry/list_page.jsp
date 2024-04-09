@@ -117,22 +117,17 @@
 		<div class="result-container">
 			<div class="page-container">
 				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">1</span><span>of</span><span
-						class="total-page">10</span>
+					<span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+						class="total-page">${pageVo.totPage}</span>
 				</div>
 				<ul class="pagelist-container">
 					<li class="btn-prev"><a class="test" href="#"><img
 							src="resources/img/chevron-left.png" alt=""></a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
+					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}" var="i">
+
+					<li><a href="#">${i }</a></li>
+			
+					</c:forEach>
 					<li class="btn-next"><a href="#"><img
 							src="resources/img/chevron-left.png" alt=""></a></li>
 				</ul>
