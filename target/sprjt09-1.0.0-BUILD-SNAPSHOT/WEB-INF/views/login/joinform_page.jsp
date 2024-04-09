@@ -14,6 +14,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
 <main>
@@ -29,9 +30,7 @@
 	</div>
 	<div class="join_insert"
 		style="width: 100%; height: 100%;  margin: auto; margin-top: 20px; text-align: center;">
-
 		<form action="join">
-
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="text" id="id" name="id" placeholder="아이디" required="required" /> <label
@@ -41,14 +40,12 @@
 					<input type="button" id="idchk" onclick="idchk();" value="아이디 중복확인" style="cursor: pointer;">
 				</div>
 			</div>
-
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="password" id="pw" name="pw" placeholder="비밀번호" required="required" /> <label
 						for="pw">비밀번호</label>
 				</div>
 			</div>
-
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="password" id="pw2" name="pw2" placeholder="비밀번호 확인" required="required" />
@@ -58,7 +55,6 @@
 					<input type="button" id="pwchk" name="pwchk" value="비밀번호 확인" style="cursor: pointer;">
 				</div>
 			</div>
-
 			<div class="inputbox-container">
 				<div class="input-box">
 					<input type="email" id="email" name="email" placeholder="이메일" required="required"/> <label

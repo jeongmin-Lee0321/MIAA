@@ -61,13 +61,32 @@
                   <span>품목</span>
                 </div>
                 <div class="searchbar-content">
-                  <select name="" id="">
-                    <option value="전체">전체</option>
-                  </select>
+                  <select onchange="itemkind(this)" id=itemkind1 name="itemkind1">
+                  <option>대분류</option>
+                  <option value="PRI000">컴퓨터</option>
+                  <option value="PRJ000">휴대폰</option>
+                  <option value="PRH000">지갑</option>
+                  <option value="PRG000">전자기기</option>
+                  <option value="PRD000">산업용품</option>
+                  <option value="PRO000">귀금속</option>
+                  <option value="PRZ000">기타물품</option>
+                  <option value="PRE000">스포츠용품</option>
+                  <option value="PRF000">자동차</option>
+                  <option value="PRL000">현금</option>
+                  <option value="PRK000">의류</option>
+                  <option value="PRQ000">쇼핑백</option>
+                  <option value="PRR000">악기</option>
+                  <option value="PRP000">카드</option>
+                  <option value="PRM000">유가증권</option>
+                  <option value="PRN000">증명서</option>
+                  <option value="PRA000">가방</option>
+                  <option value="PRB000">도서용품</option>
+                  <option value="PRX000">유류품</option>
+                </select>
                   <span>-</span>
-                  <select name="" id="">
-                    <option value="전체">전체</option>
-                  </select>
+                  <select name="itemkind2" id="itemkind2">
+                  <option>중분류</option>
+                </select>
                 </div>
               </div>
               <div class="searchbar-select-group">
@@ -75,8 +94,19 @@
                   <span>색상</span>
                 </div>
                 <div class="searchbar-content">
-                  <select name="" id="">
-                    <option value="전체">검정</option>
+                  <select name="colorCd" id="colorCd">
+                    <option>색상을 선택하세요</option>
+                    <option value="CL1001">흰색</option>
+                    <option value="CL1002">검정</option>
+                    <option value="CL1003">빨강</option>
+                    <option value="CL1004">주황</option>
+                    <option value="CL1005">노랑</option>
+                    <option value="CL1006">초록</option>
+                    <option value="CL1007">파랑</option>
+                    <option value="CL1008">갈색</option>
+                    <option value="CL1009">보라</option>
+                    <option value="CL1010">핑크</option>
+                    <option value="CL1011">기타</option>
                   </select>
                 </div>
               </div>
@@ -116,9 +146,9 @@
 
             <!-- 목록1개가 list-card -->
 			<c:forEach items="${itemList }" var="itemList">
-            <div class="list-card" onclick="location.href='lost_item_detail_page?item_id=${itemList.item_id }';" style="cursor: pointer;">
+            <div class="list-card" onclick="location.href='lost_item_detail_page?total_id=${itemList.total_id }';" style="cursor: pointer;">
               <div class="card-photo">
-                <img src="resources/img/null_img_icon.png" alt="">
+              	<img src="${itemList.filename}">
               </div>
               <div class="content-items">
                 <div class="item-title">
@@ -136,37 +166,37 @@
 
           </div>
           <!-- 검색결과 리스트 프레임 끝 -->
-          <!-- 페이징 프레임시작 -->
-          <div class="page-container">
+        <!-- 페이징 프레임시작 -->
+        <div class="page-container">
             <div class="currentOftotal">
-              <span>Page</span><span class="current-page">1</span><span>of</span><span class="total-page">10</span>
+                <span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+                    class="total-page">${pageVo.totPage}</span>
             </div>
             <ul class="pagelist-container">
-              <li class="btn-prev">
-                <a class="test" href="#"><img src="resources/img/chevron-left.png" alt=""></a>
-              </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">6</a></li>
-              <li><a href="#">7</a></li>
-              <li><a href="#">8</a></li>
-              <li><a href="#">9</a></li>
-              <li><a href="#">10</a></li>
-              <li class="btn-next">
-                <a href="#"><img src="resources/img/chevron-left.png" alt=""></a>
-              </li>
+                <li class="btn-prev"><a class="test" href="lost_item_search_page?page=${pageVo.page - 1}"><img
+                        src="resources/img/chevron-left.png" alt=""></a></li>
+                <c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}" var="i">
+                    <c:choose>
+                        <c:when test="${i eq pageVo.page}">
+                            <li><a href="#" style="color: red">${i}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="lost_item_search_page?page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <li class="btn-next"><a href="lost_item_search_page?page=${pageVo.page + 1}"><img
+                        src="resources/img/chevron-left.png" alt=""></a></li>
             </ul>
 
             <ul class="switchBtn-container">
-              <li class="btn-prev-group"><a href="#">Previous</a></li>
-              <li class="btn-next-group"><a href="#">Next</a></li>
+                <li class="btn-prev-group"><a href="lost_item_search_page?page=${pageVo.page - 1}">Previous</a></li>
+                <li class="btn-next-group"><a href="lost_item_search_page?page=${pageVo.page + 1}">Next</a></li>
             </ul>
-          </div>
-          <!-- 페이징 프레임 끝 -->
+        </div>
+        <!-- 페이징 프레임 끝 -->
         </div>
         <!-- result-container끝 -->
       </div>
+      
 </body>

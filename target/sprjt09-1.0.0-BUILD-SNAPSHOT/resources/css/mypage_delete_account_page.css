@@ -5,7 +5,7 @@
 	font-size: 15px;
 	background-color: white;
 	color: #0066FF;
-	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+	font-family: inherit;
 	border-color: #0066FF;
 	border-radius: 10px;
 	padding: 10px;

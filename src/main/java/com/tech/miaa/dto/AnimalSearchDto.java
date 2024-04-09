@@ -21,9 +21,9 @@ public class AnimalSearchDto {
 	private String upKindSelectBox;
 	private String kindSelectedBox;
 	private String sexSelectedBox;
-	private PageVO pageVO;
-	private String pageNo;
-	private String pageShift;
+//	private PageVO pageVO;
+//	private String pageNo;
+//	private String pageShift;
 
 	//
 //	public String getSearch_str_date() {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,32 +25,40 @@ public class RescueAniController {
     private Boolean isFirst = true;
     private AnimalSearchDto current_dto;
 
-    private PageVO pageVO = new PageVO();
+//    private PageVO pageVO = new PageVO();
+    private ArrayList<AbdmKindItem> abdmKindItems = new ArrayList<>();
     @RequestMapping(value = "/rescue_ani_search_page")
-    public String rescue_ani_search_page(HttpServletRequest request, Model model, AnimalSearchDto dto) {
-
-        current_dto = dto;
-
-
+    public String rescue_ani_search_page(HttpServletRequest request, Model model, AnimalSearchDto dto,PageVO page_VO) {
+        if (dto.getSearch_str_date() != null || dto.getSearch_end_date() != null ||
+        dto.getSidoSelectBox() != null || dto.getSigunguSelectBox() != null ||
+        dto.getUpKindSelectBox() != null || dto.getKindSelectedBox() != null ||
+        dto.getSexSelectedBox() != null){
+            current_dto = dto;
+            System.out.println(current_dto.getSidoSelectBox());
+            System.out.println(current_dto.getSigunguSelectBox());
+            System.out.println(current_dto.getUpKindSelectBox());
+            System.out.println(current_dto.getKindSelectedBox());
+        }
+        String strPage = request.getParameter("page");
+        if (strPage == null)
+            strPage = "1";
+        int page = Integer.parseInt(strPage);
+        page_VO.setPage(page);
         if (isFirst) {
-            current_dto.setPageVO(pageVO);
-            abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(current_dto.getPageVO().getPage());
+            abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(page_VO.getPage());
             isFirst = false;
         } else {
-            abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(current_dto, current_dto.getPageVO().getPage());
+
+            abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(current_dto, page_VO.getPage());
         }
         int totalCount = 0;
         itemList = abdmPublic.getItems();
-        if (abdmPublic.getTotalCount() != null)
+        if (abdmPublic.getTotalCount() != null) {
             totalCount = Integer.parseInt(abdmPublic.getTotalCount());
+        }
+        page_VO.pageCalculate(totalCount);
 
 
-        current_dto.getPageVO().pageCalculate(totalCount);
-
-        System.out.println("getPage : "+current_dto.getPageVO().getPage() );
-        System.out.println("getPageStart"+current_dto.getPageVO().getPageStart() );
-        System.out.println("getPageEnd"+current_dto.getPageVO().getPageEnd() );
-        System.out.println("totRow : "+current_dto.getPageVO().getTotRow());
         SexEnum[] sexEnum = SexEnum.values();
         SigunguEnum[] sigunguEnums = SigunguEnum.values();
 
@@ -57,7 +66,8 @@ public class RescueAniController {
         model.addAttribute("dto", current_dto);
         model.addAttribute("sexEnum", sexEnum);
         model.addAttribute("sigunguEnums", sigunguEnums);
-
+        model.addAttribute("abdmKindItems", abdmKindItems);
+        model.addAttribute("pageVO",page_VO);
         return "rescue_ani.search_page.보호동물 검색.3";
     }
 

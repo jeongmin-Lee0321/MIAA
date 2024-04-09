@@ -271,6 +271,15 @@ ul.bottom-btns>li>button:not([type="submit"]){
   border: 1px solid #EAECF0;
 }
 
+/*textarea 제한글자 표시css  */
+    .textLengthWrap{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      font-size: 13px;
+      color: #C2C2C2;
+    }
+
   button:hover{
     cursor: pointer;
   }
