@@ -50,7 +50,6 @@ public class PageVO {
         if (page == null || page == 0 || page < 0) {
             page = 1;
         }
-        
         return page;
     }
 
