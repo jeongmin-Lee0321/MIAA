@@ -132,6 +132,7 @@ body {
 							<div class="row-title">
 								<span>관할지*</span>
 							</div>
+							
 							<div class="row-content">
 								<select name="addressCode" id="addressCode">
 									<option value="${dto.addressCode }">${kind.get(3) }</option>
@@ -180,10 +181,10 @@ body {
 							<div class="row-title">
 								<span>품목*</span>
 							</div>
+							
 							<div class="row-content">
 								<select name="itemkind1" id="itemkind1"
 									onchange="getSubCategories(this.value)">
-									<option value="${dto.upkind }">${kind.get(0) }</option>
 									<option value="PRI000">컴퓨터</option>
 									<option value="PRJ000">휴대폰</option>
 									<option value="PRH000">지갑</option>
@@ -205,7 +206,6 @@ body {
 									<option value="PRB000">도서용품</option>
 									<option value="PRX000">유류품</option>
 								</select> <span>-</span> <select name="itemkind2" id="itemkind2">
-									<option value="${dto.upr_cd }">${kind.get(1) }</option>
 								</select>
 							</div>
 						</div>
@@ -396,6 +396,24 @@ body {
 			}
 		}
 	</script>
+	<script>
+	window.onload = function() {
+		// 모델에 담긴 데이터로 셀렉트 박스를 선택하고 onchange 이벤트를 발생시킴
+		var selectedMainCategory = "${dto.upkind }";
+		var selectedSubCategory = "${dto.upr_cd }";
+		var prd_mainCategory = document.getElementById("itemkind1");
+		var prd_subCategory = document.getElementById("itemkind2");
+
+		prd_mainCategory.value = selectedMainCategory;
+		// 서브 카테고리 업데이트 함수 호출
+		if (selectedMainCategory !== "" && selectedMainCategory !== null) {
+			// 서브 카테고리 업데이트 함수 호출
+			getSubCategories(selectedMainCategory);
+			// 서브 카테고리 선택
+			prd_subCategory.value = selectedSubCategory;
+		}
+	};
+</script>
 </body>
 
 </html>
