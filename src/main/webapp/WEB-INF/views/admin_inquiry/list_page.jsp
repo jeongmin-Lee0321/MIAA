@@ -5,7 +5,7 @@
 <head>
 <title>Title</title>
 <link rel="stylesheet"
-	href="resources/css/mypage_customer_inquiry_list_page.css" />
+	href="resources/css/admin_inquiry_list_page.css" />
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script type="text/javascript">
@@ -78,33 +78,36 @@
 		<div class="content-wrapper">
 			<div class="content-container">
 				<div class="list-control-container">
-					<button class="btn-list" id="btn-write" onclick="location.href='mypage_customer_inquiry_write_page';" style="cursor: pointer;">문의글 등록</button>
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();" style="cursor: pointer;">삭제하기</button>
 				</div>
 				<table class="info-table">
 					<tr>
-						<th><input type="checkbox" name="allCheck" id="allCheck"
-							class="table-check-box"></th>
-						<th>글번호</th>
-						<th class="table-title">제목</th>
-						<th>처리상태</th>
-						<th>문의 날짜</th>
-						<th>답변 날짜</th>
-						<th></th>
+						<th><span><input type="checkbox" name="allCheck" id="allCheck"
+							class="table-check-box"></span></th>
+						<th><span>글번호</span></th>
+						<th class="table-title"><span>제목</span></th>
+						<th><span>문의자</span></th>
+						<th><span>처리상태</span></th>
+						<th><span>문의 날짜</span></th>
+						<th><span>답변 날짜</span></th>
+						<th><span>답변자</span></th>
+
 					</tr>
-					<c:forEach items="${list }" var="list">
-					<tr>
-						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
-							class="table-check-box"></td>							
-						<td>${list.rownum}</td>
-						<td class="table-title">${list.board_title}</td>
-						<td>${list.board_reply_status}</td>
-						<td>${list.board_registration_date}</td>
-						<td>-</td>						
-						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.board_num}';" style="cursor: pointer;" /></td>
-					</tr>
-					</c:forEach>
 					
+					<c:forEach items="${list }" var="list"> 
+					<tr>
+						<td><input type="checkbox" name="RowCheck" value="list.board_num"
+							class="table-check-box"></td>							
+						<td>${list.userInquiry.board_num }</td>
+						<td class="table-title">${list.userInquiry.board_title}</td>
+						<td>${list.userInquiry.user_id}</td>
+						<td>${list.userInquiry.board_reply_status}</td>
+						<td>${list.userInquiry.board_registration_date}</td>
+						<td>${list.board_reply }</td>			
+						<td>${list.admin_id }</td>			
+					</tr>
+ 					</c:forEach> 
+
 				</table>
 			</div>
 		</div>
