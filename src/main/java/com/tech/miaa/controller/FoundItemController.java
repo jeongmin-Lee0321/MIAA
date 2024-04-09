@@ -64,6 +64,10 @@ public class FoundItemController {
 		model.addAttribute("pageNum", 0);
 		model.addAttribute("searchDto", searchDto);
 		model.addAttribute("allsearchPage",allsearchPage);
+		if(request.getParameter("prev_search_chk").equals("1")) {
+		model.addAttribute("pageNum", "9");	
+		}
+		System.out.println("단위페이지 : "+((allsearchPage-1)*10)+"(실제값:"+allsearchPage+")");
 		System.out.println(list);
 		System.out.println(total);
 
@@ -113,9 +117,13 @@ public class FoundItemController {
 		int total = fservice.getTotal();
 		int allsearchPage = fservice.getAllsearchPage();
 		model.addAttribute("allsearchPage",allsearchPage);
+		System.out.println("단위페이지 : "+((allsearchPage-1)*10)+"(실제값:"+allsearchPage+")");
 		model.addAttribute("total", total);
 		model.addAttribute("xml_code", xml_code);
 		model.addAttribute("pageNum", page);
+		System.out.println("Math.ceil(total/10)값 : "+Math.ceil(total/10));
+		System.out.println("pageNum값 : " + page);
+		System.out.println("(allsearchPage-1)*10+pageNum+1 : "+(allsearchPage-1)*10+page+1);
 
 		return "found_item.search_page.습득물 상세검색.3";
 	}
