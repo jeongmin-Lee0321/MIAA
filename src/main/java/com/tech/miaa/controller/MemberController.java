@@ -39,9 +39,22 @@ public class MemberController {
 		return "login.searchpwform.비밀번호 찾기 페이지.1";
 	}
 	@RequestMapping("mypageform")
-	public String mypageform(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+	public String mypageform(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId, 
+			@SessionAttribute(name = "userEmail", required = false) String userEmail,
+			@SessionAttribute(name = "userAddr", required = false) String userAddr,
+			@SessionAttribute(name = "userDaddr", required = false) String userDaddr, 
+			@SessionAttribute(name = "userPostcode", required = false) String userPostcode) {
 		HttpSession session = request.getSession(false);
 		model.addAttribute("userId",userId);
+		model.addAttribute("userEmail",userEmail);
+		model.addAttribute("userAddr",userAddr);
+		model.addAttribute("userDaddr",userDaddr);
+		model.addAttribute("userPostcode",userPostcode);
+		System.out.println("id : " + userId);
+		System.out.println("email : " + userEmail);
+		System.out.println("addr : " + userAddr);
+		System.out.println("detailaddr : " + userDaddr);
+		System.out.println("postcode : " + userPostcode);
 		return "login.mypageform.마이 페이지.3";
 	}
 	@RequestMapping("mypage_delete_account_page")

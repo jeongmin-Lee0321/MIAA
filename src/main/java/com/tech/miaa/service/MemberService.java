@@ -255,6 +255,10 @@ public class MemberService implements MemberServiceInter {
 					dto = dao.login2(id, bcpwd);
 					session = request.getSession(false);
 					session.setAttribute("userId", dto.getUser_id());
+					session.setAttribute("userEmail", dto.getUser_email());
+					session.setAttribute("userAddr", dto.getUser_address());
+					session.setAttribute("userDaddr", dto.getUser_detailaddress());
+					session.setAttribute("userPostcode", dto.getUser_postcode());
 					session.setMaxInactiveInterval(1800);
 					
 					

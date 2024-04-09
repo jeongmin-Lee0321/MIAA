@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+table{
+	border: 1px solid #ddd;
+	font-size: 20px;
+	width: 100%;
+}
+
+.left{
+	background-color: #0066ff;
+	color: white;
+}
+
+.right{
+	color: #0066ff;
+}
