@@ -167,12 +167,12 @@ public class AbandonmentPublicSrvc {
      * 최대사이즈 : [4000] byte
      * 평균응답시간 :  [500] ms
      * 초당 최대 트랙잭션 : [30] tps */
-    public static AbdmPublic abandonmentPublic(String page) {
+    public static AbdmPublic abandonmentPublic(int page) {
         AbdmPublic abdmPublic = new AbdmPublic();
         try {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(page, "UTF-8")); /*페이지 번호 (기본값 : 1)*/
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(page), "UTF-8")); /*페이지 번호 (기본값 : 1)*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
             urlBuilder.append("&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*xml(기본값) 또는 json*/
 

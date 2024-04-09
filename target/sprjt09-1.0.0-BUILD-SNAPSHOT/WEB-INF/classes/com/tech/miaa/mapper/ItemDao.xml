@@ -8,17 +8,27 @@
 <insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4}, 
 						#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE) 
 </insert>
-<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param2}), 
-						#{param1},#{param3}) 
+<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3}), 
+						#{param2},#{param1},#{param4}) 
 </insert>
-
 <select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto"> 
-	SELECT * FROM ITEM ORDER BY ITEM_ID 
+	SELECT * FROM (SELECT ROWNUM RM, IT.* FROM (SELECT * FROM  ITEM IT LEFT OUTER JOIN (SELECT TOTAL_ID,FILENAME FROM ITEM_IMG WHERE FILE_ID IN
+	(SELECT MIN(FILE_ID) FROM ITEM_IMG GROUP BY TOTAL_ID)) ITIMG ON IT.TOTAL_ID=ITIMG.TOTAL_ID ORDER BY ITEM_ID) IT)
+	 WHERE RM BETWEEN #{param1} AND #{param2}
 </select>
 <select id="totalCount" resultType="Integer">
 	SELECT count(*) FROM ITEM
 </select>
 <select id="lost_item_detail_page" resultType="com.tech.miaa.dto.ItemDto">
-	SELECT * FROM ITEM WHERE ITEM_ID= #{param1}
+	SELECT * FROM ITEM WHERE TOTAL_ID= #{param1}
 </select>
+<select id="lost_item_detail_img" resultType="com.tech.miaa.dto.ItemImgDto">
+	SELECT * FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
+</select>
+<update id="lost_item_delete_img">
+	DELETE FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
+</update>
+<update id="lost_item_delete_content">
+	DELETE FROM ITEM WHERE TOTAL_ID= #{param1}
+</update>
 </mapper>
