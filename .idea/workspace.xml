@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="pull완료">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/found_item/detail_map.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/FoundItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/FoundItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/common/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/found_item/detail_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/found_item/detail_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/found_item/search_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/found_item/search_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-    </list>
+    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="습득물마무리(지도새창 + 상세page-&gt;목록page + 1~10페이지prev버튼-&gt;1페이지)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -445,7 +437,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712788985848</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="습득물마무리(지도새창 + 상세page-&gt;목록page + 1~10페이지prev버튼-&gt;1페이지)">
+      <option name="closed" value="true" />
+      <created>1712789945710</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712789945710</updated>
+    </task>
+    <task id="LOCAL-00016" summary="습득물마무리(지도새창 + 상세page-&gt;목록page + 1~10페이지prev버튼-&gt;1페이지)">
+      <option name="closed" value="true" />
+      <created>1712789959395</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1712789959395</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,7 +494,8 @@
     <MESSAGE value="수정진행중" />
     <MESSAGE value="commit" />
     <MESSAGE value="pull완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="pull완료" />
+    <MESSAGE value="습득물마무리(지도새창 + 상세page-&gt;목록page + 1~10페이지prev버튼-&gt;1페이지)" />
+    <option name="LAST_COMMIT_MESSAGE" value="습득물마무리(지도새창 + 상세page-&gt;목록page + 1~10페이지prev버튼-&gt;1페이지)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
