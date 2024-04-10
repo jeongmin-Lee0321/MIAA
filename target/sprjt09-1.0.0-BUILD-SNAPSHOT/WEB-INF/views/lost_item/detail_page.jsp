@@ -43,7 +43,7 @@
 			<div class="info-name-container">
 				<img src="resources/img/clipboard.png" alt="" class="info-icon">
 				<span class="info-name">물품정보</span>
-				<button class="btn-map">지도로 위치 찾기</button>
+				<button class="btn-map" onclick="location.href='lost_item_detail_map?address=${dto.address}';" style="cursor: pointer;">지도로 위치 찾기</button>
 			</div>
 			<table class="info-table">
 				<tr>
@@ -68,7 +68,7 @@
 					</td>
 					<th class="info-table-name">물품분류</th>
 					<td class="info-table-value">
-						<div class="table-value-container" id="prdt_cl_nm">${dto.upr_cd }</div>
+						<div class="table-value-container" id="prdt_cl_nm">${dto.upkind } > ${dto.upr_cd }</div>
 					</td>
 				</tr>
 				<tr>

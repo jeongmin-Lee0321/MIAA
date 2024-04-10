@@ -172,23 +172,24 @@
 		}
 	};
 
-	function paging_Form() {
-		document.getElementById('pagingform').submit();
+	function paging_Form(page) {
+		var formId = 'pagingform_' + page; // Construct form ID
+		document.getElementById(formId).submit(); // Submit the corresponding form
 	}
-
 	function submit_prev_Form() {
 		document.getElementById('prev_form').submit();
 	}
-
 	function submit_next_Form() {
-		/*  var value = parseInt(pageNum);
-
-		    if (value < 9) { */
 		document.getElementById('next_form').submit();
-		/* } else if(value==9) {
-		    document.getElementById('next_search_form').submit()
-		}
-		 */
+	}
+	function submit_prev_search_Form() {
+		document.getElementById('prev_search_form').submit();
+	}
+	function submit_prev_search_Form2() {
+		document.getElementById('prev_search_form2').submit();
+	}
+	function submit_next_search_Form() {
+		document.getElementById('next_search_form').submit();
 	}
 </script>
 <body>
@@ -196,32 +197,10 @@
 	<div class="main-contents">
 		<!-- 검색창과 검색결과 -->
 		<div class="searchbar-container">
-
-
-			<%-- <c:if test="${searchType == 2}"> --%>
-			<!-- 			<form action="found_item_search2">
-				<input type="hidden" name="total" value="-1">
-				<div class="searchbar-select-group">
-					<div class="searchbar-title">
-						<span>습득물명</span>
-					</div>
-					<div class="searchbar-content">
-						<input type="search" name="q" id="q" style="min-width: 300px;">
-					</div>
-				</div>
-				form 조회용 버튼
-				<div class="search-btn-block">
-					<button>
-						조회<img src="resources/img/searchIcon.png" alt="">
-					</button>
-				</div>
-			</form> -->
-			<%-- </c:if> --%>
-
-			<%-- <c:if test="${searchType == 1}"> --%>
 			<form id="search_form" action="found_item_search1">
 				<!-- 서치바 셀렉 그룹시작 -->
-				<input type="hidden" name="allsearchPage" value="1" />
+				<input type="hidden" name="prev_search_chk" value="0" /> <input
+					type="hidden" name="allsearchPage" value="1" />
 				<div class="searchbar-select-group">
 					<div class="searchbar-title">
 						<span>기간</span>
@@ -415,6 +394,8 @@
 			<!-- 검색 결과 리스트프레임 -->
 			<div class="result-list">
 				<!-- 목록1개가 list-card -->
+
+				<%-- <c:if test="${(((allsearchPage-1) * 10) +9)<=Math.ceil(total/10)}"> --%>
 				<c:forEach items="${list }" var="dto" begin="${pageNum*10}"
 					end="${(pageNum * 10) +9}">
 					<div class="list-card">
@@ -436,14 +417,12 @@
 						</div>
 					</div>
 				</c:forEach>
-
-
 			</div>
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!-- 페이징 프레임시작 -->
 			<div class="page-container">
 				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">${pageNum+1}</span><span>of</span><span
+					<span>Page</span><span class="current-page">${(allsearchPage-1)*10 + pageNum+1}</span><span>of</span><span
 						class="total-page"> <c:choose>
 							<c:when test="${empty total}">
         						1
@@ -469,6 +448,12 @@
 
 					<c:if test="${total>0}">
 
+
+						<c:if test="${pageNum eq 0 && allsearchPage eq 1}">
+							<li class="btn-prev"><a class="btn-prev" href="#"> <img
+									src="resources/img/chevron-left.png" alt="">
+							</a></li>
+						</c:if>
 						<c:if test="${pageNum>=1}">
 							<li class="btn-prev"><a class="btn-prev" href="#"
 								onclick="submit_prev_Form()"><img
@@ -488,19 +473,50 @@
 											type="hidden" name="Dto_color" value="${searchDto.color}" />
 									</form> </a></li>
 						</c:if>
+						<c:if test="${pageNum eq 0 && allsearchPage>=2}">
+							<li class="btn-prev"><a href="#"
+								onclick="submit_prev_search_Form()"><img
+									src="resources/img/chevron-left.png" alt="">
+									<form id="prev_search_form" action="found_item_search1"
+										method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+										<input type="hidden" name="cityname" value="${searchDto.city}" />
+										<input type="hidden" name="START_YMD"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="END_YMD" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="prd_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="color" value="${searchDto.color}" /> <input
+											type="hidden" name="allsearchPage" value="${allsearchPage-1}" />
+										<input type="hidden" name="prev_search_chk" value="1" />
+
+									</form> </a></li>
+						</c:if>
+
+
+
+
+
+
+
+
+
 						<c:if test="${not empty xml_code}">
-							<c:if test="${Math.ceil(total/10)>=10}">
+							<c:if
+								test="${(((allsearchPage-1) * 10) +9)<=Math.ceil(total/10)}">
 								<c:forEach var="i" begin="0" end="9">
 									<li><c:choose>
 											<c:when test="${i eq pageNum}">
-												<a href="#" onclick="paging_Form()" style="color: red">
+												<a href="#" onclick="paging_Form('${i}')" style="color: red">
 											</c:when>
 											<c:otherwise>
-												<a href="#" onclick="paging_Form()">
+												<a href="#" onclick="paging_Form('${i}')">
 											</c:otherwise>
 										</c:choose>
 
-										<form id="pagingform" action="found_item_view" method="post">
+										<form id="pagingform_${i}" action="found_item_view"
+											method="post">
 											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
 											<input type="hidden" name="xml_code"
 												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
@@ -519,17 +535,19 @@
 
 
 							</c:if>
-							<c:if test="${Math.ceil(total/10)<10}">
-								<c:forEach var="i" begin="0" end="${Math.ceil(total/10)-1}">
+							<c:if test="${(((allsearchPage-1) * 10) +9)>Math.ceil(total/10)}">
+								<c:forEach var="i" begin="0"
+									end="${Math.ceil(total/10)-((allsearchPage-1) * 10)-1}">
 									<li><c:choose>
 											<c:when test="${i eq pageNum}">
-												<a href="#" onclick="paging_Form()" style="color: red">
+												<a href="#" onclick="paging_Form('${i}')" style="color: red">
 											</c:when>
 											<c:otherwise>
-												<a href="#" onclick="paging_Form()">
+												<a href="#" onclick="paging_Form('${i}')">
 											</c:otherwise>
 										</c:choose>
-										<form id="pagingform" action="found_item_view" method="post">
+										<form id="pagingform_${i}" action="found_item_view"
+											method="post">
 											<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
 											<input type="hidden" name="xml_code"
 												value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
@@ -550,32 +568,14 @@
 						</c:if>
 
 
-						<c:if test="${Math.ceil(total/10)>pageNum+1  && pageNum<9}">
-							<li class="btn-next">
-							<a href="#" onclick="submit_next_Form()">
-							<img src="resources/img/chevron-left.png" alt="">
-									<form id="next_form" action="found_item_view" method="post">
-										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
-										<input type="hidden" name="xml_code"
-											value="${fn:escapeXml(xml_code)}" /> <input type="hidden"
-											name="page" value="${pageNum+1}" /> <input type="hidden"
-											name="Dto_city" value="${searchDto.city}" /> <input
-											type="hidden" name="Dto_startYmd"
-											value="${searchDto.startYMD}" /> <input type="hidden"
-											name="Dto_endYmd" value="${searchDto.endYMD}" /> <input
-											type="hidden" name="Dto_mainCategory"
-											value="${searchDto.mainCategory}" /> <input type="hidden"
-											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
-											type="hidden" name="Dto_color" value="${searchDto.color}" />
-									</form> 
-									</a></li>
 
 
-						</c:if>
 
-						<c:if test="${Math.ceil(total / 100) >= 10 && pageNum eq 9}">
+
+						<c:if
+							test="${Math.ceil(total/10)>((allsearchPage-1)*10+pageNum+1)  && pageNum<9}">
 							<li class="btn-next"><a href="#"
-								onclick="submit_next_Form()"><img
+								onclick="submit_next_Form()"> <img
 									src="resources/img/chevron-left.png" alt="">
 									<form id="next_form" action="found_item_view" method="post">
 										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
@@ -590,23 +590,103 @@
 											value="${searchDto.mainCategory}" /> <input type="hidden"
 											name="Dto_subCategory" value="${searchDto.subCategory}" /> <input
 											type="hidden" name="Dto_color" value="${searchDto.color}" />
-									</form> <%-- 											<form id="next_search_form" action="found_item_search1"
-												method="post">
-							
-								<input type="hidden" name="cityname" value="${searchDto.city}" />
-								<input type="hidden" name="Dto_startYmd" value="${searchDto.startYMD}" />
-								<input type="hidden" name="Dto_endYmd" value="${searchDto.endYMD}" />
-								<input type="hidden" name="prd_mainCategory" value="${searchDto.mainCategory}" />
-								<input type="hidden" name="prd_subCategory" value="${searchDto.subCategory}" />
-								<input type="hidden" name="color" value="${searchDto.color}" />
-								<input type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
-											</form> --%> </a></li>
+									</form>
+							</a></li>
 						</c:if>
+
+						<c:if
+							test="${Math.ceil(total/10)>((allsearchPage-1)*10+pageNum+1) && pageNum eq 9}">
+							<li class="btn-next"><a href="#"
+								onclick="submit_next_search_Form()"><img
+									src="resources/img/chevron-left.png" alt="">
+									<form id="next_search_form" action="found_item_search1"
+										method="post">
+										<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+										<input type="hidden" name="cityname" value="${searchDto.city}" />
+										<input type="hidden" name="START_YMD"
+											value="${searchDto.startYMD}" /> <input type="hidden"
+											name="END_YMD" value="${searchDto.endYMD}" /> <input
+											type="hidden" name="prd_mainCategory"
+											value="${searchDto.mainCategory}" /> <input type="hidden"
+											name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+											type="hidden" name="color" value="${searchDto.color}" /> <input
+											type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
+										<input type="hidden" name="prev_search_chk" value="0" />
+									</form> </a></li>
+						</c:if>
+						<c:if
+							test="${ total <= (((allsearchPage-1)*100)+((pageNum+1)*10))}">
+							<li class="btn-next"><a class="btn-next" href="#"><img
+									src="resources/img/chevron-left.png" alt=""> </a></li>
+						</c:if>
+						<!-- total이 0보다클때 -- 조건식end -->
 					</c:if>
 				</ul>
+				<!-- 값 확인 용도 -->
+				<div>
+					<!-- Debugging -->
+					<c:out value="${total}" />
+					<!-- 출력 결과: 92가 나올테고 -->
+					<c:out value="${(((allsearchPage-1)*100)+((pageNum+1)*10))}" />
+					<!-- 출력 결과: 100이 나올테지 -->
+					<c:out
+						value="${ total <= (((allsearchPage-1)*100)+((pageNum+1)*10))} " />
+					<!-- 출력 결과: TF -->
+					<c:out
+						value="${Math.ceil(total/10)>((allsearchPage-1)*10+pageNum+1) && pageNum eq 9} " />
+					<!-- 출력 결과: TF -->
+					</br> <label>쌩total고정값 : </label> <label>${total}</label><br /> <label>Math.ceil(total)고정값
+						: </label> <label>${Math.ceil(total)}</label><br /> <label>Math.ceil(total/10)고정값
+						: </label> <label>${Math.ceil(total/10)}</label><br /> <label>((allsearchPage-1)*10+pageNum+1.1)점점증가
+						: </label> <label>${((allsearchPage-1)*10+pageNum+1)}</label><br /> <label>(((allsearchPage-1)*100)+((pageNum+1)*10))점점증가
+						: </label> <label>${(((allsearchPage-1)*100)+((pageNum+1)*10))}</label><br />
+				</div>
 				<ul class="switchBtn-container">
-					<li class="btn-prev-group"><a href="#">Previous</a></li>
-					<li class="btn-next-group"><a href="#">Next</a></li>
+
+
+
+					<li class="btn-prev-group"><a href="#"
+						onclick="submit_prev_search_Form2()">Previous <c:if
+								test="${allsearchPage>=2 }">
+								<form id="prev_search_form2" action="found_item_search1"
+									method="post">
+									<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+									<input type="hidden" name="cityname" value="${searchDto.city}" />
+									<input type="hidden" name="START_YMD"
+										value="${searchDto.startYMD}" /> <input type="hidden"
+										name="END_YMD" value="${searchDto.endYMD}" /> <input
+										type="hidden" name="prd_mainCategory"
+										value="${searchDto.mainCategory}" /> <input type="hidden"
+										name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+										type="hidden" name="color" value="${searchDto.color}" /> <input
+										type="hidden" name="allsearchPage" value="${allsearchPage-1}" />
+									<input type="hidden" name="prev_search_chk" value="0" />
+								</form>
+							</c:if>
+					</a></li>
+
+					<li class="btn-next-group"><a href="#"
+						onclick="submit_next_search_Form()">Next <c:if
+								test="${total>allsearchPage*100}">
+								<form id="next_search_form" action="found_item_search1"
+									method="post">
+									<!-- hidden input 태그를 사용하여 문자열 형식의 리스트를 전송 -->
+									<input type="hidden" name="cityname" value="${searchDto.city}" />
+									<input type="hidden" name="START_YMD"
+										value="${searchDto.startYMD}" /> <input type="hidden"
+										name="END_YMD" value="${searchDto.endYMD}" /> <input
+										type="hidden" name="prd_mainCategory"
+										value="${searchDto.mainCategory}" /> <input type="hidden"
+										name="prd_subCategory" value="${searchDto.subCategory}" /> <input
+										type="hidden" name="color" value="${searchDto.color}" /> <input
+										type="hidden" name="allsearchPage" value="${allsearchPage+1}" />
+									<input type="hidden" name="prev_search_chk" value="0" />
+								</form>
+							</c:if>
+					</a></li>
+
+
+
 				</ul>
 			</div>
 			<!-- 페이징 프레임 끝 -->
