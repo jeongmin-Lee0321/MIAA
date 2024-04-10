@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: goott4
-Build-Jdk: 11.0.21
-Created-By: Maven Integration for Eclipse
+Created-By: IntelliJ IDEA
+Built-By: hanseulma
+Build-Jdk: Oracle OpenJDK 20.0.2 - aarch64
 
