@@ -33,7 +33,15 @@ body {
 	<div class="main-container">
 
 		<div class="main-contents">
+				
+				<div class="image-selection">
+        <div class="image-container">
+            <img src="resources/inquiry_img/${list.board_filesrc}" onerror="this.onerror=null; this.src='resources/img/image_no.png'" id="inquiry-image" style="cursor: pointer;" onclick="window.open(this.src)">
+        </div>
 
+    </div>
+				
+				
 				<div class="table-container">
 					<div class="table-title">
 						<img src="resources/img/clipboard.png" alt=""><span>상세내역</span>
@@ -91,23 +99,7 @@ body {
 							</div>
 						</div>
 
-						<%-- <!-- 파일형식 제한 필요 -->
-						<div class="table-row">
-							<div class="row-title">
-								<span>사진첨부</span>
-							</div>
-							<div class="col-content">
-								<div class="in-row-content">
-									<input type="hidden" name="inquiry_num" value="${list.board_num}" />
-									<input type="hidden" name="inquiry_file_hidden" value="${list.board_filesrc}" />
-									<input type="file" name="inquiry_file" id="file1" accept="image/*" >
-									<label for="file1">사진첨부</label>
-								</div>
-
-								<div class="image-ex-text">*첨부파일은 한개당 3mb까지 제한되고 확장자는
-									JPEG,GIF,PNG로 제한됩니다.</div>
-							</div>
-						</div> --%>
+						
 					</div>
 				</div>
 
