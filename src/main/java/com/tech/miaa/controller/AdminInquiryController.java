@@ -63,7 +63,6 @@ public class AdminInquiryController {
 			e.printStackTrace();
 		}
 		
-		
 			
 		return "admin_inquiry.list_page.1대1문의관리.3a";
 	}
