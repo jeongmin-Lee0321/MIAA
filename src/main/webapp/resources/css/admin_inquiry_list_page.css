@@ -176,6 +176,13 @@ ul.pagelist-container>li:not([class])>a {
   padding: 0.5em;
 }
 
+/* 현재페이지인 a태그에 색상 표시 */
+ul.pagelist-container>li:not([class]) span.currpage {
+    display: inlinblock;
+    color: #0066ff;
+    padding: 0.5em;
+}
+
 .btn-next>a>img {
   transform: rotate(180deg);
 }

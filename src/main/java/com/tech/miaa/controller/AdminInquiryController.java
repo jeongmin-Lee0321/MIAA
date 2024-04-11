@@ -55,7 +55,7 @@ public class AdminInquiryController {
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
 		adminInquiryInter=new AdminInquiryService();
 		try {
-			adminInquiryInter.inquiry_list(model);
+			adminInquiryInter.inquiry_list(model,pageVo);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -63,26 +63,6 @@ public class AdminInquiryController {
 		}
 		
 		
-		
-		//페이징 처리
-			//시작페이지 전달
-		try {
-			strPage = request.getParameter("strPage");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		model.addAttribute("strPage", strPage);
-		
-		
-		
-		try {
-			adminInquiryInter.get_pagevo(model);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("pageVo",pageVo);
 			
 		return result;
 	}
