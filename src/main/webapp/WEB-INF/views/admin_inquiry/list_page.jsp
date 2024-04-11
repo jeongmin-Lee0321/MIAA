@@ -74,9 +74,17 @@
 
 		<div class="content-wrapper">
 			<div class="content-container">
+				<div class="table-caption-wrapper">
+				<div class="talbe-caption-container">
+					<div class="table-caption">
+						<span class="caption-total">${pageVo.totRow}개</span><span>의 문의내역이 있습니다</span>
+					</div>
+				</div>
 				<div class="list-control-container">
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();"
 						style="cursor: pointer;">삭제하기</button>
+				</div>
+				
 				</div>
 				<table class="info-table">
 					<tr>
@@ -158,6 +166,9 @@
 			}
 			else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
 				currpage= pageNumber-(pageNumber-1)%10;
+			}
+			else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
+				currpage= pageNumber-((pageNumber-1)%10)+9;
 			}
 			var newPath = window.location.pathname + '?currPage=' + currpage;
 			window.location.href = newPath; // 새 경로로 페이지 이동

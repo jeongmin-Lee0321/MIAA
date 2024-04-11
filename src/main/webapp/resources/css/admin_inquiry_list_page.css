@@ -1,5 +1,12 @@
+
+/*  */
 .main-body {
 	width: 1220px;
+}
+a:link{color: black;}
+a:visited,a:active{color: black;}
+a:hover{
+	color: #0066ff;
 }
 
 /* table */
@@ -15,10 +22,25 @@
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 2px 6px 0px
 		rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
 }
+/*테이블 상단 캡션  */
+.table-caption-wrapper{
+	display: flex;
+	justify-content: space-between;
+	
+}
+.talbe-caption-container{
+	display: flex;
+	align-items: center;
+}
+.table-caption{
+	padding-left: 15px;
 
+}
+span.caption-total{
+	color: #0066ff;
+}
 .list-control-container {
 	height: 83px;
-	width: 1160px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -74,9 +96,6 @@
 	width: 50px;
 
 }
-.info-table span{
-	display : inline-block;
-}
 .table-title{
 	width: 405px;
 }
@@ -95,9 +114,9 @@
 }
 
 .table-check-box {
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	border-radius: 35%;
 	border: 1px solid #999;
 	appearance: none;
 	cursor: pointer;
@@ -176,13 +195,6 @@ ul.pagelist-container>li:not([class])>a {
   padding: 0.5em;
 }
 
-/* 현재페이지인 a태그에 색상 표시 */
-ul.pagelist-container>li:not([class]) span.currpage {
-    display: inlinblock;
-    color: #0066ff;
-    padding: 0.5em;
-}
-
 .btn-next>a>img {
   transform: rotate(180deg);
 }
@@ -202,3 +214,12 @@ ul.switchBtn-container>li>a {
   padding: 0.3em 0.6em;
   border: 1px solid #D0D5DD;
 }
+
+/* 현재페이지인 a태그에 색상 표시 */
+ul.pagelist-container>li:not([class]) span.currpage {
+    display: inlinblock;
+    color: #0066ff;
+    padding: 0.5em;
+}
+
+
