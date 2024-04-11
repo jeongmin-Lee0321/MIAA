@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class RescueAniController {
@@ -50,8 +51,14 @@ public class RescueAniController {
         } else {
             abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(current_dto, page_VO.getPage());
         }
+
         int totalCount = 0;
         itemList = abdmPublic.getItems();
+        //성별 filtering
+        if (current_dto != null){
+            List<AbdmPublicItem> filterItems = itemList.stream().filter(x -> x.getSexCd().equals(current_dto.getSexSelectedBox())).collect(Collectors.toList());
+            itemList = filterItems;
+        }
         if (abdmPublic.getTotalCount() != null) {
             totalCount = Integer.parseInt(abdmPublic.getTotalCount());
         }
