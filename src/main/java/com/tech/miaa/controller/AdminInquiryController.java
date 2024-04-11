@@ -76,7 +76,7 @@ public class AdminInquiryController {
 		
 		
 		try {
-			pageVo = adminInquiryInter.get_pagevo(model);
+			adminInquiryInter.get_pagevo(model);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
