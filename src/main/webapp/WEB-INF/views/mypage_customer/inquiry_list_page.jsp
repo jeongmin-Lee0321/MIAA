@@ -121,10 +121,10 @@
                     class="total-page">${pageVO.totPage}</span>
             </div>
             <ul class="pagelist-container">
-            	<c:if test="${pageVO.page > 1}">
+            	
                 <li class="btn-prev"><a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
-                </c:if>
+                
                 <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
                     <c:choose>
                         <c:when test="${i eq pageVO.page}">
@@ -135,23 +135,20 @@
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
-                <c:if test="${pageVO.page < pageVO.pageEnd}">
+                
                 <li class="btn-next"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
                         src="resources/img/chevron-left.png" alt=""></a></li>
-                </c:if>
+                
             </ul>
 
             <ul class="switchBtn-container">
-            <c:choose>
-	            <c:when test="${pageVO.page > 1} \\ ${pageVO.page < pageVO.pageEnd}">
+            
+	            
                 <li class="btn-prev-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page - 10}">Previous</a></li>
                 <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 10}">Next</a></li>                
-                </c:when>
-                <c:otherwise>
-                <li class="btn-prev-group"><a href="">Previous</a></li>
-                <li class="btn-next-group"><a href="">Next</a></li>
-                </c:otherwise>
-            </c:choose>
+                
+                
+            
             </ul>
         </div>
         
