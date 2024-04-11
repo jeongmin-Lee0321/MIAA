@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- dao의 인터페이스 주소 -->
+<mapper namespace="com.tech.miaa.dao.InquiryDao">
+	<insert id="inquiry_wirte" parameterType="hashMap">
+		INSERT INTO USER_INQUIRY_BOARD VALUES(#{userId},BOARD_NUM_SEQ.NEXTVAL,#{inquiry_title},#{inquiry_content},SYSTIMESTAMP,DEFAULT,#{inquiry_file, jdbcType = VARCHAR})
+		<!-- 현재 시퀀스 값 가져오기위한 selectKey  -->
+		<selectKey keyProperty="board_num" resultType="String" order="AFTER">
+       		SELECT BOARD_NUM_SEQ.CURRVAL FROM DUAL
+  		</selectKey>
+	</insert>
+	<!-- 현재 시퀀스 admin_inquiry에 insert -->
+	<insert id="admin_inquiry_add">
+		INSERT INTO ADMIN_INQUIRY_BOARD(BOARD_NUM) VALUES(#{board_num})
+	</insert>
+	
+	<select id="inquiry_list" resultType="com.tech.miaa.dto.InquiryDto">
+		SELECT BOARD_NUM,RNUM,BOARD_TITLE,BOARD_REPLY_STATUS,BOARD_REGISTRATION_DATE FROM (SELECT ROWNUM RNUM, N.* FROM (SELECT BOARD_NUM,BOARD_TITLE,BOARD_REPLY_STATUS,TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE FROM USER_INQUIRY_BOARD WHERE USER_ID=#{param1} ORDER BY BOARD_NUM ASC) N ) WHERE RNUM BETWEEN #{param3} AND #{param2} ORDER BY RNUM DESC
+	</select>
+	<select id="modify_list" resultType="com.tech.miaa.dto.InquiryDto">
+		SELECT BOARD_NUM,BOARD_TITLE,BOARD_CONTENT,BOARD_FILESRC FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</select>
+	<select id="detail_list" resultType="com.tech.miaa.dto.InquiryDto">
+		SELECT BOARD_NUM,BOARD_TITLE,BOARD_CONTENT,TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE,BOARD_FILESRC,BOARD_REPLY_STATUS FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</select>
+	<delete id="delete">
+		DELETE FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</delete>
+	<update id="inquiry_modify">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4},BOARD_FILESRC=#{param5} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</update>
+	<update id="inquiry_modify_present">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4},BOARD_FILESRC=#{param5} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
+	</update>
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*) FROM USER_INQUIRY_BOARD
+	</select>
+
+</mapper>
