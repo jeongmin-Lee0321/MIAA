@@ -24,6 +24,7 @@ import org.xml.sax.InputSource;
 
 import com.tech.miaa.dto.FounddetailDto;
 import com.tech.miaa.dto.FounditemDto;
+import com.tech.miaa.dto.FoundsearchDto;
 import com.tech.miaa.serviceInter.FounditemServiceInter;
 import com.tech.miaa.util.PrdCode;
 
@@ -31,6 +32,7 @@ public class FounditemService implements FounditemServiceInter {
 
 	public static String ServiceKey = "XDBJ0UVn425mRe%2Fi9JDxdSEyLFFr1xKIRRPGJGZDKuR6QfNj4CbpIg0V%2FGxI6VbU8FM6e3tr70yQNMZ13cd%2BJw%3D%3D"; // 서비스키
 	private int total = 0;
+	private int AllsearchPage = 1;
 
 	@Override
 	// 분류별, 지역별, 기간별 습득물 정보 조회
@@ -43,18 +45,20 @@ public class FounditemService implements FounditemServiceInter {
 		String result_code = ""; // 전체 결과값
 		String PRDT_CL_CD_01 = ""; // 대분류
 		String PRDT_CL_CD_02 = ""; // 중분류
-//		String FD_COL_CD = ""; // 색상코드
+		String FD_COL_CD = ""; // 색상코드
 		String START_YMD = ""; // 시작일
 		String END_YMD = ""; // 종료일
 		String N_FD_LCT_CD = ""; // 습득지역(코드)
 
-		System.out.println(request.getParameter("cityname") + " , " + request.getParameter("cityname2"));
-
-		if (request.getParameter("cityname2").equals("") && !request.getParameter("cityname").equals(""))
+//		if (request.getParameter("cityname2").equals("") && !request.getParameter("cityname").equals(""))
+//			N_FD_LCT_CD = request.getParameter("cityname");
+//		else if (!request.getParameter("cityname2").equals("") && !request.getParameter("cityname2").isEmpty())
+//			N_FD_LCT_CD = request.getParameter("cityname2");
+		
+		if (!request.getParameter("cityname").equals(""))
 			N_FD_LCT_CD = request.getParameter("cityname");
-		else if (!request.getParameter("cityname2").equals("") && !request.getParameter("cityname2").isEmpty())
-			N_FD_LCT_CD = request.getParameter("cityname2");
-		String pageNo = request.getParameter("pageNo");
+		
+		String pageNo = request.getParameter("allsearchPage");
 
 		if ((!request.getParameter("prd_mainCategory").equals(""))
 				&& (!request.getParameter("prd_mainCategory").isEmpty()))
@@ -66,13 +70,13 @@ public class FounditemService implements FounditemServiceInter {
 				&& (!request.getParameter("prd_subCategory").isEmpty()))
 			PRDT_CL_CD_02 = prd.getPrdCode(request.getParameter("prd_subCategory").replace(" ", "")).toString();
 		System.out.println("중분류코드:" + PRDT_CL_CD_02);
-//		if (!request.getParameter("FD_COL_CD").equals(""))
-//			FD_COL_CD = request.getParameter("FD_COL_CD");
+		if (!request.getParameter("color").equals(""))
+			FD_COL_CD = request.getParameter("color");
 		if (!request.getParameter("START_YMD").equals(""))
 			START_YMD = request.getParameter("START_YMD");
 		if (!request.getParameter("END_YMD").equals(""))
 			END_YMD = request.getParameter("END_YMD");
-
+		
 		if (pageNo == null || pageNo.equals(""))
 			pageNo = "1";
 
@@ -89,9 +93,9 @@ public class FounditemService implements FounditemServiceInter {
 			if (!PRDT_CL_CD_02.equals(""))
 				urlBuilder.append("&" + URLEncoder.encode("PRDT_CL_CD_02", "UTF-8") + "="
 						+ URLEncoder.encode(PRDT_CL_CD_02, "UTF-8")); /* 중분류 */
-//			if (!FD_COL_CD.equals(""))
-//				urlBuilder.append("&" + URLEncoder.encode("FD_COL_CD", "UTF-8") + "="
-//						+ URLEncoder.encode(FD_COL_CD, "UTF-8")); /* 습득물 색상 */
+			if (!FD_COL_CD.equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("FD_COL_CD", "UTF-8") + "="
+						+ URLEncoder.encode(FD_COL_CD, "UTF-8")); /* 습득물 색상 */
 			if (!START_YMD.equals(""))
 				urlBuilder.append("&" + URLEncoder.encode("START_YMD", "UTF-8") + "="
 						+ URLEncoder.encode(START_YMD.replace("-", ""), "UTF-8")); /* 검색시작일 */
@@ -229,6 +233,10 @@ public class FounditemService implements FounditemServiceInter {
 			// <item> 요소들을 NodeList로 가져옴
 			NodeList itemList = doc.getElementsByTagName("item");
 			NodeList totalCountList = doc.getElementsByTagName("totalCount"); // 검색결과 갯수
+			NodeList pageNo = doc.getElementsByTagName("pageNo"); // 검색결과 갯수
+			
+			AllsearchPage = Integer.parseInt(pageNo.item(0).getTextContent());
+			
 			total = Integer.parseInt(totalCountList.item(0).getTextContent());
 
 			// <item> 요소들을 순회하며 파싱
@@ -281,6 +289,10 @@ public class FounditemService implements FounditemServiceInter {
 		return total;
 	}
 
+	public int getAllsearchPage() {
+		return AllsearchPage;
+	}
+
 	@Override
 	public FounddetailDto found_item_detailview(String atc_id, String fd_sn) {
 		// TODO Auto-generated method stub
@@ -316,8 +328,8 @@ public class FounditemService implements FounditemServiceInter {
 
 			result_code = sb.toString();
 
-			System.out.println("작동완료, 디테일코드xml : "+result_code);
-			
+			System.out.println("작동완료, 디테일코드xml : " + result_code);
+
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(new InputSource(new StringReader(result_code)));
@@ -370,6 +382,21 @@ public class FounditemService implements FounditemServiceInter {
 			e.printStackTrace();
 		}
 
+		return dto;
+	}
+
+	@Override
+	public FoundsearchDto getFoundsearchValue(Model model) {
+		FoundsearchDto dto = new FoundsearchDto();
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		dto.setCity(request.getParameter("cityname"));
+//		dto.setCity2(request.getParameter("cityname2"));
+		dto.setColor(request.getParameter("color"));
+		dto.setStartYMD(request.getParameter("START_YMD"));
+		dto.setEndYMD(request.getParameter("END_YMD"));
+		dto.setMainCategory(request.getParameter("prd_mainCategory"));
+		dto.setSubCategory(request.getParameter("prd_subCategory"));
 		return dto;
 	}
 

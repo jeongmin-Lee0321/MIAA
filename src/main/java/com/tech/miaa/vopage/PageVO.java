@@ -1,5 +1,14 @@
 package com.tech.miaa.vopage;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageVO {
     private Integer displayRowCount = 10;           // 출력할 데이터 개수
     private Integer grpPageCnt=10;                   //// 페이지그룹에서 페이지갯수 수정*
@@ -38,7 +47,7 @@ public class PageVO {
      * 현재 페이지 번호. 
      */
     public Integer getPage() {
-        if (page == null || page == 0) {
+        if (page == null || page == 0 || page < 0) {
             page = 1;
         }
         
@@ -104,6 +113,8 @@ public class PageVO {
     public void setPageEnd(Integer pageEnd) {
         this.pageEnd = pageEnd;
     }
+
+    public void setNextPage() { page++; }
   
 }
 

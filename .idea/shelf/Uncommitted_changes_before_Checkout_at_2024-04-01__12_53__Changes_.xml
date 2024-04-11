@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Checkout_at_2024-04-01_오후_12_53_[Changes]" date="1711943595715" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오후_12_53_[Changes]/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2024-04-01 오후 12:53 [Changes]" />
-  <binary>
-    <option name="BEFORE_PATH" value="target/classes/com/tech/miaa/dto/MemberDto.class" />
-    <option name="AFTER_PATH" value="target/classes/com/tech/miaa/dto/MemberDto.class" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-01_오후_12_53_[Changes]/MemberDto.class" />
-  </binary>
-</changelist>

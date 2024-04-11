@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tech.miaa.util.PrdCode.Prd;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +30,7 @@ public class ItemDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
-	private ArrayList<String> imgList;
+	private String addressCode;
+	private String total_id1;
+	private String filename;
 }

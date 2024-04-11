@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class AdminInquiryController {
 		}
 		else if (isAdmin.equals("admin")) {
 			System.out.println("관리자입니다.");
-			result = "admin_inquiry.list_page.1대1문의관리.3a";	
+			result = "admin_inquiry.list_page.1대1문의관리.3a";
 		}
 		
 		//싱글톤위한 값 전달
@@ -64,7 +65,7 @@ public class AdminInquiryController {
 		
 		
 			
-		return result;
+		return "admin_inquiry.list_page.1대1문의관리.3a";
 	}
 
 }
