@@ -14,6 +14,8 @@
 </head>
 <body>
 
+
+
 	<script type="text/javascript">
 		$(function() {
 			var chkObj = document.getElementsByName("RowCheck");
@@ -75,7 +77,11 @@
 		}
 	</script>
 
-	<div class="main-body">
+
+
+
+
+		<div class="main-body">
 		<div class="main-contents">
 			<!-- 검색창과 검색결과 -->
 			<!-- result-container시작 -->
