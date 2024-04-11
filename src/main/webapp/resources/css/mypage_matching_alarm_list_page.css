@@ -113,7 +113,8 @@ a:hover{
 .info-table th {
 	background-color: #FAFAFA;
 	border: 1px solid #FAFAFA;
-	font-size: 14px;
+	font-size: 16px;
+	width: 110px;
 	height: 50px;
 	border-bottom: 1px solid #EAECF0;
 	/* 글넘침 방지 */
@@ -131,7 +132,8 @@ a:hover{
 }
 .info-table td {
 	background-color: white;
-	font-size: 14px;
+	font-size: 16px;
+	width: 110px;
 	height: 80px;
 	color: #101828;
 	text-align: center;
