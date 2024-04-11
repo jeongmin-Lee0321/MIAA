@@ -20,14 +20,13 @@ public interface InquiryDao {
 
 	public void inquiry_modify(String num, String id, String title, String content, String file);
 
-	public void inquiry_modify_present(String num, String id, String title, String content, String file_hidden);
-
 	public Integer total();
 
 	
 		
 
 	public void admin_inquiry_add(HashMap<String,Object> map1);
+
 	
 	
 

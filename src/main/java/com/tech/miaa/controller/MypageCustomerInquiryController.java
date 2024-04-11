@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.InquiryDto;
@@ -120,10 +122,13 @@ public class MypageCustomerInquiryController {
 //	게시물 작성
 	@RequestMapping("inquiry_write")
 	public String inquiry_write(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId) {
+			@SessionAttribute(name = "userId", required = false) String userId,
+			@RequestParam("files") ArrayList<MultipartFile> files) {
+		
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		model.addAttribute("files", files);
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		mypageCustomerInquiryServiceInter.inquiry_wirte(model);
 
@@ -133,10 +138,13 @@ public class MypageCustomerInquiryController {
 //	게시물 수정
 	@RequestMapping("inquiry_modify")
 	public String inquiry_modify(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId) {
+			@SessionAttribute(name = "userId", required = false) String userId,
+			@RequestParam("files") ArrayList<MultipartFile> files) {
+		
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		model.addAttribute("files", files);
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		mypageCustomerInquiryServiceInter.inquiry_modify(model);
 

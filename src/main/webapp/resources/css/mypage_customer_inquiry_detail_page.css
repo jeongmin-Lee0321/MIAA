@@ -9,7 +9,30 @@
   padding: 10px 20px;
   width: 100%;
 }
-
+.image-selection {
+    width: 1180px;
+    height: 360px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+/* .image-container{
+    position: relative;
+    overflow: hidden;
+}
+.image-container img{
+    tratransition: all 0.2s linear;
+}
+.image-container:hover img{
+    transform: scale(1.4);
+} */
+#inquiry-image {
+    width: 640px;
+    height: 360px;
+    border-radius: 20px;
+}
 /* 2번레이아웃 메인 내부 셀렉션 프레임 */
 .index{
   font-size: 14px;
