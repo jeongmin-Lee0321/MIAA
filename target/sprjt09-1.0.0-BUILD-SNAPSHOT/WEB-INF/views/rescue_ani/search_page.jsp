@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="resources/css/main_contents.css"/>
     <script src="<c:url value="/resources/js/jquery-3.7.1.min.js"/>" type="text/javascript"></script>
     <script type="text/javascript">
-        function getSigungu(val, sigungu) {
-            // document.sido_selected_code.value = val;
-            // alert(sigugun);
+        function getSigungu(val) {
             var optionTag = document.getElementById("sigunguSelectBox");
             optionTag.innerHTML = '<option value="">-전체-</option>';
             switch (val) {
@@ -587,26 +585,20 @@
             var upKindSelectBox = document.getElementById("upKindSelectBox");
             var kindSelectedBox = document.getElementById("kindSelectedBox");
 
-            sidoSelectBox.value = selectedSido;
-            upKindSelectBox.value = selectedUpKind;
-            if (selectedSido !== "" && selectedSido !== null) {
-            }
-                getSigungu(selectedSido);
-                sigunguSelectBox.value = selectedSigungu;
+            getSigungu(selectedSido);
+            getKind(selectedUpKind);
 
-
-            if (upKindSelectBox !== "" && upKindSelectBox !== null) {
-            }
-                getKind(selectedUpKind);
-                kindSelectedBox.value = selectedKind;
-        };
-
+            sigunguSelectBox.value = selectedSigungu;
+            kindSelectedBox.value = selectedKind;
+        }
     </script>
 
     <title>Insert title here</title>
 </head>
 <body>
 <div class="main-contents">
+    <c:out value="${dto.upKindSelectBox}"></c:out>
+    <c:out value="${dto.kindSelectedBox}"></c:out>
     <!-- 검색창과 검색결과 -->
     <form action="/rescue_ani_search_page" method="post">
         <div class="searchbar-container">
@@ -630,7 +622,8 @@
                     <div class="searchbar-content">
                         <select name="sidoSelectBox" id="sidoSelectBox" onchange="getSigungu(this.value)">
                             <%--                                                            onchange="selectedSido(this.value,${dto.sigunguSelectBox});"--%>
-                            <option value="" <c:if test="${dto.sidoSelectBox == ''}">selected="selected"</c:if>>-전체-</option>
+                            <option value="" <c:if test="${dto.sidoSelectBox == ''}">selected="selected"</c:if>>-전체-
+                            </option>
                             <option value="6110000"
                                     <c:if test="${dto.sidoSelectBox == '6110000'}">selected="selected"</c:if> >서울특별시
                             </option>
@@ -713,10 +706,17 @@
                     </div>
                     <div class="searchbar-content">
                         <select name="upKindSelectBox" onchange="getKind(this.value)">
-                            <option value="" <c:if test="${dto.upKindSelectBox == ''}">selected="selected"</c:if>>-전체-</option>
-                            <option value="417000" <c:if test="${dto.upKindSelectBox == '417000'}">selected="selected"</c:if>>개</option>
-                            <option value="422400" <c:if test="${dto.upKindSelectBox == '422400'}">selected="selected"</c:if>>고양이</option>
-                            <option value="429900" <c:if test="${dto.upKindSelectBox == '429900'}">selected="selected"</c:if>>기타</option>
+                            <option value="" <c:if test="${dto.upKindSelectBox == ''}">selected="selected"</c:if>>-전체-
+                            </option>
+                            <option value="417000"
+                                    <c:if test="${dto.upKindSelectBox == '417000'}">selected="selected"</c:if>>개
+                            </option>
+                            <option value="422400"
+                                    <c:if test="${dto.upKindSelectBox == '422400'}">selected="selected"</c:if>>고양이
+                            </option>
+                            <option value="429900"
+                                    <c:if test="${dto.upKindSelectBox == '429900'}">selected="selected"</c:if>>기타
+                            </option>
                         </select>
                         <span>-</span>
                         <select name="kindSelectedBox" id="kindSelectedBox">
@@ -817,44 +817,46 @@
                 <ul class="pagelist-container">
                     <li class="btn-prev"><a class="test" href="rescue_ani_search_page?page=${pageVO.page - 1}"><img
                             src="resources/img/chevron-left.png" alt=""></a></li>
-<%--                    <button class="btn-prev" type="submit" name="pageVO.page" value="${pageVO.page-1}"><img--%>
-<%--                            src="resources/img/chevron-left.png" alt=""></button>--%>
+                    <%--                    <button class="btn-prev" type="submit" name="pageVO.page" value="${pageVO.page-1}"><img--%>
+                    <%--                            src="resources/img/chevron-left.png" alt=""></button>--%>
                     <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
                         <c:choose>
                             <c:when test="${i eq pageVO.page}">
-<%--                                <li>${i}</li>--%>
+                                <%--                                <li>${i}</li>--%>
                                 <li><a href="#" style="color: red">${i}</a></li>
-<%--                                <li>--%>
-<%--                                    <button type="submit" name="pageVO.page" value="${pageVO.page = i}"--%>
-<%--                                            style="color: red;">${i}</button>--%>
-<%--                                </li>--%>
+                                <%--                                <li>--%>
+                                <%--                                    <button type="submit" name="pageVO.page" value="${pageVO.page = i}"--%>
+                                <%--                                            style="color: red;">${i}</button>--%>
+                                <%--                                </li>--%>
                             </c:when>
                             <c:otherwise>
-                                 <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>
-<%--                                <li>--%>
-<%--                                    <button type="submit" name="pageVO"--%>
-<%--                                            value="${pageVO.page = i}">${i}</button>--%>
-<%--                                </li>--%>
+                                <li><a href="rescue_ani_search_page?page=${i}">${i}</a></li>
+                                <%--                                <li>--%>
+                                <%--                                    <button type="submit" name="pageVO"--%>
+                                <%--                                            value="${pageVO.page = i}">${i}</button>--%>
+                                <%--                                </li>--%>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
 
 
-                        <li class="btn-next"><a href="rescue_ani_search_page?page=${pageVO.page + 1}"><img
-                                src="resources/img/chevron-left.png" alt=""></a></li>
-<%--                    <button class="btn-next" type="submit" name="pageVO.page" value="${pageVO.getPage() + 1}"><img--%>
-<%--                            src="resources/img/chevron-right.png" alt=""></button>--%>
+                    <li class="btn-next"><a href="rescue_ani_search_page?page=${pageVO.page + 1}"><img
+                            src="resources/img/chevron-left.png" alt=""></a></li>
+                    <%--                    <button class="btn-next" type="submit" name="pageVO.page" value="${pageVO.getPage() + 1}"><img--%>
+                    <%--                            src="resources/img/chevron-right.png" alt=""></button>--%>
                 </ul>
 
                 <ul class="switchBtn-container">
-                    <li class="btn-prev-group"><a href="rescue_ani_search_page?page=${pageVO.getPageEnd()-19}">Previous</a></li>
-                    <li class="btn-next-group"><a href="rescue_ani_search_page?page=${pageVO.getPageEnd()+1}">Next</a></li>
-<%--                    <button class="btn-prev-group" type="submit" name="pageVO.page"--%>
-<%--                            value="${pageVO.getPageEnd()-19}">Previous--%>
-<%--                    </button>--%>
-<%--                    <button class="btn-next-group" type="submit" name="pageVO.page"--%>
-<%--                            value="${pageVO.getPageEnd()+1}">Next--%>
-<%--                    </button>--%>
+                    <li class="btn-prev-group"><a
+                            href="rescue_ani_search_page?page=${pageVO.getPageEnd()-19}">Previous</a></li>
+                    <li class="btn-next-group"><a href="rescue_ani_search_page?page=${pageVO.getPageEnd()+1}">Next</a>
+                    </li>
+                    <%--                    <button class="btn-prev-group" type="submit" name="pageVO.page"--%>
+                    <%--                            value="${pageVO.getPageEnd()-19}">Previous--%>
+                    <%--                    </button>--%>
+                    <%--                    <button class="btn-next-group" type="submit" name="pageVO.page"--%>
+                    <%--                            value="${pageVO.getPageEnd()+1}">Next--%>
+                    <%--                    </button>--%>
                 </ul>
             </div>
             <!-- 페이징 프레임 끝 -->
