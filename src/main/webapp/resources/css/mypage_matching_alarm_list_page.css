@@ -159,9 +159,8 @@
 	margin-bottom: 1rem;
 }
 
-.item-title>span {
-	padding: 0.4em 0.4em;
-}
+
+
 
 .item-details {
 	flex-grow: 1;
@@ -181,15 +180,35 @@
 
 .item-details>li>span {
 	padding: 0.4em 0.4em;
+} 
+
+
+
+
+	/* 원진호_0409수정 */
+.item-details li span{
+ 	height: 40px; 
 }
 
-.item-details>li>span:not (.detail-title ) {
-	flex-grow: 1;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	word-break: break-all;
+
+	/* 원진호_0409수정 */
+.show_lost_item_info_container{
+	display: flex;
+	justify-content: space-between;
+	height: 40px;
+ 	margin-bottom: 20px;
+	margin-top: 20px; 
+
 }
+
+
+
+
+
+
+
+
+
 
 .detail-title {
 	flex-shrink: 0;
@@ -271,7 +290,7 @@ ul.switchBtn-container>li>a {
 .page_root {
 	line-height: 50px;
 	text-align: right;
-	margin-right: 50px;
+	margin-right: 25px;
 }
 
 .registrationed_alarm_keywords {
@@ -301,12 +320,18 @@ ul.switchBtn-container>li>a {
 	font-size: 20px;
 }
 
+
+
+.item_tag_00{
+	color:black;
+}
+
 .item_tag_01 {
 	font-weight: bold;
-	background-color: #F7E8FF;
+	background-color: #F7E8FF; 
 	color: #8910D9;
-	border-radius: 30%;
-	margin-left: 50px;
+	border-radius: 30%; 
+	
 }
 
 .item_tag_02 {
@@ -365,42 +390,47 @@ ul.switchBtn-container>li>a {
 	width: 100px;
 	background-color: white;
 	border-radius: 10px;
+	margin-left: 20px;
 }
 
 .btn-set {
 	display: flex;
 	justify-content: flex-start;
 	margin-right: auto;
+	/* weon_0410추가 */
+	background-color: white; 
 }
 
-.view_all_btn {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
+ .view_all_btn {
+/* 	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px; */
+	width: 87px;
+} 
 
 .item_btn {
-	border: 2px solid;
+	/* border: 2px solid; */
+	width: 87px;
 }
 
 .ani_btn {
-	border: 2px solid;
+	/* border: 2px solid; */
+	width: 87px;
 }
 
 .keyword_list_btn {
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+/* 	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px; */
+	width: 87px;
 }
 
 .set_02 {
 	display: flex;
 	justify-content: flex-end;
 	margin-left: auto;
-	margin-right: 200px;
+	margin-right: 25px;
 }
 
-.alarm_delete {
-	margin-left: 30px;
-}
+
 
 select {
 	margin-right: 20px;
@@ -417,12 +447,118 @@ select {
 	border-radius: 8px;
 	padding: 10px 12px;
 	font-size: 14px;
+	/* 원진호_0411_추가 */
+	text-align: left;
+	padding-left: 40px;
+	
 }
 
 .search_icon {
 	position: absolute;
 	width: 17px;
 	top: 10px;
-	right: 12px;
+	/* 원진호_0411_수정 */
+	left: 12px;	
 	margin: 0;
+}
+
+
+
+/* 원진호_0404추가 */
+/* 원진호_0404_매칭알림목록_개별 분실물명. */
+.item-title span .matched_lost_item_name{
+	color:black;
+}
+
+.item-title{
+	height:11px; 
+}
+
+
+/* 원진호_0409_추가 */
+.list-card {
+  background: #ffffff;
+  padding: 15px 10px 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 100%;
+  /* min-width: 230px; */
+  max-width: 14.375rem;
+  height: 99%;
+  position: relative;
+  box-shadow:
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-photo {
+  width: 14rem;
+  height: calc(0.5625rem*14);
+  /* background-color: #0066ff; */
+  border-radius: 8px;
+}
+
+.card-photo>img {
+
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.content-items {
+  align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  font-size: calc(1rem*15/16);
+  margin-bottom: 1rem;
+}
+
+.item-title>span {
+  padding: 0.4em 0.4em;
+}
+
+.item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: calc(1rem*13/16);
+  font-weight: 400;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.item-details>li {
+  display: flex;
+}
+
+.item-details>li>span {
+  padding: 0.4em 0.4em;
+}
+
+.item-details>li>span:not(.detail-title) {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+.detail-title {
+  flex-shrink: 0;
+}
+
+#select_content{
+	border-radius: 10px;
 }

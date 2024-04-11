@@ -11,10 +11,10 @@
 <body>
  <div class="main-selection">
       <div class="selection-name">
-        <span>매칭 알림 목록</span>
+        <span>매칭 알람(상세목록)</span>
       </div>
       <div class="selection-explain">
-        <span> 등록하신 분실물, 실종동물의 글을 기반으로 알림이 등록되고 매칭됩니다.</span>    
+        <span>등록하신 분실물, 실종동물의 글을 기반으로 알람이 등록되고 매칭됩니다.</span>
       </div>
     </div>
 </body>
