@@ -140,7 +140,7 @@ function deleteValue(){
 							</select>
 						</div>
 						<div class="searchbar-content">
-							<input type="search" name="q" id="q" style="min-width: 300px;">
+							<input type="search" name="search_content" id="search_content" style="min-width: 300px;">
 						</div>
 					</div>
 

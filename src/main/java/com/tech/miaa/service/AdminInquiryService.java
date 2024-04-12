@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.tech.miaa.dao.AdminInquiryDao;
 import com.tech.miaa.dto.AdminInquiryDto;
+import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.serviceInter.AdminInquiryServiceInter;
 import com.tech.miaa.vopage.PageVO;
 
@@ -32,12 +33,16 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
 		int rowStart = pageVo.getRowStart();
 		int rowEnd = pageVo.getRowEnd();
-
+		
+		//전달받은 검색 조건 세팅
+		set_search_dto(model,pageVo);
+		
+		//db에서 list가져오기
 		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
 		ArrayList<AdminInquiryDto> list = null;
 		if (rowStart == 0 && rowEnd == 0) {
 			System.out.println("get_pagevo 문제발생");
-
+		
 		} else {
 			try {
 				list = dao.join_inquiry_list(rowStart, rowEnd);
@@ -92,6 +97,57 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		System.out.println("전달받은 현재페이지" + currPage);
 
 		return pageVo;
+	}
+	@Override
+	public void set_search_dto(Model model, PageVO pageVo) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
+		int rowStart = pageVo.getRowStart();
+		int rowEnd = pageVo.getRowEnd();
+		dto.setRowEnd(rowEnd);
+		dto.setRowStart(rowStart);
+		
+		//param-> null 이면 최초 화면
+		
+		//param -> null이 아니면 검색조건 추가한 창
+
+		String START_YMD=request.getParameter("START_YMD");
+		String END_YMD=request.getParameter("END_YMD");
+		//시작o 끝 x - 끝 오늘
+		//시작x 끝 o - 시작 6개월 전
+		//시작x 끝 x - 전체
+		//시작o 끝 o
+		String reply_status=request.getParameter("reply_status");
+		
+		String search_type=request.getParameter("search_type");
+		String search_content=request.getParameter("search_content");
+		
+		
+		
+		System.out.println("dto.getEND_YMD(): "+dto.getEND_YMD());
+		System.out.println("START_YMD: "+START_YMD==null);
+		System.out.println("START_YMD: "+START_YMD);
+		System.out.println("END_YMD: "+END_YMD==null);
+		System.out.println("END_YMD: "+END_YMD);
+		/*
+		 * System.out.println("reply_status: "+reply_status=="");
+		 * System.out.println("reply_status: "+reply_status);
+		 * System.out.println("search_type: "+search_type=="");
+		 * System.out.println("search_type: "+search_type);
+		 */
+		System.out.println("search_content: "+search_content==null);
+		System.out.println("search_content: "+search_content);
+		
+		
+		
+		dto.setEND_YMD(END_YMD);
+		dto.setSTART_YMD(START_YMD);
+		dto.setReply_status(reply_status);
+		dto.setSearch_type(search_type);
+		dto.setSearch_content(search_content);
+		
 	}
 	
 	
