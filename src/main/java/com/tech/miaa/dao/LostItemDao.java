@@ -19,4 +19,5 @@ public interface LostItemDao {
 	public void lost_item_delete_content(String total_id);
 	public void lost_item_modify(String tel, String openclose, String lostday, String address, String itemname,
 			String upkind, String upr_cd, String colorCd, String sepcialMark, String addressCode, String total_id);
+	public ArrayList<ItemDto> get_lost_items(String userId);
 }

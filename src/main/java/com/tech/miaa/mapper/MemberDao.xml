@@ -35,4 +35,7 @@
     <select id="login2" resultType="com.tech.miaa.dto.MemberDto">
         SELECT * FROM MEMBER WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
     </select>
+    <select id="getMembers" resultType="com.tech.miaa.dto.MemberDto">
+        SELECT * FROM MEMBER
+    </select>
 </mapper>
