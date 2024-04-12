@@ -108,6 +108,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		dao.delete(string,id);
+		dao.delete_admin(string);
 		
 	}
 	@Override

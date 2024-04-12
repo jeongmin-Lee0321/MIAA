@@ -18,6 +18,7 @@ public interface InquiryDao {
 
 	public void delete(String string, String id);
 
+	public void delete_admin(String string);
 
 	public void inquiry_modify(String num, String id, String title, String content, String file);
 
@@ -27,6 +28,7 @@ public interface InquiryDao {
 	public Integer get_total(String id);
 		
 	public void admin_inquiry_add(HashMap<String,Object> map1);
+
 
 
 	

@@ -67,6 +67,9 @@
 	<delete id="delete">
 		DELETE FROM USER_INQUIRY_BOARD WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
 	</delete>
+	<delete id="delete_admin">
+		DELETE FROM ADMIN_INQUIRY_BOARD WHERE BOARD_NUM=#{param1}
+	</delete>
 	<update id="inquiry_modify">
 		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4},BOARD_FILESRC=#{param5} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
 	</update>

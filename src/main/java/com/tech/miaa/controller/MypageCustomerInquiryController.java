@@ -132,8 +132,8 @@ public class MypageCustomerInquiryController {
 	}
 
 //	게시물 선택삭제
-	@RequestMapping(value = "/delete")
-	public String delete(HttpServletRequest request, Model model,
+	@RequestMapping(value = "/inquiry_delete")
+	public String inquiry_delete(HttpServletRequest request, Model model,
 			@SessionAttribute(name = "userId", required = false) String userId) {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
