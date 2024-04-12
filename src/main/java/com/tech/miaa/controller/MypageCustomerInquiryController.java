@@ -36,40 +36,20 @@ public class MypageCustomerInquiryController {
 //	문의내역 페이지
 	@RequestMapping("mypage_customer_inquiry_list_page")
 	public String mypage_customer_inquiry_list_page(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId) {
+			@SessionAttribute(name = "userId", required = false) String userId, PageVO2 pageVo2) {
 		
-		String strPage = request.getParameter("page");
-		
-		if (strPage == null) {
-			strPage = "1";
-		}
-		
-		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-		int page = Integer.parseInt(strPage);
-		
-		PageVO2 pageVO = new PageVO2();
-		Integer total=dao.total();
-		
-		pageVO.setPage(page);
-		pageVO.setDisplayRowCount(5);
-		pageVO.pageCalculate(total);
-		
-		System.out.println(""+pageVO.getRowStart());
-		System.out.println(""+pageVO.getRowEnd());
-
+		String strPage = null;
 						
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		model.addAttribute("pageVo",pageVo2);
 		
 		
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		
 		try {
-			ArrayList<InquiryDto> list = mypageCustomerInquiryServiceInter.inquiry_list(model,pageVO);
-			model.addAttribute("pageVO",pageVO);
-			model.addAttribute("list", list);
-
+			mypageCustomerInquiryServiceInter.inquiry_list(model,pageVo2);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

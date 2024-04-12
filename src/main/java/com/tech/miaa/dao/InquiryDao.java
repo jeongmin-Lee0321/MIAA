@@ -9,7 +9,7 @@ public interface InquiryDao {
 
 	public void inquiry_wirte(HashMap<String,Object> map1);
 	
-	public ArrayList<InquiryDto> inquiry_list(String id, String getRowStart, String getRowEnd);
+	public ArrayList<InquiryDto> inquiry_list(String id, int getRowStart, int getRowEnd);
 	
 	public InquiryDto modify_list(String board_num, String id);
 	
@@ -22,11 +22,9 @@ public interface InquiryDao {
 
 	public void inquiry_modify_empty(String num, String id, String title, String content);
 	
-	public Integer total();
-
 	
+	public Integer get_total(String id);
 		
-
 	public void admin_inquiry_add(HashMap<String,Object> map1);
 
 

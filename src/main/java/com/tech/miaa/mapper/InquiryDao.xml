@@ -35,8 +35,8 @@
 	<update id="inquiry_modify_empty">
 		UPDATE USER_INQUIRY_BOARD SET BOARD_TITLE=#{param3},BOARD_CONTENT=#{param4} WHERE BOARD_NUM=#{param1} AND USER_ID=#{param2}
 	</update>
-	<select id="total" resultType="Integer">
-		SELECT COUNT(*) FROM USER_INQUIRY_BOARD
+	<select id="get_total" resultType="Integer">
+		SELECT COUNT(*) FROM USER_INQUIRY_BOARD WHERE USER_ID=#{param1}
 	</select>
 
 </mapper>

@@ -77,10 +77,20 @@
 
 		<div class="content-wrapper">
 			<div class="content-container">
+			
+			<div class="table-caption-wrapper">
+				<div class="talbe-caption-container">
+					<div class="table-caption">
+						<span class="caption-total">${pageVo.totRow}개</span><span>의 문의내역이 있습니다</span>
+					</div>
+				</div>
 				<div class="list-control-container">
 					<button class="btn-list" id="btn-write" onclick="location.href='mypage_customer_inquiry_write_page';" style="cursor: pointer;">문의글 등록</button>
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();" style="cursor: pointer;">삭제하기</button>
 				</div>
+				
+				</div>			
+				
 				<table class="info-table">
 					<tr>
 						<th><input type="checkbox" name="allCheck" id="allCheck"
@@ -112,50 +122,58 @@
 		<!-- page -->
 
 		<div class="result-container">
-		
-		<!-- 페이징 프레임시작 -->
-		
-        <div class="page-container">
-            <div class="currentOftotal">
-                <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
-                    class="total-page">${pageVO.totPage}</span>
-            </div>
-            <ul class="pagelist-container">
-            	
-                <li class="btn-prev"><a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-                
-                <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
-                    <c:choose>
-                        <c:when test="${i eq pageVO.page}">
-                            <li><a href="#" style="color: red">${i}</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                
-                <li class="btn-next"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-                
-            </ul>
+			<div class="page-container">
+				<div class="currentOftotal">
+					<span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+						class="total-page">${pageVo.totPage}</span>
+				</div>
+				<ul class="pagelist-container">
+					<li class="btn-prev"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}-1)"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
+						var="i">
+						<c:choose>
+							<c:when test="${i eq pageVo.page}">
+								<li><span class="currpage">${i}</span></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="javascript:void(0);" onclick="goToPage(${i})">${i}</a></li>
+ 							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<li class="btn-next"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}+1)"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+				</ul>
 
-            <ul class="switchBtn-container">
-            
-	            
-                <li class="btn-prev-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page - 10}">Previous</a></li>
-                <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 10}">Next</a></li>                
-                
-                
-            
-            </ul>
-        </div>
-        
-        <!-- 페이징 프레임 끝 -->
-        
+				<ul class="switchBtn-container">
+					<li class="btn-prev-group"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
+					<li class="btn-next-group"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}+10)">Next</a></li>
+				</ul>
+			</div>
 		</div>
 
 	</div>
+	<script>
+		function goToPage(pageNumber) {
+			var currpage = pageNumber;
+			if (pageNumber<=0){
+				currpage = 1;
+			}else if(currpage>${pageVo.totPage}){//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지 
+				currpage = ${pageVo.totPage};
+			}
+			else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
+				currpage= pageNumber-(pageNumber-1)%10;
+			}
+			else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
+				currpage= pageNumber-((pageNumber-1)%10)+9;
+			}
+			var newPath = window.location.pathname + '?currPage=' + currpage;
+			window.location.href = newPath; // 새 경로로 페이지 이동
+		}
+	</script>
 </body>
 </html>

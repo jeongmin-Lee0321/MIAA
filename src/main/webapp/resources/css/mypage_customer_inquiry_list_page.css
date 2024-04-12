@@ -20,13 +20,28 @@ a:hover{
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 2px 6px 0px
 		rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
 }
+/*테이블 상단 캡션  */
+.table-caption-wrapper{
+   display: flex;
+   justify-content: space-between; 
+   
+}
+.talbe-caption-container{
+   display: flex;
+   align-items: center;
+}
+.table-caption{
+   padding-left: 15px;
 
+}
+span.caption-total{
+   color: #0066ff;
+}
 .list-control-container {
-	height: 83px;
-	width: 1160px;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+   height: 83px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
 }
 
 .btn-list {
@@ -120,13 +135,10 @@ input[type="checkbox"]:hover {
 	width: 40px;
 	height: 40px;
 }
-
 /* page */
 .result-container {
-	width: 1180px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 59px;
+   width: 1180px;
+   margin : 59px auto;
 }
 .page-container {
   font-size: calc(1rem*14/16);
@@ -189,11 +201,22 @@ ul.switchBtn-container {
 
 ul.switchBtn-container>li {
   margin-right: 1rem;
+  width : 77px;
+  flex-shrink: 0;
+  flex-basis :77px;
 }
 
 ul.switchBtn-container>li>a {
-  display: inline-block;
+  display: block;
   border-radius: 8px;
   padding: 0.3em 0.6em;
   border: 1px solid #D0D5DD;
+  text-align: center;
+}
+
+/* 현재페이지인 a태그에 색상 표시 */
+ul.pagelist-container>li:not([class]) span.currpage {
+    display: inlinblock;
+    color: #0066ff;
+    padding: 0.5em;
 }
