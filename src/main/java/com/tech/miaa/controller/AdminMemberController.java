@@ -3,6 +3,7 @@ package com.tech.miaa.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.tech.miaa.dao.MemberDao;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,5 +91,14 @@ public class AdminMemberController {
 		int num = adminMemberServiceInter.admin_codechk(model);
 
 		return num;
+	}
+
+	//jeongmin
+	@RequestMapping("/admin_member_management_page")
+	public String admin_member_management_page(HttpServletRequest request, Model model) {
+		MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+
+
+		return "admin_member.management_page.회원 관리 게시판.3a";
 	}
 }
