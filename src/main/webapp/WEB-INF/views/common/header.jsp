@@ -15,7 +15,7 @@
       </div>
       <div class="nologo_container">
         <div class="menu_cotainer">
-          <div class="menu_title" onclick="location.href='found_item_search_page';" style="cursor: pointer;">
+          <div class="menu_title" onclick="location.href='found_item_search_page?cityname=&allsearchPage=1&prd_mainCategory=&prd_subCategory=&color=&START_YMD=&END_YMD=';" style="cursor: pointer;">
             습득물 찾기
           </div>
           <div class="menu_title" onclick="location.href='lost_item_search_page';" style="cursor: pointer; ">
@@ -53,8 +53,7 @@
               <div class="text-btn-login" onclick="location.href='logout';" >로그아웃</div>
             </button>
             <button class="btn-reg" style="cursor: pointer;">
-            <!-- 원진호  -->
-              <div class="text-btn-reg" onclick="location.href='list';" >내정보</div>
+              <div class="text-btn-reg" onclick="location.href='mypageform';" >내정보</div>
             </button>
 </c:if>         
           </div>

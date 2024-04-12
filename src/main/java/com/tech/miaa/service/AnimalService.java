@@ -38,7 +38,7 @@ public class AnimalService implements AnimalServiceInter {
 			result="redirect:missing_ani_write_view";
 		}else {
 			AnimalDao dao = sqlSession.getMapper(AnimalDao.class);
-			dao.animalWrite(tel,openclose,lostday,address,animalname,animalkind1,animalkind2,sexCd,colorCd,age,sepcialMark,userId);
+//			dao.animalWrite(tel,openclose,lostday,address,animalname,animalkind1,animalkind2,sexCd,colorCd,age,sepcialMark,userId);
 			System.out.println("등록되었습니다.");
 			result="redirect:/";
 		}

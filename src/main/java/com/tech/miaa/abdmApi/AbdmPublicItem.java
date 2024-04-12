@@ -24,9 +24,6 @@ public class AbdmPublicItem {
     public final static String CHARGENM ="chargeNm";
     public final static String OFFICETEL ="officetel";
     public final static String NOTICECOMMENT ="noticeComment";
-    public final static String NUMOFROWS ="numOfRows";
-    public final static String PAGENO ="pageNo";
-    public final static String TOTALCOUNT ="totalCount";
     //유기번호
     private String desertionNo;
     //Thumbnail Image
@@ -73,18 +70,12 @@ public class AbdmPublicItem {
     private String officetel;
     //특이사항
     private String noticeComment;
-    //한 페이지 결과 수
-    private String numOfRows;
-    //페이지 번호
-    private String pageNo;
-    //전체 결과 수
-    private String totalCount;
-    //담당자연락처
+
     public AbdmPublicItem() {
 
     }
 
-    public AbdmPublicItem(String desertionNo, String filename, String happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeNo, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel, String noticeComment, String numOfRows, String pageNo, String totalCount) {
+    public AbdmPublicItem(String desertionNo, String filename, String happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeNo, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel, String noticeComment) {
         this.desertionNo = desertionNo;
         this.filename = filename;
         this.happenDt = happenDt;
@@ -108,9 +99,6 @@ public class AbdmPublicItem {
         this.chargeNm = chargeNm;
         this.officetel = officetel;
         this.noticeComment = noticeComment;
-        this.numOfRows = numOfRows;
-        this.pageNo = pageNo;
-        this.totalCount = totalCount;
     }
 
     public String getDesertionNo() {
@@ -295,29 +283,5 @@ public class AbdmPublicItem {
 
     public void setNoticeComment(String noticeComment) {
         this.noticeComment = noticeComment;
-    }
-
-    public String getNumOfRows() {
-        return numOfRows;
-    }
-
-    public void setNumOfRows(String numOfRows) {
-        this.numOfRows = numOfRows;
-    }
-
-    public String getPageNo() {
-        return pageNo;
-    }
-
-    public void setPageNo(String pageNo) {
-        this.pageNo = pageNo;
-    }
-
-    public String getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(String totalCount) {
-        this.totalCount = totalCount;
     }
 }

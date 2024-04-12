@@ -8,26 +8,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="resources/css/loginform.css" />
+<link rel="stylesheet" href="resources/css/mypage_delete_account_page.css" />
 </head>
 <body>
 <div>
-<main>
-<div>
-회원 탈퇴하기
-</div>
-	 	
-		<div class="login_insert"
+<main> 	
+		<div class="pw_insert"
 			style="width: 100%; height: 400px;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; text-align: center;">
-			<form action="login">
-				
+			<form action="del_account">				
 				<div class="input-box">
-					<input type="text" id="pw" name="pw" placeholder="비밀번호" /> <label
+					<input type="text" id="pw" name="pw" placeholder="비밀번호" required="required" /> <label
 						for="pw">비밀번호</label>
 				</div>
-				<div class="forgot">
-					<div>
-						<input type="submit" id="login" value="확인" style="cursor: pointer;">
+				<div class="check">
+					<div class="delBtn-container">
+						<input type="submit" id="del_account" value="확인" style="cursor: pointer; ">
 					</div>
 					
 				</div>
@@ -37,4 +32,5 @@
 
 </div>
 </body>
+
 </html>

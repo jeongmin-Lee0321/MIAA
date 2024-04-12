@@ -8,6 +8,8 @@ import com.tech.miaa.dto.MemberDto;
 
 public interface MemberServiceInter {
 	public String join(Model model);
+	public String modify_account(Model model);
+	public String del_account(Model model);
 	public int idchek(Model model);
 	public int emailchk(Model model);
 	public String searchid(Model model);

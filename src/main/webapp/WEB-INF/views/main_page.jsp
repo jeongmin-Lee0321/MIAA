@@ -41,6 +41,9 @@
 		<a href="missing_ani_detail_page">missing_ani_detail_page</a><br>
 		<a href="found_item_detail_page">found_item_detail_page</a><br>
 		<a href="lost_item_detail_page">lost_item_detail_page</a><br>
+		<!--관리자페이지 테스트링크  -->
+		<a href="admin_inquiry_list_page">admin_inquiry_list_page</a><br>
+		<a href="admin">admin_joinform</a><br>
 =======
 		</div>
 		<div

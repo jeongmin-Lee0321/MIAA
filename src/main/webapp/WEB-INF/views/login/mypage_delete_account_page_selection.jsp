@@ -11,10 +11,10 @@
 <body>
  <div class="main-selection">
       <div class="selection-name">
-        <span>마이 페이지</span>
+        <span>회원탈퇴</span>
       </div>
       <div class="selection-explain">
-        <span>내정보 페이지 입니다</span>
+        <span>회원탈퇴 페이지 입니다</span>
       </div>
     </div>
 </body>
