@@ -97,7 +97,10 @@
 							<img class="search_icon"
 								src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" onclick="alert('hello world!')">			
 					</div>
-				<button class="alarm_delete" onclick="deleteValue();">알림제거</button>
+				<button class="alarm_delete" onclick="deleteValue();">
+					<img class="alarm_off" src="./resources/img/bell-off.png">
+					<span>알림제거</span>
+				</button>
 			</div>
 		</div>
 		<!-- 원진호_0408_버튼&검색창 추가.끝  -->

@@ -42,8 +42,7 @@
 			var chk = confirm("정말 삭제하시겠습니까?");
 
 			if (chk) {
-				$
-						.ajax({
+				$.ajax({
 							url : url, // 전송 URL
 							type : 'POST', // POST 방식
 							traditional : true,
@@ -85,7 +84,6 @@
 			</div>
 			<div class="set_02">
 			<!-- weonjinho_0411추가 -->
-		
 					<!-- weonjinho_0410추가 -->
 					<select name="select_content" id="select_content">
 						<option value="제목+내용">제목+내용</option>
@@ -97,7 +95,10 @@
 						
 							<img class="search_icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" onclick="alert('hello world!')">			
 					</div>	
-				<button class="alarm_delete" onclick="deleteValue();">알림제거</button>
+				<button class="alarm_delete" onclick="deleteValue();">
+					<img class="alarm_off" src="./resources/img/bell-off.png">
+					<span>알림제거</span>
+				</button>
 			</div>
 		</div>
 		<!-- 원진호_0408_버튼&검색창 추가.끝  -->

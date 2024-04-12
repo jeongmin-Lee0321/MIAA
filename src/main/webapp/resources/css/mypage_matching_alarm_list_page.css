@@ -2,12 +2,22 @@
 
 .main-contents * {
 	box-sizing: border-box;
-}
+} 
+
+
 
 /* 검색창 프레임 */
 .searchbar-container {
 	padding-top: 1rem;
 }
+
+
+/* 원진호_0412추가*/
+.result-container{
+	margin-left: 30px;
+}
+
+
 
 .searchbar-container form {
 	display: flex;
@@ -109,99 +119,33 @@
 }
 
 /* 검색결과 리스트 프레임 */
-.result-list {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(14.375rem, auto));
-	grid-auto-rows: minmax(20rem, auto);
-	row-gap: 10px;
-	column-gap: 12px;
-}
-
-.list-card {
-	background: #ffffff;
-	padding: 15px 10px 15px 10px;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	align-items: center;
-	justify-content: flex-start;
-	flex-shrink: 0;
-	width: 100%;
-	max-width: 14.375rem;
-	height: 99%;
-	position: relative;
-	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px
-		rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.card-photo {
-	width: 14rem;
-	height: calc(0.5625rem * 14);
-	border-radius: 8px;
-}
-
-.card-photo>img {
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-}
-
-.content-items {
-	align-self: stretch;
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.item-title {
-	font-size: calc(1rem * 15/ 16);
-	margin-bottom: 1rem;
-}
 
 
-/* 원진호_0409수정 */
-/* .item-title>span {
-	원진호_0409수정
-	padding: 0.4em 0.7em;
-	margin-left: 10px;
-} */
-
-.item-details {
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	font-size: calc(1rem * 13/ 16);
-	font-weight: 400;
-	margin: 0;
-	padding-left: 0;
-	list-style: none;
-}
-
-.item-details>li {
-	display: flex;
-}
-
-.item-details>li>span {
-	padding: 0.4em 0.4em;
-} 
-
-	/* 원진호_0409수정 */
-/* .item-details>li>span:not (.detail-title ) {
-	flex-grow: 1;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	word-break: break-all;
-}
- */
 
 
-	/* 원진호_0409수정 */
-.item-details li span{
- 	height: 40px; 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	/* 원진호_0409수정 */
@@ -210,14 +154,6 @@
 	justify-content: space-between;
 	
 }
-
-
-
-
-
-
-
-
 
 
 .detail-title {
@@ -307,6 +243,12 @@ ul.switchBtn-container>li>a {
 	line-height: 50px;
 }
 
+/* 원진호_0412추가 */
+/* 등록된 알림 키워드 수량 */
+.registration_item_alarmkeyword_count{
+	line-height: 50px;
+}
+
 .registrationed_alarm_keywords_list {
 	font-size: 16px;
 	line-height: 50px;
@@ -336,13 +278,14 @@ ul.switchBtn-container>li>a {
 	color:black;
 }
 
+
+
 .item_tag_01 {
 	font-weight: bold;
-	background-color: #F7E8FF;
+	background-color: #F7E8FF; 
 	color: #8910D9;
 	border-radius: 30%;
 	margin-left: 50px;
-
 }
 
 .item_tag_02 {
@@ -402,7 +345,17 @@ ul.switchBtn-container>li>a {
 	background-color: white;
 	border-radius: 10px;
 	margin-left: 20px;
+	cursor: pointer;
+	
 }
+
+.alarm_delete span{
+	text-align: center;
+	font-size: 14px;
+}
+
+
+
 
 .btn-set {
 	display: flex;
@@ -413,26 +366,28 @@ ul.switchBtn-container>li>a {
 	
 }
 
- .view_all_btn {
-/* 	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px; */
+.view_all_btn {
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 } 
 
 .item_btn {
-	/* border: 2px solid; */
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .ani_btn {
-	/* border: 2px solid; */
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .keyword_list_btn {
-/* 	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px; */
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .set_02 {
@@ -467,23 +422,24 @@ select {
 	top: 10px;
 	right: 12px;	
 	margin: 0;
+	cursor: pointer;
 }
 
 
 
 /* 원진호_0404추가 */
 /* 원진호_0404_매칭알림목록_개별 분실물명. */
-.item-title span .matched_lost_item_name{
+/* .item-title span .matched_lost_item_name{
 	color:black;
-}
+} */
 
-.item-title{
+/* .item-title{
 	height:11px; 
-}
+} */
 
 
 /* 원진호_0409_추가 */
-.list-card {
+/* .list-card {
   background: #ffffff;
   padding: 15px 10px 15px 10px;
   display: flex;
@@ -493,7 +449,7 @@ select {
   justify-content: flex-start;
   flex-shrink: 0;
   width: 100%;
-  /* min-width: 230px; */
+  min-width: 230px;
   max-width: 14.375rem;
   height: 99%;
   position: relative;
@@ -501,38 +457,26 @@ select {
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
     0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
+} */
 
-.card-photo {
-  width: 14rem;
-  height: calc(0.5625rem*14);
-  /* background-color: #0066ff; */
-  border-radius: 8px;
-}
 
-.card-photo>img {
 
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.content-items {
+/* .content-items {
   align-self: stretch;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
-.item-title {
+/* .item-title {
   font-size: calc(1rem*15/16);
   margin-bottom: 1rem;
-}
+} */
 
-.item-title>span {
+/* .item-title>span {
   padding: 0.4em 0.4em;
-}
+} */
 
 .item-details {
   flex-grow: 1;
@@ -571,3 +515,144 @@ select {
 #select_content{
 	border-radius: 10px;
 }
+
+/* --------------------------- */
+
+.result-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14.375rem, auto));
+	grid-auto-rows: minmax(20rem, auto);
+	row-gap: 10px;
+	column-gap: 10px;
+}
+
+
+
+.list-card {
+	background: #ffffff;
+	padding: 15px 10px 15px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	/* width: 100%; */
+	width: 246px;
+/* 	max-width: 14.375rem; */
+ 	max-width: 16rem; 
+	/* height: 99%; */
+	height: 263px;
+	position: relative;
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px
+		rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	margin-right: 50px;
+}
+
+
+.card-photo {
+/* 	width: 14rem;
+	height: calc(0.5625rem * 14); */
+	width:206px;
+	height:116px;
+	border-radius: 8px;
+}
+
+.card-photo>img {
+	object-fit: cover;
+	/* width: 100%;
+	height: 100%; */
+	width: 136px;
+	height: 110px;
+	border-radius: 20px;
+}
+
+
+.content-items {
+	align-self: stretch;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+
+/* .content-items div span:first-child{
+	background-color: red;
+}
+
+.content-items li span{
+	line-height:20px; 
+	background-color: green;	
+}
+
+.content-items li span:nth-child(1){
+	width: 76px;
+	height: 20px;
+	
+} */
+
+
+.item-title {
+	/* font-size: calc(1rem * 15/ 16); */
+	font-size: 15px;
+	/* margin-bottom: 1rem; */
+	width: 206px;
+	height: 48px;
+/* 	background-color: green; */
+	margin-left: 10px;
+}
+
+
+
+
+.item-details {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-size: calc(1rem * 13/ 16);
+	font-weight: 400;
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+/* .item-details>li {
+	display: flex;
+} */
+
+/* .item-details>li>span {
+	padding: 0.4em 0.4em;
+}  */
+
+	/* 원진호_0409수정 */
+/* .item-details li:nth-child(1){ */
+.item-details_01{
+ 	width:76px;
+ 	height: 20px; 
+  	line-height: 20px; 
+  	margin-left: 10px;
+}
+
+.item-details_02{
+ 	width:220px;
+ 	height: 20px; 
+  	line-height: 20px;
+  	margin-left: 10px; 
+}
+
+.item-details_03{
+ 	width:125px;
+ 	height: 20px; 
+	line-height: 20px;
+	margin-left: 10px;
+}
+
+
+
+
+
+
+
+

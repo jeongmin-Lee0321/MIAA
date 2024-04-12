@@ -42,8 +42,7 @@
 			var chk = confirm("정말 삭제하시겠습니까?");
 
 			if (chk) {
-				$
-						.ajax({
+				$.ajax({
 							url : url, // 전송 URL
 							type : 'POST', // POST 방식
 							traditional : true,
