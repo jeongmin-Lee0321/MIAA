@@ -15,7 +15,7 @@
       </div>
       <div class="nologo_container">
         <div class="menu_cotainer">
-          <div class="menu_title" onclick="location.href='found_item_search_page';" style="cursor: pointer;">
+          <div class="menu_title" onclick="location.href='found_item_search_page?cityname=&allsearchPage=1&prd_mainCategory=&prd_subCategory=&color=&START_YMD=&END_YMD=';" style="cursor: pointer;">
             습득물 찾기
           </div>
           <div class="menu_title" onclick="location.href='lost_item_search_page';" style="cursor: pointer; ">

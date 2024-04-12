@@ -83,7 +83,8 @@ body {
 
 		<div class="main-contents">
 
-			<form action="inquiry_modify">
+			<form action="inquiry_modify" method="post"
+			enctype="multipart/form-data">
 
 				<div class="table-container">
 					<div class="table-title">
@@ -122,13 +123,10 @@ body {
 							</div>
 							<div class="col-content">
 								<div class="in-row-content">
-									<input type="hidden" name="inquiry_num"
-										value="${list.board_num}" /> <input type="hidden"
-										name="inquiry_file_hidden" value="${list.board_filesrc}" /> <input
-										type="file" name="inquiry_file" id="file1" accept="image/*">
+									<input type="file" name="files" id="file1" accept="image/*">
 									<label for="file1">사진첨부</label>
 								</div>
-
+															
 								<div class="image-ex-text">*첨부파일은 한개당 3mb까지 제한되고 확장자는
 									JPEG,GIF,PNG로 제한됩니다.</div>
 							</div>

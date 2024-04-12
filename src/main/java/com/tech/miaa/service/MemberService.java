@@ -202,7 +202,8 @@ public class MemberService implements MemberServiceInter {
 		HttpSession session = null; MemberDto dto=null;
 		String id = request.getParameter("id"); String pw = request.getParameter("pw");
 		String shpwd = ""; String bcpwd = ""; String result = "redirect:loginform";
-		AdminMemberDto admin_dto= null;
+		AdminMemberDto admin_dto= null; AdminMemberDao admin_dao = null;
+		int isAdmin = 0;
 		
 		//로그인 비밀번호 아이디 공백 확인
 		if (id == "" && pw == "") {
@@ -222,21 +223,31 @@ public class MemberService implements MemberServiceInter {
 			MemberDao dao = sqlSession.getMapper(MemberDao.class);
 			
 			//추가 및 변경 김영빈 - 관리자 아이디인지 확인
-			AdminMemberDao admin_dao=sqlSession.getMapper(AdminMemberDao.class);
+			try {
+				admin_dao=sqlSession.getMapper(AdminMemberDao.class);
+				isAdmin = admin_dao.admin_login1(id, bcpwd);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			int isAdmin = admin_dao.admin_login1(id, bcpwd);
 			switch (isAdmin) {
 			case 1:
 				//아이디와 비밀번호 일치하는지 확인
 				if (isAdmin > 0) {
-					//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
-					admin_dto = admin_dao.admin_login2(id, bcpwd);
-					session = request.getSession(false);
-					//---로그인아이디가 관리자일경우 isAdmin에 admin이라고 저장---
-					session.setAttribute("isAdmin", "admin");
-					
-					session.setAttribute("userId", admin_dto.getUser_id());
-					session.setMaxInactiveInterval(1800);
+					try {
+						//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
+						admin_dto = admin_dao.admin_login2(id, bcpwd);
+						session = request.getSession(false);
+						//---로그인아이디가 관리자일경우 isAdmin에 admin이라고 저장---
+						session.setAttribute("isAdmin", "admin");
+						
+						session.setAttribute("userId", admin_dto.getUser_id());
+						session.setMaxInactiveInterval(1800);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					
 					result = "redirect:/";
