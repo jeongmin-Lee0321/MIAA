@@ -9,16 +9,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="페이지 초과문제 완료">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" afterDir="false" />
+    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/controller/RescueAniController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/LostItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/LostItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MemberDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/LostItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/LostItemDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MemberDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MemberDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/sprjt09-1.0.0-BUILD-SNAPSHOT/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/LostItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/LostItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/InquiryDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/ItemDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/ItemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dto/ItemDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/AdminMemberDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/InquiryDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/ItemDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/scheduler/Scheduler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/FounditemService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/InquiryService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/ItemService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MatchingAlarmService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MemberService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/ItemServiceInter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/util/PrdCode$Prd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/util/PrdCode$Prd.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/util/PrdCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/util/PrdCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/vopage/PageVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/vopage/PageVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbandonmentPublicSrvc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbdmPublic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbdmPublic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbdmPublicItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/AbdmPublicItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/KindEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/KindEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/SexEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/SexEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/SigunguEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/SigunguEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/XmlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/abdmApi/XmlParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/cmmnApi/CmmnCdService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/cmmnApi/CmmnCdService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/AdminInquiryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/AdminInquiryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/FoundItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/FoundItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MemberController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MypageCustomerInquiryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/RescueAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/RescueAniController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dao/MemberDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dao/MemberDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dto/AnimalSearchDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dto/AnimalSearchDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dto/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dto/test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminInquiryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminInquiryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminMemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminMemberService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AnimalService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AnimalService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/FounditemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/FounditemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/InquiryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/InquiryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/ItemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/LostItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/LostItemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MatchingAlarmService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MatchingAlarmService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MemberService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/serviceInter/AdminInquiryServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/serviceInter/AdminInquiryServiceInter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/util/PrdCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/util/PrdCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/vopage/PageVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/vopage/PageVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,10 +159,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -328,6 +380,10 @@
       <workItem from="1712151365854" duration="1273000" />
       <workItem from="1712622913439" duration="16216000" />
       <workItem from="1712813484373" duration="1563000" />
+      <workItem from="1712884307669" duration="475000" />
+      <workItem from="1712884788252" duration="966000" />
+      <workItem from="1712885973974" duration="8984000" />
+      <workItem from="1712895049578" duration="4416000" />
     </task>
     <task id="LOCAL-00001" summary="Ani,Found,Lost detail view init.">
       <option name="closed" value="true" />
@@ -433,7 +489,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712654335137</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="commit">
+      <option name="closed" value="true" />
+      <created>1712884063000</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712884063000</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +514,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="development" />
+                        <option value="realease/resueani-search" />
                       </list>
                     </value>
                   </entry>
@@ -473,23 +537,23 @@
     <MESSAGE value="api추가 및 rescueAni_search_page 작업중" />
     <MESSAGE value="수정진행중" />
     <MESSAGE value="페이지 초과문제 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="페이지 초과문제 완료" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.net.SocketException" package="java.net" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="org.mybatis.spring.SqlSessionTemplate" memberName="exceptionTranslator" />
+        <PinnedItemInfo parentTag="org.mybatis.spring.SqlSessionTemplate" memberName="sqlSessionProxy" />
         <PinnedItemInfo parentTag="org.apache.taglibs.standard.tag.common.core.ChooseTag" memberName="values" />
         <PinnedItemInfo parentTag="org.apache.jasper.runtime.PageContextImpl" memberName="request" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="((SqlSessionTemplate)((MapperProxy)this.h).sqlSession).exceptionTranslator" custom="org.apache.ibatis.binding.MapperProxy,java.lang.reflect.Proxy,org.mybatis.spring.SqlSessionTemplate" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
