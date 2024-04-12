@@ -135,6 +135,7 @@ body {
 				</div>
 
 				<ul class="bottom-btns">
+					<input type="hidden" name="inquiry_num" value="${list.board_num}" />
 					<li><button type="submit">수정하기</button></li>
 					<li><button type="button"
 							onclick="location.href='mypage_customer_inquiry_list_page';">취소하기</button></li>

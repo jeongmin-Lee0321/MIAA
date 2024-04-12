@@ -81,7 +81,10 @@ body {
 								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_registration_date}">
 							</div>
 						</div>
-						<div class="table-row">
+						
+						<!-- 이미지만 업로드가능하고 이미지클릭해서 다운로드 가능하기에 주석처리 -->
+						
+						<%-- <div class="table-row">
 							<div class="row-title">
 								<span>첨부파일</span>
 							</div>
@@ -89,7 +92,8 @@ body {
 								<input type="text" name="inquiry_title" id="inquiry_title"
 									placeholder="첨부파일 없음" readonly="readonly" value="${list.board_filesrc}">
 							</div>
-						</div>
+						</div> --%>
+						
 						<div class="table-row">
 							<div class="row-title">
 								<span>처리상태</span>
