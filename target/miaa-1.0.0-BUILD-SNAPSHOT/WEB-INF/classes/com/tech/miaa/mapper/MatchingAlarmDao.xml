@@ -2,13 +2,11 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 원진호_0403_mapper추가. -->
+    
+<!-- 원진호_0403_mapper추가.  -->
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MatchingAlarmDao">
-	<select id="matching_alarm_list" resultType="com.tech.miaa.dto.ItemDto">
-		SELECT ITEM_NAME,LOSTDAY,UPKIND,UPR_CD,ADDRESS
-		FROM ITEM
-		WHERE USER_ID =#{param1}
-		ORDER BY TOTAL_ID DESC
-	</select>
+   <select id="matching_alarm_list" resultType="com.tech.miaa.dto.ItemDto">
+      SELECT ITEM_NAME,LOSTDAY,UPKIND,UPR_CD,ADDRESS FROM ITEM WHERE USER_ID =#{param1}
+   </select>
 </mapper>

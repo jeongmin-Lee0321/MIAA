@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -93,22 +94,22 @@
                     <th><span>이메일</span></th>
                     <th><span>우편 번호</span></th>
                     <th><span>주소</span></th>
-                    <th><span>답변 날짜</span></th>
+<%--                    <th><span>답변 날짜</span></th>--%>
 <%--                    <th><span>답변자</span></th>--%>
 
                 </tr>
 
-                <c:forEach items="${list }" var="list">
+                <c:forEach items="${list}" var="memeber">
                     <tr>
                         <td><input type="checkbox" name="RowCheck"
                                    value="list.board_num" class="table-check-box"></td>
-                        <td>${list.userInquiry.board_num }</td>
-                        <td class="table-title">${list.userInquiry.board_title}</td>
-                        <td>${list.userInquiry.user_id}</td>
-                        <td>${list.userInquiry.board_reply_status}</td>
-                        <td>${list.userInquiry.board_registration_date}</td>
-                        <td>${list.board_reply }</td>
-                        <td>${list.admin_id }</td>
+                        <td>${memeber.getUser_id() }</td>
+                        <td class="table-title">${memeber.getUser_email() }</td>
+                        <td>${memeber.getUser_postcode() }</td>
+                        <td>${memeber.getUser_address() }</td>
+<%--                        <td>${list.userInquiry.board_registration_date}</td>--%>
+<%--                        <td>${list.board_reply }</td>--%>
+<%--                        <td>${list.admin_id }</td>--%>
                     </tr>
                 </c:forEach>
 

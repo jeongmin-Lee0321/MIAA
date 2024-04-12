@@ -44,6 +44,9 @@
 		<!--관리자페이지 테스트링크  -->
 		<a href="admin_inquiry_list_page">admin_inquiry_list_page</a><br>
 		<a href="admin">admin_joinform</a><br>
+		<a href="admin_member_management_page">admin_member_management_page
+
+		</a><br>
 =======
 		</div>
 		<div

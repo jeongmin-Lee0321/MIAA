@@ -4,6 +4,7 @@ import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dao.MemberDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.MemberDto;
+import com.tech.miaa.service.FounditemService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -37,19 +38,20 @@ public class Scheduler {
             System.out.println(memeberId);
 
 //            //분실물
-//            LostItemDao lostItemDao = sqlSession.getMapper(LostItemDao.class);
-//            List<ItemDto> itemDtos =lostItemDao.get_lost_items(memeberId);
-//            for (int j = 0; j <itemDtos.size(); j++){
-//                System.out.println(itemDtos.get(j).getTotal_id());
-//                System.out.println(itemDtos.get(j).getItem_id());
-//                System.out.println(itemDtos.get(j).getUser_tel());
-//                System.out.println(itemDtos.get(j).getOpenclose());
-//                System.out.println(itemDtos.get(j).getItem_name());
-//                System.out.println(itemDtos.get(j).getItem_date());
-//                //api 호출
-//
-//                //db 저장
-//            }
+            LostItemDao lostItemDao = sqlSession.getMapper(LostItemDao.class);
+            List<ItemDto> itemDtos =lostItemDao.get_lost_items(memeberId);
+            for (int j = 0; j <itemDtos.size(); j++){
+                System.out.println(itemDtos.get(j).getTotal_id());
+                System.out.println(itemDtos.get(j).getItem_id());
+                System.out.println(itemDtos.get(j).getUser_tel());
+                System.out.println(itemDtos.get(j).getOpenclose());
+                System.out.println(itemDtos.get(j).getItem_name());
+                System.out.println(itemDtos.get(j).getItem_date());
+                //api 호출
+                FounditemService founditemService = new FounditemService();
+//                founditemService.getFoundsearchValue()
+                //db 저장
+            }
 //            //유기동물
 
 

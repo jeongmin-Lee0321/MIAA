@@ -35,4 +35,7 @@
 	UPDATE ITEM SET USER_TEL=#{param1},OPENCLOSE=#{param2},LOSTDAY=#{param3},ADDRESS=#{param4},ITEM_NAME=#{param5},UPKIND=#{param6},
 	UPR_CD=#{param7},COLORCD=#{param8},SEPCIALMARK=#{param9},ITEM_DATE=SYSDATE,ADDRESSCODE=#{param10} WHERE TOTAL_ID=#{param11}
 </update>
+	<select id="get_lost_items" resultType="com.tech.miaa.dto.ItemDto">
+		SELECT * FROM ITEM WHERE ITEM_ID= #{PARAM1}
+	</select>
 </mapper>
