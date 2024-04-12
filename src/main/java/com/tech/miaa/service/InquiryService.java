@@ -165,7 +165,10 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		for (int i = 0; i < files.size(); i++) {
 			if(files.get(i).getOriginalFilename()=="") {
-				continue;
+				
+				dao.inquiry_modify_empty(num,id,title,content);
+				
+				
 			}else if(files.get(i).getOriginalFilename()!=""){
 				try {
 					UUID uuid=UUID.randomUUID();
@@ -174,7 +177,13 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 					files.get(i).transferTo(saveFile);
 					
 					String file = uuid+"_"+files.get(i).getOriginalFilename();
-					System.out.println(file);
+					
+//					System.out.println("inquiry_num : "+num);
+//					System.out.println("userId : "+id);
+//					System.out.println("inquiry_title : "+title);
+//					System.out.println("inquiry_content : "+content);
+//					System.out.println("file : "+file);
+					
 					dao.inquiry_modify(num,id,title,content,file);
 					
 				} catch (IllegalStateException e) {
