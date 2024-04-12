@@ -8,64 +8,65 @@
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		var chkObj = document.getElementsByName("RowCheck");
-		var rowCnt = chkObj.length;
-
-		$("input[name='allCheck']").click(function() {
-			var chk_listArr = $("input[name='RowCheck']");
-			for (var i = 0; i < chk_listArr.length; i++) {
-				chk_listArr[i].checked = this.checked;
-			}
-		});
-		$("input[name='RowCheck']").click(function() {
-			if ($("input[name='RowCheck']:checked").length == rowCnt) {
-				$("input[name='allCheck']")[0].checked = true;
-			} else {
-				$("input[name='allCheck']")[0].checked = false;
-			}
-		});
-	});
-	function deleteValue() {
-		var url = "delete"; // Controller로 보내고자 하는 URL
-		var valueArr = new Array();
-		var list = $("input[name='RowCheck']");
-		for (var i = 0; i < list.length; i++) {
-			if (list[i].checked) { //선택되어 있으면 배열에 값을 저장함
-				valueArr.push(list[i].value);
-			}
+$(function(){
+	var chkObj = document.getElementsByName("RowCheck");
+	var rowCnt = chkObj.length;
+	
+	$("input[name='allCheck']").click(function(){
+		var chk_listArr = $("input[name='RowCheck']");
+		for (var i=0; i<chk_listArr.length; i++){
+			chk_listArr[i].checked = this.checked;
 		}
-		if (valueArr.length == 0) {
-			alert("선택된 글이 없습니다.");
-		} else {
-			var chk = confirm("정말 삭제하시겠습니까?");
-
-			if (chk) {
-				$
-						.ajax({
-							url : url, // 전송 URL
-							type : 'POST', // POST 방식
-							traditional : true,
-							data : {
-								valueArr : valueArr
-							// 보내고자 하는 data 변수 설정
-							},
-							success : function(jdata) {
-								if (jdata = 1) {
-
-									alert("삭제 성공");
-									location
-											.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
-								} else {
-									alert("삭제 실패");
-								}
-							}
-						});
-			} else {
-				alert("삭제 취소");
+	});
+	$("input[name='RowCheck']").click(function(){
+		if($("input[name='RowCheck']:checked").length == rowCnt){
+			$("input[name='allCheck']")[0].checked = true;
+		}
+		else{
+			$("input[name='allCheck']")[0].checked = false;
+		}
+	});
+});
+function deleteValue(){
+	var url = "delete";    // Controller로 보내고자 하는 URL
+	var valueArr = new Array();
+    var list = $("input[name='RowCheck']");
+    for(var i = 0; i < list.length; i++){
+        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
+            valueArr.push(list[i].value);
+        }
+    }
+    if (valueArr.length == 0){
+    	alert("선택된 글이 없습니다.");
+    }
+    else{
+		var chk = confirm("정말 삭제하시겠습니까?");
+		
+		if(chk)
+			{
+		$.ajax({
+		    url : url,                    // 전송 URL
+		    type : 'POST',                // POST 방식
+		    traditional : true,
+		    data : {
+		    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
+		    },
+            success: function(jdata){
+                if(jdata = 1) {
+                    alert("삭제 성공");
+                    location.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
+                }
+                else{
+                    alert("삭제 실패");
+                }
+            }
+		});
 			}
+		else{
+			alert("삭제 취소");
 		}
 	}
+}
 </script>
 <body>
 	<div class="main-body">
@@ -73,18 +74,101 @@
 		<!-- main -->
 
 		<div class="content-wrapper">
+			<!-- 검색창과 검색결과 -->
+			<div class="searchbar-container">
+				<form action="admin_inquiry_list_page" id="inquiry-form">
+					<!-- 서치바 셀렉 그룹시작 -->
+					<div class="searchbar-select-group">
+						<div class="searchbar-title">
+							<span>기간</span>
+						</div>
+						<div class="searchbar-content">
+							<input type="date" name="START_YMD" id="START_YMD"> <span>~</span>
+							<input type="date" name="END_YMD" id="END_YMD">
+							<div class="form-date-btn" id="date-today">
+								<div class="div-placeholder">
+									<div class="div">오늘</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-1week">
+								<div class="div-placeholder">
+									<div class="div">1주일</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-1month">
+								<div class="div-placeholder">
+									<div class="div">1개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-3month">
+								<div class="div-placeholder">
+									<div class="div">3개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-6month">
+								<div class="div-placeholder">
+									<div class="div">6개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-all">
+								<div class="div-placeholder">
+									<div class="div">전체</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="searchbar-select-group">
+						<div class="searchbar-title">
+							<span>답변유무</span>
+						</div>
+						<div class="searchbar-content">
+							<select name="reply_status" id="reply_status">
+								<option value="all">전체</option>
+								<option value="ing">처리중</option>
+								<option value="done">답변완료</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="searchbar-select-group">
+						<div class="searchbar-title">
+							<select name="search_type" id="search_type">
+								<option value="title">제목</option>
+								<option value="user">문의자</option>
+								<option value="admin">답변자</option>
+							</select>
+						</div>
+						<div class="searchbar-content">
+							<input type="search" name="q" id="q" style="min-width: 300px;">
+						</div>
+					</div>
+
+					<!-- form 조회용 버튼 -->
+					<div class="search-btn-block">
+						<button type="submit" form="inquiry-form">
+							조회<img src="resources/img/searchIcon.png" alt="">
+						</button>
+						<button class="reset">
+							<div class="div">초기화</div>
+						</button>
+					</div>
+				</form>
+			</div>
+			<!-- 검색창과 검색결과 끝 -->
 			<div class="content-container">
 				<div class="table-caption-wrapper">
-				<div class="talbe-caption-container">
-					<div class="table-caption">
-						<span class="caption-total">${pageVo.totRow}개</span><span>의 문의내역이 있습니다</span>
+					<div class="talbe-caption-container">
+						<div class="table-caption">
+							<span class="caption-total">${pageVo.totRow}개</span><span>의
+								문의내역이 있습니다</span>
+						</div>
 					</div>
-				</div>
-				<div class="list-control-container">
-					<button class="btn-list" id="btn-delete" onclick="deleteValue();"
-						style="cursor: pointer;">삭제하기</button>
-				</div>
-				
+					<div class="list-control-container">
+						<button class="btn-list" id="btn-delete" onclick="deleteValue();"
+							style="cursor: pointer;">삭제하기</button>
+					</div>
+
 				</div>
 				<table class="info-table">
 					<tr>
@@ -103,8 +187,8 @@
 					<c:forEach items="${list }" var="list">
 						<tr>
 							<td><input type="checkbox" name="RowCheck"
-								value="list.board_num" class="table-check-box"></td>
-							<td>${list.userInquiry.board_num }</td>
+								value="${list.userInquiry.board_num}" class="table-check-box"></td>
+							<td>${list.userInquiry.board_num}</td>
 							<td class="table-title">${list.userInquiry.board_title}</td>
 							<td>${list.userInquiry.user_id}</td>
 							<td>${list.userInquiry.board_reply_status}</td>
@@ -137,8 +221,8 @@
 								<li><span class="currpage">${i}</span></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="javascript:void(0);" onclick="goToPage(${i})">${i}</a></li>
- 							</c:otherwise>
+								<li><a href="javascript:void(0);" onclick="goToPage(${i})">${i}</a></li>
+							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<li class="btn-next"><a href="javascript:void(0);"
@@ -174,6 +258,49 @@
 			window.location.href = newPath; // 새 경로로 페이지 이동
 		}
 	</script>
+	<!-- 날짜 제한 -->
+	<script>
+					var now_utc = Date.now() // 지금 날짜를 밀리초로
+					// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+					var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+					// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+					var today = new Date(now_utc - timeOff).toISOString()
+							.split("T")[0];
+					var today2 = new Date(now_utc - timeOff)//.getFullYear()등을 쓰기위한 today2
+		$(document).ready(
+				function() {//로드완료시
+					document.getElementById("START_YMD").setAttribute("max",
+							today); //시작날짜 최대값 오늘날짜로 제한
+					document.getElementById("END_YMD").setAttribute("max",
+							today);//종료날짜 오늘날짜로 제한
+				});
+ /*날짜선택버튼*/
+	document.getElementById('date-today').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = today;
+	    document.getElementById('END_YMD').value = today;
+	});
 
+	document.getElementById('date-1week').addEventListener('click', function() {
+	    const lastWeek = new Date(today2.getFullYear(), today2.getMonth(), today2.getDate() - 7);
+	    document.getElementById('START_YMD').value = lastWeek.toISOString().substring(0, 10); // 일주일 전 날짜
+	    document.getElementById('END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
+	});
+
+	document.getElementById('date-all').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
+	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
+	});
+	
+	document.getElementById('date-1month').addEventListener('click', setPastDate.bind(null, 1));
+	document.getElementById('date-3month').addEventListener('click', setPastDate.bind(null, 3));
+	document.getElementById('date-6month').addEventListener('click', setPastDate.bind(null, 6));
+
+	function setPastDate(months) {
+	    const pastDate = new Date(today2.getFullYear(), today2.getMonth() - months, today2.getDate());
+	    document.getElementById('START_YMD').value = pastDate.toISOString().substring(0, 10);
+	    document.getElementById('END_YMD').value = today2.toISOString().substring(0, 10);
+	}
+	</script>
+	
 </body>
 </html>
