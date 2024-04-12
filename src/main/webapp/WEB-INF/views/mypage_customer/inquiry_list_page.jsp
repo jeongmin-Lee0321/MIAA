@@ -104,14 +104,14 @@
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
+						<td><input type="checkbox" name="RowCheck" value="${list.userInquiry.board_num }"
 							class="table-check-box"></td>							
-						<td>${list.rnum}</td>
-						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.board_num}">${list.board_title}</a></td>
-						<td>${list.board_reply_status}</td>
-						<td>${list.board_registration_date}</td>
-						<td>-</td>						
-						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.board_num}';" style="cursor: pointer;" /></td>
+						<td>${list.userInquiry.rnum }</td>
+						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
+						<td>${list.userInquiry.board_reply_status}</td>
+						<td>${list.userInquiry.board_registration_date}</td>
+						<td>${list.board_reply}</td>						
+						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.userInquiry.board_num}';" style="cursor: pointer;" /></td>
 					</tr>
 					</c:forEach>
 					

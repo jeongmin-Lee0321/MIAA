@@ -216,7 +216,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		int rowEnd = pageVo.getRowEnd();
 
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-		ArrayList<InquiryDto> list = null;
+		ArrayList<AdminInquiryDto> list = null;
 		if (rowStart == 0 && rowEnd == 0) {
 			System.out.println("get_pagevo 문제발생");
 
@@ -227,8 +227,8 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		model.addAttribute("list", list);
+		}		
+			model.addAttribute("list", list);
 
 	}
 
