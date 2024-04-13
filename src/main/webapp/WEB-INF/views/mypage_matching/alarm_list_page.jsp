@@ -223,6 +223,58 @@
 					</c:forEach>
 				</div>
 			</table>
+			
+			<!-- 123455 -->
+			
+			
+			
+			<!-- page -->
+		<div class="result-container">
+			<!-- 페이징 프레임시작 -->
+			<div class="page-container">
+				<div class="currentOftotal">
+					<span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
+						class="total-page">${pageVO.totPage}</span>
+				</div>
+				<ul class="pagelist-container">
+					<li class="btn-prev"><a class="test"
+						href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+					<c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}"
+						var="i">
+						<c:choose>
+							<c:when test="${i eq pageVO.page}">
+								<li><a href="#" style="color: red">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<li class="btn-next"><a
+						href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+				</ul>
+
+				<ul class="switchBtn-container">
+					<li class="btn-prev-group"><a
+						href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">Previous</a></li>
+					<li class="btn-next-group"><a
+						href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>
+				</ul>
+			</div>
+			<!-- 페이징 프레임 끝 -->
+		</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</div>
 	</div>
 	<!-- 	</div> -->

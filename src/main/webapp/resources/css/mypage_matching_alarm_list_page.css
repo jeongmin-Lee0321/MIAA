@@ -152,7 +152,9 @@
 .show_lost_item_info_container{
 	display: flex;
 	justify-content: space-between;
-	
+	line-height: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 
@@ -168,6 +170,7 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 0;
+	width: 1190px;
 }
 
 .page-container a:hover {
@@ -522,8 +525,10 @@ select {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(14.375rem, auto));
 	grid-auto-rows: minmax(20rem, auto);
-	row-gap: 10px;
-	column-gap: 10px;
+/* 	row-gap: 10px;
+	column-gap: 10px; */
+	column-gap:13px;
+	height: 273px;
 }
 
 
@@ -540,13 +545,13 @@ select {
 	/* width: 100%; */
 	width: 246px;
 /* 	max-width: 14.375rem; */
- 	max-width: 16rem; 
+ 	max-width: 20rem; 
 	/* height: 99%; */
 	height: 263px;
 	position: relative;
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px
 		rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-	margin-right: 50px;
+
 }
 
 
