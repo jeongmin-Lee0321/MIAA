@@ -25,13 +25,8 @@ public class MypageMatchingAlarmController {
 	private SqlSession sqlSession;
 	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 	/* 원진호_0409추가 */
-<<<<<<< HEAD
-	ItemServiceInter itemService;
-
-=======
 	LostItemServiceInter itemService;
 	
->>>>>>> release/KGY
 	/* 원진호_0401추가 */
 	/* 원진호_0409_수정 */
 	@RequestMapping(value = "mypage_matching_alarm_list_page", method = RequestMethod.GET)
@@ -41,15 +36,10 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-<<<<<<< HEAD
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
 
-=======
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
 		itemService = new LostItemService();
-		
->>>>>>> release/KGY
+
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
@@ -69,15 +59,10 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-<<<<<<< HEAD
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
 
-=======
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
 		itemService = new LostItemService();
-		
->>>>>>> release/KGY
+
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
@@ -98,11 +83,9 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("userId", userId);
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
 		/* 원진호_0409추가 */
-<<<<<<< HEAD
-		itemService = new ItemService();
-=======
+
 		itemService = new LostItemService();
->>>>>>> release/KGY
+
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
@@ -122,15 +105,10 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-<<<<<<< HEAD
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
 
-=======
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
 		itemService = new LostItemService();
-		
->>>>>>> release/KGY
+
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
@@ -150,15 +128,10 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-<<<<<<< HEAD
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
 
-=======
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
 		itemService = new LostItemService();
 		
->>>>>>> release/KGY
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
