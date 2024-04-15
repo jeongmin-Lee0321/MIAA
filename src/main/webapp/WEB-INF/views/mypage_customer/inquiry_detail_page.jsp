@@ -99,32 +99,9 @@ body {
 								<span>처리상태</span>
 							</div>
 							<div class="row-content">
-								
 								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_reply_status}">
-								
 							</div>
 						</div>
-						
-						<c:if test="${list.board_reply_status eq '답변완료'}">
-						
-						<div class="table-row">
-							<div class="row-title">
-								<span>답변날짜</span>
-							</div>
-							<div class="row-content" id="input-title">
-								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_reply_date}">
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="row-title">
-								<span>답변</span>
-							</div>
-							<div class="row-content" id="textarea-content">
-								<!-- 텍스트제한 표시 추가 필요 -->
-								<textarea name="inquiry_content" id="inquiry_content" maxlength="300" readonly="readonly">${list.board_reply}</textarea>
-							</div>
-						</div>
-						</c:if>
 
 						
 					</div>

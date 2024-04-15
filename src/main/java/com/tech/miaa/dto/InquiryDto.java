@@ -18,7 +18,4 @@ public class InquiryDto {
 	private String board_registration_date;
 	private String board_reply_status;
 	private String board_filesrc;
-	private String board_reply_date;
-	private String board_reply;
-	
 }
