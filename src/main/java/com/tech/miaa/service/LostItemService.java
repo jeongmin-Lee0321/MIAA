@@ -4,6 +4,7 @@ package com.tech.miaa.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
+import com.tech.miaa.dto.ItemSearchDto;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.util.PrdCode;
 import com.tech.miaa.vopage.PageVO;
@@ -33,21 +35,35 @@ public class LostItemService implements LostItemServiceInter {
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
 		//검색 입력값 가져오기
-		String searchday1 = null; String searchday2 = null; String addressCode = null;
-		String itemkind1 =null; String itemkind2 = null; String colorCd = null;
+//		String searchday1 = null; String searchday2 = null; String addressCode = null;
+//		String itemkind1 =null; String itemkind2 = null; String colorCd = null;
+//		
+//		
+//		//검색조건 채우기 작업
+//		if(request.getParameter("searchday1")!="") searchday1=request.getParameter("searchday1");
+//		if(request.getParameter("searchday2")!="") searchday2=request.getParameter("searchday2");
+//		if(request.getParameter("addressCode")!="") addressCode=request.getParameter("addressCode");
+//		if(request.getParameter("itemkind1")!="") itemkind1=request.getParameter("itemkind1");
+//		if(request.getParameter("itemkind2")!="") itemkind2=request.getParameter("itemkind2");
+//		if(request.getParameter("colorCd")!="") colorCd=request.getParameter("colorCd");
+//		
+//		Map<String, String> ItemSearch = new HashMap<String, String>();
+//		if(searchday1 !=null) ItemSearch.put("searchday1", searchday1);
+//		if(searchday2!=null) ItemSearch.put("searchday2", searchday2);
+//		if(addressCode!=null) ItemSearch.put("addressCode", addressCode);
+//		if(itemkind1 !=null) ItemSearch.put("itemkind1", itemkind1);
+//		if(itemkind2!=null) ItemSearch.put("itemkind2", itemkind2);
+//		if(colorCd!=null) ItemSearch.put("colorCd", colorCd);
 		
-		//검색조건 채우기 작업
-		if(request.getParameter("searchday1")!="") searchday1=request.getParameter("searchday1");
-		if(request.getParameter("searchday2")!="") searchday2=request.getParameter("searchday2");
-		if(request.getParameter("addressCode")!="") addressCode=request.getParameter("addressCode");
-		if(request.getParameter("itemkind1")!="") itemkind1=request.getParameter("itemkind1");
-		if(request.getParameter("itemkind2")!="") itemkind2=request.getParameter("itemkind2");
-		if(request.getParameter("colorCd")!="") colorCd=request.getParameter("colorCd");
 		
-		if(searchday1==null && searchday2==null && addressCode==null && itemkind1==null && itemkind2==null && colorCd==null) {
-			System.out.println("검색조건 없음");
-		}
 		
+//		ItemSearchDto itemSearchDto=new ItemSearchDto();
+//		itemSearchDto.setSearch_str_date(searchday1);
+//		itemSearchDto.setSearch_end_date(searchday2);
+//		itemSearchDto.setSidoSelectBox(addressCode);
+//		itemSearchDto.setUpKindSelectBox(itemkind1);
+//		itemSearchDto.setKindSelectedBox(itemkind2);
+//		itemSearchDto.setColorCd(colorCd);
 		
 		PageVO pageVo = new PageVO();
 		int totalCount=dao.totalCount();
@@ -61,7 +77,8 @@ public class LostItemService implements LostItemServiceInter {
 				
 		int rowStart=pageVo.getRowStart();
 		int rowEnd=pageVo.getRowEnd();
-		
+//		ItemSearch.put("rowStart", toString(rowStart));
+//		ItemSearch.put("rowEnd", toString(rowEnd));
 		ArrayList<ItemDto> itemList = dao.itemlistview(rowStart,rowEnd);
 		
 		
@@ -125,6 +142,11 @@ public class LostItemService implements LostItemServiceInter {
 		return itemList;
 	}
 	
+	private String toString(int rowStart) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public String lost_item_write(Model model){
 		Map<String, Object> map = model.asMap();

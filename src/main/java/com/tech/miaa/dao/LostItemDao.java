@@ -1,9 +1,11 @@
 package com.tech.miaa.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
+import com.tech.miaa.dto.ItemSearchDto;
 
 public interface LostItemDao {
 	public void imgUpLoad(String userId,int i, String itemname, String fileName,String itemkind2);
