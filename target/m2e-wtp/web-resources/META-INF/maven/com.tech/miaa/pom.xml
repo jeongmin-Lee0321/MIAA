@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tech</groupId>
-	<artifactId>sprjt09</artifactId>
-	<name>sprjt09replyboard</name>
+	<artifactId>miaa</artifactId>
+	<name>MIAA</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
