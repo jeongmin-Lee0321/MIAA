@@ -14,7 +14,7 @@ public interface InquiryDao {
 	
 	public InquiryDto modify_list(String board_num, String id);
 	
-	public InquiryDto detail_list(String board_num, String id);
+	public AdminInquiryDto detail_list(String board_num, String id);
 
 	public void delete(String string, String id);
 

@@ -110,7 +110,7 @@
 						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
 						<td>${list.userInquiry.board_reply_status}</td>
 						<td>${list.userInquiry.board_registration_date}</td>
-						<td>${list.board_reply}</td>						
+						<td>${list.board_reply_date}</td>						
 						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.userInquiry.board_num}';" style="cursor: pointer;" /></td>
 					</tr>
 					</c:forEach>

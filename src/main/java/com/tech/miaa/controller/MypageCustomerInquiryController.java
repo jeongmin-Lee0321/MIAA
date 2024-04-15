@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dao.InquiryDao;
+import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.service.InquiryService;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
@@ -89,7 +90,7 @@ public class MypageCustomerInquiryController {
 
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		try {
-			InquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
+			AdminInquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
 			model.addAttribute("list", list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

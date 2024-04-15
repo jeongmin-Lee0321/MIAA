@@ -36,7 +36,7 @@ body {
 				
 				<div class="image-selection">
         <div class="image-container">
-            <img src="resources/inquiry_img/${list.board_filesrc}" onerror="this.onerror=null; this.src='resources/img/image_no.png'" id="inquiry-image" style="cursor: pointer;" onclick="window.open(this.src)">
+            <img src="resources/inquiry_img/${list.userInquiry.board_filesrc}" onerror="this.onerror=null; this.src='resources/img/image_no.png'" id="inquiry-image" style="cursor: pointer;" onclick="window.open(this.src)">
         </div>
 
     </div>
@@ -53,7 +53,7 @@ body {
 								<span>관리번호</span>
 							</div>
 							<div class="row-content">
-								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_num}">
+								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.userInquiry.board_num}">
 							</div>
 						</div>
 						<div class="table-row">
@@ -61,7 +61,7 @@ body {
 								<span>제목</span>
 							</div>
 							<div class="row-content" id="input-title">
-								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_title}">
+								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.userInquiry.board_title}">
 							</div>
 						</div>
 						<div class="table-row">
@@ -70,7 +70,7 @@ body {
 							</div>
 							<div class="row-content" id="textarea-content">
 								<!-- 텍스트제한 표시 추가 필요 -->
-								<textarea name="inquiry_content" id="inquiry_content" maxlength="300" readonly="readonly">${list.board_content}</textarea>
+								<textarea name="inquiry_content" id="inquiry_content" maxlength="300" readonly="readonly">${list.userInquiry.board_content}</textarea>
 							</div>
 						</div>
 						<div class="table-row">
@@ -78,7 +78,7 @@ body {
 								<span>등록일자</span>
 							</div>
 							<div class="row-content">
-								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_registration_date}">
+								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.userInquiry.board_registration_date}">
 							</div>
 						</div>
 						
@@ -99,9 +99,28 @@ body {
 								<span>처리상태</span>
 							</div>
 							<div class="row-content">
-								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_reply_status}">
+								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.userInquiry.board_reply_status}">
 							</div>
 						</div>
+						<c:if test="${list.userInquiry.board_reply_status eq '답변완료'}">
+						<div class="table-row">
+							<div class="row-title">
+								<span>답변일자</span>
+							</div>
+							<div class="row-content" id="input-title">
+								<input type="text" name="inquiry_title" id="inquiry_title" readonly="readonly" value="${list.board_reply_date}">
+							</div>
+						</div>
+						<div class="table-row">
+							<div class="row-title">
+								<span>답변</span>
+							</div>
+							<div class="row-content" id="textarea-content">
+								<!-- 텍스트제한 표시 추가 필요 -->
+								<textarea name="inquiry_content" id="inquiry_content" maxlength="300" readonly="readonly">${list.board_reply}</textarea>
+							</div>
+						</div>
+						</c:if>
 
 						
 					</div>

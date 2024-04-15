@@ -15,12 +15,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tech.miaa.dao.AdminInquiryDao;
 import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
-import com.tech.miaa.vopage.PageVO;
 import com.tech.miaa.vopage.PageVO2;
 
 public class InquiryService implements MypageCustomerInquiryServiceInter {
@@ -133,7 +131,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		return list;
 	}
 	@Override
-	public InquiryDto detail_list(Model model) {
+	public AdminInquiryDto detail_list(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
@@ -143,7 +141,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		String id = (String) session.getAttribute("userId");
 		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-		InquiryDto list=null;
+		AdminInquiryDto list=null;
 		try {
 			list = dao.detail_list(board_num,id);
 		} catch (Exception e) {
