@@ -157,7 +157,7 @@ function deleteValue(){
 						<button type="submit" form="inquiry-form">
 							조회<img src="resources/img/searchIcon.png" alt="">
 						</button>
-						<button class="reset">
+						<button class="reset" onclick="resetForm()">
 							<div class="div">초기화</div>
 						</button>
 					</div>
@@ -304,11 +304,6 @@ function deleteValue(){
 	    document.getElementById('END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
 	});
 
-	document.getElementById('date-all').addEventListener('click', function() {
-	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
-	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
-	});
-	
 	document.getElementById('date-1month').addEventListener('click', setPastDate.bind(null, 1));
 	document.getElementById('date-3month').addEventListener('click', setPastDate.bind(null, 3));
 	document.getElementById('date-6month').addEventListener('click', setPastDate.bind(null, 6));
@@ -318,7 +313,24 @@ function deleteValue(){
 	    document.getElementById('START_YMD').value = pastDate.toISOString().substring(0, 10);
 	    document.getElementById('END_YMD').value = today2.toISOString().substring(0, 10);
 	}
-	</script>
+	document.getElementById('date-all').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
+	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
+	});
 	
+	</script>
+
+<script>
+    $(document).ready(function() {
+        $(".reset").click(function(event) {
+            event.preventDefault(); // 폼의 기본 동작 중지
+            // form 안의 input 요소의 값을 빈 문자열로 설정
+            $('#inquiry-form input').val('');
+
+            // form 안의 select 요소의 selectedIndex를 0으로 설정하여 첫 번째 옵션을 선택
+            $('#inquiry-form select').prop('selectedIndex', 0);
+        });
+    });
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 package com.tech.miaa.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,24 +120,7 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 
 		String START_YMD=request.getParameter("START_YMD");
 		String END_YMD=request.getParameter("END_YMD");
-		//시작o 끝 x - 끝 오늘
-		//시작x 끝 o - 시작 6개월 전
-		//시작x 끝 x - 전체
-		//시작o 끝 o
-//		--where BOARD_REGISTRATION_DATE = SYSDATE 오늘
-//				--where BOARD_REGISTRATION_DATE >= SYSDATE-1 하루전
-//				--where BOARD_REGISTRATION_DATE >= SYSDATE-7 일주일전
-//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -1) 한달전
-//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -3) 3달전
-//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -6) 6달전
-//				--USER_ID like '%bb%' 유저아이디
-//
-//				--11 between s and e
-//				--01 <= e 
-//				--10 >= s 
-//
-//				--00 or null
-//				 
+
 		String reply_status=request.getParameter("reply_status");
 		
 		String search_type=request.getParameter("search_type");
@@ -154,17 +138,7 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		System.out.println("START_YMD: "+START_YMD);
 		System.out.println("END_YMD: "+END_YMD==null);
 		System.out.println("END_YMD: "+END_YMD);
-		/*
-		 * System.out.println("reply_status: "+reply_status=="");
-		 * System.out.println("reply_status: "+reply_status);
-		 * System.out.println("search_type: "+search_type=="");
-		 * System.out.println("search_type: "+search_type);
-		 */
-		System.out.println("search_content: "+search_content==null);
-		System.out.println("search_content: "+search_content);
-		
-		
-		
+
 		dto.setEND_YMD(END_YMD);
 		dto.setSTART_YMD(START_YMD);
 		dto.setReply_status(reply_status);
