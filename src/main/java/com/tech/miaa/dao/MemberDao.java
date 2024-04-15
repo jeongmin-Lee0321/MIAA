@@ -2,6 +2,9 @@ package com.tech.miaa.dao;
 
 import com.tech.miaa.dto.MemberDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface MemberDao {
 	public void join(String id, String shpwd, String bcpwd,
 	String email, String postcode, String address, String detailAddress);
@@ -15,4 +18,6 @@ public interface MemberDao {
 	public String searchpw2(String id, String email);
 	public int login1(String id, String bcpwd);
 	public MemberDto login2(String id, String bcpwd);
+	public ArrayList<MemberDto> getMembers();
+
 }

@@ -45,7 +45,13 @@ public class AdminInquiryController {
 			System.out.println("관리자입니다.");
 			result = "admin_inquiry.list_page.1대1문의관리.3a";
 		}
-		
+		try {
+			String aa = request.getParameter("START_YMD");
+			System.out.println("날자값 :"+aa);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//싱글톤위한 값 전달
 		model.addAttribute("userId", userId);
 		model.addAttribute("IsAdmin", isAdmin);
