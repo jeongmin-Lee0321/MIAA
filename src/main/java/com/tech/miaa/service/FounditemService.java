@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.tech.miaa.dto.ItemDto;
+import com.tech.miaa.vopage.PageVO;
 import org.springframework.ui.Model;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -400,4 +402,64 @@ public class FounditemService implements FounditemServiceInter {
 		return dto;
 	}
 
+	public String found_item_search_AreaPd(ItemDto itemDto, PageVO pageVO) {
+		String result_code = ""; // 전체 결과값
+
+		try {
+			StringBuilder urlBuilder = new StringBuilder(
+					"http://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd"); /* URL */
+			urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + ServiceKey); /* Service Key 서비스키 */
+			if (!itemDto.getUpkind().equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("PRDT_CL_CD_01", "UTF-8") + "="
+						+ URLEncoder.encode(itemDto.getUpkind(), "UTF-8")); /* 대분류 */
+			if (!itemDto.getUpr_cd().equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("PRDT_CL_CD_02", "UTF-8") + "="
+						+ URLEncoder.encode(itemDto.getUpr_cd(), "UTF-8")); /* 중분류 */
+			if (!itemDto.getColorcd().equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("FD_COL_CD", "UTF-8") + "="
+						+ URLEncoder.encode(itemDto.getColorcd(), "UTF-8")); /* 습득물 색상 */
+			if (!itemDto.getLostday().equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("START_YMD", "UTF-8") + "="
+						+ URLEncoder.encode(itemDto.getLostday().replace("-", ""), "UTF-8")); /* 검색시작일 */
+//			if (!END_YMD.equals(""))
+//				urlBuilder.append("&" + URLEncoder.encode("END_YMD", "UTF-8") + "="
+//						+ URLEncoder.encode(END_YMD.replace("-", ""), "UTF-8")); /* 검색종료일 */
+			if (!itemDto.getAddressCode().equals(""))
+				urlBuilder.append("&" + URLEncoder.encode("N_FD_LCT_CD", "UTF-8") + "="
+						+ URLEncoder.encode(itemDto.getAddress(), "UTF-8")); /* 습득지역 */
+			urlBuilder.append(
+					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(pageVO.getPage()), "UTF-8")); /* 페이지 번호 */
+			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
+					+ URLEncoder.encode("500", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
+//			System.out.println(urlBuilder.toString());
+			URL url = new URL(urlBuilder.toString());
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
+			System.out.println("Response code: " + conn.getResponseCode());
+			BufferedReader rd;
+			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			} else {
+				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			}
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+			rd.close();
+			conn.disconnect();
+
+			/*
+			 * 장문의 xml코드를 String화 해서 result_code에 저장 후 parsing작업
+			 */
+			result_code = sb.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result_code;
+
+	}
 }

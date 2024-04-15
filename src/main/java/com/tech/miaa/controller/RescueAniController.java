@@ -27,13 +27,14 @@ public class RescueAniController {
     private AnimalSearchDto current_dto;
     private ArrayList<AbdmKindItem> abdmKindItems = new ArrayList<>();
 
-    private  PageVO current_pageVO;
+    private PageVO current_pageVO;
+
     @RequestMapping(value = "/rescue_ani_search_page")
-    public String rescue_ani_search_page(HttpServletRequest request, Model model, AnimalSearchDto dto,PageVO page_VO) {
+    public String rescue_ani_search_page(HttpServletRequest request, Model model, AnimalSearchDto dto, PageVO page_VO) {
         if (dto.getSearch_str_date() != null || dto.getSearch_end_date() != null ||
-        dto.getSidoSelectBox() != null || dto.getSigunguSelectBox() != null ||
-        dto.getUpKindSelectBox() != null || dto.getKindSelectedBox() != null ||
-        dto.getSexSelectedBox() != null){
+                dto.getSidoSelectBox() != null || dto.getSigunguSelectBox() != null ||
+                dto.getUpKindSelectBox() != null || dto.getKindSelectedBox() != null ||
+                dto.getSexSelectedBox() != null) {
             current_dto = dto;
         }
         String strPage = request.getParameter("page");
@@ -42,7 +43,7 @@ public class RescueAniController {
         }
         int page = Integer.parseInt(strPage);
         //페이지 초과문제 해결
-        if (current_pageVO != null &&current_pageVO.getTotPage() < page)
+        if (current_pageVO != null && current_pageVO.getTotPage() < page)
             page = current_pageVO.getTotPage();
         page_VO.setPage(page);
         if (isFirst) {
@@ -54,23 +55,29 @@ public class RescueAniController {
 
         int totalCount = 0;
         itemList = abdmPublic.getItems();
-        //성별 filtering
-        if (current_dto != null){
-            List<AbdmPublicItem> filterItems = itemList.stream().filter(x -> x.getSexCd().equals(current_dto.getSexSelectedBox())).collect(Collectors.toList());
-            itemList = filterItems;
-        }
+        System.out.println(current_dto);
         if (abdmPublic.getTotalCount() != null) {
             totalCount = Integer.parseInt(abdmPublic.getTotalCount());
         }
+        //성별 filtering
+        if (current_dto != null) {
+            if (!current_dto.getSexSelectedBox().isEmpty()) {
+                System.out.println(current_dto.getSexSelectedBox());
+                List<AbdmPublicItem> filterItems = itemList.stream().filter(x -> x.getSexCd().equals(current_dto.getSexSelectedBox())).collect(Collectors.toList());
+                itemList = filterItems;
+            }
+        }
         page_VO.pageCalculate(totalCount);
-
         SexEnum[] sexEnum = SexEnum.values();
         current_pageVO = page_VO;
+        for (int i = 0; i < itemList.size(); i++) {
+            System.out.println(itemList.get(i).getNoticeNo());
+        }
         model.addAttribute("itemList", itemList);
         model.addAttribute("dto", current_dto);
         model.addAttribute("sexEnum", sexEnum);
         model.addAttribute("abdmKindItems", abdmKindItems);
-        model.addAttribute("pageVO",page_VO);
+        model.addAttribute("pageVO", page_VO);
         return "rescue_ani.search_page.보호동물 검색.3";
     }
 

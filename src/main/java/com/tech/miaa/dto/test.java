@@ -1,10 +1,11 @@
 package com.tech.miaa.dto;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Service;
+
 import com.tech.miaa.abdmApi.AbandonmentPublicSrvc;
 import com.tech.miaa.abdmApi.AbdmSido;
 import com.tech.miaa.abdmApi.AbdmSigungu;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
 
 @Service
 public class test implements InitializingBean {
