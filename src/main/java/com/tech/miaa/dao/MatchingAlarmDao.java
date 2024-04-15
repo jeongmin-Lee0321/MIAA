@@ -7,4 +7,6 @@ import com.tech.miaa.dto.ItemDto;
 /* 원진호_0403_matching_alarm_list(String id)추가 */
 public interface MatchingAlarmDao {
    public ArrayList<ItemDto> matching_alarm_list(String id);
+   /*원진호_0412_원글삭제기능추가*/
+	public void mypage_alarm_delete(String string, String id);
 }

@@ -293,18 +293,26 @@ ul.switchBtn-container>li>a {
 
 .view_all_btn {
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 } 
 
 .item_btn {
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .ani_btn {
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .keyword_list_btn {
 	width: 87px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .set_02 {
@@ -332,17 +340,17 @@ select {
 	position: relative;
 	width: 300px;
 }
-
+ 
 .searchbar-container {
 	padding-top: 1rem;
-}
+} 
 
 
 .search_bar {
-	width: 100%;
+	width: 300px;
 	border: 1px solid #bbb;
 	border-radius: 8px;
- 	padding: 10px 12px; 
+ 	padding: 10px 12px;  
 	font-size: 14px;
 }
 
@@ -350,17 +358,26 @@ select {
 	position: absolute;
 	width: 17px;
 	top: 10px;
-	right: 12px;	
+ 	right: 12px; 
 	margin: 0;
+	cursor: pointer;
 }
 
 .alarm_delete {
 	width: 100px;
 	background-color: white;
-	border-radius: 10px;
-	
+	border-radius: 10px;	
 	margin-left: 50px;
+	cursor: pointer;
 }
+
+
+.alarm_delete span{
+	text-align: center;
+	font-size: 14px;
+}
+
+
 
 .registrationed_alarm_keywords {
 	line-height: 50px;

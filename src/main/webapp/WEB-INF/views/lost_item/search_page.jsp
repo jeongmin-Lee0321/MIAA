@@ -179,7 +179,9 @@
 			<!-- 페이징 프레임시작 -->
 			<div class="page-container">
 				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+					<span>Page</span>
+					<span class="current-page">${pageVo.page}</span>
+					<span>of</span><span
 						class="total-page">${pageVo.totPage}</span>
 				</div>
 				<ul class="pagelist-container">
