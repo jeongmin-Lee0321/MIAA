@@ -4,6 +4,7 @@ package com.tech.miaa.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
+import com.tech.miaa.dto.ItemSearchDto;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.util.PrdCode;
 import com.tech.miaa.vopage.PageVO;
@@ -33,33 +35,50 @@ public class LostItemService implements LostItemServiceInter {
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
 		//검색 입력값 가져오기
-		String searchday1 = request.getParameter("searchday1");
-		String searchday2 = request.getParameter("searchday2");
-		String addressCode = request.getParameter("addressCode");
-		String itemkind1 = request.getParameter("itemkind1");
-		String itemkind2 = request.getParameter("itemkind2");
-		String colorCd = request.getParameter("colorCd");
+//		String searchday1 = null; String searchday2 = null; String addressCode = null;
+//		String itemkind1 =null; String itemkind2 = null; String colorCd = null;
+//		
+//		
+//		//검색조건 채우기 작업
+//		if(request.getParameter("searchday1")!="") searchday1=request.getParameter("searchday1");
+//		if(request.getParameter("searchday2")!="") searchday2=request.getParameter("searchday2");
+//		if(request.getParameter("addressCode")!="") addressCode=request.getParameter("addressCode");
+//		if(request.getParameter("itemkind1")!="") itemkind1=request.getParameter("itemkind1");
+//		if(request.getParameter("itemkind2")!="") itemkind2=request.getParameter("itemkind2");
+//		if(request.getParameter("colorCd")!="") colorCd=request.getParameter("colorCd");
+//		
+//		Map<String, String> ItemSearch = new HashMap<String, String>();
+//		if(searchday1 !=null) ItemSearch.put("searchday1", searchday1);
+//		if(searchday2!=null) ItemSearch.put("searchday2", searchday2);
+//		if(addressCode!=null) ItemSearch.put("addressCode", addressCode);
+//		if(itemkind1 !=null) ItemSearch.put("itemkind1", itemkind1);
+//		if(itemkind2!=null) ItemSearch.put("itemkind2", itemkind2);
+//		if(colorCd!=null) ItemSearch.put("colorCd", colorCd);
 		
-		System.out.println(searchday1+"~"+searchday2);
-		System.out.println(addressCode);
-		System.out.println(itemkind1+"-"+itemkind2);
-		System.out.println(colorCd);
 		
 		
-		//페이지 처리
-				PageVO pageVo = new PageVO();
-				int totalCount=dao.totalCount();
-				String strPage=request.getParameter("page");
+//		ItemSearchDto itemSearchDto=new ItemSearchDto();
+//		itemSearchDto.setSearch_str_date(searchday1);
+//		itemSearchDto.setSearch_end_date(searchday2);
+//		itemSearchDto.setSidoSelectBox(addressCode);
+//		itemSearchDto.setUpKindSelectBox(itemkind1);
+//		itemSearchDto.setKindSelectedBox(itemkind2);
+//		itemSearchDto.setColorCd(colorCd);
+		
+		PageVO pageVo = new PageVO();
+		int totalCount=dao.totalCount();
+		String strPage=request.getParameter("page");
 				
-				if(strPage==null) {strPage="1";}
-				int page=Integer.parseInt(strPage);
-				pageVo.setPage(page);
+		if(strPage==null) {strPage="1";}
+		int page=Integer.parseInt(strPage);
+		pageVo.setPage(page);
 				
-				pageVo.pageCalculate(totalCount);
+		pageVo.pageCalculate(totalCount);
 				
-				int rowStart=pageVo.getRowStart();
-				int rowEnd=pageVo.getRowEnd();
-				
+		int rowStart=pageVo.getRowStart();
+		int rowEnd=pageVo.getRowEnd();
+//		ItemSearch.put("rowStart", toString(rowStart));
+//		ItemSearch.put("rowEnd", toString(rowEnd));
 		ArrayList<ItemDto> itemList = dao.itemlistview(rowStart,rowEnd);
 		
 		
@@ -123,6 +142,11 @@ public class LostItemService implements LostItemServiceInter {
 		return itemList;
 	}
 	
+	private String toString(int rowStart) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public String lost_item_write(Model model){
 		Map<String, Object> map = model.asMap();
@@ -154,7 +178,7 @@ public class LostItemService implements LostItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(userId,(i+1),itemname,fileName);
+						dao.imgUpLoad(userId,(i+1),itemname,fileName,itemkind2);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
@@ -330,7 +354,7 @@ public class LostItemService implements LostItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(user_id,(i+1),itemname,fileName);
+						dao.imgUpLoad(user_id,(i+1),itemname,fileName,upr_cd);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

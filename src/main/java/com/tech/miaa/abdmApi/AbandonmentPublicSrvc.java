@@ -1,16 +1,8 @@
 package com.tech.miaa.abdmApi;
 
-import com.tech.miaa.dto.AnimalSearchDto;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+
+import com.tech.miaa.dto.AnimalSearchDto;
 
 public class AbandonmentPublicSrvc {
     private final static String API_KEY = "hm0qJL%2FrZFagiGGwrhjAQ6KMXI2DOUcHs5uVRpIGSk0k1yvSZiQDcIr%2BzGHVVbw1Cs0n2wAIZNlzXcaeJbukmQ%3D%3D";

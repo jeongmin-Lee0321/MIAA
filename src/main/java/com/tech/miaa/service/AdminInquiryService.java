@@ -93,5 +93,7 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 
 		return pageVo;
 	}
+	
+	
 
 }

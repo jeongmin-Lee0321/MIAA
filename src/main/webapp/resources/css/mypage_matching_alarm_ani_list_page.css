@@ -352,6 +352,7 @@ select {
 	top: 10px;
 	right: 12px;	
 	margin: 0;
+	cursor: pointer;
 }
 
 .alarm_delete {
@@ -361,6 +362,13 @@ select {
 	
 	margin-left: 50px;
 }
+
+
+.alarm_delete span{
+	text-align: center;
+	font-size: 14px;
+}
+
 
 .registrationed_alarm_keywords {
 	line-height: 50px;
