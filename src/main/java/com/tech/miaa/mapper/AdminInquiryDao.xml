@@ -5,7 +5,6 @@
 
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.AdminInquiryDao">
-
 	<resultMap id="adminInquiry"
 		type="com.tech.miaa.dto.AdminInquiryDto">
 		<id property="board_num" column="A_BOARD_NUM" />
@@ -27,28 +26,115 @@
 		</association>
 	</resultMap>
 
-	<select id="join_inquiry_list" resultMap="adminInquiry">
-	WITH J AS (SELECT USER_ID ,
-	U.BOARD_NUM ,
-	BOARD_TITLE ,
-	BOARD_CONTENT ,
-	TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE ,
-	BOARD_REPLY_STATUS ,
-	BOARD_FILESRC,
-	NVL(TO_CHAR(BOARD_REPLY_DATE,'YYYY-MM-DD'),'-') BOARD_REPLY_DATE
-	,NVL(BOARD_REPLY,'-') BOARD_REPLY
-	,NVL(ADMIN_ID,'-') ADMIN_ID
-	,A.BOARD_NUM AS A_BOARD_NUM
-	FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
-	ON U.BOARD_NUM = A.BOARD_NUM
-	ORDER BY U.BOARD_NUM DESC)
-	SELECT * FROM (SELECT ROWNUM N,J.* FROM J)
-	WHERE N BETWEEN #{param1} AND #{param2}
-	</select>
-	
-	<select id="get_total" resultType="Integer">
-		SELECT COUNT(U.BOARD_NUM) TOTALNUM
-		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
+	<sql id="date_select">
+		<trim prefix="AND (" suffix=")" >
+			<choose>
+				<when test="START_YMD != '' and END_YMD != ''">
+					U.BOARD_REGISTRATION_DATE BETWEEN
+					TO_DATE(#{START_YMD} || '
+					00:00:00', 'YYYY-MM-DD HH24:MI:SS') AND
+					TO_DATE(#{END_YMD} || '
+					23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+				</when>
+				<when test="START_YMD == '' and END_YMD != ''">
+					U.BOARD_REGISTRATION_DATE &lt;=
+					TO_DATE(#{END_YMD} || ' 23:59:59',
+					'YYYY-MM-DD HH24:MI:SS')
+				</when>
+				<when test="START_YMD != '' and END_YMD == ''">
+					U.BOARD_REGISTRATION_DATE &gt;=
+					TO_DATE(#{START_YMD} || '
+					00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<sql id="reply_select">
+		<trim prefix="AND (" suffix=")" >
+			<choose>
+				<when test="reply_status == 'ing'">
+					BOARD_REPLY_STATUS = '처리중'
+				</when>
+				<when test="reply_status == 'done'">
+					BOARD_REPLY_STATUS = '답변완료'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<sql id="search_select">
+		<trim prefix="AND (" suffix=")" >
+			<choose>
+				<when test="search_type == 'title'">
+					BOARD_TITLE like '%'||#{search_content}||'%'
+				</when>
+				<when test="search_type == 'user'">
+					USER_ID like '%'||#{search_content}||'%'
+				</when>
+				<when test="search_type == 'admin'">
+					ADMIN_ID like '%'||#{search_content}||'%'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<select id="join_inquiry_list"
+		parameterType="com.tech.miaa.dto.AdminInquirySearchDto"
+		resultMap="adminInquiry">
+		WITH J AS (SELECT USER_ID ,
+		U.BOARD_NUM ,
+		BOARD_TITLE ,
+		BOARD_CONTENT ,
+		TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE
+		,
+		BOARD_REPLY_STATUS ,
+		BOARD_FILESRC,
+		NVL(TO_CHAR(BOARD_REPLY_DATE,'YYYY-MM-DD'),'-') BOARD_REPLY_DATE
+		,NVL(BOARD_REPLY,'-') BOARD_REPLY
+		,NVL(ADMIN_ID,'-') ADMIN_ID
+		,A.BOARD_NUM AS A_BOARD_NUM
+		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN
+		ADMIN_INQUIRY_BOARD A
 		ON U.BOARD_NUM = A.BOARD_NUM
+	<trim prefix="WHERE" prefixOverrides="AND" >
+		<if test="START_YMD != null or END_YMD != null">
+			<include refid="date_select" />
+		</if>
+		<if test="reply_status != null or reply_status != 'all' ">
+			<include refid="reply_select" />
+		</if>
+		<if
+			test="(search_type != null and search_content != null) or search_content != ''">
+			<include refid="search_select" />
+		</if>
+	</trim>
+		ORDER BY U.BOARD_NUM DESC)
+		SELECT * FROM (SELECT ROWNUM N,J.* FROM J)
+		WHERE N BETWEEN #{rowStart} AND #{rowEnd}
+
+	</select>
+
+	<select id="get_total" resultType="Integer">
+		SELECT COUNT(U.BOARD_NUM)
+		TOTALNUM
+		FROM USER_INQUIRY_BOARD U FULL OUTER
+		JOIN ADMIN_INQUIRY_BOARD
+		A
+		ON U.BOARD_NUM = A.BOARD_NUM
+	<trim prefix="WHERE" prefixOverrides="AND" >
+		<if test="START_YMD != null or END_YMD != null">
+			<include refid="date_select" />
+		</if>
+		<if test="reply_status != null or reply_status != 'all' ">
+			<include refid="reply_select" />
+		</if>
+		<if
+			test="(search_type != null and search_content != null) or search_content != ''">
+			<include refid="search_select" />
+		</if>
+	</trim>
+
+
 	</select>
 </mapper>

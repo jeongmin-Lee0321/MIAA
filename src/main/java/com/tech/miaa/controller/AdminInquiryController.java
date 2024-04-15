@@ -1,18 +1,16 @@
 package com.tech.miaa.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.tech.miaa.dto.AdminInquiryDto;
+import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.service.AdminInquiryService;
 import com.tech.miaa.serviceInter.AdminInquiryServiceInter;
 import com.tech.miaa.vopage.PageVO;
@@ -28,7 +26,7 @@ public class AdminInquiryController {
 //	문의내역 페이지
 	@RequestMapping("admin_inquiry_list_page")
 	public String admin_inquiry_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo) {
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo, @ModelAttribute("dto") AdminInquirySearchDto dto) {
 		String result = "redirect:/";
 		String strPage = null;
 		

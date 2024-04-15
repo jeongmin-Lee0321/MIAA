@@ -83,8 +83,10 @@ function deleteValue(){
 							<span>기간</span>
 						</div>
 						<div class="searchbar-content">
-							<input type="date" name="START_YMD" id="START_YMD"> <span>~</span>
-							<input type="date" name="END_YMD" id="END_YMD">
+							<input type="date" name="START_YMD" id="START_YMD"
+							<c:if test="${search ne null}">value="${search.START_YMD }"</c:if>> <span>~</span>
+							<input type="date" name="END_YMD" id="END_YMD"
+							<c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
 							<div class="form-date-btn" id="date-today">
 								<div class="div-placeholder">
 									<div class="div">오늘</div>
@@ -124,9 +126,12 @@ function deleteValue(){
 						</div>
 						<div class="searchbar-content">
 							<select name="reply_status" id="reply_status">
-								<option value="all">전체</option>
-								<option value="ing">처리중</option>
-								<option value="done">답변완료</option>
+								<option value="all" 
+								<c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체</option>
+								<option value="ing" 
+								<c:if test="${search.reply_status eq 'ing'}">selected</c:if>>처리중</option>
+								<option value="done" 
+								<c:if test="${search.reply_status eq 'done'}">selected</c:if>>답변완료</option>
 							</select>
 						</div>
 					</div>
@@ -134,13 +139,16 @@ function deleteValue(){
 					<div class="searchbar-select-group">
 						<div class="searchbar-title">
 							<select name="search_type" id="search_type">
-								<option value="title">제목</option>
-								<option value="user">문의자</option>
-								<option value="admin">답변자</option>
+								<option value="title"
+								<c:if test="${search.search_type eq 'title'}">selected</c:if>>제목</option>
+								<option value="user" 
+								<c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자</option>
+								<option value="admin" 
+								<c:if test="${search.search_type eq 'admin'}">selected</c:if>>답변자</option>
 							</select>
 						</div>
 						<div class="searchbar-content">
-							<input type="search" name="q" id="q" style="min-width: 300px;">
+							<input type="search" name="search_content" id="search_content" style="min-width: 300px;">
 						</div>
 					</div>
 
@@ -149,7 +157,7 @@ function deleteValue(){
 						<button type="submit" form="inquiry-form">
 							조회<img src="resources/img/searchIcon.png" alt="">
 						</button>
-						<button class="reset">
+						<button class="reset" onclick="resetForm()">
 							<div class="div">초기화</div>
 						</button>
 					</div>
@@ -255,7 +263,17 @@ function deleteValue(){
 				currpage= pageNumber-((pageNumber-1)%10)+9;
 			}
 			var newPath = window.location.pathname + '?currPage=' + currpage;
+			
+		    // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+		    var form = document.getElementById("inquiry-form");
+		    var formData = new FormData(form);
+		    formData.append('currPage', currpage); // currPage를 추가
+		    for (var pair of formData.entries()) {
+		        newPath += '&' + pair[0] + '=' + pair[1];
+		    }
+		    
 			window.location.href = newPath; // 새 경로로 페이지 이동
+			
 		}
 	</script>
 	<!-- 날짜 제한 -->
@@ -286,11 +304,6 @@ function deleteValue(){
 	    document.getElementById('END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
 	});
 
-	document.getElementById('date-all').addEventListener('click', function() {
-	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
-	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
-	});
-	
 	document.getElementById('date-1month').addEventListener('click', setPastDate.bind(null, 1));
 	document.getElementById('date-3month').addEventListener('click', setPastDate.bind(null, 3));
 	document.getElementById('date-6month').addEventListener('click', setPastDate.bind(null, 6));
@@ -300,7 +313,24 @@ function deleteValue(){
 	    document.getElementById('START_YMD').value = pastDate.toISOString().substring(0, 10);
 	    document.getElementById('END_YMD').value = today2.toISOString().substring(0, 10);
 	}
-	</script>
+	document.getElementById('date-all').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
+	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
+	});
 	
+	</script>
+
+<script>
+    $(document).ready(function() {
+        $(".reset").click(function(event) {
+            event.preventDefault(); // 폼의 기본 동작 중지
+            // form 안의 input 요소의 값을 빈 문자열로 설정
+            $('#inquiry-form input').val('');
+
+            // form 안의 select 요소의 selectedIndex를 0으로 설정하여 첫 번째 옵션을 선택
+            $('#inquiry-form select').prop('selectedIndex', 0);
+        });
+    });
+</script>
 </body>
 </html>
