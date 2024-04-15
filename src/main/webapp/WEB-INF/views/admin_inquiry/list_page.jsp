@@ -83,8 +83,10 @@ function deleteValue(){
 							<span>기간</span>
 						</div>
 						<div class="searchbar-content">
-							<input type="date" name="START_YMD" id="START_YMD"> <span>~</span>
-							<input type="date" name="END_YMD" id="END_YMD">
+							<input type="date" name="START_YMD" id="START_YMD"
+							<c:if test="${search ne null}">value="${search.START_YMD }"</c:if>> <span>~</span>
+							<input type="date" name="END_YMD" id="END_YMD"
+							<c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
 							<div class="form-date-btn" id="date-today">
 								<div class="div-placeholder">
 									<div class="div">오늘</div>
@@ -124,9 +126,12 @@ function deleteValue(){
 						</div>
 						<div class="searchbar-content">
 							<select name="reply_status" id="reply_status">
-								<option value="all">전체</option>
-								<option value="ing">처리중</option>
-								<option value="done">답변완료</option>
+								<option value="all" 
+								<c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체</option>
+								<option value="ing" 
+								<c:if test="${search.reply_status eq 'ing'}">selected</c:if>>처리중</option>
+								<option value="done" 
+								<c:if test="${search.reply_status eq 'done'}">selected</c:if>>답변완료</option>
 							</select>
 						</div>
 					</div>
@@ -134,9 +139,12 @@ function deleteValue(){
 					<div class="searchbar-select-group">
 						<div class="searchbar-title">
 							<select name="search_type" id="search_type">
-								<option value="title">제목</option>
-								<option value="user">문의자</option>
-								<option value="admin">답변자</option>
+								<option value="title"
+								<c:if test="${search.search_type eq 'title'}">selected</c:if>>제목</option>
+								<option value="user" 
+								<c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자</option>
+								<option value="admin" 
+								<c:if test="${search.search_type eq 'admin'}">selected</c:if>>답변자</option>
 							</select>
 						</div>
 						<div class="searchbar-content">
@@ -255,7 +263,17 @@ function deleteValue(){
 				currpage= pageNumber-((pageNumber-1)%10)+9;
 			}
 			var newPath = window.location.pathname + '?currPage=' + currpage;
+			
+		    // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+		    var form = document.getElementById("inquiry-form");
+		    var formData = new FormData(form);
+		    formData.append('currPage', currpage); // currPage를 추가
+		    for (var pair of formData.entries()) {
+		        newPath += '&' + pair[0] + '=' + pair[1];
+		    }
+		    
 			window.location.href = newPath; // 새 경로로 페이지 이동
+			
 		}
 	</script>
 	<!-- 날짜 제한 -->

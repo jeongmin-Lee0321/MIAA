@@ -22,7 +22,7 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		String id = (String) map.get("userId");
 
 		// 페이징 처리를 위한 pageVo 가져오기-(현재페이지를 가져와서 현재페이지경우의수를 정한후 PageVo를 셋팅)
@@ -45,13 +45,16 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		
 		} else {
 			try {
-				list = dao.join_inquiry_list(rowStart, rowEnd);
+				list = dao.join_inquiry_list(dto);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		model.addAttribute("search", dto);
 		model.addAttribute("list", list);
+		
 
 	}
 
@@ -64,13 +67,14 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		Map<String, Object> map = model.asMap();
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		String currPage = request.getParameter("currPage");
 
 		// 토탈페이지 먼저 구하기
 		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
 
 		try {
-			total = dao.get_total();
+			total = dao.get_total(dto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,13 +123,32 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		//시작x 끝 o - 시작 6개월 전
 		//시작x 끝 x - 전체
 		//시작o 끝 o
+//		--where BOARD_REGISTRATION_DATE = SYSDATE 오늘
+//				--where BOARD_REGISTRATION_DATE >= SYSDATE-1 하루전
+//				--where BOARD_REGISTRATION_DATE >= SYSDATE-7 일주일전
+//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -1) 한달전
+//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -3) 3달전
+//				--where BOARD_REGISTRATION_DATE >= add_Months(SYSDATE, -6) 6달전
+//				--USER_ID like '%bb%' 유저아이디
+//
+//				--11 between s and e
+//				--01 <= e 
+//				--10 >= s 
+//
+//				--00 or null
+//				 
 		String reply_status=request.getParameter("reply_status");
 		
 		String search_type=request.getParameter("search_type");
 		String search_content=request.getParameter("search_content");
 		
 		
-		
+		try {
+			System.out.println(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("dto.getEND_YMD(): "+dto.getEND_YMD());
 		System.out.println("START_YMD: "+START_YMD==null);
 		System.out.println("START_YMD: "+START_YMD);

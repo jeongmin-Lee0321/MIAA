@@ -10,7 +10,6 @@ import com.tech.miaa.vopage.PageVO;
 
 public interface AdminInquiryDao {
 
-
-	public ArrayList<AdminInquiryDto> join_inquiry_list(int rowStart,int rowEnd);
-	public Integer get_total();
+	public Integer get_total(AdminInquirySearchDto dto);
+	public ArrayList<AdminInquiryDto> join_inquiry_list(AdminInquirySearchDto dto);
 }
