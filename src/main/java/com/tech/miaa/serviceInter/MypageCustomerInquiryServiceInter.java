@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.ui.Model;
 
 import com.tech.miaa.dto.InquiryDto;
-import com.tech.miaa.vopage.PageVO;
 import com.tech.miaa.vopage.PageVO2;
 
 public interface MypageCustomerInquiryServiceInter {

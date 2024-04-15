@@ -2,8 +2,6 @@ package com.tech.miaa.dao;
 
 import java.util.ArrayList;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
 
