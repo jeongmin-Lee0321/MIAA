@@ -45,6 +45,6 @@
 	UPR_CD=#{param7},COLORCD=#{param8},SEPCIALMARK=#{param9},ITEM_DATE=SYSDATE,ADDRESSCODE=#{param10} WHERE TOTAL_ID=#{param11}
 </update>
 	<select id="get_lost_items" resultType="com.tech.miaa.dto.ItemDto">
-		SELECT * FROM ITEM WHERE ITEM_ID= #{PARAM1}
+		SELECT * FROM ITEM WHERE USER_ID= #{PARAM1}
 	</select>
 </mapper>

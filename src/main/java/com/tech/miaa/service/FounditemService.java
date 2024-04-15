@@ -402,7 +402,7 @@ public class FounditemService implements FounditemServiceInter {
 		return dto;
 	}
 
-	public String found_item_search_AreaPd(ItemDto itemDto, PageVO pageVO) {
+	public String found_item_search_AreaPd(ItemDto itemDto) {
 		String result_code = ""; // 전체 결과값
 
 		try {
@@ -415,9 +415,9 @@ public class FounditemService implements FounditemServiceInter {
 			if (!itemDto.getUpr_cd().equals(""))
 				urlBuilder.append("&" + URLEncoder.encode("PRDT_CL_CD_02", "UTF-8") + "="
 						+ URLEncoder.encode(itemDto.getUpr_cd(), "UTF-8")); /* 중분류 */
-			if (!itemDto.getColorcd().equals(""))
-				urlBuilder.append("&" + URLEncoder.encode("FD_COL_CD", "UTF-8") + "="
-						+ URLEncoder.encode(itemDto.getColorcd(), "UTF-8")); /* 습득물 색상 */
+//			if (!itemDto.getColorcd().equals(""))
+//				urlBuilder.append("&" + URLEncoder.encode("FD_COL_CD", "UTF-8") + "="
+//						+ URLEncoder.encode(itemDto.getColorcd(), "UTF-8")); /* 습득물 색상 */
 			if (!itemDto.getLostday().equals(""))
 				urlBuilder.append("&" + URLEncoder.encode("START_YMD", "UTF-8") + "="
 						+ URLEncoder.encode(itemDto.getLostday().replace("-", ""), "UTF-8")); /* 검색시작일 */
@@ -426,17 +426,16 @@ public class FounditemService implements FounditemServiceInter {
 //						+ URLEncoder.encode(END_YMD.replace("-", ""), "UTF-8")); /* 검색종료일 */
 			if (!itemDto.getAddressCode().equals(""))
 				urlBuilder.append("&" + URLEncoder.encode("N_FD_LCT_CD", "UTF-8") + "="
-						+ URLEncoder.encode(itemDto.getAddress(), "UTF-8")); /* 습득지역 */
+						+ URLEncoder.encode(itemDto.getAddressCode(), "UTF-8")); /* 습득지역 */
 			urlBuilder.append(
-					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(pageVO.getPage()), "UTF-8")); /* 페이지 번호 */
+					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
 			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
 					+ URLEncoder.encode("500", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
-//			System.out.println(urlBuilder.toString());
+			System.out.println(urlBuilder.toString());
 			URL url = new URL(urlBuilder.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-type", "application/json");
-			System.out.println("Response code: " + conn.getResponseCode());
 			BufferedReader rd;
 			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
