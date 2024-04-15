@@ -237,9 +237,11 @@
 						class="total-page">${pageVO.totPage}</span>
 				</div>
 				<ul class="pagelist-container">
-					<li class="btn-prev"><a class="test"
-						href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
+					<li class="btn-prev">
+						<a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">
+							<img src="resources/img/chevron-left.png" alt="">
+						</a>
+					</li>
 					<c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}"
 						var="i">
 						<c:choose>
