@@ -112,7 +112,7 @@
 						</div>
 						<div class="searchbar-content">
 							<select name="colorCd" id="colorCd">
-								<option>색상을 선택하세요</option>
+								<option value="">색상을 선택하세요</option>
 								<option value="CL1001">흰색</option>
 								<option value="CL1002">검정</option>
 								<option value="CL1003">빨강</option>
@@ -179,7 +179,9 @@
 			<!-- 페이징 프레임시작 -->
 			<div class="page-container">
 				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+					<span>Page</span>
+					<span class="current-page">${pageVo.page}</span>
+					<span>of</span><span
 						class="total-page">${pageVo.totPage}</span>
 				</div>
 				<ul class="pagelist-container">

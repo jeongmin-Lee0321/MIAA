@@ -2,9 +2,11 @@ package com.tech.miaa.scheduler;
 
 import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dao.MemberDao;
+import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.MemberDto;
 import com.tech.miaa.service.FounditemService;
+import com.tech.miaa.vopage.PageVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,6 +42,7 @@ public class Scheduler {
 //            //분실물
             LostItemDao lostItemDao = sqlSession.getMapper(LostItemDao.class);
             List<ItemDto> itemDtos =lostItemDao.get_lost_items(memeberId);
+            PageVO pageVO = new PageVO();
             for (int j = 0; j <itemDtos.size(); j++){
                 System.out.println(itemDtos.get(j).getTotal_id());
                 System.out.println(itemDtos.get(j).getItem_id());
@@ -49,7 +52,8 @@ public class Scheduler {
                 System.out.println(itemDtos.get(j).getItem_date());
                 //api 호출
                 FounditemService founditemService = new FounditemService();
-//                founditemService.getFoundsearchValue()
+                String a = founditemService.found_item_search_AreaPd(itemDtos.get(i),pageVO);
+                ArrayList<FounditemDto> list = founditemService.getFoundList(a);
                 //db 저장
             }
 //            //유기동물

@@ -14,7 +14,7 @@
 			<span>매칭 알림 목록(전체목록)</span>
 		</div>
 		<div class="selection-explain">
-			<span>1대1 문의 관리 페이지 입니다</span>
+			<span>등록하신 분실물,실종동물의 글을 기반으로 알람이 등록되고 매칭됩니다.</span>
 		</div>
 	</div>
 </body>
