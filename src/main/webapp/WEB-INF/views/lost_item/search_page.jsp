@@ -112,7 +112,7 @@
 						</div>
 						<div class="searchbar-content">
 							<select name="colorCd" id="colorCd">
-								<option>색상을 선택하세요</option>
+								<option value="">색상을 선택하세요</option>
 								<option value="CL1001">흰색</option>
 								<option value="CL1002">검정</option>
 								<option value="CL1003">빨강</option>

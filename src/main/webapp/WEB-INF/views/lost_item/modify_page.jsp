@@ -135,7 +135,6 @@ body {
 							
 							<div class="row-content">
 								<select name="addressCode" id="addressCode">
-									<option value="${dto.addressCode }">${kind.get(3) }</option>
 									<option value="LCA000">서울특별시</option>
 									<option value="LCH000">강원도</option>
 									<option value="LCI000">경기도</option>
@@ -217,7 +216,6 @@ body {
 								</div>
 								<div class="row-content">
 									<select name="colorCd" id="colorCd">
-										<option value="${dto.colorcd }">${kind.get(2)}</option>
 										<option value="CL1001">흰색</option>
 										<option value="CL1002">검정</option>
 										<option value="CL1003">빨강</option>
@@ -401,10 +399,16 @@ body {
 		// 모델에 담긴 데이터로 셀렉트 박스를 선택하고 onchange 이벤트를 발생시킴
 		var selectedMainCategory = "${dto.upkind }";
 		var selectedSubCategory = "${dto.upr_cd }";
+		var selectedAddressCode = "${dto.addressCode }";
+		var selectedColorCd = "${dto.colorcd }";
 		var prd_mainCategory = document.getElementById("itemkind1");
 		var prd_subCategory = document.getElementById("itemkind2");
+		var prd_addressCode = document.getElementById("addressCode");
+		var prd_colorCd = document.getElementById("colorCd");
 
+		prd_addressCode.value = selectedAddressCode;
 		prd_mainCategory.value = selectedMainCategory;
+		prd_colorCd.value = selectedColorCd;
 		// 서브 카테고리 업데이트 함수 호출
 		if (selectedMainCategory !== "" && selectedMainCategory !== null) {
 			// 서브 카테고리 업데이트 함수 호출

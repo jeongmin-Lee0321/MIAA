@@ -33,33 +33,35 @@ public class LostItemService implements LostItemServiceInter {
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
 		//검색 입력값 가져오기
-		String searchday1 = request.getParameter("searchday1");
-		String searchday2 = request.getParameter("searchday2");
-		String addressCode = request.getParameter("addressCode");
-		String itemkind1 = request.getParameter("itemkind1");
-		String itemkind2 = request.getParameter("itemkind2");
-		String colorCd = request.getParameter("colorCd");
+		String searchday1 = null; String searchday2 = null; String addressCode = null;
+		String itemkind1 =null; String itemkind2 = null; String colorCd = null;
 		
-		System.out.println(searchday1+"~"+searchday2);
-		System.out.println(addressCode);
-		System.out.println(itemkind1+"-"+itemkind2);
-		System.out.println(colorCd);
+		//검색조건 채우기 작업
+		if(request.getParameter("searchday1")!="") searchday1=request.getParameter("searchday1");
+		if(request.getParameter("searchday2")!="") searchday2=request.getParameter("searchday2");
+		if(request.getParameter("addressCode")!="") addressCode=request.getParameter("addressCode");
+		if(request.getParameter("itemkind1")!="") itemkind1=request.getParameter("itemkind1");
+		if(request.getParameter("itemkind2")!="") itemkind2=request.getParameter("itemkind2");
+		if(request.getParameter("colorCd")!="") colorCd=request.getParameter("colorCd");
+		
+		if(searchday1==null && searchday2==null && addressCode==null && itemkind1==null && itemkind2==null && colorCd==null) {
+			System.out.println("검색조건 없음");
+		}
 		
 		
-		//페이지 처리
-				PageVO pageVo = new PageVO();
-				int totalCount=dao.totalCount();
-				String strPage=request.getParameter("page");
+		PageVO pageVo = new PageVO();
+		int totalCount=dao.totalCount();
+		String strPage=request.getParameter("page");
 				
-				if(strPage==null) {strPage="1";}
-				int page=Integer.parseInt(strPage);
-				pageVo.setPage(page);
+		if(strPage==null) {strPage="1";}
+		int page=Integer.parseInt(strPage);
+		pageVo.setPage(page);
 				
-				pageVo.pageCalculate(totalCount);
+		pageVo.pageCalculate(totalCount);
 				
-				int rowStart=pageVo.getRowStart();
-				int rowEnd=pageVo.getRowEnd();
-				
+		int rowStart=pageVo.getRowStart();
+		int rowEnd=pageVo.getRowEnd();
+		
 		ArrayList<ItemDto> itemList = dao.itemlistview(rowStart,rowEnd);
 		
 		
@@ -154,7 +156,7 @@ public class LostItemService implements LostItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(userId,(i+1),itemname,fileName);
+						dao.imgUpLoad(userId,(i+1),itemname,fileName,itemkind2);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
@@ -330,7 +332,7 @@ public class LostItemService implements LostItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(user_id,(i+1),itemname,fileName);
+						dao.imgUpLoad(user_id,(i+1),itemname,fileName,upr_cd);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
