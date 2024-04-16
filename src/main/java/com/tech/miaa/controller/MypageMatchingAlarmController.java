@@ -26,6 +26,8 @@ public class MypageMatchingAlarmController {
 	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 	/* 원진호_0409추가 */
 	LostItemServiceInter itemService;
+	/* 원진호_0415_추가 */
+	
 	
 	/* 원진호_0401추가 */
 	/* 원진호_0409_수정 */

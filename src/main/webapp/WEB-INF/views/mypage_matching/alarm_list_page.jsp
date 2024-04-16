@@ -45,10 +45,8 @@
 				alert("선택된 글이 없습니다.");
 			} else {
 				var chk = confirm("정말 삭제하시겠습니까?");
-
 				if (chk) {
-					$
-							.ajax({
+					$.ajax({
 								url : url, // 전송 URL
 								type : 'POST', // POST 방식
 								traditional : true,
@@ -74,7 +72,6 @@
 		}
 	</script>
 
-
 	<!-- <div class="main-body"> -->
 	<div class="main-contents">
 		<!-- 검색창과 검색결과 -->
@@ -95,11 +92,10 @@
 				</div>
 				<div class="set_02">
 					<select name="select_content" id="select_content">
-						<option value="제목+내용">제목+내용</option>
-						<option value="제목">제목</option>
-						<option value="내용">내용</option>
+						<option value="title+content">제목+내용</option>
+						<option value="title">제목</option>
+						<option value="content">내용</option>
 					</select>
-
 
 					<div class="search">
 						<input class="search_bar" type="text" placeholder="검색어 입력">
@@ -115,20 +111,12 @@
 
 			<table id="total_lost_item_list_content">
 				<!-- <div class="registrationed_alarm_keywords"> -->
-				<span class="registration_item_alarmkeyword_count">등록된 알림
-					키워드(${totalCount }개)</span>
-				<!-- </div> -->
+				<span class="registration_item_alarmkeyword_count">등록된 알림 키워드(${totalCount }개)</span>
+
 				<div class="registrationed_alarm_keywords_list">
 					<c:forEach items="${list }" var="list" varStatus="status">
 						<div class="show_lost_item_info_container">
-							<a href="mypage_matching_alarm_detail_list_page"
-								class="item_tag_00"> <input type="checkbox"
-								class="lost_item_name" id="lost_item_name"
-								value="lost_item_name"> ${list.upr_cd} <!-- 소분류 -->
-							</a> <a href="$$$" class="item_tag_01">물건</a> <a href="$$$"
-								class="item_tag_02">${list.item_name}</a> <a href="$$$"
-								class="item_tag_03">${list.lostday}</a>
-
+							<!-- 대분류코드 한글전환 -->
 							<c:set var="upperkind" value="${list.upkind}" />
 							<c:choose>
 								<c:when test="${upperkind == 'PRB000'}">
@@ -189,30 +177,105 @@
 									<c:set var="upperkind" value="기타물품" />
 								</c:when>
 							</c:choose>
+
+							<!-- 소분류코드 한글전환 -->
 							<c:set var="lowerkind" value="${list.upr_cd}" />
+							<c:choose>
+								<c:when test="${lowerkind == 'PRI100'}">
+									<c:set var="lowerkind" value="삼성노트북" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRI200'}">
+									<c:set var="lowerkind" value="LG노트북" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRI300'}">
+									<c:set var="lowerkind" value="삼보노트북" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRI400'}">
+									<c:set var="lowerkind" value="기타" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRI500'}">
+									<c:set var="lowerkind" value="HP노트북" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRI600'}">
+									<c:set var="lowerkind" value="애플노트북" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ100'}">
+									<c:set var="lowerkind" value="삼성휴대폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ200'}">
+									<c:set var="lowerkind" value="LG휴대폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ300'}">
+									<c:set var="lowerkind" value="스카이휴대폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ400'}">
+									<c:set var="lowerkind" value="아이폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ500'}">
+									<c:set var="lowerkind" value="기타통신기기" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ600'}">
+									<c:set var="lowerkind" value="모토로라휴대폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRJ900'}">
+									<c:set var="lowerkind" value="기타휴대폰" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRH100'}">
+									<c:set var="lowerkind" value="여성용지갑" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRH200'}">
+									<c:set var="lowerkind" value="남성용지갑" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRH300'}">
+									<c:set var="lowerkind" value="기타지갑" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRG100'}">
+									<c:set var="lowerkind" value="PMP" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRG200'}">
+									<c:set var="lowerkind" value="MP3" />
+								</c:when>
+								<c:when test="${lowerkind == 'PRG300'}">
+									<c:set var="lowerkind" value="PDA" />
+								</c:when>
+							</c:choose>
+
+							<a href="mypage_matching_alarm_detail_list_page" class="item_tag_00"> 
+								<input type="checkbox" class="lost_item_name" id="lost_item_name" value="lost_item_name"> 
+								소분류 : ${lowerkind} <!-- 소분류 -->
+							</a> 
+							<a href="$$$" class="item_tag_01">물건</a> 
+							<a href="$$$" class="item_tag_02">${list.item_name}</a> 
+							<a href="$$$" class="item_tag_03">${list.lostday}</a>
 							<a href="$$$" class="item_tag_04">${upperkind} > ${lowerkind}</a>
 							<%-- <a href="$$$" class="item_tag_04">${list.upkind} > ${list.upr_cd}</a> --%>
-							<a href="$$$" class="item_tag_05">${list.address}</a> <a
-								href="mypage_matching_alarm_detail_list_page"
-								class="show_all_result">모두 보기(49개)</a>
+							<a href="$$$" class="item_tag_05">${list.address}</a> 
+							<a href="mypage_matching_alarm_detail_list_page" class="show_all_result">모두 보기(${status.count }개)</a>
 						</div>
 						<div class="result-list">
 							<!-- 목록1개가 list-card -->
 							<c:forEach items="${itemList }" var="itemList">
 								<c:choose>
 									<c:when test="${list.upr_cd eq itemList.upr_cd }">
-										<div class="list-card"
-											onclick="location.href='lost_item_detail_page?item_id=${itemList.item_id }';"
-											style="cursor: pointer;">
+										<div class="list-card" onclick="location.href='lost_item_detail_page?item_id=${itemList.item_id }';" style="cursor: pointer;">
 											<div class="card-photo">
 												<img src="resources/img/null_img_icon.png" alt="">
 											</div>
 											<div class="content-items">
-												<div class="item-title">${itemList.item_name }</div>
+												<div class="item-title">
+													<c:out value="${itemList.item_name }"></c:out>
+												
+												</div>
 												<ul class="item-details">
-													<li class="item-details_01">${itemList.lostday }</li>
-													<li class="item-details_02">${itemList.address }</li>
-													<li class="item-details_03">${upperkind} > ${itemList.upr_cd }</li>
+													<li class="item-details_01">
+													<c:out value="${itemList.lostday }"></c:out>
+													</li>
+													<li class="item-details_02">
+													<c:out value="${itemList.address }"></c:out>									
+													</li>
+													<li class="item-details_03">
+													<c:out value="${upperkind}"></c:out> > <c:out value="${itemList.upr_cd }"></c:out> 
+													</li>
 												</ul>
 											</div>
 										</div>
@@ -223,62 +286,47 @@
 					</c:forEach>
 				</div>
 			</table>
-			
-			<!-- 123455 -->
-			
-			
-			
-			<!-- page -->
-		<div class="result-container">
-			<!-- 페이징 프레임시작 -->
-			<div class="page-container">
-				<div class="currentOftotal">
-					<span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
-						class="total-page">${pageVO.totPage}</span>
-				</div>
-				<ul class="pagelist-container">
-					<li class="btn-prev">
-						<a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">
-							<img src="resources/img/chevron-left.png" alt="">
-						</a>
-					</li>
-					<c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}"
-						var="i">
-						<c:choose>
-							<c:when test="${i eq pageVO.page}">
-								<li><a href="#" style="color: red">${i}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<li class="btn-next"><a
-						href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
-				</ul>
 
-				<ul class="switchBtn-container">
-					<li class="btn-prev-group"><a
-						href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">Previous</a></li>
-					<li class="btn-next-group"><a
-						href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>
-				</ul>
+			<!-- page -->
+			<div class="result-container">
+				<!-- 페이징 프레임시작 -->
+				<div class="page-container">
+					<div class="currentOftotal">
+						<span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
+							class="total-page">${pageVO.totPage}</span>
+					</div>
+					<ul class="pagelist-container">
+						<li class="btn-prev"><a class="test"
+							href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">
+								<img src="resources/img/chevron-left.png" alt="">
+						</a></li>
+						<c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}"
+							var="i">
+							<c:choose>
+								<c:when test="${i eq pageVO.page}">
+									<li><a href="#" style="color: red">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="btn-next"><a
+							href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
+								src="resources/img/chevron-left.png" alt=""></a></li>
+					</ul>
+
+					<ul class="switchBtn-container">
+						<li class="btn-prev-group"><a
+							href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}">Previous</a></li>
+						<li class="btn-next-group"><a
+							href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}">Next</a></li>
+					</ul>
+				</div>
+				<!-- 페이징 프레임 끝 -->
 			</div>
-			<!-- 페이징 프레임 끝 -->
-		</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		</div>
 	</div>
-	<!-- 	</div> -->
 </body>
 </html>
