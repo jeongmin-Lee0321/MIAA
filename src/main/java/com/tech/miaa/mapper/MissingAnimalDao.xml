@@ -7,11 +7,11 @@
 <mapper namespace="com.tech.miaa.dao.MissingAnimalDao">
 	<insert id="animalWrite">
 		INSERT INTO ANIMAL VALUES(TOTAL_SEQ.NEXTVAL, ANIMAL_SEQ.NEXTVAL,#{param1},#{param2},#{param3}, 
-		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},SYSDATE,#{param13},#{param14})
+		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},SYSDATE,#{param11},#{param12})
 	</insert>
 	
 	<insert id="imgUpLoad"> 
-		INSERT INTO ANIMAL_IMG VALUES((SELECT TOTAL_ID FROM ANIMAL WHERE USER_ID=#{param1} AND ANIMAL_NAME=#{param3} AND UPR_CD=#{param5}), 
+		INSERT INTO ANIMAL_IMG VALUES((SELECT TOTAL_ID FROM ANIMAL WHERE USER_ID=#{param1} AND ANIMAL_NAME=#{param3} AND UPKIND=#{param5}), 
 		#{param2},#{param1},#{param4}) 
 	</insert>
 	<select id="animalListView" resultType="com.tech.miaa.dto.AnimalDto">
