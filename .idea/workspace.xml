@@ -9,11 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="scheduler 작업중">
+    <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="scheduler 분실문 1차완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MatchingAlarmDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MatchingAlarmDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MatchingAlarmDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MissingAniController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MissingAniController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/controller/MypageMatchingAlarmController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/LostItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/dao/LostItemDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/scheduler/Scheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/scheduler/Scheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/LostItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/LostItemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/serviceInter/MypageMatchingAlarmServiceInter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -491,7 +498,8 @@
     <MESSAGE value="commit" />
     <MESSAGE value="admin_member 작업중" />
     <MESSAGE value="scheduler 작업중" />
-    <option name="LAST_COMMIT_MESSAGE" value="scheduler 작업중" />
+    <MESSAGE value="scheduler 분실문 1차완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="scheduler 분실문 1차완료" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

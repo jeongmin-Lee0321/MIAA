@@ -98,8 +98,7 @@ public class Scheduler {
                     if(founditemDtos.get(t).getAddr() == null){
                         founditemDtos.get(t).setAddr("");
                     }
-
-                    matchingAlarmDao.alert_item_write(memeberId,founditemDtos.get(t).getAtcid(),
+                    matchingAlarmDao.alert_item_write(itemDtos.get(i).getTotal_id(),memeberId,founditemDtos.get(t).getAtcid(),
                             founditemDtos.get(t).getFdSbjt(),founditemDtos.get(t).getFdSn(),founditemDtos.get(t).getPrdtClNm(),
                             founditemDtos.get(t).getFdPrdtNm(),founditemDtos.get(t).getFdYmd(),founditemDtos.get(t).getDepPlace(),
                             founditemDtos.get(t).getRnum(),founditemDtos.get(t).getClrNm(),founditemDtos.get(t).getFdFilePathImg(),
