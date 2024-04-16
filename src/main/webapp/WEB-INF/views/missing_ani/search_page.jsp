@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/main_contents.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 <title>실종동물 상세검색</title>
 </head>
 <body>
@@ -76,7 +85,7 @@
 						<div class="searchbar-content">
 							<select name="animalkind1" id="animalkind1"
 									onchange="getKind(this.value)">
-									<option value="">축종을 선택하세요</option>
+									<option value="">전체축종</option>
 									<option value="417000">강아지</option>
 									<option value="422400">고양이</option>
 									<option value="429900">기타</option>
@@ -188,7 +197,7 @@
 	<script type="text/javascript">
 		function getSigungu(val) {
 			var optionTag = document.getElementById("addressCode2");
-			optionTag.innerHTML = '<option value="">-전체-</option>';
+			optionTag.innerHTML = '<option value="all">전체검색</option>';
 			switch (val) {
 			case "6110000": {
 				optionTag.innerHTML += '<option value="6119999">가정보호</option>'
@@ -513,7 +522,7 @@
 		}
 		function getKind(val) {
             var optionTag = document.getElementById("animalkind2");
-            optionTag.innerHTML = '<option value="">-전체-</option>';
+            optionTag.innerHTML = '<option value="all">전체검색</option>';
             switch (val) {
                 case "417000" : {
                     optionTag.innerHTML += '<option value="000054">골든 리트리버</option>' +

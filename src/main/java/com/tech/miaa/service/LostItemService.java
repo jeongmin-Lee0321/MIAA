@@ -4,7 +4,6 @@ package com.tech.miaa.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
-import com.tech.miaa.dto.ItemSearchDto;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.util.PrdCode;
 import com.tech.miaa.vopage.PageVO;
