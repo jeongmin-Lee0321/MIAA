@@ -91,7 +91,6 @@
                 <span>(문의날짜기준)</span>
               </div>
             </div>
-
             <!-- 멀티그룹묶음 -->
             <div class="searchbar-mutil-group">
               <div class="searchbar-select-group">
