@@ -22,4 +22,7 @@
 	<select id="totalCount" resultType="Integer">
 	SELECT count(*) FROM ANIMAL
 	</select>
+	<select id="get_missing_animals" resultType="com.tech.miaa.dto.AnimalDto">
+		SELECT * FROM ANIMAL WHERE USER_ID= #{PARAM1}
+	</select>
 </mapper>
