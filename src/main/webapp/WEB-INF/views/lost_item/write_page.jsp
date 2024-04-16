@@ -208,7 +208,7 @@ body {
 						<div class="table-multi-row">
 							<div class="table-row">
 								<div class="row-title">
-									<span>색상*</span>
+									<span>색상</span>
 								</div>
 								<div class="row-content">
 									<select name="colorCd" id="colorCd">
