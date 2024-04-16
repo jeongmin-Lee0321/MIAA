@@ -14,4 +14,7 @@
 	<delete id="mypage_alarm_delete" >
 		DELETE FROM ITEM WHERE ITEM_ID=#{param1} AND USER_ID=#{param2};
 	</delete>
+	<insert id="alert_item_write"> INSERT INTO ALERT_ITEM VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11}, #{param12}, #{param13})
+	</insert>
 </mapper>

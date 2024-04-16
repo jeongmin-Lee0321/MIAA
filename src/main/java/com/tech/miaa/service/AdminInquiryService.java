@@ -146,6 +146,38 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		dto.setSearch_content(search_content);
 		
 	}
+
+	@Override
+	public void delete(Model model, PageVO pageVo) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		
+	}
+
+	@Override
+	public void inquiry_write_page(Model model) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		String id = (String) map.get("userId");
+		String bn=request.getParameter("board_num");
+		//db에서 write_page 내용가져오기
+				AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+				AdminInquiryDto detailDto = null;
+
+					try {
+						detailDto = dao.inquiry_write_page(bn);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				model.addAttribute("search", dto);
+				model.addAttribute("list", detailDto);
+	}
 	
 	
 
