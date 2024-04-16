@@ -148,7 +148,8 @@ function deleteValue(){
 							</select>
 						</div>
 						<div class="searchbar-content">
-							<input type="search" name="search_content" id="search_content" style="min-width: 300px;">
+							<input type="search" name="search_content" id="search_content" style="min-width: 300px;"
+							<c:if test="${search ne null or search.search_content ne ''}">value="${search.search_content}"</c:if>>
 						</div>
 					</div>
 

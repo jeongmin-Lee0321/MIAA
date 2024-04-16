@@ -28,7 +28,6 @@ public class AdminInquiryController {
 	public String admin_inquiry_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
 			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo, @ModelAttribute("dto") AdminInquirySearchDto dto) {
 		String result = "redirect:/";
-		String strPage = null;
 		
 		//접속자가 관리자인지 확인 후 뷰단경로 처리
 		if (isAdmin == null) {		
@@ -42,13 +41,6 @@ public class AdminInquiryController {
 		else if (isAdmin.equals("admin")) {
 			System.out.println("관리자입니다.");
 			result = "admin_inquiry.list_page.1대1문의관리.3a";
-		}
-		try {
-			String aa = request.getParameter("START_YMD");
-			System.out.println("날자값 :"+aa);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		//싱글톤위한 값 전달
 		model.addAttribute("userId", userId);
@@ -68,7 +60,7 @@ public class AdminInquiryController {
 		}
 		
 			
-		return "admin_inquiry.list_page.1대1문의관리.3a";
+		return result;
 	}
 
 }
