@@ -74,6 +74,49 @@
 	<div class="main-body">
 
 		<!-- main -->
+		
+		<!-- 검색창과 검색결과 -->
+		<div class="content-wrapper">
+        <div class="searchbar-container">
+          <form action="#">
+            <!-- 서치바 셀렉 그룹시작 -->
+            <div class="searchbar-select-group">
+              <div class="searchbar-title">
+                <span>일자</span>
+              </div>
+              <div class="searchbar-content">
+                <input type="date" name="" id="">
+                <span>~</span>
+                <input type="date" name="" id="">
+                <span>(문의날짜기준)</span>
+              </div>
+            </div>
+            <!-- 멀티그룹묶음 -->
+            <div class="searchbar-mutil-group">
+              <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                  <span>처리상태</span>
+                </div>
+                <div class="searchbar-content">
+                  <select name="" id="">
+                    <option value="전체">전체</option>
+                    <option value="처리중">처리중</option>
+                    <option value="답변완료">답변완료</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- form 조회용 버튼 -->
+            <div class="search-btn-block">
+              <button style="font-family: inherit;">
+                조회<img src="resources/img/searchIcon.png" alt="">
+              </button>
+            </div>
+          </form>
+        </div>
+        </div>
+        <!-- 검색창과 검색결과 끝 -->
 
 		<div class="content-wrapper">
 			<div class="content-container">
@@ -107,11 +150,22 @@
 						<td><input type="checkbox" name="RowCheck" value="${list.userInquiry.board_num }"
 							class="table-check-box"></td>							
 						<td>${list.userInquiry.rnum }</td>
-						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
+						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">${list.userInquiry.board_title}</a></td>
+						<c:choose>
+						<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+						<td style="color: #0066FF;">${list.userInquiry.board_reply_status}</td>
+						</c:when>
+						<c:otherwise>
 						<td>${list.userInquiry.board_reply_status}</td>
-						<td>${list.userInquiry.board_registration_date}</td>
+						</c:otherwise>
+						</c:choose>
+						<td>${list.userInquiry.board_registration_date} </td>
 						<td>${list.board_reply_date}</td>						
-						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.userInquiry.board_num}';" style="cursor: pointer;" /></td>
+						<td>
+						<c:if test="${list.userInquiry.board_reply_status eq '처리중'}">
+						<input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.userInquiry.board_num}';" style="cursor: pointer;" />
+						</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					

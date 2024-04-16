@@ -70,31 +70,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		dao.admin_inquiry_add(map1);
 		
 	}
-//	@Override
-//	public ArrayList<InquiryDto> inquiry_list(Model model,PageVO2 pageVO2) {
-//		Map<String, Object> map = model.asMap();
-//		HttpServletRequest request = (HttpServletRequest) map.get("request");
-//		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-//		HttpSession session=request.getSession();
-//		
-//		String getRowStart = pageVO2.getRowStart().toString();
-//		String getRowEnd = pageVO2.getRowEnd().toString();
-//		String id = (String) session.getAttribute("userId");
-//		
-//		
-//		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-//		ArrayList<InquiryDto> list=null;
-//		try {
-//			list = dao.inquiry_list(id,getRowStart,getRowEnd);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return list;
-//		
-//		
-//	}
+
 	@Override
 	public void delete(String string, Model model) {
 		Map<String, Object> map = model.asMap();
@@ -179,12 +155,6 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 					files.get(i).transferTo(saveFile);
 					
 					String file = uuid+"_"+files.get(i).getOriginalFilename();
-					
-//					System.out.println("inquiry_num : "+num);
-//					System.out.println("userId : "+id);
-//					System.out.println("inquiry_title : "+title);
-//					System.out.println("inquiry_content : "+content);
-//					System.out.println("file : "+file);
 					
 					dao.inquiry_modify(num,id,title,content,file);
 					

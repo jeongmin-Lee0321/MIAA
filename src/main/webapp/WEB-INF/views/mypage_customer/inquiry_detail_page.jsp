@@ -128,7 +128,7 @@ body {
 
 				<ul class="bottom-btns">
 					<li><button type="button"
-							onclick="location.href='mypage_customer_inquiry_list_page';">목록으로</button></li>
+							onclick="location.href='mypage_customer_inquiry_list_page?currPage=${currPage}';">목록으로</button></li>
 				</ul>
 
 		</div>

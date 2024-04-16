@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.service.InquiryService;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
-import com.tech.miaa.vopage.PageVO;
 import com.tech.miaa.vopage.PageVO2;
 
 @Controller
@@ -87,11 +85,14 @@ public class MypageCustomerInquiryController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		String currpage=request.getParameter("currPage");
+		
 
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		try {
 			AdminInquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
 			model.addAttribute("list", list);
+			model.addAttribute("currPage",currpage);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
