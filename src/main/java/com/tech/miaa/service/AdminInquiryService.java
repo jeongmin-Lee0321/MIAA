@@ -178,6 +178,35 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 				model.addAttribute("search", dto);
 				model.addAttribute("list", detailDto);
 	}
+	@Override
+	public void inquiry_write(Model model) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		String id = (String) map.get("userId");
+		String board_reply=request.getParameter("board_reply");
+		String board_num=request.getParameter("board_num");
+		
+		//db에서 write_page 내용가져오기
+		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+		AdminInquiryDto detailDto = null;
+		System.out.println("inquiry_write실행");
+		try {
+			//어드민 인쿼리 테이블 답변,답변날짜 업데이트
+			int write1 = dao.inquiry_write1(board_num,id,board_reply);
+			//유저 인쿼리 테이블 답변상태 없데이트
+			int write2 = dao.inquiry_write2(board_num);
+			System.out.println("write1 : " + write1);
+			System.out.println("write2 : " + write2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("search", dto);
+		model.addAttribute("list", detailDto);
+	}
 	
 	
 

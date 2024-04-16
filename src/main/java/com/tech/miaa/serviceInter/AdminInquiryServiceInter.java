@@ -11,4 +11,5 @@ public interface AdminInquiryServiceInter {
 	public void set_search_dto(Model model, PageVO pageVo);
 	public void delete(Model model,PageVO pageVo);
 	public void inquiry_write_page(Model model);
+	public void inquiry_write(Model model);
 }

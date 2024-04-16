@@ -48,7 +48,7 @@ body {
 				<li><button type="button" id="delete">삭제하기</button></li>
 			</ul>
 			<!-- form 시작 -->
-			<form action="missing_ani_write">
+			<form action="admin_inquiry_write" id="inquiry_write_form">
 				<!-- table1 -->
 				<div class="table-container">
 					<div class="table-title">
@@ -69,11 +69,11 @@ body {
 							</div>
 							<div class="row-content">${list.userInquiry.board_title}</div>
 						</div>
-						<div class="table-row">
+						<div class="table-row" id="lg-content">
 							<div class="row-title">
 								<span>내용</span>
 							</div>
-							<div class="row-content">${list.userInquiry.board_content}</div>
+							<div class="row-content" id="lg-content">${list.userInquiry.board_content}</div>
 						</div>
 						<div class="table-row">
 							<div class="row-title">
@@ -114,8 +114,8 @@ body {
 							</div>
 							<div class="row-content" id="textarea-content">
 								<!-- 텍스트제한 표시 추가 필요 -->
-								<textarea name="sepcialMark" id="sepcialMark" maxlength="300"
-									placeholder="텍스트를 입력하세요."></textarea>
+								<textarea name="board_reply" id="board_reply" maxlength="300"
+									placeholder="텍스트를 입력하세요.">${list.board_reply}</textarea>
 								<div class="textLengthWrap">
 									<span class="textCount">0자</span> <span class="textTotal">/300자</span>
 								</div>
@@ -125,35 +125,34 @@ body {
 				</div>
 
 				<ul class="bottom-btns">
-					<li><button type="submit">답변등록</button></li>
+					<li><button type="submit" form="inquiry_write_form">답변등록</button></li>
 				</ul>
 				<!-- hidden 세션로그인 id -->
-				<input type="hidden" name="userId" value="${userId }">
+				<input type="hidden" name="board_num" value="${list.userInquiry.board_num}">
 			</form>
 			<!-- form 끝 -->
 		</div>
 	</div>
 	<!-- 글자수 제한 표현 -->
 	<script>
-		$(document).on("keydown change", "#sepcialMark", function() {
-			let content = $(this).val();
+	$(document).ready(function() {
+	    function updateTextCount() {
+	        let content = $("#board_reply").val();
+	        let textCount = content.length > 0 ? content.length + '자' : '0자';
+	        $('.textCount').text(textCount);
+	        
+	        if (content.length > 300) {
+	            $("#board_reply").val(content.substring(0, 300));
+	            alert('글자수는 300자까지 입력 가능합니다.');
+	        }
+	    }
 
-			// 글자수 세기
-			if (content.length == 0 || content == '') {
-				$('.textCount').text('0자');
-			} else {
-				$('.textCount').text(content.length + '자');
-			}
+	    // 페이지 로드 시 호출
+	    updateTextCount();
 
-			// 글자수 제한
-			if (content.length > 300) {
-				// 300자 부터는 타이핑 되지 않도록
-				$(this).val($(this).val().substring(0, 300));
-				// 300자 넘으면 알림창 뜨도록
-				alert('글자수는 300자까지 입력 가능합니다.');
-			}
-			;
-		});
+	    // 입력 변경 시 호출
+	    $(document).on("keydown change", "#board_reply", updateTextCount);
+	});
 	</script>
 </body>
 

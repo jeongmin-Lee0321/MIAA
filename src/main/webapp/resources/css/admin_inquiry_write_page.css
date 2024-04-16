@@ -108,6 +108,13 @@ ul.top-btns>li>button#list{
     flex-basis: 50%;
     border-bottom: 1px solid #EAECF0;
   }
+  /* #lg-content 내용 많은 글*/
+    #lg-content{
+  	display: flex;
+  	flex-basis: 80%;
+    align-items: stretch;
+    text-align: left;
+  }
   .row-title{
     flex-basis: 120px;
     flex-shrink: 0;

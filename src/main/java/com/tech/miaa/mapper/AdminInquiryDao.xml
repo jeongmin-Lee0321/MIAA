@@ -148,4 +148,10 @@
 		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
 		ON U.BOARD_NUM = A.BOARD_NUM WHERE U.BOARD_NUM=#{param1}
 	</select>
+	<update id="inquiry_write1">
+		UPDATE ADMIN_INQUIRY_BOARD SET BOARD_REPLY_DATE = SYSTIMESTAMP, BOARD_REPLY = #{param3} ,ADMIN_ID=#{param2}  WHERE BOARD_NUM = #{param1}
+	</update>
+	<update id="inquiry_write2">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_REPLY_STATUS = '답변완료' WHERE BOARD_NUM = #{param1}
+	</update>
 </mapper>
