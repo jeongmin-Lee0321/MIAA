@@ -11,24 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="72195b6c-f8c7-4cab-84f0-ed48f1e9f755" name="Changes" comment="scheduler 작업중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MatchingAlarmDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/dao/MatchingAlarmDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/LostItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/LostItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/mapper/MatchingAlarmDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/scheduler/Scheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tech/miaa/service/FounditemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tech/miaa/service/FounditemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/LostItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/LostItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/scheduler/Scheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/scheduler/Scheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/FounditemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/FounditemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MatchingAlarmService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tech/miaa/service/MatchingAlarmService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/AdminInquiryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/controller/AdminInquiryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dao/MatchingAlarmDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/dao/MatchingAlarmDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/mapper/LostItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/mapper/LostItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/mapper/MatchingAlarmDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminInquiryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/AdminInquiryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/FounditemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/FounditemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MatchingAlarmService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/service/MatchingAlarmService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/serviceInter/MypageCustomerInquiryServiceInter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/miaa-1.0.0-BUILD-SNAPSHOT/WEB-INF/classes/com/tech/miaa/serviceInter/MypageCustomerInquiryServiceInter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.tech/miaa/pom.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,29 +86,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Tomcat Server.Tomcat 9.0.63.executor": "Run",
-    "git-widget-placeholder": "LJM",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/MIAA/src/main/webapp/resources",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.63.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;LJM&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/MIAA/src/main/webapp/resources&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\MIAA\src\main\webapp\resources" />
