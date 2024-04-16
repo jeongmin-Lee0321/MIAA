@@ -8,9 +8,9 @@ import com.tech.miaa.dto.AnimalDto;
 
 public interface MissingAnimalDao {
 	public void animalWrite(String tel,String openclose, String missingday,String address,String animalname,
-			String animalkind1,String animalkind2,String sexCd,String colorCd,String age,String sepcialMark,
+			String animalkind1,String animalkind2, String age,String sepcialMark,
 			String userId,String addresscode1, String addresscode2);
-	public void imgUpLoad(String userId, int i, String animalname, String fileName, String animalkind2);
+	public void imgUpLoad(String userId, int i, String animalname, String fileName, String animalkind1);
 	public ArrayList<AnimalDto> animalListView(int rowStart, int rowEnd);
 	public int totalCount();
 	public ArrayList<AnimalDto> get_missing_animals(String user_id);
