@@ -198,7 +198,7 @@ function deleteValue(){
 							<td><input type="checkbox" name="RowCheck"
 								value="${list.userInquiry.board_num}" class="table-check-box"></td>
 							<td>${list.userInquiry.board_num}</td>
-							<td class="table-title">${list.userInquiry.board_title}</td>
+							<td class="table-title"><a href="admin_inquiry_write_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
 							<td>${list.userInquiry.user_id}</td>
 							<td>${list.userInquiry.board_reply_status}</td>
 							<td>${list.userInquiry.board_registration_date}</td>
