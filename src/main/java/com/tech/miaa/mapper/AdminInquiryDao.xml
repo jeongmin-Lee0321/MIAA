@@ -30,21 +30,16 @@
 		<trim prefix="AND (" suffix=")" >
 			<choose>
 				<when test="START_YMD != '' and END_YMD != ''">
-					U.BOARD_REGISTRATION_DATE BETWEEN
-					TO_DATE(#{START_YMD} || '
-					00:00:00', 'YYYY-MM-DD HH24:MI:SS') AND
-					TO_DATE(#{END_YMD} || '
-					23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BETWEEN
+					#{START_YMD} AND #{END_YMD}
 				</when>
 				<when test="START_YMD == '' and END_YMD != ''">
-					U.BOARD_REGISTRATION_DATE &lt;=
-					TO_DATE(#{END_YMD} || ' 23:59:59',
-					'YYYY-MM-DD HH24:MI:SS')
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') &lt;=
+					#{END_YMD}
 				</when>
 				<when test="START_YMD != '' and END_YMD == ''">
-					U.BOARD_REGISTRATION_DATE &gt;=
-					TO_DATE(#{START_YMD} || '
-					00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') &gt;=
+					#{START_YMD}
 				</when>
 			</choose>
 		</trim>
