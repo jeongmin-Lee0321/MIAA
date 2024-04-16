@@ -302,17 +302,23 @@ public class LostItemService implements LostItemServiceInter {
 		String total_id = request.getParameter("total_id");
 		String user_id = request.getParameter("user_id");
 		String addressCode=request.getParameter("addressCode");
-		
 		//기존 업로드 사진 삭제
-		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
-		if(imgDtos.size()!=0) {
-			for (int i = 0; i < imgDtos.size(); i++) {
-				String fileName=imgDtos.get(i).getFilename();
-				File file = new File(filePath, fileName);
-				file.delete();
+		int cnt=0;
+		for (int i = 0; i < files.size(); i++) {
+			if(files.get(i).getOriginalFilename()!="") cnt=cnt+1;
+		}
+		System.out.println(cnt);
+		if(cnt>0) {
+			ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
+			if(imgDtos.size()!=0) {
+				for (int i = 0; i < imgDtos.size(); i++) {
+					String fileName=imgDtos.get(i).getFilename();
+					File file = new File(filePath, fileName);
+					file.delete();
+					dao.lost_item_delete_img(total_id);
+				}
 			}
 		}
-		dao.lost_item_delete_img(total_id);
 		//수정
 		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind2.equals("분류를 선택하세요") || 
 				addressCode.equals("지역을 선택하세요")) {
@@ -320,20 +326,22 @@ public class LostItemService implements LostItemServiceInter {
 			result="redirect:lost_item_modify_page?total_id="+total_id;
 		}else {
 			dao.lost_item_modify(tel,openclose,lostday,address,itemname,itemkind1,itemkind2,colorCd,sepcialMark,addressCode,total_id);
-			for (int i = 0; i < files.size(); i++) {
-				if(files.get(i).getOriginalFilename()=="") {
-					continue;
-				}else if(files.get(i).getOriginalFilename()!=""){
-					try {
-						UUID uuid=UUID.randomUUID();
-						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
-						File saveFile = new File(filePath, fileName);
-						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(user_id,(i+1),itemname,fileName,itemkind2);
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+			if(cnt>0) {
+				for (int i = 0; i < files.size(); i++) {
+					if(files.get(i).getOriginalFilename()=="") {
+						continue;
+					}else if(files.get(i).getOriginalFilename()!=""){
+						try {
+							UUID uuid=UUID.randomUUID();
+							String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
+							File saveFile = new File(filePath, fileName);
+							files.get(i).transferTo(saveFile);
+							dao.imgUpLoad(user_id,(i+1),itemname,fileName,itemkind2);
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}

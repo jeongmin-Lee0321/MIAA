@@ -195,20 +195,6 @@ body {
                         		</select>
 							</div>
 						</div>
-
-						<div class="table-row">
-							<div class="row-title">
-								<span>성별*</span>
-							</div>
-							<div class="row-content">
-								<div class="radio-container">
-									<input type="radio" name="sexCd" id="sexCd" value="F" checked><span>암컷</span>
-								</div>
-								<div class="radio-container">
-									<input type="radio" name="sexCd" id="sexCd" value="M"><span>수컷</span>
-								</div>
-							</div>
-						</div>
 						<div class="table-row">
 							<div class="row-title">
 								<span>나이</span>
@@ -217,31 +203,6 @@ body {
 								<input type="text" name="age" id="age">
 							</div>
 						</div>
-
-						<div class="table-multi-row">
-							<div class="table-row">
-								<div class="row-title">
-									<span>색상</span>
-								</div>
-								<div class="row-content">
-									<select name="colorCd" id="colorCd">
-										<option>색상을 선택하세요</option>
-										<option value="CL1001">흰색</option>
-										<option value="CL1002">검정</option>
-										<option value="CL1003">빨강</option>
-										<option value="CL1004">주황</option>
-										<option value="CL1005">노랑</option>
-										<option value="CL1006">초록</option>
-										<option value="CL1007">파랑</option>
-										<option value="CL1008">갈색</option>
-										<option value="CL1009">보라</option>
-										<option value="CL1010">핑크</option>
-										<option value="CL1011">기타</option>
-									</select>
-								</div>
-							</div>
-						</div>
-
 						<div class="table-row">
 							<div class="row-title">
 								<span>특징</span>
@@ -406,25 +367,6 @@ body {
 							document.getElementById("sample6_address").value = addr;
 						}
 					}).open();
-		}
-	</script>
-	<script>
-		function getSubCategories(mainCategory) {
-			var prd_subCategory = document.getElementById("animalkind2");
-			switch (mainCategory) {
-			case 'PRI000': // 컴퓨터
-				animalkind2.innerHTML = '<option value="PRI100">삼성 노트북</option><option value="PRI200">LG노트북</option><option value="PRI300">삼보 노트북</option><option value="PRI400">기타</option><option value="PRI500">HP노트북</option><option value="PRI600">애플 노트북</option>';
-				break;
-			case 'PRJ000': // 휴대폰
-				animalkind2.innerHTML = '<option value="PRJ100">삼성 휴대폰</option><option value="PRJ200">LG휴대폰</option><option value="PRJ300">스카이휴대폰</option><option value="PRJ400">아이폰</option><option value="PRJ500">기타통신기기</option><option value="PRJ600">모토로라 휴대폰</option><option value="PRJ900">기타 휴대폰</option>';
-				break;
-			case 'PRH000': // 지갑
-				animalkind2.innerHTML = '<option value="PRH100">여성용 지갑</option><option value="PRH200">남성용 지갑</option><option value="PRH300">기타 지갑</option>';
-				break;
-			default:
-				animalkind2.innerHTML = ''; //초기화
-				break;
-			}
 		}
 	</script>
 	<script type="text/javascript">

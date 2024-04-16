@@ -83,11 +83,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		String openclose=request.getParameter("openclose"); String Missingday=request.getParameter("Missingday");
 		String address=request.getParameter("address"); String animalname=request.getParameter("animalname");
 		String animalkind1=request.getParameter("animalkind1"); String animalkind2=request.getParameter("animalkind2");
-		String sexCd=request.getParameter("sexCd"); String age=request.getParameter("age"); 
-		String colorCd="";
-		if(!request.getParameter("colorCd").equals("색상을 선택하세요")) {
-			colorCd=request.getParameter("colorCd"); 
-		}
+		String age=request.getParameter("age");
 		String sepcialMark=request.getParameter("sepcialMark"); String userId=request.getParameter("userId"); 
 		String addressCode1=request.getParameter("addressCode1"); String addressCode2=request.getParameter("addressCode2");
 		
@@ -96,7 +92,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:missing_ani_write_page";
 		}else {
-			dao.animalWrite(tel, openclose, Missingday, address, animalname, animalkind1, animalkind2, sexCd, colorCd, 
+			dao.animalWrite(tel, openclose, Missingday, address, animalname, animalkind1, animalkind2,
 					age, sepcialMark, userId, addressCode1, addressCode2);
 			for (int i = 0; i < files.size(); i++) {
 				if(files.get(i).getOriginalFilename()=="") {
@@ -107,7 +103,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 						String fileName="resources/ani_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(userId,(i+1),animalname,fileName,animalkind2);
+						dao.imgUpLoad(userId,(i+1),animalname,fileName,animalkind1);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
