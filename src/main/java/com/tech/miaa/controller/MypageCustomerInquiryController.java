@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tech.miaa.dao.InquiryDao;
+import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.service.InquiryService;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
-import com.tech.miaa.vopage.PageVO;
 import com.tech.miaa.vopage.PageVO2;
 
 @Controller
@@ -36,40 +35,20 @@ public class MypageCustomerInquiryController {
 //	문의내역 페이지
 	@RequestMapping("mypage_customer_inquiry_list_page")
 	public String mypage_customer_inquiry_list_page(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId) {
+			@SessionAttribute(name = "userId", required = false) String userId, PageVO2 pageVo2) {
 		
-		String strPage = request.getParameter("page");
-		
-		if (strPage == null) {
-			strPage = "1";
-		}
-		
-		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
-		int page = Integer.parseInt(strPage);
-		
-		PageVO2 pageVO = new PageVO2();
-		Integer total=dao.total();
-		
-		pageVO.setPage(page);
-		pageVO.setDisplayRowCount(5);
-		pageVO.pageCalculate(total);
-		
-		System.out.println(""+pageVO.getRowStart());
-		System.out.println(""+pageVO.getRowEnd());
-
+		String strPage = null;
 						
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		model.addAttribute("pageVo",pageVo2);
 		
 		
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		
 		try {
-			ArrayList<InquiryDto> list = mypageCustomerInquiryServiceInter.inquiry_list(model,pageVO);
-			model.addAttribute("pageVO",pageVO);
-			model.addAttribute("list", list);
-
+			mypageCustomerInquiryServiceInter.inquiry_list(model,pageVo2);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -106,11 +85,14 @@ public class MypageCustomerInquiryController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
+		String currpage=request.getParameter("currPage");
+		
 
 		mypageCustomerInquiryServiceInter = new InquiryService();
 		try {
-			InquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
+			AdminInquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
 			model.addAttribute("list", list);
+			model.addAttribute("currPage",currpage);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,8 +134,8 @@ public class MypageCustomerInquiryController {
 	}
 
 //	게시물 선택삭제
-	@RequestMapping(value = "/delete")
-	public String delete(HttpServletRequest request, Model model,
+	@RequestMapping(value = "/inquiry_delete")
+	public String inquiry_delete(HttpServletRequest request, Model model,
 			@SessionAttribute(name = "userId", required = false) String userId) {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);

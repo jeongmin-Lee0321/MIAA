@@ -29,7 +29,7 @@
 			});
 		});
 		function deleteValue(){
-			var url = "delete";    // Controller로 보내고자 하는 URL
+			var url = "inquiry_delete";   // Controller로 보내고자 하는 URL
 			var valueArr = new Array();
 		    var list = $("input[name='RowCheck']");
 		    for(var i = 0; i < list.length; i++){
@@ -74,13 +74,66 @@
 	<div class="main-body">
 
 		<!-- main -->
+		
+		<!-- 검색창과 검색결과 -->
+		<div class="content-wrapper">
+        <div class="searchbar-container">
+          <form action="#">
+            <!-- 서치바 셀렉 그룹시작 -->
+            <div class="searchbar-select-group">
+              <div class="searchbar-title">
+                <span>일자</span>
+              </div>
+              <div class="searchbar-content">
+                <input type="date" name="" id="">
+                <span>~</span>
+                <input type="date" name="" id="">
+                <span>(문의날짜기준)</span>
+              </div>
+            </div>
+            <!-- 멀티그룹묶음 -->
+            <div class="searchbar-mutil-group">
+              <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                  <span>처리상태</span>
+                </div>
+                <div class="searchbar-content">
+                  <select name="" id="">
+                    <option value="전체">전체</option>
+                    <option value="처리중">처리중</option>
+                    <option value="답변완료">답변완료</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- form 조회용 버튼 -->
+            <div class="search-btn-block">
+              <button style="font-family: inherit;">
+                조회<img src="resources/img/searchIcon.png" alt="">
+              </button>
+            </div>
+          </form>
+        </div>
+        </div>
+        <!-- 검색창과 검색결과 끝 -->
 
 		<div class="content-wrapper">
 			<div class="content-container">
+			
+			<div class="table-caption-wrapper">
+				<div class="talbe-caption-container">
+					<div class="table-caption">
+						<span class="caption-total">${pageVo.totRow}개</span><span>의 문의내역이 있습니다</span>
+					</div>
+				</div>
 				<div class="list-control-container">
 					<button class="btn-list" id="btn-write" onclick="location.href='mypage_customer_inquiry_write_page';" style="cursor: pointer;">문의글 등록</button>
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();" style="cursor: pointer;">삭제하기</button>
 				</div>
+				
+				</div>			
+				
 				<table class="info-table">
 					<tr>
 						<th><input type="checkbox" name="allCheck" id="allCheck"
@@ -94,14 +147,25 @@
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><input type="checkbox" name="RowCheck" value="${list.board_num}"
+						<td><input type="checkbox" name="RowCheck" value="${list.userInquiry.board_num }"
 							class="table-check-box"></td>							
-						<td>${list.rnum}</td>
-						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.board_num}">${list.board_title}</a></td>
-						<td>${list.board_reply_status}</td>
-						<td>${list.board_registration_date}</td>
-						<td>-</td>						
-						<td><input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.board_num}';" style="cursor: pointer;" /></td>
+						<td>${list.userInquiry.rnum }</td>
+						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">${list.userInquiry.board_title}</a></td>
+						<c:choose>
+						<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+						<td style="color: #0066FF;">${list.userInquiry.board_reply_status}</td>
+						</c:when>
+						<c:otherwise>
+						<td>${list.userInquiry.board_reply_status}</td>
+						</c:otherwise>
+						</c:choose>
+						<td>${list.userInquiry.board_registration_date} </td>
+						<td>${list.board_reply_date}</td>						
+						<td>
+						<c:if test="${list.userInquiry.board_reply_status eq '처리중'}">
+						<input type="image" src="resources/img/write_icon.png" name="" onclick="location.href='mypage_customer_inquiry_modify_page?board_num=${list.userInquiry.board_num}';" style="cursor: pointer;" />
+						</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					
@@ -112,50 +176,58 @@
 		<!-- page -->
 
 		<div class="result-container">
-		
-		<!-- 페이징 프레임시작 -->
-		
-        <div class="page-container">
-            <div class="currentOftotal">
-                <span>Page</span><span class="current-page">${pageVO.page}</span><span>of</span><span
-                    class="total-page">${pageVO.totPage}</span>
-            </div>
-            <ul class="pagelist-container">
-            	
-                <li class="btn-prev"><a class="test" href="mypage_customer_inquiry_list_page?page=${pageVO.page - 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-                
-                <c:forEach begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" var="i">
-                    <c:choose>
-                        <c:when test="${i eq pageVO.page}">
-                            <li><a href="#" style="color: red">${i}</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="mypage_customer_inquiry_list_page?page=${i}">${i}</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                
-                <li class="btn-next"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 1}"><img
-                        src="resources/img/chevron-left.png" alt=""></a></li>
-                
-            </ul>
+			<div class="page-container">
+				<div class="currentOftotal">
+					<span>Page</span><span class="current-page">${pageVo.page}</span><span>of</span><span
+						class="total-page">${pageVo.totPage}</span>
+				</div>
+				<ul class="pagelist-container">
+					<li class="btn-prev"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}-1)"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
+						var="i">
+						<c:choose>
+							<c:when test="${i eq pageVo.page}">
+								<li><span class="currpage">${i}</span></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="javascript:void(0);" onclick="goToPage(${i})">${i}</a></li>
+ 							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<li class="btn-next"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}+1)"><img
+							src="resources/img/chevron-left.png" alt=""></a></li>
+				</ul>
 
-            <ul class="switchBtn-container">
-            
-	            
-                <li class="btn-prev-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page - 10}">Previous</a></li>
-                <li class="btn-next-group"><a href="mypage_customer_inquiry_list_page?page=${pageVO.page + 10}">Next</a></li>                
-                
-                
-            
-            </ul>
-        </div>
-        
-        <!-- 페이징 프레임 끝 -->
-        
+				<ul class="switchBtn-container">
+					<li class="btn-prev-group"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
+					<li class="btn-next-group"><a href="javascript:void(0);"
+						onclick="goToPage(${pageVo.page}+10)">Next</a></li>
+				</ul>
+			</div>
 		</div>
 
 	</div>
+	<script>
+		function goToPage(pageNumber) {
+			var currpage = pageNumber;
+			if (pageNumber<=0){
+				currpage = 1;
+			}else if(currpage>${pageVo.totPage}){//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지 
+				currpage = ${pageVo.totPage};
+			}
+			else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
+				currpage= pageNumber-(pageNumber-1)%10;
+			}
+			else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
+				currpage= pageNumber-((pageNumber-1)%10)+9;
+			}
+			var newPath = window.location.pathname + '?currPage=' + currpage;
+			window.location.href = newPath; // 새 경로로 페이지 이동
+		}
+	</script>
 </body>
 </html>

@@ -31,58 +31,32 @@ public class LostItemService implements LostItemServiceInter {
 		Map<String, Object> map = model.asMap();
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		
+		PrdCode pc = new PrdCode();
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
-		//검색 입력값 가져오기
-//		String searchday1 = null; String searchday2 = null; String addressCode = null;
-//		String itemkind1 =null; String itemkind2 = null; String colorCd = null;
-//		
-//		
-//		//검색조건 채우기 작업
-//		if(request.getParameter("searchday1")!="") searchday1=request.getParameter("searchday1");
-//		if(request.getParameter("searchday2")!="") searchday2=request.getParameter("searchday2");
-//		if(request.getParameter("addressCode")!="") addressCode=request.getParameter("addressCode");
-//		if(request.getParameter("itemkind1")!="") itemkind1=request.getParameter("itemkind1");
-//		if(request.getParameter("itemkind2")!="") itemkind2=request.getParameter("itemkind2");
-//		if(request.getParameter("colorCd")!="") colorCd=request.getParameter("colorCd");
-//		
-//		Map<String, String> ItemSearch = new HashMap<String, String>();
-//		if(searchday1 !=null) ItemSearch.put("searchday1", searchday1);
-//		if(searchday2!=null) ItemSearch.put("searchday2", searchday2);
-//		if(addressCode!=null) ItemSearch.put("addressCode", addressCode);
-//		if(itemkind1 !=null) ItemSearch.put("itemkind1", itemkind1);
-//		if(itemkind2!=null) ItemSearch.put("itemkind2", itemkind2);
-//		if(colorCd!=null) ItemSearch.put("colorCd", colorCd);
+		String searchday1 = ""; String searchday2 = ""; String addressCode = "";
+		String itemkind1 =""; String itemkind2 = ""; String colorCd = "";
 		
 		
+		//검색조건 채우기 작업
+		if(request.getParameter("searchday1")!=null) searchday1=request.getParameter("searchday1");
+		if(request.getParameter("searchday2")!=null) searchday2=request.getParameter("searchday2");
+		if(request.getParameter("addressCode")!=null) addressCode=request.getParameter("addressCode");
+		if(request.getParameter("itemkind1")!=null) itemkind1=request.getParameter("itemkind1");
+		if(request.getParameter("itemkind2")!=null) itemkind2=request.getParameter("itemkind2");
+		if(request.getParameter("colorCd")!=null) colorCd=request.getParameter("colorCd");
 		
-//		ItemSearchDto itemSearchDto=new ItemSearchDto();
-//		itemSearchDto.setSearch_str_date(searchday1);
-//		itemSearchDto.setSearch_end_date(searchday2);
-//		itemSearchDto.setSidoSelectBox(addressCode);
-//		itemSearchDto.setUpKindSelectBox(itemkind1);
-//		itemSearchDto.setKindSelectedBox(itemkind2);
-//		itemSearchDto.setColorCd(colorCd);
-		
+		//페이징 로직 처리
 		PageVO pageVo = new PageVO();
-		int totalCount=dao.totalCount();
+		int totalCount=dao.totalCount(searchday1,searchday2,addressCode,itemkind1,itemkind2,colorCd);
 		String strPage=request.getParameter("page");
-				
 		if(strPage==null) {strPage="1";}
 		int page=Integer.parseInt(strPage);
 		pageVo.setPage(page);
-				
 		pageVo.pageCalculate(totalCount);
-				
 		int rowStart=pageVo.getRowStart();
 		int rowEnd=pageVo.getRowEnd();
-//		ItemSearch.put("rowStart", toString(rowStart));
-//		ItemSearch.put("rowEnd", toString(rowEnd));
-		ArrayList<ItemDto> itemList = dao.itemlistview(rowStart,rowEnd);
-		
-		
-		
+		ArrayList<ItemDto> itemList = dao.itemlistview(searchday1,searchday2,addressCode,itemkind1,itemkind2,colorCd,rowStart,rowEnd);
 		
 		//사진이 없을 때 기본이미지로 대체
 		for (int i = 0; i < itemList.size(); i++) {
@@ -129,10 +103,6 @@ public class LostItemService implements LostItemServiceInter {
 					itemList.get(i).setFilename("resources/item_default/유류물품.png");
 				}
 			}
-		}
-		//DB코드로 된 값 이름으로 대체
-		PrdCode pc = new PrdCode();
-		for (int i = 0; i < itemList.size(); i++) {
 			itemList.get(i).setUpkind(pc.getPrdNameByCode(itemList.get(i).getUpkind()));
 			itemList.get(i).setUpr_cd(pc.getPrdNameByCode(itemList.get(i).getUpr_cd()));
 		}
@@ -141,11 +111,7 @@ public class LostItemService implements LostItemServiceInter {
 		model.addAttribute("pageVo", pageVo);
 		return itemList;
 	}
-	
-	private String toString(int rowStart) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public String lost_item_write(Model model){
@@ -160,11 +126,15 @@ public class LostItemService implements LostItemServiceInter {
 		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
 		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
-		String colorCd=request.getParameter("colorCd"); String sepcialMark=request.getParameter("sepcialMark");
+		String colorCd="";
+		if(!request.getParameter("colorCd").equals("색상을 선택하세요")) {
+			colorCd=request.getParameter("colorCd"); 
+		}
+		String sepcialMark=request.getParameter("sepcialMark");
 		String userId=request.getParameter("userId"); String addressCode=request.getParameter("addressCode");
 		
-		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind1.equals("분류를 선택하세요") || colorCd.equals("색상을 선택하세요")
-				|| addressCode.equals("지역을 선택하세요")) {
+		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind1.equals("분류를 선택하세요") || 
+				addressCode.equals("지역을 선택하세요")) {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_write_page";
 		}else {
@@ -316,19 +286,23 @@ public class LostItemService implements LostItemServiceInter {
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
 		String result=null; LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
-		
+
 		String tel=request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String openclose=request.getParameter("openclose");
 		String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address");
 		String itemname=request.getParameter("itemname");
-		String upkind=request.getParameter("itemkind1");
-		String upr_cd=request.getParameter("itemkind2");
-		String colorCd = request.getParameter("colorCd");
+		String itemkind1=request.getParameter("itemkind1");
+		String itemkind2=request.getParameter("itemkind2");
+		String colorCd="";
+		if(request.getParameter("colorCd")!=null) {
+			colorCd=request.getParameter("colorCd"); 
+		}
 		String sepcialMark = request.getParameter("sepcialMark");
 		String total_id = request.getParameter("total_id");
 		String user_id = request.getParameter("user_id");
 		String addressCode=request.getParameter("addressCode");
+		
 		//기존 업로드 사진 삭제
 		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
 		if(imgDtos.size()!=0) {
@@ -340,11 +314,12 @@ public class LostItemService implements LostItemServiceInter {
 		}
 		dao.lost_item_delete_img(total_id);
 		//수정
-		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || upkind.equals("중분류") || colorCd.equals("색상을 선택하세요")) {
+		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind2.equals("분류를 선택하세요") || 
+				addressCode.equals("지역을 선택하세요")) {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_modify_page?total_id="+total_id;
 		}else {
-			dao.lost_item_modify(tel,openclose,lostday,address,itemname,upkind,upr_cd,colorCd,sepcialMark,addressCode,total_id);
+			dao.lost_item_modify(tel,openclose,lostday,address,itemname,itemkind1,itemkind2,colorCd,sepcialMark,addressCode,total_id);
 			for (int i = 0; i < files.size(); i++) {
 				if(files.get(i).getOriginalFilename()=="") {
 					continue;
@@ -354,7 +329,7 @@ public class LostItemService implements LostItemServiceInter {
 						String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
 						File saveFile = new File(filePath, fileName);
 						files.get(i).transferTo(saveFile);
-						dao.imgUpLoad(user_id,(i+1),itemname,fileName,upr_cd);
+						dao.imgUpLoad(user_id,(i+1),itemname,fileName,itemkind2);
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
