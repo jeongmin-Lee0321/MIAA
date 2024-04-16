@@ -27,18 +27,21 @@
 	</resultMap>
 
 	<sql id="date_select">
-		<trim prefix="AND (" suffix=")" >
+		<trim prefix="AND (" suffix=")">
 			<choose>
 				<when test="START_YMD != '' and END_YMD != ''">
-					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BETWEEN
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					BETWEEN
 					#{START_YMD} AND #{END_YMD}
 				</when>
 				<when test="START_YMD == '' and END_YMD != ''">
-					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') &lt;=
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&lt;=
 					#{END_YMD}
 				</when>
 				<when test="START_YMD != '' and END_YMD == ''">
-					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD') &gt;=
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&gt;=
 					#{START_YMD}
 				</when>
 			</choose>
@@ -46,7 +49,7 @@
 	</sql>
 
 	<sql id="reply_select">
-		<trim prefix="AND (" suffix=")" >
+		<trim prefix="AND (" suffix=")">
 			<choose>
 				<when test="reply_status == 'ing'">
 					BOARD_REPLY_STATUS = '처리중'
@@ -59,7 +62,7 @@
 	</sql>
 
 	<sql id="search_select">
-		<trim prefix="AND (" suffix=")" >
+		<trim prefix="AND (" suffix=")">
 			<choose>
 				<when test="search_type == 'title'">
 					BOARD_TITLE like '%'||#{search_content}||'%'
@@ -92,18 +95,18 @@
 		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN
 		ADMIN_INQUIRY_BOARD A
 		ON U.BOARD_NUM = A.BOARD_NUM
-	<trim prefix="WHERE" prefixOverrides="AND" >
-		<if test="START_YMD != null or END_YMD != null">
-			<include refid="date_select" />
-		</if>
-		<if test="reply_status != null or reply_status != 'all' ">
-			<include refid="reply_select" />
-		</if>
-		<if
-			test="(search_type != null and search_content != null) or search_content != ''">
-			<include refid="search_select" />
-		</if>
-	</trim>
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="START_YMD != null or END_YMD != null">
+				<include refid="date_select" />
+			</if>
+			<if test="reply_status != null or reply_status != 'all' ">
+				<include refid="reply_select" />
+			</if>
+			<if
+				test="(search_type != null and search_content != null) or search_content != ''">
+				<include refid="search_select" />
+			</if>
+		</trim>
 		ORDER BY U.BOARD_NUM DESC)
 		SELECT * FROM (SELECT ROWNUM N,J.* FROM J)
 		WHERE N BETWEEN #{rowStart} AND #{rowEnd}
@@ -117,19 +120,32 @@
 		JOIN ADMIN_INQUIRY_BOARD
 		A
 		ON U.BOARD_NUM = A.BOARD_NUM
-	<trim prefix="WHERE" prefixOverrides="AND" >
-		<if test="START_YMD != null or END_YMD != null">
-			<include refid="date_select" />
-		</if>
-		<if test="reply_status != null or reply_status != 'all' ">
-			<include refid="reply_select" />
-		</if>
-		<if
-			test="(search_type != null and search_content != null) or search_content != ''">
-			<include refid="search_select" />
-		</if>
-	</trim>
-
-
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="START_YMD != null or END_YMD != null">
+				<include refid="date_select" />
+			</if>
+			<if test="reply_status != null or reply_status != 'all' ">
+				<include refid="reply_select" />
+			</if>
+			<if
+				test="(search_type != null and search_content != null) or search_content != ''">
+				<include refid="search_select" />
+			</if>
+		</trim>
+	</select>
+	<select id="inquiry_write_page" resultMap="adminInquiry">
+		SELECT USER_ID ,
+		U.BOARD_NUM ,
+		BOARD_TITLE ,
+		BOARD_CONTENT ,
+		TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE ,
+		BOARD_REPLY_STATUS ,
+		BOARD_FILESRC,
+		NVL(TO_CHAR(BOARD_REPLY_DATE,'YYYY-MM-DD'),'-') BOARD_REPLY_DATE
+		,NVL(BOARD_REPLY,'-') BOARD_REPLY
+		,NVL(ADMIN_ID,'-') ADMIN_ID
+		,A.BOARD_NUM AS A_BOARD_NUM
+		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
+		ON U.BOARD_NUM = A.BOARD_NUM WHERE U.BOARD_NUM=#{param1}
 	</select>
 </mapper>
