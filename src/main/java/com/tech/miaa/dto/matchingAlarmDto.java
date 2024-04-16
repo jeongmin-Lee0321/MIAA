@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class matchingAlarmDto {
+	/*원진호_0415_수정*/
 	private String total_id;
 	private String item_id;
 	private String user_tel;
@@ -25,4 +26,7 @@ public class matchingAlarmDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date item_date;
+	private String addressCode;
+	private String total_id1;
+	private String filename;
 }

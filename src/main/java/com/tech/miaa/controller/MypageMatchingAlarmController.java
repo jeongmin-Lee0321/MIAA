@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.tech.miaa.dto.ItemDto;
-import com.tech.miaa.service.ItemService;
+import com.tech.miaa.service.LostItemService;
 import com.tech.miaa.service.MatchingAlarmService;
-import com.tech.miaa.serviceInter.ItemServiceInter;
+import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
 
 //원진호_알림목록_0401추가
@@ -25,8 +25,10 @@ public class MypageMatchingAlarmController {
 	private SqlSession sqlSession;
 	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 	/* 원진호_0409추가 */
-	ItemServiceInter itemService;
-
+	LostItemServiceInter itemService;
+	/* 원진호_0415_추가 */
+	
+	
 	/* 원진호_0401추가 */
 	/* 원진호_0409_수정 */
 	@RequestMapping(value = "mypage_matching_alarm_list_page", method = RequestMethod.GET)
@@ -36,8 +38,9 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
+
+		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
+		itemService = new LostItemService();
 
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
@@ -58,8 +61,9 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
+
+		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
+		itemService = new LostItemService();
 
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
@@ -81,7 +85,9 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("userId", userId);
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
 		/* 원진호_0409추가 */
-		itemService = new ItemService();
+
+		itemService = new LostItemService();
+
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);
@@ -101,8 +107,9 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
+
+		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
+		itemService = new LostItemService();
 
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
@@ -123,9 +130,10 @@ public class MypageMatchingAlarmController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
-		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		itemService = new ItemService();
 
+		mypageMatchingAlarmServiceInter = new MatchingAlarmService();		
+		itemService = new LostItemService();
+		
 		try {
 			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<ItemDto> itemList = itemService.lost_item_search(model);

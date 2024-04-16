@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
@@ -6,6 +7,8 @@
 <title>Title</title>
 <link rel="stylesheet"
 	href="resources/css/mypage_matching_alarm_detail_list_page.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <!-- 원진호_0410_선택삭제기능추가 -->
 <script type="text/javascript">
@@ -42,7 +45,8 @@
 			var chk = confirm("정말 삭제하시겠습니까?");
 
 			if (chk) {
-				$.ajax({
+				$
+						.ajax({
 							url : url, // 전송 URL
 							type : 'POST', // POST 방식
 							traditional : true,
@@ -73,7 +77,7 @@
 	<div class="content-selection">
 		<div class="content-container">
 			<div class="list-control-container">
-				<span id="item-name-text">분실물명 :</span> <span id="item-name-value">에어팟</span>
+				<span id="item-name-text">분실물 소분류:</span> <span id="item-name-value">${list.upr_cd}</span>
 				<button class="btn-list" id="btn-off-alert">
 					<img src="resources/img/bell-off.png" alt=""> 알림제거
 				</button>
