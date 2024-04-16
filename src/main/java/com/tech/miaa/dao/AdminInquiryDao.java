@@ -12,4 +12,5 @@ public interface AdminInquiryDao {
 
 	public Integer get_total(AdminInquirySearchDto dto);
 	public ArrayList<AdminInquiryDto> join_inquiry_list(AdminInquirySearchDto dto);
+	public AdminInquiryDto inquiry_write_page(String bn);
 }
