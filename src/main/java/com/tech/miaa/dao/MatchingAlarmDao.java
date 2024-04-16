@@ -14,4 +14,8 @@ public interface MatchingAlarmDao {
     public void alert_item_write(String total_id,String user_id,String atcid,String fdSbjt,String fdSn,
                                  String prdtClNm,String fdPrdtNm,String fdYmd,String depPlace,
                                  String rnum,String clrNm,String fdFilePathImg,String addr);
+
+    public void alert_animal_write(String total_id,String user_id,String atcid,String fdSbjt,String fdSn,
+                                 String prdtClNm,String fdPrdtNm,String fdYmd,String depPlace,
+                                 String rnum,String clrNm,String fdFilePathImg,String addr);
 }
