@@ -16,7 +16,7 @@ public class AnimalDto {
 	private String animal_id;
 	private String user_tel;
 	private String openclose;
-	private String lostday;
+	private String missingday;
 	private String address;
 	private String animal_name;
 	private String upkind;
@@ -27,4 +27,8 @@ public class AnimalDto {
 	private String sepcialmark;
 	private String user_id;
 	private Date animal_date;
+	private String addresscode1;
+	private String addresscode2;
+	private String total_id1;
+	private String filename;
 }
