@@ -2,6 +2,7 @@ package com.tech.miaa.abdmApi;
 
 import java.net.URLEncoder;
 
+import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.AnimalSearchDto;
 
 public class AbandonmentPublicSrvc {
@@ -246,6 +247,60 @@ public class AbandonmentPublicSrvc {
 //            System.out.println("nor : " + abdmPublic.getNumOfRows());
 //            System.out.println("pageno : " + abdmPublic.getPageNo());
 //            System.out.println("total : " + abdmPublic.getTotalCount());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return abdmPublic;
+    }
+
+    public static AbdmPublic abandonmentPublic(AnimalDto dto) {
+        AbdmPublic abdmPublic = new AbdmPublic();
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
+            if (dto.getMissingday() != null && !dto.getMissingday().isEmpty()) {
+                String date ="";
+                String charsToRemove = "-";
+                for (char c : charsToRemove.toCharArray()) {
+                    date = dto.getMissingday().replace(String.valueOf(c), "");
+                }
+                urlBuilder.append("&" + URLEncoder.encode("bgnde", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*유기날짜(검색 시작일) (YYYYMMDD)*/
+            }
+//            if (dto.getSearch_end_date() != null && !dto.getSearch_end_date().isEmpty()) {
+//                String date ="";
+//                String charsToRemove = "-";
+//                for (char c : charsToRemove.toCharArray()) {
+//                    date = dto.getSearch_str_date().replace(String.valueOf(c), "");
+//                }
+//                urlBuilder.append("&" + URLEncoder.encode("endde", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*유기날짜(검색 종료일) (YYYYMMDD)*/
+//            }
+            if (dto.getUpkind() != null && !dto.getUpkind().isEmpty()) {
+                urlBuilder.append("&" + URLEncoder.encode("upkind", "UTF-8") + "=" + URLEncoder.encode(dto.getUpkind(), "UTF-8")); /*축종코드 (개 : 417000, 고양이 : 422400, 기타 : 429900)*/
+            }
+            if (dto.getUpr_cd() != null && !dto.getUpr_cd().isEmpty()) {
+                urlBuilder.append("&" + URLEncoder.encode("kind", "UTF-8") + "=" + URLEncoder.encode(dto.getUpr_cd(), "UTF-8")); /*품종코드 (품종 조회 OPEN API 참조)*/
+            }
+            if (dto.getAddresscode1() != null && !dto.getAddresscode1().isEmpty()) {
+                urlBuilder.append("&" + URLEncoder.encode("upr_cd", "UTF-8") + "=" + URLEncoder.encode(dto.getAddresscode1(), "UTF-8")); /*시도코드 (시도 조회 OPEN API 참조)*/
+            }
+            if (dto.getAddresscode2() != null && !dto.getAddresscode2().isEmpty()) {
+                urlBuilder.append("&" + URLEncoder.encode("org_cd", "UTF-8") + "=" + URLEncoder.encode(dto.getAddresscode2(), "UTF-8")); /*시군구코드 (시군구 조회 OPEN API 참조)*/
+            }
+//            if (!dto.getShelterSelectBox().isEmpty()) {
+//                urlBuilder.append("&" + URLEncoder.encode("care_reg_no","UTF-8") + "=" + URLEncoder.encode(dto.getShelterSelectBox(), "UTF-8")); /*보호소번호 (보호소 조회 OPEN API 참조)*/
+//            }
+            System.out.println(urlBuilder.toString());
+//            urlBuilder.append("&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode("protect", "UTF-8")); /*상태(전체 : null(빈값), 공고중 : notice, 보호중 : protect)*/
+//            urlBuilder.append("&" + URLEncoder.encode("neuter_yn","UTF-8") + "=" + URLEncoder.encode("U", "UTF-8")); /*상태 (전체 : null(빈값), 예 : Y, 아니오 : N, 미상 : U)*/
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호 (기본값 : 1)*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
+            urlBuilder.append("&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*xml(기본값) 또는 json*/
+
+
+            XmlParser xmlParser = new XmlParser();
+
+            abdmPublic = (AbdmPublic) xmlParser.parsing(urlBuilder.toString(), XmlParser.GETABDMPUBLIC);
 
         } catch (Exception e) {
             e.printStackTrace();

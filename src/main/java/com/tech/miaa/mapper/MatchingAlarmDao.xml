@@ -17,4 +17,9 @@
 	<insert id="alert_item_write"> INSERT INTO ALERT_ITEM VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
 		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11}, #{param12}, #{param13})
 	</insert>
+	<insert id="alert_animal_write"> INSERT INTO ALERT_ANIMAL VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11}, #{param12}, #{param13},
+		#{param14},#{param15},#{param16},#{param17},#{param18},#{param19},#{param20},#{param21},
+		#{param22},#{param23},#{param24},#{param25})
+	</insert>
 </mapper>
