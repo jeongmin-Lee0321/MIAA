@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.service.MissingAnimalService;
 import com.tech.miaa.serviceInter.MissingAnimalServiceInter;
 
@@ -25,6 +26,12 @@ public class MissingAniController {
 	MissingAnimalServiceInter animalService;
 	@RequestMapping("missing_ani_search_page")
 	public String missing_ani_search_page(HttpServletRequest request, Model model) {
+		model.addAttribute("sqlSession", sqlSession); model.addAttribute("request", request);
+		animalService = new MissingAnimalService();
+		
+		ArrayList<AnimalDto> animalList = animalService.missing_ani_search(model);
+		model.addAttribute("animalList", animalList);
+		
 		return "missing_ani.search_page.실종동물 상세검색.3";
 	}
 

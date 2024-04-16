@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- dao의 인터페이스 주소 -->
+<mapper namespace="com.tech.miaa.dao.MissingAnimalDao">
+	<insert id="animalWrite">
+		INSERT INTO ANIMAL VALUES(TOTAL_SEQ.NEXTVAL, ANIMAL_SEQ.NEXTVAL,#{param1},#{param2},#{param3}, 
+		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},SYSDATE,#{param13},#{param14})
+	</insert>
+	
+	<insert id="imgUpLoad"> 
+		INSERT INTO ANIMAL_IMG VALUES((SELECT TOTAL_ID FROM ANIMAL WHERE USER_ID=#{param1} AND ANIMAL_NAME=#{param3} AND UPR_CD=#{param5}), 
+		#{param2},#{param1},#{param4}) 
+	</insert>
+	<select id="animalListView" resultType="com.tech.miaa.dto.AnimalDto">
+		SELECT * FROM (SELECT ROWNUM RM, IT.* FROM (SELECT * FROM  ANIMAL AN LEFT OUTER JOIN (SELECT TOTAL_ID,FILENAME FROM ANIMAL_IMG WHERE FILE_ID IN
+	(SELECT MIN(FILE_ID) FROM ANIMAL_IMG GROUP BY TOTAL_ID)) ANIMG ON AN.TOTAL_ID=ANIMG.TOTAL_ID ORDER BY ANIMAL_ID DESC) IT )
+	WHERE RM BETWEEN #{param1} AND #{param2}
+	</select>
+	<select id="totalCount" resultType="Integer">
+	SELECT count(*) FROM ANIMAL
+	</select>
+</mapper>

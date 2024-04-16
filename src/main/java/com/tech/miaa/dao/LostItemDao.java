@@ -21,7 +21,7 @@ public interface LostItemDao {
 	public void lost_item_delete_img(String total_id);
 	public void lost_item_delete_content(String total_id);
 	public void lost_item_modify(String tel, String openclose, String lostday, String address, String itemname,
-			String upkind, String upr_cd, String colorCd, String sepcialMark, String addressCode, String total_id);
+			String itemkind1, String itemkind2, String colorCd, String sepcialMark, String addressCode, String total_id);
 	public ArrayList<ItemDto> get_lost_items(String userId);
 	public ArrayList<ItemDto> itemlistview(@Param("searchday1")String searchday1, @Param("searchday2")String searchday2, 
 			@Param("addressCode") String addressCode, @Param("itemkind1")String itemkind1, @Param("itemkind2")String itemkind2, 
