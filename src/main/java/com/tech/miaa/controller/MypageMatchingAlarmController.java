@@ -113,7 +113,7 @@ public class MypageMatchingAlarmController {
       mypageMatchingAlarmServiceInter = new MatchingAlarmService();      
       try {
          ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
-         model.addAttribute("list", list); 
+         model.addAttribute("list", list);
       } catch (Exception e) {
          // TODO: handle exception
       }
