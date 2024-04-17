@@ -6,7 +6,7 @@
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MemberDao">
     <insert id="join">
-        INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+        INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',SYSDATE,TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
     </insert>
     <delete id="del_account">
         DELETE FROM MEMBER WHERE USER_BCPWD = #{param1} AND USER_ID = #{param2}
@@ -38,4 +38,7 @@
     <select id="getMembers" resultType="com.tech.miaa.dto.MemberDto">
         SELECT * FROM MEMBER
     </select>
+    <update id="login_date_update">
+        UPDATE MEMBER SET USER_LAST_LOGIN=SYSDATE WHERE USER_ID=#{param1}
+    </update>
 </mapper>
