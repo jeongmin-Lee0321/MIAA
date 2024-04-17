@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tech.miaa.dao.AdminInquiryDao;
 import com.tech.miaa.dto.AdminInquiryDto;
@@ -34,16 +35,16 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
 		int rowStart = pageVo.getRowStart();
 		int rowEnd = pageVo.getRowEnd();
-		
-		//전달받은 검색 조건 세팅
-		set_search_dto(model,pageVo);
-		
-		//db에서 list가져오기
+
+		// 전달받은 검색 조건 세팅
+		set_search_dto(model, pageVo);
+
+		// db에서 list가져오기
 		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
 		ArrayList<AdminInquiryDto> list = null;
 		if (rowStart == 0 && rowEnd == 0) {
 			System.out.println("get_pagevo 문제발생");
-		
+
 		} else {
 			try {
 				list = dao.join_inquiry_list(dto);
@@ -52,10 +53,9 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 				e.printStackTrace();
 			}
 		}
-		
+
 		model.addAttribute("search", dto);
 		model.addAttribute("list", list);
-		
 
 	}
 
@@ -103,32 +103,51 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 
 		return pageVo;
 	}
+
 	@Override
 	public void set_search_dto(Model model, PageVO pageVo) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
 		int rowStart = pageVo.getRowStart();
 		int rowEnd = pageVo.getRowEnd();
 		dto.setRowEnd(rowEnd);
 		dto.setRowStart(rowStart);
-		
-		//ModelAttribute로 request의 parameter는 dto 자동으로 들어감
-		//따라서 request parameter에 없는 rowEnd와 rowStart만 pageVo로 주입 되는것 
-		
-		//param-> null 이면 최초 화면
-		
-		//param -> null이 아니면 검색조건 추가한 창
-		
+
+		// ModelAttribute로 request의 parameter는 dto 자동으로 들어감
+		// 따라서 request parameter에 없는 rowEnd와 rowStart만 pageVo로 주입 되는것
+
+		// param-> null 이면 최초 화면
+
+		// param -> null이 아니면 검색조건 추가한 창
+
 	}
 
 	@Override
-	public void delete(Model model, PageVO pageVo) {
+	public void inquiry_detail_page(Model model) {
+		// TODO Auto-generated method stub
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String[] ajaxMsg = request.getParameterValues("valueArr");
-		
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		String id = (String) map.get("userId");
+		String board_num = request.getParameter("board_num");
+		String currPage = request.getParameter("currPage");
+		// db에서 list_page 내용가져오기
+		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+		AdminInquiryDto detailDto = null;
+		try {
+			detailDto = dao.inquiry_detail_page(board_num);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 검색조건
+		model.addAttribute("search", dto);
+		// 조인테이블 결과
+		model.addAttribute("list", detailDto);
+		// 현재 페이지
+		model.addAttribute("currPage", currPage);
 	}
 
 	@Override
@@ -138,52 +157,113 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		System.out.println(dto.getSearch_type());
+		System.out.println(request.getParameter("search_type"));
 		String id = (String) map.get("userId");
-		String bn=request.getParameter("board_num");
-		//db에서 write_page 내용가져오기
-				AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
-				AdminInquiryDto detailDto = null;
-
-					try {
-						detailDto = dao.inquiry_write_page(bn);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				
-				model.addAttribute("search", dto);
-				model.addAttribute("list", detailDto);
-	}
-	@Override
-	public void inquiry_write(Model model) {
-		// TODO Auto-generated method stub
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
-		String id = (String) map.get("userId");
-		String board_reply=request.getParameter("board_reply");
-		String board_num=request.getParameter("board_num");
-		
-		//db에서 write_page 내용가져오기
+		String bn = request.getParameter("board_num");
+		String currPage = request.getParameter("currPage");
+		// db에서 write_page 내용가져오기
 		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
 		AdminInquiryDto detailDto = null;
-		System.out.println("inquiry_write실행");
+
 		try {
-			//어드민 인쿼리 테이블 답변,답변날짜 업데이트
-			int write1 = dao.inquiry_write1(board_num,id,board_reply);
-			//유저 인쿼리 테이블 답변상태 없데이트
-			int write2 = dao.inquiry_write2(board_num);
-			System.out.println("write1 : " + write1);
-			System.out.println("write2 : " + write2);
+			detailDto = dao.inquiry_write_page(bn);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		// 검색조건
 		model.addAttribute("search", dto);
+		// 조인테이블 결과
 		model.addAttribute("list", detailDto);
+		// 현재 페이지
+		model.addAttribute("currPage", currPage);
+	}
+
+	@Override
+	public void inquiry_write(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		String id = (String) map.get("userId");
+		String board_reply = request.getParameter("board_reply");
+		String board_num = request.getParameter("board_num");
+
+		// db에서 write 내용 update
+		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+		System.out.println("inquiry_write실행");
+		try {
+			// 어드민 인쿼리 테이블 답변,답변날짜 업데이트
+			int write1 = dao.inquiry_write1(board_num, id, board_reply);
+			// 유저 인쿼리 테이블 답변상태 없데이트
+			int write2 = dao.inquiry_write2(board_num);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void redirect_data_set_for_list(Model model, RedirectAttributes redAttri) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		String START_YMD = dto.getSTART_YMD();
+		String END_YMD = dto.getEND_YMD();
+		String reply_status = dto.getReply_status();
+		String search_type = dto.getSearch_type();
+		String search_content = dto.getSearch_content();
+		String currPage = request.getParameter("currPage");
+		
+		redAttri.addAttribute("START_YMD", START_YMD);
+		redAttri.addAttribute("END_YMD", END_YMD);
+		redAttri.addAttribute("reply_status", reply_status);
+		redAttri.addAttribute("search_type", search_type);
+		redAttri.addAttribute("search_content", search_content);
+		redAttri.addAttribute("currPage", currPage);
+
+	}
+	@Override
+	public void redirect_data_set_for_write(Model model, RedirectAttributes redAttri) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		String board_num = request.getParameter("board_num");
+		String START_YMD = dto.getSTART_YMD();
+		String END_YMD = dto.getEND_YMD();
+		String reply_status = dto.getReply_status();
+		String search_type = dto.getSearch_type();
+		String search_content = dto.getSearch_content();
+		String currPage = request.getParameter("currPage");
+		
+		redAttri.addAttribute("START_YMD", START_YMD);
+		redAttri.addAttribute("END_YMD", END_YMD);
+		redAttri.addAttribute("reply_status", reply_status);
+		redAttri.addAttribute("search_type", search_type);
+		redAttri.addAttribute("search_content", search_content);
+		redAttri.addAttribute("currPage", currPage);
+		redAttri.addAttribute("board_num", board_num);
 	}
 	
-	
+	@Override
+	public void inquiry_delete(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		String board_num = request.getParameter("board_num");
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+		try {
+			// 유저 인쿼리 테이블에서 삭제 (어드민테이블은 on delete CASCADE 제약조건으로 자동삭제됨)
+			int deletecount = dao.inquiry_delete(board_num);
+			System.out.println("삭제된갯수 : " + deletecount);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+	}
 }

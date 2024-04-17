@@ -76,7 +76,7 @@ function deleteValue(){
 		<div class="content-wrapper">
 			<!-- 검색창과 검색결과 -->
 			<div class="searchbar-container">
-				<form action="admin_inquiry_list_page" id="inquiry-form" >
+				<form action="admin_inquiry_list_page" id="inquiry-form">
 					<!-- 서치바 셀렉 그룹시작 -->
 					<div class="searchbar-select-group">
 						<div class="searchbar-title">
@@ -199,8 +199,18 @@ function deleteValue(){
 							<td><input type="checkbox" name="RowCheck"
 								value="${list.userInquiry.board_num}" class="table-check-box"></td>
 							<td>${list.userInquiry.board_num}</td>
-							<td class="table-title"><a
-								href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
+							<td class="table-title" id="detail-page">
+							<c:choose>
+								<c:when test="${search ne null }">
+							<a href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}&START_YMD=${search.START_YMD }&END_YMD=${search.END_YMD }&reply_status=${search.reply_status}&search_type=${search.search_type}&search_content=${search.search_content}">
+									${list.userInquiry.board_title}</a>
+								</c:when>
+								<c:otherwise>							
+							<a href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">
+									${list.userInquiry.board_title}</a>
+								</c:otherwise>
+							</c:choose>
+							</td>
 							<td>${list.userInquiry.user_id}</td>
 							<c:choose>
 								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
@@ -281,7 +291,6 @@ function deleteValue(){
 	      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
 	      
 		    var formData = new FormData(form);
-		    formData.append('currPage', currpage); // currPage를 추가
 	      // FormData의 각 항목에 대해 반복
 	        formData.forEach(function(value, key) {
 	            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
@@ -346,6 +355,7 @@ function deleteValue(){
             $('#inquiry-form select').prop('selectedIndex', 0);
         });
     });
+    
 </script>
 
 </body>

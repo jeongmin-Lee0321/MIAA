@@ -48,7 +48,7 @@ body {
 				<li><button type="button" id="delete">삭제하기</button></li>
 			</ul>
 			<!-- form 시작 -->
-			<form action="admin_inquiry_write" id="inquiry_write_form">
+			<form action="admin_inquiry_write" id="inquiry_write_form" method="post">
 				<!-- table1 -->
 				<div class="table-container">
 					<div class="table-title">
@@ -142,8 +142,20 @@ body {
 
 				<ul class="bottom-btns">
 					<li><button type="submit" form="inquiry_write_form">답변등록</button></li>
+					<li><button id="cancel_write">취소하기</button></li>
 				</ul>
-				<!-- hidden 보드넘 -->
+				<!-- hidden 보드넘, 페이지, 검색조건 -->
+				<input type="hidden" name="currPage" value="${currPage}">
+				<input
+					type="hidden" name="START_YMD" value="${search.START_YMD}">
+				<input type="hidden" name="END_YMD" value="${search.END_YMD}">
+				<input type="hidden" name="reply_status"
+					value="${search.reply_status}"> 
+				<input type="hidden"
+					name="search_type" value="${search.search_type}">
+				<input
+					type="hidden" name="search_content"
+					value="${search.search_content}">
 				<input type="hidden" name="board_num"
 					value="${list.userInquiry.board_num}">
 			</form>
@@ -173,6 +185,53 @@ body {
 					$(document).on("keydown change", "#board_reply",
 							updateTextCount);
 				});
+		
+		// 리스트(목록) 버튼에 리스너 추가
+		let listpath = "admin_inquiry_list_page?";
+		$(document).ready(function() {
+			$("#list").click(function() {
+				// inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+				let form = document.getElementById("inquiry_write_form");
+				let formData = new FormData(form);
+				// FormData의 각 항목에 대해 반복
+				formData.forEach(function(value, key) {
+					// board_num일 경우에는 추가하지 않음
+					if (key !== "board_num") {
+						listpath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+					}
+				});
+				window.location.href = listpath; // listpage로 이동
+			});
+		});
+		// 취소 버튼에 리스너 추가
+		let writepath = "admin_inquiry_write_page?";
+		$(document).ready(function() {
+			$("#cancel_write").click(function() {
+				// inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+				let form = document.getElementById("inquiry_write_form");
+				let formData = new FormData(form);
+				// FormData의 각 항목에 대해 반복
+				formData.forEach(function(value, key) {
+					writepath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+				});
+				window.location.href = writepath; // writepage로 이동
+			});
+		});
+		//삭제버튼애드리스너
+		$(document).ready(function() {
+		    $("#delete").click(function() {
+		        // 삭제하기 버튼 클릭 시 경고창 표시
+		        var confirmDelete = confirm("정말 삭제하시겠습니까?");
+		        if (confirmDelete) {
+		            // "예"를 선택한 경우 폼 제출
+		            var form = document.getElementById("inquiry_write_form");
+		            form.action = "admin_inquiry_delete"; // 폼의 action 변경
+		            form.submit(); // 폼 제출
+		        } else {
+		            // "아니오"를 선택한 경우 아무 동작도 하지 않음
+		        }
+		    });
+		});
 	</script>
 </body>
 

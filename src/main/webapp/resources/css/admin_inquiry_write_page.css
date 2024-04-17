@@ -281,7 +281,7 @@ ul.bottom-btns>li>button{
   font-weight: 500;
   flex-shrink: 0;
 }
-ul.bottom-btns>li>button:not([type="submit"]){
+ul.bottom-btns>li>button:not([type]){
   background-color: #FFFFFF;
   border: 1px solid #EAECF0;
 }

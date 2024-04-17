@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.service.AdminInquiryService;
@@ -86,14 +87,13 @@ public class AdminInquiryController {
 		
 		//싱글톤위한 값 전달
 		model.addAttribute("userId", userId);
-		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
 		adminInquiryInter=new AdminInquiryService();
 		try {
-			adminInquiryInter.inquiry_write_page(model);
+			adminInquiryInter.inquiry_detail_page(model);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -124,7 +124,6 @@ public class AdminInquiryController {
 
 		//싱글톤위한 값 전달
 		model.addAttribute("userId", userId);
-		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		
@@ -143,7 +142,7 @@ public class AdminInquiryController {
 	}
 	@RequestMapping("admin_inquiry_write")
 	public String admin_inquiry_write(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , @ModelAttribute("dto") AdminInquirySearchDto dto) {
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , @ModelAttribute("dto") AdminInquirySearchDto dto, RedirectAttributes redAttri) {
 		String result = "redirect:/";
 		
 		//접속자가 관리자인지 확인 후 뷰단경로 처리
@@ -157,12 +156,11 @@ public class AdminInquiryController {
 		}
 		else if (isAdmin.equals("admin")) {
 			System.out.println("관리자입니다.");
-			result = "forward:admin_inquiry_write_page";
+			result = "redirect:admin_inquiry_detail_page";
 		}
 		
 		//싱글톤위한 값 전달
 		model.addAttribute("userId", userId);
-		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		
@@ -175,6 +173,11 @@ public class AdminInquiryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//redirectAttribute에 데이터 담기 
+		adminInquiryInter.redirect_data_set_for_write(model,redAttri);
+		
+		
+		
 		System.out.println(result);
 		
 		return result;
@@ -182,7 +185,7 @@ public class AdminInquiryController {
 	
 	@RequestMapping("admin_inquiry_delete")
 	public String admin_inquiry_delete(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo, @ModelAttribute("dto") AdminInquirySearchDto dto) {
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo, @ModelAttribute("dto") AdminInquirySearchDto dto, RedirectAttributes redAttri) {
 		String result = "redirect:/";
 		
 		//접속자가 관리자인지 확인 후 뷰단경로 처리
@@ -196,25 +199,24 @@ public class AdminInquiryController {
 		}
 		else if (isAdmin.equals("admin")) {
 			System.out.println("관리자입니다.");
-			result = "admin_inquiry.list_page.1대1문의관리.3a";
+			result = "redirect:admin_inquiry_list_page";
 		}
 		//싱글톤위한 값 전달
-		model.addAttribute("userId", userId);
-		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
-		model.addAttribute("pageVo",pageVo);
-		
+
+		System.out.println("admin_inquiry_delete");
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
 		adminInquiryInter=new AdminInquiryService();
 		try {
-			adminInquiryInter.inquiry_list(model,pageVo);
+			adminInquiryInter.inquiry_delete(model);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		//redirectAttribute에 데이터 담기 
+		adminInquiryInter.redirect_data_set_for_list(model,redAttri);
 		
 		return result;
 	}
