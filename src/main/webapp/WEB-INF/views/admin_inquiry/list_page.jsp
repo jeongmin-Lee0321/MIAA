@@ -76,7 +76,7 @@ function deleteValue(){
 		<div class="content-wrapper">
 			<!-- 검색창과 검색결과 -->
 			<div class="searchbar-container">
-				<form action="admin_inquiry_list_page" id="inquiry-form">
+				<form action="admin_inquiry_list_page" id="inquiry-form" >
 					<!-- 서치바 셀렉 그룹시작 -->
 					<div class="searchbar-select-group">
 						<div class="searchbar-title">
@@ -200,7 +200,7 @@ function deleteValue(){
 								value="${list.userInquiry.board_num}" class="table-check-box"></td>
 							<td>${list.userInquiry.board_num}</td>
 							<td class="table-title"><a
-								href="admin_inquiry_write_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
+								href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
 							<td>${list.userInquiry.user_id}</td>
 							<c:choose>
 								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
@@ -276,6 +276,10 @@ function deleteValue(){
 			
 		    // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
 		    var form = document.getElementById("inquiry-form");
+		    
+		 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+	      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+	      
 		    var formData = new FormData(form);
 		    formData.append('currPage', currpage); // currPage를 추가
 	      // FormData의 각 항목에 대해 반복

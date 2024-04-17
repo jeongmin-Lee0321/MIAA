@@ -48,7 +48,7 @@ body {
 				<li><button type="button" id="delete">삭제하기</button></li>
 			</ul>
 			<!-- form 시작 -->
-			<form action="admin_inquiry_write" id="inquiry_write_form">
+			<form action="admin_inquiry_write_page" id="inquiry_write_page_form">
 				<!-- table1 -->
 				<div class="table-container">
 					<div class="table-title">
@@ -93,55 +93,50 @@ body {
 							<div class="row-title">
 								<span>처리상태</span>
 							</div>
-							<div class="row-content">${list.userInquiry.board_reply_status}</div>
-						</div>
-					</div>
-				</div>
-				<!-- table2 -->
-				<div class="table-container">
-					<div class="table-title">
-						<img src="resources/img/clipboard.png" alt=""><span>관리자
-							답변</span>
-					</div>
-					<div class="table">
-						<div class="table-row">
-							<div class="row-title">
-								<span>처리일자</span>
-							</div>
-							<div class="row-content">${list.board_reply_date}</div>
-						</div>
-						<div class="table-row">
-							<div class="row-title">
-								<span>답변내용</span>
-							</div>
 							<c:choose>
-								<c:when test="${list.board_reply eq '-'}">
-									<div class="row-content" id="textarea-content">
-										<!-- 텍스트제한 표시 추가 필요 -->
-										<textarea name="board_reply" id="board_reply" maxlength="300"
-											placeholder="텍스트를 입력하세요."></textarea>
-										<div class="textLengthWrap">
-											<span class="textCount">0자</span> <span class="textTotal">/300자</span>
-										</div>
-									</div>
+								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+									<div class="row-content" style="color: #0066ff">${list.userInquiry.board_reply_status}</div>
 								</c:when>
 								<c:otherwise>
-									<div class="row-content" id="textarea-content">
-										<!-- 텍스트제한 표시 추가 필요 -->
-										<textarea name="board_reply" id="board_reply" maxlength="300"
-											placeholder="텍스트를 입력하세요.">${list.board_reply}</textarea>
-										<div class="textLengthWrap">
-											<span class="textCount">0자</span> <span class="textTotal">/300자</span>
-										</div>
-									</div>
-										</c:otherwise>
+									<div class="row-content">${list.userInquiry.board_reply_status}</div>
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
 				</div>
-
+				<c:if test="${list.userInquiry.board_reply_status eq '답변완료'}">
+					<!-- table2 -->
+					<div class="table-container">
+						<div class="table-title">
+							<img src="resources/img/clipboard.png" alt=""><span>관리자
+								답변</span>
+						</div>
+						<div class="table">
+							<div class="table-row">
+								<div class="row-title">
+									<span>처리일자</span>
+								</div>
+								<div class="row-content">${list.board_reply_date}</div>
+							</div>
+							<div class="table-row">
+								<div class="row-title">
+									<span>답변내용</span>
+								</div>
+								<div class="row-content" id="lg-content">
+									${list.board_reply}</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
 				<ul class="bottom-btns">
-					<li><button type="submit" form="inquiry_write_form">답변등록</button></li>
+					<c:choose>
+						<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+							<li><button type="submit" form="inquiry_write_page_form">답변수정</button></li>
+						</c:when>
+						<c:otherwise>
+							<li><button type="submit" form="inquiry_write_page_form">답변작성</button></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				<!-- hidden 보드넘 -->
 				<input type="hidden" name="board_num"
@@ -150,30 +145,6 @@ body {
 			<!-- form 끝 -->
 		</div>
 	</div>
-	<!-- 글자수 제한 표현 -->
-	<script>
-		$(document).ready(
-				function() {
-					function updateTextCount() {
-						let content = $("#board_reply").val();
-						let textCount = content.length > 0 ? content.length
-								+ '자' : '0자';
-						$('.textCount').text(textCount);
-
-						if (content.length > 300) {
-							$("#board_reply").val(content.substring(0, 300));
-							alert('글자수는 300자까지 입력 가능합니다.');
-						}
-					}
-
-					// 페이지 로드 시 호출
-					updateTextCount();
-
-					// 입력 변경 시 호출
-					$(document).on("keydown change", "#board_reply",
-							updateTextCount);
-				});
-	</script>
 </body>
 
 </html>

@@ -114,36 +114,12 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		dto.setRowEnd(rowEnd);
 		dto.setRowStart(rowStart);
 		
+		//ModelAttribute로 request의 parameter는 dto 자동으로 들어감
+		//따라서 request parameter에 없는 rowEnd와 rowStart만 pageVo로 주입 되는것 
+		
 		//param-> null 이면 최초 화면
 		
 		//param -> null이 아니면 검색조건 추가한 창
-
-		String START_YMD=request.getParameter("START_YMD");
-		String END_YMD=request.getParameter("END_YMD");
-
-		String reply_status=request.getParameter("reply_status");
-		
-		String search_type=request.getParameter("search_type");
-		String search_content=request.getParameter("search_content");
-		
-		
-		try {
-			System.out.println(dto);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("dto.getEND_YMD(): "+dto.getEND_YMD());
-		System.out.println("START_YMD: "+START_YMD==null);
-		System.out.println("START_YMD: "+START_YMD);
-		System.out.println("END_YMD: "+END_YMD==null);
-		System.out.println("END_YMD: "+END_YMD);
-
-		dto.setEND_YMD(END_YMD);
-		dto.setSTART_YMD(START_YMD);
-		dto.setReply_status(reply_status);
-		dto.setSearch_type(search_type);
-		dto.setSearch_content(search_content);
 		
 	}
 
