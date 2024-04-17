@@ -69,7 +69,12 @@ public class MissingAniController {
 	//JeongMin
 	@RequestMapping(value = "/missing_ani_detail_page", method = RequestMethod.GET)
 	public String missing_ani_detail_page(HttpServletRequest request, Model model ) {
-
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		animalService = new MissingAnimalService();
+		
+		AnimalDto dto = animalService.missing_ani_detail_page(model);
+		
+		model.addAttribute("dto", dto);
 		return "missing_ani.detail_page.보호동물 상세페이지.2";
 	}
 }
