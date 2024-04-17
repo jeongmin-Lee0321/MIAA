@@ -431,7 +431,6 @@ public class FounditemService implements FounditemServiceInter {
 					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
 			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
 					+ URLEncoder.encode("500", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
-			System.out.println(urlBuilder.toString());
 			URL url = new URL(urlBuilder.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -449,10 +448,6 @@ public class FounditemService implements FounditemServiceInter {
 			}
 			rd.close();
 			conn.disconnect();
-
-			/*
-			 * 장문의 xml코드를 String화 해서 result_code에 저장 후 parsing작업
-			 */
 			result_code = sb.toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

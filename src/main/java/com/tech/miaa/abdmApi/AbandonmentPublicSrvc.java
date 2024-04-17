@@ -290,7 +290,6 @@ public class AbandonmentPublicSrvc {
 //            if (!dto.getShelterSelectBox().isEmpty()) {
 //                urlBuilder.append("&" + URLEncoder.encode("care_reg_no","UTF-8") + "=" + URLEncoder.encode(dto.getShelterSelectBox(), "UTF-8")); /*보호소번호 (보호소 조회 OPEN API 참조)*/
 //            }
-            System.out.println(urlBuilder.toString());
 //            urlBuilder.append("&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode("protect", "UTF-8")); /*상태(전체 : null(빈값), 공고중 : notice, 보호중 : protect)*/
 //            urlBuilder.append("&" + URLEncoder.encode("neuter_yn","UTF-8") + "=" + URLEncoder.encode("U", "UTF-8")); /*상태 (전체 : null(빈값), 예 : Y, 아니오 : N, 미상 : U)*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호 (기본값 : 1)*/
