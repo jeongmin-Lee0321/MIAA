@@ -5,13 +5,41 @@
 <!-- 원진호_0403_mapper추가. -->
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MatchingAlarmDao">
-	<select id="matching_alarm_list" resultType="com.tech.miaa.dto.ItemDto">
-		SELECT ITEM_NAME,LOSTDAY,UPKIND,UPR_CD,ADDRESS,ITEM_ID
+	<select id="matching_alarm_list"
+		resultType="com.tech.miaa.dto.ItemDto">
+		SELECT *
 		FROM ITEM
 		WHERE USER_ID =#{param1}
 		ORDER BY TOTAL_ID DESC
 	</select>
-	<delete id="mypage_alarm_delete" >
-		DELETE FROM ITEM WHERE ITEM_ID=#{param1} AND USER_ID=#{param2};
+	<delete id="mypage_alarm_delete">
+		DELETE FROM ITEM
+		WHERE ITEM_ID=#{param1} AND USER_ID=#{param2}
 	</delete>
+	<insert id="alert_item_write">
+		INSERT INTO ALERT_ITEM
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12}, #{param13})
+	</insert>
+	<select id="alert_item_list"
+		resultType="com.tech.miaa.dto.matchingAlarmDto">
+ 		SELECT *
+		  FROM ALERT_ITEM
+		 WHERE USER_ID=#{param1}
+		 ORDER BY TOTAL_ID DESC 
+		 
+		<!--  SELECT AITEM.PRDTCLNM ,ITEM.UPR_CD 
+		  FROM ALERT_ITEM AITEM FULL OUTER JOIN ITEM ITEM 
+		    ON AITEM.USER_ID=ITEM.USER_ID
+		 WHERE USER_ID=#{param1}
+		 ORDER BY TOTAL_ID DESC -->
+	</select>
 </mapper>
+
+
+
+
+
+
+
