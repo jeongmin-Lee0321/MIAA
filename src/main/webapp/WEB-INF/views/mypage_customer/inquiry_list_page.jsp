@@ -75,48 +75,84 @@
 
 		<!-- main -->
 		
-		<!-- 검색창과 검색결과 -->
 		<div class="content-wrapper">
-        <div class="searchbar-container">
-          <form action="#">
-            <!-- 서치바 셀렉 그룹시작 -->
-            <div class="searchbar-select-group">
-              <div class="searchbar-title">
-                <span>일자</span>
-              </div>
-              <div class="searchbar-content">
-                <input type="date" name="" id="">
-                <span>~</span>
-                <input type="date" name="" id="">
-                <span>(문의날짜기준)</span>
-              </div>
-            </div>
-            <!-- 멀티그룹묶음 -->
-            <div class="searchbar-mutil-group">
-              <div class="searchbar-select-group">
-                <div class="searchbar-title">
-                  <span>처리상태</span>
-                </div>
-                <div class="searchbar-content">
-                  <select name="" id="">
-                    <option value="전체">전체</option>
-                    <option value="처리중">처리중</option>
-                    <option value="답변완료">답변완료</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+		
+        <!-- 검색창과 검색결과 -->
+        
+			<div class="searchbar-container">
+				<form action="mypage_customer_inquiry_list_page" id="inquiry-form">
+					<!-- 서치바 셀렉 그룹시작 -->
+					<div class="searchbar-select-group">
+						<div class="searchbar-title">
+							<span>기간</span>
+						</div>
+						<div class="searchbar-content">
+							<input type="date" name="START_YMD" id="START_YMD"
+							<c:if test="${search ne null}">value="${search.START_YMD }"</c:if>> <span>~</span>
+							<input type="date" name="END_YMD" id="END_YMD"
+							<c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
+							<div class="form-date-btn" id="date-today">
+								<div class="div-placeholder">
+									<div class="div">오늘</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-1week">
+								<div class="div-placeholder">
+									<div class="div">1주일</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-1month">
+								<div class="div-placeholder">
+									<div class="div">1개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-3month">
+								<div class="div-placeholder">
+									<div class="div">3개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-6month">
+								<div class="div-placeholder">
+									<div class="div">6개월</div>
+								</div>
+							</div>
+							<div class="form-date-btn" id="date-all">
+								<div class="div-placeholder">
+									<div class="div">전체</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            <!-- form 조회용 버튼 -->
-            <div class="search-btn-block">
-              <button style="font-family: inherit;">
-                조회<img src="resources/img/searchIcon.png" alt="">
-              </button>
-            </div>
-          </form>
+					<div class="searchbar-select-group">
+						<div class="searchbar-title">
+							<span>처리상태</span>
+						</div>
+						<div class="searchbar-content">
+							<select name="reply_status" id="reply_status">
+								<option value="all" 
+								<c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체</option>
+								<option value="ing" 
+								<c:if test="${search.reply_status eq 'ing'}">selected</c:if>>처리중</option>
+								<option value="done" 
+								<c:if test="${search.reply_status eq 'done'}">selected</c:if>>답변완료</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- form 조회용 버튼 -->
+					<div class="search-btn-block">
+						<button type="submit" form="inquiry-form" style="font-family: inherit;">
+							조회<img src="resources/img/searchIcon.png" alt="">
+						</button>
+						<button class="reset" onclick="resetForm()" style="font-family: inherit;">
+							<div class="div">초기화</div>
+						</button>
+					</div>
+				</form>
+			</div>
+			<!-- 검색창과 검색결과 끝 -->
         </div>
-        </div>
-        <!-- 검색창과 검색결과 끝 -->
 
 		<div class="content-wrapper">
 			<div class="content-container">
@@ -211,23 +247,94 @@
 		</div>
 
 	</div>
+	   <script>
+      function goToPage(pageNumber) {
+         var currpage = pageNumber;
+         if (pageNumber<=0){
+            currpage = 1;
+         }else if(currpage>${pageVo.totPage}){//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지 
+            currpage = ${pageVo.totPage};
+         }
+         else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
+            currpage= pageNumber-(pageNumber-1)%10;
+         }
+         else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
+            currpage= pageNumber-((pageNumber-1)%10)+9;
+         }
+         var newPath = window.location.pathname + '?currPage=' + currpage;
+         
+          // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+          var form = document.getElementById("inquiry-form");
+          
+             // 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경하고 조회 버튼을 안눌러도 검색조건 변경된 데이터가 들어감
+         document.getElementById("inquiry-form").reset(); // 폼 초기화(현재페이지 렌더링기준)
+         
+          var formData = new FormData(form);
+          formData.append('currPage', currpage); // currPage를 추가
+         // FormData의 각 항목에 대해 반복
+           formData.forEach(function(value, key) {
+               newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+           });
+          
+         window.location.href = newPath; // 새 경로로 페이지 이동
+         
+      }
+   </script>
+	<!-- 날짜 제한 -->
 	<script>
-		function goToPage(pageNumber) {
-			var currpage = pageNumber;
-			if (pageNumber<=0){
-				currpage = 1;
-			}else if(currpage>${pageVo.totPage}){//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지 
-				currpage = ${pageVo.totPage};
-			}
-			else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
-				currpage= pageNumber-(pageNumber-1)%10;
-			}
-			else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
-				currpage= pageNumber-((pageNumber-1)%10)+9;
-			}
-			var newPath = window.location.pathname + '?currPage=' + currpage;
-			window.location.href = newPath; // 새 경로로 페이지 이동
-		}
+					var now_utc = Date.now() // 지금 날짜를 밀리초로
+					// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+					var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+					// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+					var today = new Date(now_utc - timeOff).toISOString()
+							.split("T")[0];
+					var today2 = new Date(now_utc - timeOff)//.getFullYear()등을 쓰기위한 today2
+		$(document).ready(
+				function() {//로드완료시
+					document.getElementById("START_YMD").setAttribute("max",
+							today); //시작날짜 최대값 오늘날짜로 제한
+					document.getElementById("END_YMD").setAttribute("max",
+							today);//종료날짜 오늘날짜로 제한
+				});
+ /*날짜선택버튼*/
+	document.getElementById('date-today').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = today;
+	    document.getElementById('END_YMD').value = today;
+	});
+
+	document.getElementById('date-1week').addEventListener('click', function() {
+	    const lastWeek = new Date(today2.getFullYear(), today2.getMonth(), today2.getDate() - 7);
+	    document.getElementById('START_YMD').value = lastWeek.toISOString().substring(0, 10); // 일주일 전 날짜
+	    document.getElementById('END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
+	});
+
+	document.getElementById('date-1month').addEventListener('click', setPastDate.bind(null, 1));
+	document.getElementById('date-3month').addEventListener('click', setPastDate.bind(null, 3));
+	document.getElementById('date-6month').addEventListener('click', setPastDate.bind(null, 6));
+
+	function setPastDate(months) {
+	    const pastDate = new Date(today2.getFullYear(), today2.getMonth() - months, today2.getDate());
+	    document.getElementById('START_YMD').value = pastDate.toISOString().substring(0, 10);
+	    document.getElementById('END_YMD').value = today2.toISOString().substring(0, 10);
+	}
+	document.getElementById('date-all').addEventListener('click', function() {
+	    document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
+	    document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
+	});
+	
 	</script>
+
+<script>
+    $(document).ready(function() {
+        $(".reset").click(function(event) {
+            event.preventDefault(); // 폼의 기본 동작 중지
+            // form 안의 input 요소의 값을 빈 문자열로 설정
+            $('#inquiry-form input').val('');
+
+            // form 안의 select 요소의 selectedIndex를 0으로 설정하여 첫 번째 옵션을 선택
+            $('#inquiry-form select').prop('selectedIndex', 0);
+        });
+    });
+</script>
 </body>
 </html>

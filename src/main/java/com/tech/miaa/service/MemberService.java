@@ -268,6 +268,8 @@ public class MemberService implements MemberServiceInter {
 					session.setAttribute("userId", dto.getUser_id());
 					session.setMaxInactiveInterval(1800);
 					
+					//최근로그인날짜 추가 마한슬
+					dao.login_date_update(id);
 					
 					result = "redirect:/";
 				} else if (num == 0) {
@@ -278,4 +280,5 @@ public class MemberService implements MemberServiceInter {
 		}
 		return result;
 	}
+
 }

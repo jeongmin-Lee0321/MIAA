@@ -8,12 +8,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dto.AdminInquiryDto;
+import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.service.InquiryService;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
@@ -35,7 +37,7 @@ public class MypageCustomerInquiryController {
 //	문의내역 페이지
 	@RequestMapping("mypage_customer_inquiry_list_page")
 	public String mypage_customer_inquiry_list_page(HttpServletRequest request, Model model,
-			@SessionAttribute(name = "userId", required = false) String userId, PageVO2 pageVo2) {
+			@SessionAttribute(name = "userId", required = false) String userId, PageVO2 pageVo2, @ModelAttribute("dto") AdminInquirySearchDto dto) {
 		
 		String strPage = null;
 						
