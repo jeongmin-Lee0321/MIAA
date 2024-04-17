@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dto.ItemDto;
+import com.tech.miaa.dto.matchingAlarmDto;
 import com.tech.miaa.service.LostItemService;
+import com.tech.miaa.service.MatchingAlarmService;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
+import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
 
 @Controller
 public class LostItemController {
@@ -24,6 +27,9 @@ public class LostItemController {
 	private SqlSession sqlSession;
 
 	LostItemServiceInter itemService;
+	/*원진호_0417추가*/
+	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
+	/* 추가끝 */ 
 
 	@RequestMapping("lost_item_search_page")
 	public String rescue_ani_search_page(HttpServletRequest request, Model model) {
@@ -68,7 +74,11 @@ public class LostItemController {
 		
 		itemService = new LostItemService();
 		ItemDto dto = itemService.lost_item_detail_page(model);
-		
+		/* 원진호_0417_추가 */
+		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
+		ArrayList<matchingAlarmDto> alert_item_list = mypageMatchingAlarmServiceInter.alert_item_list(model);
+		model.addAttribute("alert_item_list", alert_item_list);
+		/* 추가끝 */		
 		model.addAttribute("dto", dto);
 		return "lost_item.detail_page.분실물 상세페이지.2";
 	}
