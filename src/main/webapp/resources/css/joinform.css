@@ -11,6 +11,9 @@
 	min-height: 10px;
 	min-width: 90px;
 }
+
+
+
 .inputbox-container{
 	display : flex;
 	justify-content: flex-start;
@@ -85,6 +88,12 @@ input:focus, input:not(:placeholder-shown){
 .input[type=submit] {
 	
 }
+
+.hththt{
+	font-size: 12px;
+}
+
+
 
 /* .forgot {
 	display: flex;
