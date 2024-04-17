@@ -8,25 +8,32 @@
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	var chkObj = document.getElementsByName("RowCheck");
-	var rowCnt = chkObj.length;
-	
-	$("input[name='allCheck']").click(function(){
-		var chk_listArr = $("input[name='RowCheck']");
-		for (var i=0; i<chk_listArr.length; i++){
-			chk_listArr[i].checked = this.checked;
-		}
-	});
-	$("input[name='RowCheck']").click(function(){
-		if($("input[name='RowCheck']:checked").length == rowCnt){
-			$("input[name='allCheck']")[0].checked = true;
-		}
-		else{
-			$("input[name='allCheck']")[0].checked = false;
-		}
-	});
+
+$(document).ready(function(){
+    let checkedList = $("input[name='RowCheck']");
+    let allCheck = $("input[name='allCheck']");
+    
+    //allcheck에 따라 rowcheck의 체크박스 상태 변화(해체와 체크가 둘다 true false로 각각 적용됨)
+    allCheck.click(function(){
+        checkedList.each(function(index,element){
+        	console.log(index,element);
+        	// jquery 객체인 allCheck의 dom요소에 접근 allCheck[0]
+        	// allCheck[0]의 체크상태를 각 rowCheck 체크박스의 상태에 적용
+            element.checked = allCheck[0].checked;
+        });
+    }); 
+    
+    //rowcheck의 체크박스가 하나라도 해제되면 allcheck도 해제,전체 선택일때만 allcheck가 체크됨
+    checkedList.click(function(){
+    	if($("input[name='RowCheck']:checked").length == checkedList.length){
+    		allCheck[0].checked = true;
+    	}else{
+    		allCheck[0].checked = false;
+    	}
+    });
 });
+	
+/* 
 function deleteValue(){
 	var url = "delete";    // Controller로 보내고자 하는 URL
 	var valueArr = new Array();
@@ -66,7 +73,7 @@ function deleteValue(){
 			alert("삭제 취소");
 		}
 	}
-}
+} */
 </script>
 <body>
 	<div class="main-body">
@@ -199,18 +206,18 @@ function deleteValue(){
 							<td><input type="checkbox" name="RowCheck"
 								value="${list.userInquiry.board_num}" class="table-check-box"></td>
 							<td>${list.userInquiry.board_num}</td>
-							<td class="table-title" id="detail-page">
-							<c:choose>
-								<c:when test="${search ne null }">
-							<a href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}&START_YMD=${search.START_YMD }&END_YMD=${search.END_YMD }&reply_status=${search.reply_status}&search_type=${search.search_type}&search_content=${search.search_content}">
-									${list.userInquiry.board_title}</a>
-								</c:when>
-								<c:otherwise>							
-							<a href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">
-									${list.userInquiry.board_title}</a>
-								</c:otherwise>
-							</c:choose>
-							</td>
+							<td class="table-title" id="detail-page"><c:choose>
+									<c:when test="${search ne null }">
+										<a
+											href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}&START_YMD=${search.START_YMD }&END_YMD=${search.END_YMD }&reply_status=${search.reply_status}&search_type=${search.search_type}&search_content=${search.search_content}">
+											${list.userInquiry.board_title}</a>
+									</c:when>
+									<c:otherwise>
+										<a
+											href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">
+											${list.userInquiry.board_title}</a>
+									</c:otherwise>
+								</c:choose></td>
 							<td>${list.userInquiry.user_id}</td>
 							<c:choose>
 								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
