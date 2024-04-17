@@ -186,7 +186,7 @@
 						<td><input type="checkbox" name="RowCheck" value="${list.userInquiry.board_num }"
 							class="table-check-box"></td>							
 						<td>${list.userInquiry.rnum }</td>
-						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">${list.userInquiry.board_title}</a></td>
+						<td class="table-title"><a href="mypage_customer_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}&START_YMD=${search.START_YMD }&END_YMD=${search.END_YMD }&reply_status=${search.reply_status}">${list.userInquiry.board_title}</a></td>
 						<c:choose>
 						<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
 						<td style="color: #0066FF;">${list.userInquiry.board_reply_status}</td>
