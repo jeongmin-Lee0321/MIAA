@@ -169,10 +169,8 @@ public class LostItemService implements LostItemServiceInter {
 		String total_id = request.getParameter("total_id");
 		
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
-		ItemDto dto = null; ArrayList<ItemImgDto> imgDtos=null;
-		try {
-			dto=dao.lost_item_detail_page(total_id);
-			imgDtos=dao.lost_item_detail_img(total_id);
+		ItemDto dto=dao.lost_item_detail_page(total_id);
+		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
 			//사진이 없을 때 기본아이콘 대체
 			if (imgDtos.size()==0) {
 				if(dto.getUpkind().equals("PRI000")) {
@@ -217,7 +215,6 @@ public class LostItemService implements LostItemServiceInter {
 					ItemImgDto imgdto = new ItemImgDto(0,0,null, "resources/item_default/유류물품.png"); imgDtos.add(0, imgdto);
 				}
 			}
-		} catch (Exception e) {}
 		PrdCode pc = new PrdCode();
 		dto.setUpkind(pc.getPrdNameByCode(dto.getUpkind()));
 		dto.setUpr_cd(pc.getPrdNameByCode(dto.getUpr_cd()));

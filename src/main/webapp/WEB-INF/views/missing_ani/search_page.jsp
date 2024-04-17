@@ -121,7 +121,7 @@
 
             <!-- 목록1개가 list-card -->
             <c:forEach items="${animalList }" var="animalList">
-            <div class="list-card" style="cursor: pointer;">
+            <div class="list-card" style="cursor: pointer;" onclick="location.href='missing_ani_detail_page?total_id=${animalList.total_id }';">
               <div class="card-photo">
                 <img src="${animalList.filename }" alt="">
               </div>

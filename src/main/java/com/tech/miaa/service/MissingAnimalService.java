@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dao.MissingAnimalDao;
 import com.tech.miaa.dto.AnimalDto;
+import com.tech.miaa.dto.AnimalImgDto;
+import com.tech.miaa.dto.ItemDto;
+import com.tech.miaa.dto.ItemImgDto;
 import com.tech.miaa.serviceInter.MissingAnimalServiceInter;
 import com.tech.miaa.util.PrdCode;
 import com.tech.miaa.vopage.PageVO;
@@ -30,10 +33,19 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		PrdCode pc = new PrdCode();
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
+		String searchday1=""; String searchday2=""; String addressCode1=""; String addressCode2="";
+		String animalkind1=""; String animalkind2="";
+		if(request.getParameter("searchday1")!=null) searchday1=request.getParameter("searchday1");
+		if(request.getParameter("searchday2")!=null) searchday2=request.getParameter("searchday2");
+		if(request.getParameter("addressCode1")!=null) addressCode1=request.getParameter("addressCode1");
+		if(request.getParameter("addressCode2")!=null) addressCode2=request.getParameter("addressCode2");
+		if(request.getParameter("animalkind1")!=null) animalkind1=request.getParameter("animalkind1");
+		if(request.getParameter("animalkind2")!=null) animalkind2=request.getParameter("animalkind2");
 		
 		//페이징 처리
 		PageVO pageVo = new PageVO();
-		int totalCount=dao.totalCount();
+		int totalCount=dao.totalCount(searchday1,searchday2,addressCode1,addressCode2,
+				animalkind1,animalkind2);
 		String strPage=request.getParameter("page");
 		if(strPage==null) {strPage="1";}
 		int page=Integer.parseInt(strPage);
@@ -42,7 +54,8 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		int rowStart=pageVo.getRowStart();
 		int rowEnd=pageVo.getRowEnd();
 		
-		ArrayList<AnimalDto> animalList = dao.animalListView(rowStart,rowEnd);
+		ArrayList<AnimalDto> animalList = dao.animalListView(searchday1,searchday2,addressCode1,addressCode2,
+				animalkind1,animalkind2,rowStart,rowEnd);
 		
 		//사진이 없을 때 기본이미지로 대체
 		for (int i = 0; i < animalList.size(); i++) {
@@ -117,5 +130,34 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		return result;
 	}
 
-	
+	@Override
+	public AnimalDto missing_ani_detail_page(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class); PrdCode pc = new PrdCode();
+		String total_id = request.getParameter("total_id"); 
+		
+		AnimalDto dto = dao.missing_ani_detail_page(total_id);
+		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
+		//사진이 없을 때 기본아이콘 대체
+		if (imgDtos.size()==0) {
+			if(dto.getUpkind().equals("417000")) {
+				AnimalImgDto imgdto = new AnimalImgDto(0,0, null, "resources/ani_default/강아지.png"); imgDtos.add(0, imgdto);
+			}else if(dto.getUpkind().equals("422400")) {
+				AnimalImgDto imgdto = new AnimalImgDto(0,0, null, "resources/ani_default/고양이.png"); imgDtos.add(0, imgdto);
+			}else if(dto.getUpkind().equals("429900")) {
+				AnimalImgDto imgdto = new AnimalImgDto(0,0, null, "resources/ani_default/기타.png"); imgDtos.add(0, imgdto);
+			}
+		}
+		String upkind="P"+dto.getUpkind();
+		dto.setUpkind(pc.getPrdNameByCode(upkind));
+		if(dto.getUpr_cd()==null) {
+			dto.setUpr_cd("전체");
+		}else{
+			String upr_cd="C"+dto.getUpr_cd();
+			dto.setUpr_cd(pc.getPrdNameByCode(upr_cd));
+		}
+		model.addAttribute("imgDtos", imgDtos);
+		return dto;
+	}
 }
