@@ -102,6 +102,9 @@ public class MemberService implements MemberServiceInter {
 		String postcode = request.getParameter("postcode");
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
+		String tel = request.getParameter("tel");
+
+		System.out.println("tel :"+tel);
 		
 		String result = "redirect:joinform";
 		
