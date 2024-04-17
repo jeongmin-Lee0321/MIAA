@@ -12,11 +12,9 @@ public interface MissingAnimalDao {
 			String animalkind1,String animalkind2, String age,String sepcialMark,
 			String userId,String addresscode1, String addresscode2);
 	public void imgUpLoad(String userId, int i, String animalname, String fileName, String animalkind1);
-<<<<<<< HEAD
-	public ArrayList<AnimalDto> animalListView(int rowStart, int rowEnd);
-	public int totalCount();
+
 	public ArrayList<AnimalDto> get_missing_animals(String user_id);
-=======
+
 	public int totalCount(@Param("searchday1")String searchday1, @Param("searchday2")String searchday2, 
 			@Param("addressCode1")String addressCode1,@Param("addressCode2")String addressCode2, 
 			@Param("animalkind1")String animalkind1, @Param("animalkind2")String animalkind2);
@@ -27,5 +25,5 @@ public interface MissingAnimalDao {
 	public AnimalDto missing_ani_detail_page(String total_id);
 	public ArrayList<AnimalImgDto> missing_ani_detail_img(String total_id);
 	
->>>>>>> release/KGY
+
 }
