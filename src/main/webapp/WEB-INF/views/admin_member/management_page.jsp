@@ -3,21 +3,21 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/admin_inquiry_list_page.css" />
+    <link rel="stylesheet" href="resources/css/admin_inquiry_list_page.css"/>
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         var chkObj = document.getElementsByName("RowCheck");
         var rowCnt = chkObj.length;
 
-        $("input[name='allCheck']").click(function() {
+        $("input[name='allCheck']").click(function () {
             var chk_listArr = $("input[name='RowCheck']");
             for (var i = 0; i < chk_listArr.length; i++) {
                 chk_listArr[i].checked = this.checked;
             }
         });
-        $("input[name='RowCheck']").click(function() {
+        $("input[name='RowCheck']").click(function () {
             if ($("input[name='RowCheck']:checked").length == rowCnt) {
                 $("input[name='allCheck']")[0].checked = true;
             } else {
@@ -25,6 +25,7 @@
             }
         });
     });
+
     function deleteValue() {
         var url = "delete"; // Controller로 보내고자 하는 URL
         var valueArr = new Array();
@@ -42,14 +43,14 @@
             if (chk) {
                 $
                     .ajax({
-                        url : url, // 전송 URL
-                        type : 'POST', // POST 방식
-                        traditional : true,
-                        data : {
-                            valueArr : valueArr
+                        url: url, // 전송 URL
+                        type: 'POST', // POST 방식
+                        traditional: true,
+                        data: {
+                            valueArr: valueArr
                             // 보내고자 하는 data 변수 설정
                         },
-                        success : function(jdata) {
+                        success: function (jdata) {
                             if (jdata = 1) {
 
                                 alert("삭제 성공");
@@ -68,7 +69,103 @@
 </script>
 <body>
 <div class="main-body">
+    <!-- 검색창과 검색결과 -->
+    <div class="searchbar-container">
 
+        <form action="admin_inquiry_list_page" id="inquiry-form">
+            <!-- 서치바 셀렉 그룹시작 -->
+            <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                    <span>가입 기간</span>
+                </div>
+                <div class="searchbar-content">
+                    <input type="date" name="START_YMD" id="START_YMD"
+                           <c:if test="${search ne null}">value="${search.START_YMD }"</c:if>> <span>~</span>
+                    <input type="date" name="END_YMD" id="END_YMD"
+                           <c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
+                    <div class="form-date-btn" id="date-today">
+                        <div class="div-placeholder">
+                            <div class="div">오늘</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="date-1week">
+                        <div class="div-placeholder">
+                            <div class="div">1주일</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="date-1month">
+                        <div class="div-placeholder">
+                            <div class="div">1개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="date-3month">
+                        <div class="div-placeholder">
+                            <div class="div">3개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="date-6month">
+                        <div class="div-placeholder">
+                            <div class="div">6개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="date-all">
+                        <div class="div-placeholder">
+                            <div class="div">전체</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                    <span>등급</span>
+                </div>
+                <div class="searchbar-content">
+                    <select name="reply_status" id="reply_status">
+                        <option value="all"
+                                <c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체
+                        </option>
+                        <option value="member"
+                                <c:if test="${search.reply_status eq 'member'}">selected</c:if>>일반회원
+                        </option>
+                        <option value="admin"
+                                <c:if test="${search.reply_status eq 'admin'}">selected</c:if>>관리자
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                    <select name="search_type" id="search_type">
+                        <%--                        <option value="title"--%>
+                        <%--                                <c:if test="${search.search_type eq 'title'}">selected</c:if>>제목--%>
+                        <%--                        </option>--%>
+                        <%--                        <option value="user"--%>
+                        <%--                                <c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자--%>
+                        <%--                        </option>--%>
+                        <option value="id"
+                                <c:if test="${search.search_type eq 'admin'}">selected</c:if>>아이디
+                        </option>
+                    </select>
+                </div>
+                <div class="searchbar-content">
+                    <input type="search" name="search_content" id="search_content" style="min-width: 300px;"
+                           <c:if test="${search ne null or search.search_content ne ''}">value="${search.search_content}"</c:if>>
+                </div>
+            </div>
+
+            <!-- form 조회용 버튼 -->
+            <div class="search-btn-block">
+                <button type="submit" form="inquiry-form">
+                    조회<img src="resources/img/searchIcon.png" alt="">
+                </button>
+                <button class="reset" onclick="resetForm()">
+                    <div class="div">초기화</div>
+                </button>
+            </div>
+        </form>
+    </div>
     <!-- main -->
 
     <div class="content-wrapper">
@@ -81,7 +178,8 @@
                 </div>
                 <div class="list-control-container">
                     <button class="btn-list" id="btn-delete" onclick="deleteValue();"
-                            style="cursor: pointer;">삭제하기</button>
+                            style="cursor: pointer;">삭제하기
+                    </button>
                 </div>
 
             </div>
@@ -90,13 +188,13 @@
                     <th><span><input type="checkbox" name="allCheck"
                                      id="allCheck" class="table-check-box"></span></th>
                     <th><span>아이디</span></th>
-<%--                    <th class="table-title"><span>제목</span></th>--%>
+                    <th><span>회원등급</span></th>
                     <th><span>이메일</span></th>
                     <th><span>우편 번호</span></th>
                     <th><span>주소</span></th>
-<%--                    <th><span>답변 날짜</span></th>--%>
-<%--                    <th><span>답변자</span></th>--%>
-
+                    <th><span>휴대번호</span></th>
+                    <th><span>가입일</span></th>
+                    <th><span>마지막로그인날짜</span></th>
                 </tr>
 
                 <c:forEach items="${list}" var="memeber">
@@ -104,12 +202,13 @@
                         <td><input type="checkbox" name="RowCheck"
                                    value="list.board_num" class="table-check-box"></td>
                         <td>${memeber.getUser_id() }</td>
+                        <td>${memeber.getUser_grade() }</td>
                         <td class="table-title">${memeber.getUser_email() }</td>
                         <td>${memeber.getUser_postcode() }</td>
                         <td>${memeber.getUser_address() }</td>
-<%--                        <td>${list.userInquiry.board_registration_date}</td>--%>
-<%--                        <td>${list.board_reply }</td>--%>
-<%--                        <td>${list.admin_id }</td>--%>
+                        <td>${memeber.getUser_tel() }</td>
+                        <td>${memeber.getUser_join_date() }</td>
+                        <td style="padding-left: 10px; padding-right: 10px">${memeber.getUser_last_login() }</td>
                     </tr>
                 </c:forEach>
 
@@ -158,21 +257,85 @@
 <script>
     function goToPage(pageNumber) {
         var currpage = pageNumber;
-        if (pageNumber<=0){
+        if (pageNumber <= 0) {
             currpage = 1;
-        }else if(currpage>${pageVo.totPage}){//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지
+        } else if (currpage >${pageVo.totPage}) {//현재페이지가 총페이지보다 클경우 현재페이지 = 총페이지
             currpage = ${pageVo.totPage};
-        }
-        else if(currpage>${pageVo.pageEnd}){//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
-            currpage= pageNumber-(pageNumber-1)%10;
-        }
-        else if(currpage<${pageVo.pageStart}){//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
-            currpage= pageNumber-((pageNumber-1)%10)+9;
+        } else if (currpage >${pageVo.pageEnd}) {//페이지 표시갯수인 10이 넘을때는 해당 페이지리스트의 1번으로 가게함
+            currpage = pageNumber - (pageNumber - 1) % 10;
+        } else if (currpage <${pageVo.pageStart}) {//-10page 버튼누를시 -10 말고 이전 페이지리스트의 10번으로 가게함
+            currpage = pageNumber - ((pageNumber - 1) % 10) + 9;
         }
         var newPath = window.location.pathname + '?currPage=' + currpage;
+
+        // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+        var form = document.getElementById("inquiry-form");
+        var formData = new FormData(form);
+        formData.append('currPage', currpage); // currPage를 추가
+        for (var pair of formData.entries()) {
+            newPath += '&' + pair[0] + '=' + pair[1];
+        }
+
         window.location.href = newPath; // 새 경로로 페이지 이동
+
     }
 </script>
+<!-- 날짜 제한 -->
+<script>
+    var now_utc = Date.now() // 지금 날짜를 밀리초로
+    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+    var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+    // new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+    var today = new Date(now_utc - timeOff).toISOString()
+        .split("T")[0];
+    var today2 = new Date(now_utc - timeOff)//.getFullYear()등을 쓰기위한 today2
+    $(document).ready(
+        function () {//로드완료시
+            document.getElementById("START_YMD").setAttribute("max",
+                today); //시작날짜 최대값 오늘날짜로 제한
+            document.getElementById("END_YMD").setAttribute("max",
+                today);//종료날짜 오늘날짜로 제한
+        });
+    /*날짜선택버튼*/
+    document.getElementById('date-today').addEventListener('click', function () {
+        document.getElementById('START_YMD').value = today;
+        document.getElementById('END_YMD').value = today;
+    });
 
+    document.getElementById('date-1week').addEventListener('click', function () {
+        const lastWeek = new Date(today2.getFullYear(), today2.getMonth(), today2.getDate() - 7);
+        document.getElementById('START_YMD').value = lastWeek.toISOString().substring(0, 10); // 일주일 전 날짜
+        document.getElementById('END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
+    });
+
+    document.getElementById('date-1month').addEventListener('click', setPastDate.bind(null, 1));
+    document.getElementById('date-3month').addEventListener('click', setPastDate.bind(null, 3));
+    document.getElementById('date-6month').addEventListener('click', setPastDate.bind(null, 6));
+
+    function setPastDate(months) {
+        const pastDate = new Date(today2.getFullYear(), today2.getMonth() - months, today2.getDate());
+        document.getElementById('START_YMD').value = pastDate.toISOString().substring(0, 10);
+        document.getElementById('END_YMD').value = today2.toISOString().substring(0, 10);
+    }
+
+    document.getElementById('date-all').addEventListener('click', function () {
+        document.getElementById('START_YMD').value = ""; // 입력 필드를 비웁니다
+        document.getElementById('END_YMD').value = ""; // 입력 필드를 비웁니다
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".reset").click(function (event) {
+            event.preventDefault(); // 폼의 기본 동작 중지
+            // form 안의 input 요소의 값을 빈 문자열로 설정
+            $('#inquiry-form input').val('');
+
+            // form 안의 select 요소의 selectedIndex를 0으로 설정하여 첫 번째 옵션을 선택
+            $('#inquiry-form select').prop('selectedIndex', 0);
+        });
+    });
+</script>
 </body>
 </html>

@@ -139,6 +139,7 @@ public class MemberController {
 		
 		String result=memberServiceInter.login(model);
 		
+		
 		return result;
 	}
 	@RequestMapping("logout")
