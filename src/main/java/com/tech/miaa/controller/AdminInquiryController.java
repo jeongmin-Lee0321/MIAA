@@ -209,7 +209,6 @@ public class AdminInquiryController {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 
-		System.out.println("admin_inquiry_delete");
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
 		adminInquiryInter=new AdminInquiryService();
 		try {
@@ -226,13 +225,23 @@ public class AdminInquiryController {
 	}
 	@ResponseBody
 	@RequestMapping("/admin_inquiry_delete_ajax")
-    public ResponseEntity<String> admin_inquiry_delete_ajax(HttpServletRequest request, Model model) {
-        // 클라이언트로부터 받은 숫자 배열을 처리합니다.
-		String[] chkValues= request.getParameterValues("chkVal");
-        System.out.println("Received checked values: " + chkValues.toString());
-        
-        // 여기서 작업을 수행하고 클라이언트에게 응답을 보냅니다.
-        return ResponseEntity.ok("작업이 성공적으로 수행되었습니다.");
+    public int admin_inquiry_delete_ajax(HttpServletRequest request, Model model) {
+		int resultCnt = 0;
+		//싱글톤위한 값 전달
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		
+		//inquiry 조인 테이블 가져오와서 모델에 넘기기
+				adminInquiryInter=new AdminInquiryService();
+				try {
+					resultCnt = adminInquiryInter.inquiry_delete_for_ajax(model);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("resultCnt : "+resultCnt);
+        return resultCnt;
     }
 
 }

@@ -3,6 +3,7 @@ package com.tech.miaa.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -254,16 +255,34 @@ public class AdminInquiryService implements AdminInquiryServiceInter {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		String board_num = request.getParameter("board_num");
-		String[] ajaxMsg = request.getParameterValues("valueArr");
 		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
 		try {
 			// 유저 인쿼리 테이블에서 삭제 (어드민테이블은 on delete CASCADE 제약조건으로 자동삭제됨)
 			int deletecount = dao.inquiry_delete(board_num);
-			System.out.println("삭제된갯수 : " + deletecount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	}
+	@Override
+	public int inquiry_delete_for_ajax(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		// 클라이언트로부터 받은 숫자 배열을 처리합니다.
+		String[] chkValues= request.getParameterValues("chkVal");
+		List<String> chkValList = Arrays.asList(chkValues);
+		System.out.println("가져온 리스트내용 : "+chkValList.toString());
+        int deletecount = 0;
+		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+		try {
+			System.out.println("DEL실행직전" );
+			deletecount= dao.inquiry_delete_for_ajax(chkValList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(deletecount);
+		return deletecount;
 	}
 }

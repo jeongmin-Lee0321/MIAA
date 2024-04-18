@@ -54,12 +54,34 @@ $(document).ready(function(){
         	$.ajax({
         	    url: "admin_inquiry_delete_ajax",
         	    method: "POST",
-        	    traditional: true,
-        	    data: {chkVal : checkedValues},
-        	    success: function() {
-        	        // 서버로부터 응답을 받은 후 실행할 코드를 작성합니다.
-        	        // 예를 들어, 삭제가 성공했을 때 다시 로드하거나 리다이렉트할 수 있습니다.
-        	    }
+        	    dataType : "json",
+        	   traditional: true,
+         	   data: {chkVal : checkedValues},
+        	    success: function(resultCnt) {
+        	    	if(resultCnt >= 1) {
+        	    		//url 주소설정
+	        	    		let currpage = $(".current-page").text();
+	        	    		let newPath = "admin_inquiry_list_page?currPage="+currpage;
+	        	    		
+	        	    		// inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+	        			    let form = document.getElementById("inquiry-form");
+	        			    
+	        			 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+	        		      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+	        		      
+	        			    let formData = new FormData(form);
+	        		      // FormData의 각 항목에 대해 반복
+	        		        formData.forEach(function(value, key) {
+	        		            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+	        		        });
+        		      
+                        alert("삭제 성공");
+                        location.replace(newPath) //페이지 새로고침
+                    }
+                    else{
+                        alert("삭제 실패");
+                    }
+                } 
         	});
         }
     });
