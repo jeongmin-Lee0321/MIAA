@@ -54,6 +54,7 @@ $(document).ready(function(){
         	$.ajax({
         	    url: "admin_inquiry_delete_ajax",
         	    method: "POST",
+        	    traditional: true,
         	    data: {chkVal : checkedValues},
         	    success: function() {
         	        // 서버로부터 응답을 받은 후 실행할 코드를 작성합니다.
