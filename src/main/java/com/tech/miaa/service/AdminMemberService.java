@@ -4,6 +4,7 @@ package com.tech.miaa.service;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -169,23 +170,53 @@ public class AdminMemberService implements AdminMemberServiceInter {
             tmp.setUser_grade("관리자");
             totalDto.add(tmp);
         }
-        int a = totalDto.get(0).getUser_join_date().indexOf(" ");
-        String b = totalDto.get(0).getUser_join_date().substring(0, totalDto.get(0).getUser_join_date().indexOf(" "));
-        System.out.println(b);
+        if (dto.getJOIN_START_YMD() != null && dto.getJOIN_END_YMD() != null &&
+                dto.getSTART_YMD() != null && dto.getEND_YMD() != null && dto.getMember_grade() != null &&
+                dto.getSearch_type() != null && dto.getSearch_content() != null) {
+            List<MemberDto> tmp = new ArrayList<>();
+            List<MemberDto> membertmp = totalDto.stream().filter(x -> x.getUser_grade().equals("일반회원")).collect(Collectors.toList());
+            List<MemberDto> admintmp = totalDto.stream().filter(x -> x.getUser_grade().equals("관리자")).collect(Collectors.toList());
+//
+//            if (!dto.getMember_grade().isEmpty()) {
+//                if (dto.getMember_grade().equals("일반회원"))
+//                    membertmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
+//                else if (dto.getMember_grade().equals("관리자"))
+//                    admintmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
+//                else
+//                    tmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
+//
+//            }
 
-        String date = "";
-        String charsToRemove = "-";
-        for (char c : charsToRemove.toCharArray()) {
-            date = b.replace(String.valueOf(c), "");
+            if (!dto.getSearch_content().isEmpty()) {
+                Boolean a = tmp.addAll(totalDto.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList()));
+                System.out.println("check1:" + a);
+            }
+//
+            if (!dto.getJOIN_START_YMD().isEmpty() && !dto.getJOIN_END_YMD().isEmpty()) {
+
+                Boolean a = tmp.addAll(totalDto.stream().filter(x ->
+                        Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) >=
+                                Integer.parseInt(dto.getJOIN_START_YMD().replace("-", "")) &&
+                                Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) <=
+                                        Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList()));
+                System.out.println("check2:"+a);
+
+            }
+//            System.out.println("222222222222222222222222");
+//
+//            if (!dto.getSTART_YMD().isEmpty() && !dto.getEND_YMD().isEmpty()) {
+//                Boolean a =tmp.addAll(totalDto.stream().filter(x ->
+//                        Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >=
+//                                Integer.parseInt(dto.getSTART_YMD().replace("-", "")) &&
+//                                Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <=
+//                                        Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList()));
+//                System.out.println("check3:"+a);
+//            }
+//            System.out.println("333333333333333");
+            totalDto.clear();
+            totalDto.addAll(membertmp);
+            totalDto.addAll(admintmp);
         }
-        System.out.println(date+"//Afadgasg");
-//        System.out.println("getUser_join_date" + totalDto.get(0).getUser_join_date().split(" "));
-        System.out.println("getUser_last_login" + totalDto.get(0).getUser_last_login());
-		totalDto.stream().filter(x ->
-            x.getUser_id().equals(dto.getSearch_content()) &&
-                    Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" "))) > 11
-        ).collect(Collectors.toList());
-
         if (rowStart == 0 && rowEnd == 0) {
             System.out.println("get_pagevo 문제발생");
 
