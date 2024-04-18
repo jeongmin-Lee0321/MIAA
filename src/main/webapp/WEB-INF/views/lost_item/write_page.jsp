@@ -67,16 +67,6 @@ body {
 					<div class="table">
 						<div class="table-row">
 							<div class="row-title">
-								<span>연락처</span>
-							</div>
-							<div class="row-content">
-								<input type="tel" name="tel1" id="tel" maxlength="3">-<input
-									type="tel" name="tel2" id="tel" maxlength="4">-<input
-									type="tel" name="tel3" id="tel" maxlength="4">
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="row-title">
 								<span>공개여부*</span>
 							</div>
 							<div class="row-content">
@@ -281,6 +271,7 @@ body {
 				</ul>
 				<!-- hidden 세션로그인 id -->
 				<input type="hidden" name="userId" value="${userId }">
+				<input type="hidden" name="userTel" value="${userTel }">
 			</div>
 		</form>
 		<!-- form 끝 -->

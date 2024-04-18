@@ -21,8 +21,9 @@ public class AnimalDto {
 	private String animal_name;
 	private String upkind;
 	private String upr_cd;
-	private String colorcd;
-	private int age;
+	private String sexcd;
+	private String weight;
+	private String age;
 	private String sepcialmark;
 	private String user_id;
 	private Date animal_date;

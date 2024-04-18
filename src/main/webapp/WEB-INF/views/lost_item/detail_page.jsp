@@ -75,7 +75,7 @@
 					<th class="info-table-name">연락처</th>
 					<td class="info-table-value" colspan="3">
 					<c:if test="${dto.openclose eq 'true'}">
-						<div class="table-value-container" id="user_tel">${dto.user_tel }</div>
+						<div class="table-value-container" id="user_tel">${dto.user_tel}</div>
 					</c:if>
 					<c:if test="${dto.openclose eq 'false'}">
 						<div class="table-value-container" id="user_tel">***-***-****</div>

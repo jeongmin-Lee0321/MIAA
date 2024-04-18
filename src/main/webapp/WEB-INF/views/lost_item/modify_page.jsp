@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="resources/css/lost_item_write_page.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script
@@ -16,7 +17,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="resources/css/lost_item_write_page.css">
 <title>Document</title>
 <style>
 body {
@@ -65,18 +65,6 @@ body {
 							정보</span>
 					</div>
 					<div class="table">
-						<div class="table-row">
-							<div class="row-title">
-								<span>연락처</span>
-							</div>
-							<div class="row-content">
-								<input type="tel" name="tel1" id="tel" maxlength="3"
-									value="${userTels[0]}">-<input type="tel" name="tel2"
-									id="tel" maxlength="4" value="${userTels[1]}">-<input
-									type="tel" name="tel3" id="tel" maxlength="4"
-									value="${userTels[2]}">
-							</div>
-						</div>
 						<div class="table-row">
 							<div class="row-title">
 								<span>공개여부*</span>

@@ -271,6 +271,7 @@ public class MemberService implements MemberServiceInter {
 					dto = dao.login2(id, bcpwd);
 					session = request.getSession(false);
 					session.setAttribute("userId", dto.getUser_id());
+					session.setAttribute("userTel", dto.getUser_tel());
 					session.setMaxInactiveInterval(1800);
 					
 					//최근로그인날짜 추가 마한슬

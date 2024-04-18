@@ -8,8 +8,8 @@ import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.AnimalImgDto;
 
 public interface MissingAnimalDao {
-	public void animalWrite(String tel,String openclose, String missingday,String address,String animalname,
-			String animalkind1,String animalkind2, String age,String sepcialMark,
+	public void animalWrite(String user_tel, String openclose, String missingday,String address,String animalname,
+			String sexCd,String weight,String animalkind1,String animalkind2, String age,String sepcialMark,
 			String userId,String addresscode1, String addresscode2);
 	public void imgUpLoad(String userId, int i, String animalname, String fileName, String animalkind1);
 
@@ -24,6 +24,9 @@ public interface MissingAnimalDao {
 			@Param("rowStart")int rowStart, @Param("rowEnd")int rowEnd);
 	public AnimalDto missing_ani_detail_page(String total_id);
 	public ArrayList<AnimalImgDto> missing_ani_detail_img(String total_id);
-	
-
+	public void missing_ani_delete_img(String total_id);
+	public void missing_ani_modify(String openclose, String Missingday, String address, String animalname, String animalkind1, 
+			String animalkind2, String sexCd,String weight, String age, String sepcialMark, String addressCode1, 
+			String addressCode2, String total_id);
+	public void missing_ani_delete_content(String total_id);
 }
