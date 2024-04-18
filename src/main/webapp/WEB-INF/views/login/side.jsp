@@ -14,9 +14,7 @@
           <li class="menu-title">알림 페이지</li>
           <li class="menu-item"><a href="mypage_matching_alarm_list_page">매칭된 알림 목록</a></li>
           <li class="menu-title">등록 게시물 관리</li>
-          <li class="menu-item"><a href="#">등록 게시물</a></li>
-          <li class="menu-item"><a href="#">&nbsp;&nbsp;분실물</a></li>
-          <li class="menu-item"><a href="#">&nbsp;&nbsp;실종동물</a></li>
+          <li class="menu-item"><a href="mypage_post_list_page">등록 게시물</a></li>
           <li class="menu-title">1대1 문의 게시판</li>
           <li class="menu-item"><a href="mypage_customer_inquiry_list_page">문의 내역</a></li>
           <li class="menu-item"><a href="mypage_customer_inquiry_write_page">문의글 등록</a></li>

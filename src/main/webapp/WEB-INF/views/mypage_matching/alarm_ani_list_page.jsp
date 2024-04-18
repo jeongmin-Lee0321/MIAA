@@ -117,6 +117,12 @@
 					<button class="btn-list" id="btn-delete" onclick="deleteValue();"
 						style="cursor: pointer;">원글삭제</button>
 				</div>
+				
+				
+				
+				
+				
+				
 				<table class="info-table">
 					<tr>
 						<th><input type="checkbox" name="allCheck" id="allCheck"
