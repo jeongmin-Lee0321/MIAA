@@ -1,15 +1,19 @@
 package com.tech.miaa.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -220,5 +224,14 @@ public class AdminInquiryController {
 		
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/admin_inquiry_delete_ajax")
+    public ResponseEntity<String> admin_inquiry_delete_ajax(@RequestBody List<String> checkedValues) {
+        // 클라이언트로부터 받은 숫자 배열을 처리합니다.
+        System.out.println("Received checked values: " + checkedValues);
+        
+        // 여기서 작업을 수행하고 클라이언트에게 응답을 보냅니다.
+        return ResponseEntity.ok("작업이 성공적으로 수행되었습니다.");
+    }
 
 }

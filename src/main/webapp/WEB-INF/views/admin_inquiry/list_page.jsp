@@ -15,11 +15,10 @@ $(document).ready(function(){
     
     //allcheck에 따라 rowcheck의 체크박스 상태 변화(해체와 체크가 둘다 true false로 각각 적용됨)
     allCheck.click(function(){
-        checkedList.each(function(index,element){
-        	console.log(index,element);
+        checkedList.each(function(){
         	// jquery 객체인 allCheck의 dom요소에 접근 allCheck[0]
         	// allCheck[0]의 체크상태를 각 rowCheck 체크박스의 상태에 적용
-            element.checked = allCheck[0].checked;
+            this.checked = allCheck[0].checked;
         });
     }); 
     
@@ -31,49 +30,41 @@ $(document).ready(function(){
     		allCheck[0].checked = false;
     	}
     });
-});
-	
-/* 
-function deleteValue(){
-	var url = "delete";    // Controller로 보내고자 하는 URL
-	var valueArr = new Array();
-    var list = $("input[name='RowCheck']");
-    for(var i = 0; i < list.length; i++){
-        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
-            valueArr.push(list[i].value);
+    
+    //삭제버튼
+    $("#btn-delete").click(function() {
+        // 선택된 체크박스의 값을 담을 배열을 생성
+        let checkedValues = [];
+
+        // 선택된 체크박스의 값을 배열에 추가
+        $("input[name='RowCheck']:checked").each(function() {
+            checkedValues.push($(this).val());
+        });
+				
+        // 만약 선택된 체크박스가 없는 경우 아무 작업도 수행하지 않음
+        if (checkedValues.length === 0) {
+            alert("삭제할 항목을 선택해주세요.");
+            return;
         }
-    }
-    if (valueArr.length == 0){
-    	alert("선택된 글이 없습니다.");
-    }
-    else{
-		var chk = confirm("정말 삭제하시겠습니까?");
-		
-		if(chk)
-			{
-		$.ajax({
-		    url : url,                    // 전송 URL
-		    type : 'POST',                // POST 방식
-		    traditional : true,
-		    data : {
-		    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
-		    },
-            success: function(jdata){
-                if(jdata = 1) {
-                    alert("삭제 성공");
-                    location.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
-                }
-                else{
-                    alert("삭제 실패");
-                }
-            }
-		});
-			}
-		else{
-			alert("삭제 취소");
-		}
-	}
-} */
+        console.log(checkedValues);
+        // 삭제를 확인하는 경고창을 띄우고, 확인 시 서버로 선택된 항목을 전송
+        let confirmDelete = confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            // 서버로 데이터를 전송합니다.
+        	$.ajax({
+        	    url: "admin_inquiry_delete_ajax",
+        	    method: "POST",
+        	    data: {chkVal : checkedValues},
+        	    success: function() {
+        	        // 서버로부터 응답을 받은 후 실행할 코드를 작성합니다.
+        	        // 예를 들어, 삭제가 성공했을 때 다시 로드하거나 리다이렉트할 수 있습니다.
+        	    }
+        	});
+        }
+    });
+    
+});
+
 </script>
 <body>
 	<div class="main-body">
@@ -182,8 +173,7 @@ function deleteValue(){
 						</div>
 					</div>
 					<div class="list-control-container">
-						<button class="btn-list" id="btn-delete" onclick="deleteValue();"
-							style="cursor: pointer;">삭제하기</button>
+						<button class="btn-list" id="btn-delete" style="cursor: pointer;">삭제하기</button>
 					</div>
 
 				</div>
