@@ -226,9 +226,10 @@ public class AdminInquiryController {
 	}
 	@ResponseBody
 	@RequestMapping("/admin_inquiry_delete_ajax")
-    public ResponseEntity<String> admin_inquiry_delete_ajax(@RequestBody List<String> checkedValues) {
+    public ResponseEntity<String> admin_inquiry_delete_ajax(HttpServletRequest request, Model model) {
         // 클라이언트로부터 받은 숫자 배열을 처리합니다.
-        System.out.println("Received checked values: " + checkedValues);
+		String[] chkValues= request.getParameterValues("chkVal");
+        System.out.println("Received checked values: " + chkValues.toString());
         
         // 여기서 작업을 수행하고 클라이언트에게 응답을 보냅니다.
         return ResponseEntity.ok("작업이 성공적으로 수행되었습니다.");
