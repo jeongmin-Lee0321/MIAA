@@ -2,20 +2,26 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.LostItemDao">
-<insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4}, 
-						#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE, #{param11}) 
-</insert>
+	<insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL,
+		ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4},
+		#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE,
+		#{param11})
+	</insert>
 
-<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3} AND UPR_CD=#{param5}), 
-						#{param2},#{param1},#{param4}) 
-</insert>
+	<insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM
+		ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3} AND
+		UPR_CD=#{param5}),
+		#{param2},#{param1},#{param4})
+	</insert>
 
-<select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto"> 
-	SELECT * FROM (SELECT ROWNUM RM, IT.* FROM (SELECT * FROM  ITEM IT LEFT OUTER JOIN (SELECT TOTAL_ID,FILENAME FROM ITEM_IMG WHERE FILE_ID IN
-	(SELECT MIN(FILE_ID) FROM ITEM_IMG GROUP BY TOTAL_ID)) ITIMG ON IT.TOTAL_ID=ITIMG.TOTAL_ID ORDER BY ITEM_ID DESC) IT
+	<select id="itemlistview" resultType="com.tech.miaa.dto.ItemDto">
+		SELECT * FROM (SELECT ROWNUM RM, IT.* FROM (SELECT * FROM ITEM IT LEFT
+		OUTER JOIN (SELECT TOTAL_ID,FILENAME FROM ITEM_IMG WHERE FILE_ID IN
+		(SELECT MIN(FILE_ID) FROM ITEM_IMG GROUP BY TOTAL_ID)) ITIMG ON
+		IT.TOTAL_ID=ITIMG.TOTAL_ID ORDER BY ITEM_ID DESC) IT
 		<trim prefix="WHERE (" suffix=")">
 			<trim prefixOverrides="AND">
 				<if test="searchday1 !=''">
@@ -33,24 +39,25 @@
 				</if>
 				<if test="itemkind1 !=''">
 					<choose>
-					<when test="itemkind2 =='all'">
-						AND UPKIND=#{param4}
-					</when>
-					<when test="itemkind2 !='all'">
-						AND UPR_CD=#{param5}
-					</when>
+						<when test="itemkind2 =='all'">
+							AND UPKIND=#{param4}
+						</when>
+						<when test="itemkind2 !='all'">
+							AND UPR_CD=#{param5}
+						</when>
 					</choose>
 				</if>
 				<if test="colorCd != ''">
 					AND COLORCD=#{param6}
 				</if>
-			</trim></trim>		
-	 )WHERE RM BETWEEN #{param7} AND #{param8}
-</select>
+			</trim>
+		</trim>
+		)WHERE RM BETWEEN #{param7} AND #{param8}
+	</select>
 
-<select id="totalCount" resultType="Integer">
-	SELECT count(*) FROM ITEM
-	<trim prefix="WHERE (" suffix=")">
+	<select id="totalCount" resultType="Integer">
+		SELECT count(*) FROM ITEM
+		<trim prefix="WHERE (" suffix=")">
 			<trim prefixOverrides="AND">
 				<if test="searchday1 !=''">
 					<choose>
@@ -67,36 +74,59 @@
 				</if>
 				<if test="itemkind1 !=''">
 					<choose>
-					<when test="itemkind2 =='all'">
-						AND UPKIND=#{param4}
-					</when>
-					<when test="itemkind2 !='all'">
-						AND UPR_CD=#{param5}
-					</when>
+						<when test="itemkind2 =='all'">
+							AND UPKIND=#{param4}
+						</when>
+						<when test="itemkind2 !='all'">
+							AND UPR_CD=#{param5}
+						</when>
 					</choose>
 				</if>
 				<if test="colorCd != ''">
 					AND COLORCD=#{param6}
 				</if>
-			</trim></trim>		
-</select>
-<select id="lost_item_detail_page" resultType="com.tech.miaa.dto.ItemDto">
-	SELECT * FROM ITEM WHERE TOTAL_ID= #{param1}
-</select>
-<select id="lost_item_detail_img" resultType="com.tech.miaa.dto.ItemImgDto">
-	SELECT * FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
-</select>
-<update id="lost_item_delete_img">
-	DELETE FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
-</update>
-<update id="lost_item_delete_content">
-	DELETE FROM ITEM WHERE TOTAL_ID= #{param1}
-</update>
-<update id="lost_item_modify">
-	UPDATE ITEM SET USER_TEL=#{param1},OPENCLOSE=#{param2},LOSTDAY=#{param3},ADDRESS=#{param4},ITEM_NAME=#{param5},UPKIND=#{param6},
-	UPR_CD=#{param7},COLORCD=#{param8},SEPCIALMARK=#{param9},ITEM_DATE=SYSDATE,ADDRESSCODE=#{param10} WHERE TOTAL_ID=#{param11}
-</update>
-	<select id="get_lost_items" resultType="com.tech.miaa.dto.ItemDto">
+			</trim>
+		</trim>
+	</select>
+	<select id="lost_item_detail_page"
+		resultType="com.tech.miaa.dto.ItemDto">
+		SELECT * FROM ITEM WHERE TOTAL_ID= #{param1}
+	</select>
+	<select id="lost_item_detail_img"
+		resultType="com.tech.miaa.dto.ItemImgDto">
+		SELECT * FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
+	</select>
+	<update id="lost_item_delete_img">
+		DELETE FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
+	</update>
+	<update id="lost_item_delete_content">
+		DELETE FROM ITEM WHERE TOTAL_ID= #{param1}
+	</update>
+	<update id="lost_item_modify">
+		UPDATE ITEM SET
+		USER_TEL=#{param1},OPENCLOSE=#{param2},LOSTDAY=#{param3},ADDRESS=#{param4},ITEM_NAME=#{param5},UPKIND=#{param6},
+		UPR_CD=#{param7},COLORCD=#{param8},SEPCIALMARK=#{param9},ITEM_DATE=SYSDATE,ADDRESSCODE=#{param10}
+		WHERE TOTAL_ID=#{param11}
+	</update>
+	<select id="get_lost_items"
+		resultType="com.tech.miaa.dto.ItemDto">
 		SELECT * FROM ITEM WHERE ITEM_ID= #{PARAM1}
 	</select>
+
+	<!-- 원진호_0418추가 -->
+	<insert id="alert_item_write">
+ 		INSERT INTO ALERT_ITEM
+ 		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12},#{param13})  				
+	</insert>
+	
+	<!-- api검색후 결과값을 조회 -->
+	<select id="alert_item_select" resultType="com.tech.miaa.dto.matchingAlarmDto">
+		SELECT * 
+		  FROM ALERT_ITEM WHERE TOTAL_ID=#{param1},USER_ID=#{param2}
+	</select>
+
+
+
+
 </mapper>

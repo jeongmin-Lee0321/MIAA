@@ -40,7 +40,6 @@
 			alert("선택된 글이 없습니다.");
 		} else {
 			var chk = confirm("정말 삭제하시겠습니까?");
-
 			if (chk) {
 				$.ajax({
 							url : url, // 전송 URL
@@ -52,10 +51,9 @@
 							},
 							success : function(jdata) {
 								if (jdata = 1) {
-
 									alert("삭제 성공");
-									location
-											.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
+									location.replace("mypage_customer_inquiry_list_page") //페이지 새로고침 
+									/* location.replace("mypage_matching_alarm_item_list_page") //페이지 새로고침 */
 								} else {
 									alert("삭제 실패");
 								}
@@ -127,7 +125,8 @@
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td><input type="checkbox" name="RowCheck" value=""
-								class="table-check-box"></td>
+								class="table-check-box">
+							</td>
 							<td class="table-title">
 								<div class="show_item_name">${list.item_name}
 									<br />

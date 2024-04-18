@@ -14,4 +14,5 @@ public interface LostItemServiceInter {
 	public void lost_item_delete(Model model);
 	public void lost_item_modify_page(Model model);
 	public String lost_item_modify(Model model);
+	
 }

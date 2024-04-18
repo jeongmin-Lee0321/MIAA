@@ -31,6 +31,8 @@ public class Scheduler {
     // sec/min/hour/day/month/day of week/year
     // 0-59/0-59/0~23/1-31/1-12/0-6/생략가능
     @Scheduled(cron = "0/10 * * * * *")
+//    @Scheduled(cron = "0 0 */1 * * *")
+//    @Scheduled(cron = "0 * * * * *")
     public void updateAnimalAlertList() {
         System.out.println("테스트 : " + new Date());
         MemberDao dao = sqlSession.getMapper(MemberDao.class);
@@ -55,6 +57,14 @@ public class Scheduler {
                 String a = founditemService.found_item_search_AreaPd(itemDtos.get(i),pageVO);
                 ArrayList<FounditemDto> list = founditemService.getFoundList(a);
                 //db 저장
+                /*원진호_0418추가*/
+                for (int k = 0; k < list.size(); k++) {              	
+                	lostItemDao.alert_item_write(Integer.parseInt(itemDtos.get(j).getTotal_id()) ,memeberId,list.get(k).getAtcid(),list.get(k).getFdSbjt(),list.get(k).getFdSn(),
+                			list.get(k).getPrdtClNm(),list.get(k).getFdPrdtNm(),list.get(k).getFdYmd(),list.get(k).getDepPlace(),list.get(k).getRnum(),list.get(k).getClrNm(),
+                			list.get(k).getFdFilePathImg(),list.get(k).getAddr());
+				}
+                
+                
             }
 //            //유기동물
 

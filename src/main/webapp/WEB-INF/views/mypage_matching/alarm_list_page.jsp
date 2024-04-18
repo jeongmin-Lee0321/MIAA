@@ -117,7 +117,7 @@
                <c:forEach items="${list }" var="list" varStatus="status">
                   <div class="show_lost_item_info_container">
                      <!-- 분실물 : 대분류코드 한글전환 -->
-                     <c:set var="upperkind" value="${lost.upr_cd}" />
+                     <c:set var="upperkind" value="${list.upkind}" />
                      <c:choose>
                         <c:when test="${upperkind == 'PRB000'}">
                            <c:set var="upperkind" value="도서용품" />
@@ -242,7 +242,7 @@
 
                      <a href="mypage_matching_alarm_detail_list_page" class="item_tag_00"> 
                         <input type="checkbox" class="lost_item_name" id="lost_item_name" value="lost_item_name"> 
-                       	 분실물 소분류 : () <!-- 분실물 : 소분류 -->
+                       	 분실물명 : ${list.item_name} <!-- 분실물 : 소분류 -->
                      </a> 
                      <a href="$$$" class="item_tag_01">물건</a> 
                      <a href="$$$" class="item_tag_02">${list.item_name}</a>  <!-- 분실물 : 물품명 -->

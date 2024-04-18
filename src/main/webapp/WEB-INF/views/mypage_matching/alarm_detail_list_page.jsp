@@ -77,7 +77,8 @@
 	<div class="content-selection">
 		<div class="content-container">
 			<div class="list-control-container">
-				<span id="item-name-text">분실물 소분류:</span> <span id="item-name-value">${list.upr_cd}</span>
+				<span id="item-name-text">분실물 소분류:</span> 
+				<span id="item-name-value">${list.upr_cd}</span>
 				<button class="btn-list" id="btn-off-alert">
 					<img src="resources/img/bell-off.png" alt=""> 알림제거
 				</button>
@@ -85,8 +86,9 @@
 					style="cursor: pointer;">선택 목록 삭제</button>
 			</div>
 			<div class="registrationed_alarm_keywords_list">
-				<a href="$$$" class="item_tag_01">물건</a> <a href="$$$"
-					class="item_tag_02">에어팟</a> <a href="$$$" class="item_tag_03">2024-03-01</a>
+				<a href="$$$" class="item_tag_01">물건</a>
+				 <a href="$$$" class="item_tag_02">에어팟</a> 
+				 <a href="$$$" class="item_tag_03">2024-03-01</a>
 				<a href="$$$" class="item_tag_04">전자기기 > 무선이어폰</a> <a href="$$$"
 					class="item_tag_05">월게,이마트,트레이더스</a> <a href="$$$"
 					class="show_all_result">매칭된 게시물 총(${totalCount }개)</a>
