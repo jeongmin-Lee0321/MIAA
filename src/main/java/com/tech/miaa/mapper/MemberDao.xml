@@ -6,13 +6,13 @@
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MemberDao">
     <insert id="join">
-        INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',SYSDATE,TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+        INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',#{param8},SYSDATE,TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
     </insert>
     <delete id="del_account">
         DELETE FROM MEMBER WHERE USER_BCPWD = #{param1} AND USER_ID = #{param2}
     </delete>
     <update id="modify_account">
-        UPDATE MEMBER SET USER_SHPWD=#{param2},USER_BCPWD=#{param3},USER_EMAIL=#{param4},USER_POSTCODE=#{param5},USER_ADDRESS=#{param6},USER_DETAILADDRESS=#{param7} WHERE USER_ID = #{param1}
+        UPDATE MEMBER SET USER_SHPWD=#{param2},USER_BCPWD=#{param3},USER_EMAIL=#{param4},USER_POSTCODE=#{param5},USER_ADDRESS=#{param6},USER_DETAILADDRESS=#{param7},USER_TEL=#{param8} WHERE USER_ID = #{param1}
     </update>
     <select id="idcheck" resultType="Integer">
         SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1}
