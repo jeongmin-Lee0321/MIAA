@@ -8,7 +8,7 @@ import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.AnimalImgDto;
 
 public interface MissingAnimalDao {
-	public void animalWrite(String openclose, String missingday,String address,String animalname,
+	public void animalWrite(String user_tel, String openclose, String missingday,String address,String animalname,
 			String sexCd,String weight,String animalkind1,String animalkind2, String age,String sepcialMark,
 			String userId,String addresscode1, String addresscode2);
 	public void imgUpLoad(String userId, int i, String animalname, String fileName, String animalkind1);

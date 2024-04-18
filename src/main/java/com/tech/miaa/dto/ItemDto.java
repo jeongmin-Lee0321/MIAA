@@ -19,6 +19,7 @@ import lombok.Setter;
 public class ItemDto {
 	private String total_id;
 	private String item_id;
+	private String user_tel;
 	private String openclose; // 공개여부
 	private String lostday; // 분실날짜
 	private String address; // 분실장소

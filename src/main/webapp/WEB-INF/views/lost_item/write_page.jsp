@@ -271,6 +271,7 @@ body {
 				</ul>
 				<!-- hidden 세션로그인 id -->
 				<input type="hidden" name="userId" value="${userId }">
+				<input type="hidden" name="userTel" value="${userTel }">
 			</div>
 		</form>
 		<!-- form 끝 -->

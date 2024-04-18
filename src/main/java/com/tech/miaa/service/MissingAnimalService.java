@@ -55,6 +55,10 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		ArrayList<AnimalDto> animalList = dao.animalListView(searchday1,searchday2,addressCode1,addressCode2,
 				animalkind1,animalkind2,rowStart,rowEnd);
 		
+		ArrayList<String> searchContent= new ArrayList<>();
+		searchContent.add(0, searchday1); searchContent.add(1, searchday2); searchContent.add(2, addressCode1);
+		searchContent.add(3, addressCode2); searchContent.add(4, animalkind1); searchContent.add(5, animalkind2);
+		
 		//사진이 없을 때 기본이미지로 대체
 		for (int i = 0; i < animalList.size(); i++) {
 			if(animalList.get(i).getFilename()==null) {
@@ -76,6 +80,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 			}
 		}
 		
+		model.addAttribute("searchContent", searchContent);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("pageVo", pageVo);
 		return animalList;
@@ -94,16 +99,15 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		String address=request.getParameter("address"); String animalname=request.getParameter("animalname");
 		String animalkind1=request.getParameter("animalkind1"); String animalkind2=request.getParameter("animalkind2");
 		String sexCd=request.getParameter("sexCd"); String weight=request.getParameter("weight");
-		String age=request.getParameter("age");
+		String age=request.getParameter("age"); String user_tel=request.getParameter("userTel");
 		String sepcialMark=request.getParameter("sepcialMark"); String userId=request.getParameter("userId"); 
 		String addressCode1=request.getParameter("addressCode1"); String addressCode2=request.getParameter("addressCode2");
 		
 		if(Missingday.equals("")|| address.equals("")|| animalname.equals("") || animalkind1.equals("축종을 선택하세요") || 
 				addressCode1.equals("지역을 선택하세요")) {
-			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:missing_ani_write_page";
 		}else {
-			dao.animalWrite(openclose, Missingday, address, animalname, animalkind1, animalkind2,sexCd,weight,
+			dao.animalWrite(user_tel, openclose, Missingday, address, animalname, animalkind1, animalkind2,sexCd,weight,
 					age, sepcialMark, userId, addressCode1, addressCode2);
 			for (int i = 0; i < files.size(); i++) {
 				if(files.get(i).getOriginalFilename()=="") {
@@ -119,17 +123,12 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 						e.printStackTrace();
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
-				}
-			}
-			System.out.println("등록되었습니다.");
-			result="redirect:missing_ani_search_page";
-		}
-		return result;
-	}
+				}}}
+			result="redirect:missing_ani_search_page";}
+		return result;}
 
 	@Override
-	public AnimalDto missing_ani_detail_page(Model model) {
+	public void missing_ani_detail_page(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class); PrdCode pc = new PrdCode();
@@ -149,14 +148,30 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		}
 		String upkind="P"+dto.getUpkind();
 		dto.setUpkind(pc.getPrdNameByCode(upkind));
-		if(dto.getUpr_cd()==null) {
-			dto.setUpr_cd("전체");
-		}else{
+		if(dto.getUpr_cd()==null) dto.setUpr_cd("전체");
+		else{
 			String upr_cd="C"+dto.getUpr_cd();
 			dto.setUpr_cd(pc.getPrdNameByCode(upr_cd));
 		}
-		model.addAttribute("imgDtos", imgDtos);
-		return dto;
+		
+		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos);
+	}
+	
+	@Override
+	public void missing_ani_delete(Model model) {
+		Map<String, Object> map = model.asMap(); HttpServletRequest request = (HttpServletRequest) map.get("request"); 
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
+		String total_id=request.getParameter("total_id");
+		
+		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
+		if(imgDtos.size()!=0) {
+			for (int i = 0; i < imgDtos.size(); i++) {
+				String fileName=imgDtos.get(i).getFilename();
+				File file = new File(filePath, fileName);
+				file.delete();
+		}}
+		dao.missing_ani_delete_img(total_id); dao.missing_ani_delete_content(total_id);
 	}
 
 	@Override
@@ -202,7 +217,6 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		for (int i = 0; i < files.size(); i++) {
 			if(files.get(i).getOriginalFilename()!="") cnt=cnt+1;
 		}
-		System.out.println(cnt);
 		if(cnt>0) {
 			ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
 			if(imgDtos.size()!=0) {
@@ -211,13 +225,11 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 					File file = new File(filePath, fileName);
 					file.delete();
 				}
-			}
-		}
-		dao.missing_ani_delete_img(total_id);
+				dao.missing_ani_delete_img(total_id);}}
+		
 		// 내용 수정
 		if(Missingday.equals("")|| address.equals("")|| animalname.equals("") || animalkind1.equals("축종을 선택하세요") || 
 				addressCode1.equals("지역을 선택하세요")) {
-			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:missing_ani_modify_page?total_id="+total_id;
 		}else {
 			dao.missing_ani_modify(openclose, Missingday, address, animalname, animalkind1, animalkind2,sexCd,weight,
@@ -239,30 +251,6 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 					}
 				}
 			}
-			System.out.println("등록되었습니다.");
-			result="redirect:missing_ani_search_page";
-		}
-		return result;
-	}
-
-	@Override
-	public void missing_ani_delete(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request"); 
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
-		String total_id=request.getParameter("total_id");
-		
-		
-		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
-		if(imgDtos.size()!=0) {
-			for (int i = 0; i < imgDtos.size(); i++) {
-				String fileName=imgDtos.get(i).getFilename();
-				File file = new File(filePath, fileName);
-				file.delete();
-			}
-		}
-		dao.missing_ani_delete_img(total_id);
-		dao.missing_ani_delete_content(total_id);
-	}
+			result="redirect:missing_ani_search_page";}
+		return result;}
 }

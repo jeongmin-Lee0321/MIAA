@@ -212,7 +212,7 @@ body {
 								<span>나이</span>
 							</div>
 							<div class="row-content">
-								<input type="text" name="age" id="age">
+								<input type="text" name="age" id="age"> (살)
 							</div>
 						</div>
 						<div class="table-row">
@@ -267,6 +267,7 @@ body {
 				</ul>
 				<!-- hidden 세션로그인 id -->
 				<input type="hidden" name="userId" value="${userId }">
+				<input type="hidden" name="userTel" value="${userTel }">
 			</div>
 		</form>
 		<!-- form 끝 -->
@@ -406,9 +407,7 @@ body {
 						+ '<option value="3000000">종로구</option>'
 						+ '<option value="3010000">중구</option>'
 						+ '<option value="3060000">중랑구</option>';
-				break;
-
-			}
+				break;}
 			case "6260000": {
 				optionTag.innerHTML += '<option value="3360000">강서구</option>'
 						+ '<option value="3350000">금정구</option>'
@@ -426,10 +425,7 @@ body {
 						+ '<option value="3280000">영도구</option>'
 						+ '<option value="3250000">중구</option>'
 						+ '<option value="3330000">해운대구</option>';
-				break;
-
-			}
-
+				break;}
 			case "6270000": {
 				optionTag.innerHTML += '<option value="5141000">군위군</option>'
 						+ '<option value="3440000">남구</option>'
@@ -440,10 +436,7 @@ body {
 						+ '<option value="3430000">서구</option>'
 						+ '<option value="3460000">수성구</option>'
 						+ '<option value="3410000">중구</option>';
-				break;
-
-			}
-
+				break;}
 			case "6280000": {
 				optionTag.innerHTML += '<option value="3570000">강화군</option>'
 						+ '<option value="3550000">계양구</option>'
@@ -455,10 +448,7 @@ body {
 						+ '<option value="3520000">연수구</option>'
 						+ '<option value="3580000">옹진군</option>'
 						+ '<option value="3490000">중구</option>';
-				break;
-
-			}
-
+				break;}
 			case "6290000": {
 				optionTag.innerHTML = '<option value="6299998">광산구</option>'
 						+ '<option value="6299998">광주광역시</option>'
@@ -466,33 +456,23 @@ body {
 						+ '<option value="3590000">동구</option>'
 						+ '<option value="3620000">북구</option>'
 						+ '<option value="3600000">서구</option>';
-				break;
-
-			}
-
+				break;}
 			case "5690000": {
-				break;
-
-			}
-
+				break;}
 			case "6300000": {
 				optionTag.innerHTML += '<option value="3680000">대덕구</option>'
 						+ '<option value="3640000">동구</option>'
 						+ '<option value="3660000">서구</option>'
 						+ '<option value="3670000">유성구</option>'
 						+ '<option value="3650000">중구</option>';
-			}
-
+				break;}
 			case "6310000": {
 				optionTag.innerHTML += '<option value="3700000">남구</option>'
 						+ '<option value="3710000">동구</option>'
 						+ '<option value="3720000">북구</option>'
 						+ '<option value="3730000">울주군</option>'
 						+ '<option value="3690000">중구</option>';
-				break;
-
-			}
-
+				break;}
 			case "6410000": {
 				optionTag.innerHTML += '<option value="4160000">가평군</option>'
 						+ '<option value="3940000">고양시</option>'
@@ -526,10 +506,7 @@ body {
 						+ '<option value="5600000">포천시</option>'
 						+ '<option value="4040000">하남시</option>'
 						+ '<option value="5530000">화성시</option>';
-				break;
-
-			}
-
+				break;}
 			case "6530000": {
 				optionTag.innerHTML += '<option value="4201000">강릉시</option>'
 						+ '<option value="4341000">고성군</option>'
@@ -549,10 +526,7 @@ body {
 						+ '<option value="4251000">홍천군</option>'
 						+ '<option value="4311000">화천군</option>'
 						+ '<option value="4261000">횡성군</option>';
-				break;
-
-			}
-
+				break;}
 			case "6430000": {
 				optionTag.innerHTML += '<option value="4460000">괴산군</option>'
 						+ '<option value="4480000">단양군</option>'
@@ -565,10 +539,7 @@ body {
 						+ '<option value="4450000">진천군</option>'
 						+ '<option value="5710000">청주시</option>'
 						+ '<option value="4390000">충주시</option>';
-				break;
-
-			}
-
+				break;}
 			case "6440000": {
 				optionTag.innerHTML += '<option value="5580000">계룡시</option>'
 						+ '<option value="4500000">공주시</option>'
@@ -586,10 +557,7 @@ body {
 						+ '<option value="4590000">청양군</option>'
 						+ '<option value="4620000">태안군</option>'
 						+ '<option value="4600000">홍성군</option>';
-				break;
-
-			}
-
+				break;}
 			case "6540000": {
 				optionTag.innerHTML += '<option value="4781000">고창군</option>'
 						+ '<option value="4671000">군산시</option>'
@@ -605,10 +573,7 @@ body {
 						+ '<option value="4641000">전주시</option>'
 						+ '<option value="4691000">정읍시</option>'
 						+ '<option value="4731000">진안군</option>';
-				break;
-
-			}
-
+				break;}
 			case "6460000": {
 				optionTag.innerHTML += '<option value="4920000">강진군</option>'
 						+ '<option value="4880000">고흥군</option>'
@@ -632,10 +597,7 @@ body {
 						+ '<option value="4960000">함평군</option>'
 						+ '<option value="4930000">해남군</option>'
 						+ '<option value="4900000">화순군</option>';
-				break;
-
-			}
-
+				break;}
 			case "6470000": {
 				optionTag.innerHTML += '<option value="5130000">경산시</option>'
 						+ '<option value="6479998">경상북도</option>'
@@ -660,10 +622,7 @@ body {
 						+ '<option value="5160000">청송군</option>'
 						+ '<option value="5220000">칠곡군</option>'
 						+ '<option value="5020000">포항시</option>';
-				break;
-
-			}
-
+				break;}
 			case "6480000": {
 				optionTag.innerHTML += '<option value="5370000">거제시</option>'
 						+ '<option value="5470000">거창군</option>'
@@ -686,19 +645,13 @@ body {
 						+ '<option value="5460000">함양군</option>'
 						+ '<option value="5480000">합천군</option>'
 						+ '<option value="6489999"></option>';
-				break;
-
-			}
-
+				break;}
 			case "6500000": {
 				optionTag.innerHTML += '<option value="6520000">서귀포시</option>'
 						+ '<option value="6510000">제주시</option>'
 						+ '<option value="6500000">제주특별자치도</option>';
-				break;
-			}
-			}
-
-		}
+				break;}}}
+		
 		function getKind(val) {
 			var optionTag = document.getElementById("animalkind2");
 			optionTag.innerHTML = '<option value="">-전체-</option>';
@@ -890,8 +843,7 @@ body {
 						+ '<option value="000130">화이트리트리버</option>'
 						+ '<option value="000134">화이트테리어</option>'
 						+ '<option value="000111">휘펫</option>';
-				break;
-			}
+				break;}
 			case "422400": {
 				optionTag.innerHTML += '<option value="000116">고양이</option>'
 						+ '<option value="000201">기타</option>'
@@ -931,14 +883,10 @@ body {
 						+ '<option value="000198">하바나 브라운</option>'
 						+ '<option value="000199">하일랜드 폴드</option>'
 						+ '<option value="000200">한국 고양이</option>';
-				break;
-			}
+				break;}
 			case "429900": {
 				optionTag.innerHTML += '<option value="000117">기타축종</option>';
-				break;
-			}
-			}
-		}
+				break;}}}
 	</script>
 </body>
 </html>

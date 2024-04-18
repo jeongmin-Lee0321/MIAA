@@ -14,6 +14,7 @@ import lombok.Setter;
 public class AnimalDto {
 	private String total_id;
 	private String animal_id;
+	private String user_tel;
 	private String openclose;
 	private String missingday;
 	private String address;

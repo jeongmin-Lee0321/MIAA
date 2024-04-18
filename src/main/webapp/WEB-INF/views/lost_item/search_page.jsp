@@ -29,9 +29,9 @@
 						<span>기간</span>
 					</div>
 					<div class="searchbar-content">
-						<input type="date" name="searchday1" id="searchday1"> 
+						<input type="date" name="searchday1" id="searchday1" value="${searchContent.get(0) }"> 
 						<span>~</span> 
-						<input type="date" name="searchday2" id="searchday2"> 
+						<input type="date" name="searchday2" id="searchday2" value="${searchContent.get(1) }"> 
 						<span>(습득일 기준)</span>
 					</div>
 				</div>
@@ -216,6 +216,30 @@
 		<!-- result-container끝 -->
 	</div>
 </body>
+<script>
+	window.onload = function() {
+		// 모델에 담긴 데이터로 셀렉트 박스를 선택하고 onchange 이벤트를 발생시킴
+		var selectedMainCategory = "${searchContent.get(3) }";
+		var selectedSubCategory = "${searchContent.get(4) }";
+		var selectedAddressCode = "${searchContent.get(2) }";
+		var selectedColorCd = "${searchContent.get(5) }";
+		var prd_mainCategory = document.getElementById("itemkind1");
+		var prd_subCategory = document.getElementById("itemkind2");
+		var prd_addressCode = document.getElementById("addressCode");
+		var prd_colorCd = document.getElementById("colorCd");
+
+		prd_addressCode.value = selectedAddressCode;
+		prd_mainCategory.value = selectedMainCategory;
+		prd_colorCd.value = selectedColorCd;
+		// 서브 카테고리 업데이트 함수 호출
+		if (selectedMainCategory !== "" && selectedMainCategory !== null) {
+			// 서브 카테고리 업데이트 함수 호출
+			getSubCategories(selectedMainCategory);
+			// 서브 카테고리 선택
+			prd_subCategory.value = selectedSubCategory;
+		}
+	};
+</script>
 <script>
 		function getSubCategories(mainCategory) {
 			var prd_subCategory = document.getElementById("itemkind2");
