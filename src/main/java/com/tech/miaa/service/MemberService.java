@@ -96,12 +96,16 @@ public class MemberService implements MemberServiceInter {
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw"); String pw2 = request.getParameter("pw2");
+		String pw = request.getParameter("pw");
+		String pw2 = request.getParameter("pw2");
 		String shpwd = ""; String bcpwd = "";
 		String email = request.getParameter("email");
 		String postcode = request.getParameter("postcode");
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
+		String tel = request.getParameter("tel");
+
+		System.out.println("tel :"+tel);
 		
 		String result = "redirect:joinform";
 		
@@ -129,7 +133,7 @@ public class MemberService implements MemberServiceInter {
 				// 가입가능여부 확인 (비밀번호와 비밀번호 확인 같은지 확인)
 				if (pw.equals(pw2)) {
 					System.out.println("회원가입을 축하드립니다.");
-					dao.join(id, shpwd, bcpwd, email, postcode, address, detailAddress);
+					dao.join(id, shpwd, bcpwd, email, postcode, address, detailAddress,tel);
 					result = "redirect:loginform";
 				} else {
 					System.out.println("비밀번호를 확인해주세요.");
@@ -147,13 +151,14 @@ public class MemberService implements MemberServiceInter {
 		HttpSession session=request.getSession();
 		
 		String id = (String) session.getAttribute("userId");
-		String pw = request.getParameter("pw"); String pw2 = request.getParameter("pw2");
+		String pw = request.getParameter("pw");
+		String pw2 = request.getParameter("pw2");
 		String shpwd = ""; String bcpwd = "";
 		String email = request.getParameter("email");
 		String postcode = request.getParameter("postcode");
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
-		
+		String tel = request.getParameter("tel");
 		String result = "redirect:mypageform";
 		
 		try {
@@ -164,7 +169,7 @@ public class MemberService implements MemberServiceInter {
 		}
 		System.out.println(bcpwd);
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		dao.modify_account(id, shpwd, bcpwd, email, postcode, address, detailAddress);
+		dao.modify_account(id, shpwd, bcpwd, email, postcode, address, detailAddress,tel);
 		
 		return result;
 	}

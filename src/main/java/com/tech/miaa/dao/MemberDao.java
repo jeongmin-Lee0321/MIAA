@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface MemberDao {
 	public void join(String id, String shpwd, String bcpwd,
-	String email, String postcode, String address, String detailAddress);
+	String email, String postcode, String address, String detailAddress,String tel);
 	public void modify_account(String id, String shpwd, String bcpwd,
-			String email, String postcode, String address, String detailAddress);
+			String email, String postcode, String address, String detailAddress,String tel);
 	public int idcheck(String id);
 	public int emailcheck(String email);
 	public String searchid(String email);
