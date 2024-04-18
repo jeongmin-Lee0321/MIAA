@@ -4,18 +4,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.tech.miaa.dao.MemberDao;
+import com.tech.miaa.dto.AdminInquirySearchDto;
+import com.tech.miaa.dto.AdminMemberDto;
+import com.tech.miaa.dto.AdminMemberSearchDto;
 import com.tech.miaa.dto.MemberDto;
+import com.tech.miaa.vopage.PageVO;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import com.tech.miaa.service.AdminMemberService;
 import com.tech.miaa.service.MemberService;
@@ -98,18 +98,25 @@ public class AdminMemberController {
 
 	//jeongmin
 	@RequestMapping("/admin_member_management_page")
-	public String admin_member_management_page(HttpServletRequest request, Model model) {
-		MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-		List<MemberDto> memberDtoList = memberDao.getMembers();
-		for (MemberDto a : memberDtoList){
-			System.out.println(a.getUser_id());
-			System.out.println(a.getUser_address());
-			System.out.println(a.getUser_grade());
-			System.out.println(a.getUser_join_date());
-			System.out.println(a.getUser_last_login());
-		}
+	public String admin_member_management_page(HttpServletRequest request, Model model,
+	PageVO pageVo,@ModelAttribute("dto") AdminMemberSearchDto dto) {
+//		MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+//		List<MemberDto> memberDtoList = memberDao.getMembers();
+//		for (MemberDto a : memberDtoList){
+//			System.out.println(a.getUser_id());
+//			System.out.println(a.getUser_address());
+//			System.out.println(a.getUser_grade());
+//			System.out.println(a.getUser_join_date());
+//			System.out.println(a.getUser_last_login());
+//		}
+//		model.addAttribute("list",memberDtoList);
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession",sqlSession);
+		model.addAttribute("pageVo",pageVo);
 
-		model.addAttribute("list",memberDtoList);
+		adminMemberServiceInter = new AdminMemberService();
+		adminMemberServiceInter.member_list(model, pageVo);
+
 		return "admin_member.management_page.회원 관리 게시판.3a";
 	}
 }

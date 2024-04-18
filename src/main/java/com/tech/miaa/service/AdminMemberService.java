@@ -1,139 +1,286 @@
 
 package com.tech.miaa.service;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.tech.miaa.dao.AdminInquiryDao;
+import com.tech.miaa.dto.*;
+import com.tech.miaa.vopage.PageVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.tech.miaa.dao.AdminMemberDao;
 import com.tech.miaa.dao.MemberDao;
-import com.tech.miaa.dto.MemberDto;
 import com.tech.miaa.serviceInter.AdminMemberServiceInter;
 import com.tech.miaa.util.CryptoUtil;
 
 public class AdminMemberService implements AdminMemberServiceInter {
 
-	@Override
-	public int admin_idchek(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+    @Override
+    public int admin_idchek(Model model) {
+        Map<String, Object> map = model.asMap();
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 
-		String id = request.getParameter("id");
-		int num=0;
-		if(id=="") {
-			num=-1;
-		}else{
-			AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
-			num = dao.admin_idcheck(id);
-		}
-		return num;
-	}
+        String id = request.getParameter("id");
+        int num = 0;
+        if (id == "") {
+            num = -1;
+        } else {
+            AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+            num = dao.admin_idcheck(id);
+        }
+        return num;
+    }
 
-	@Override
-	public int admin_emailchk(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+    @Override
+    public int admin_emailchk(Model model) {
+        Map<String, Object> map = model.asMap();
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 
-		String email = request.getParameter("email");
-		int num = 0;
+        String email = request.getParameter("email");
+        int num = 0;
 
-		if (email == "") {
-			num = -1;
-		} else {
-			AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
-			num = dao.admin_emailcheck(email);
-		}
+        if (email == "") {
+            num = -1;
+        } else {
+            AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+            num = dao.admin_emailcheck(email);
+        }
 
-		return num;
-	}
-	
-//	admin_codeck 관리자가입 코드 Aldkxptmxm
-	@Override
-	public int admin_codechk(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		//인증코드
-		String code = request.getParameter("code");
-		int num = 0;
+        return num;
+    }
 
-		if (code == "") {
-			num = -1; //값없을 경우 -1
-		} else if(code.equals("Aldkxptmxm")) {
-			num = 0; // 맞을경우 0 
-		} else {
-			num = 1; // 틀릴경우 -1
-		}
+    //	admin_codeck 관리자가입 코드 Aldkxptmxm
+    @Override
+    public int admin_codechk(Model model) {
+        Map<String, Object> map = model.asMap();
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+        //인증코드
+        String code = request.getParameter("code");
+        int num = 0;
 
-		return num;
-	}
-	
-	@Override
-	public String admin_join(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw"); String pw2 = request.getParameter("pw2");
-		String shpwd = ""; String bcpwd = "";
-		String email = request.getParameter("email");
+        if (code == "") {
+            num = -1; //값없을 경우 -1
+        } else if (code.equals("Aldkxptmxm")) {
+            num = 0; // 맞을경우 0
+        } else {
+            num = 1; // 틀릴경우 -1
+        }
+
+        return num;
+    }
+
+    @Override
+    public String admin_join(Model model) {
+        Map<String, Object> map = model.asMap();
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        String pw2 = request.getParameter("pw2");
+        String shpwd = "";
+        String bcpwd = "";
+        String email = request.getParameter("email");
 //		인증코드
-		String code = request.getParameter("code");
-		
-		String result = "redirect:admin";
-		
-		// 암호화 처리
-		try {
-			shpwd = CryptoUtil.sha512(pw);
-			bcpwd = CryptoUtil.encryptAES256(pw, shpwd);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(bcpwd);
-		AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
-		int idcheck = dao.admin_idcheck(id);
-		int emailcheck = dao.admin_emailcheck(email);
-		//인증코드체크
-		int codecheck= admin_codechk(model);
-		
-		switch (codecheck) {
-		case 0 :
-			if (id != "" && email != "" && pw != "") {
-				// 가입가능여부 확인 (아이디, 이메일 중복확인)
-				if (idcheck >= 1 && emailcheck >= 1) {
-					System.out.println("아이디와 이메일이 중복됩니다.");
-				} else if (idcheck == 0 && emailcheck >= 1) {
-					System.out.println("이메일이 중복됩니다.");
-				} else if (idcheck >= 1 && emailcheck == 0) {
-					System.out.println("아이디가 중복됩니다.");
-				} else {
-					// 가입가능여부 확인 (비밀번호와 비밀번호 확인 같은지 확인)
-					if (pw.equals(pw2)) {
-						System.out.println("관리자 가입 완료.");
-						dao.admin_join(id, shpwd, bcpwd, email);
-						result = "redirect:loginform";
-					} else {
-						System.out.println("비밀번호를 확인해주세요.");
-					}
-				}
-			}
-			break;
-		case -1 :
-			System.out.println("인증코드가 틀렸습니다");
-		default:
-			System.out.println("인증코드를 확인해주세요");
-			break;
-		}
-		
-		return result;
-	}
-	
+        String code = request.getParameter("code");
 
+        String result = "redirect:admin";
+
+        // 암호화 처리
+        try {
+            shpwd = CryptoUtil.sha512(pw);
+            bcpwd = CryptoUtil.encryptAES256(pw, shpwd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(bcpwd);
+        AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+        int idcheck = dao.admin_idcheck(id);
+        int emailcheck = dao.admin_emailcheck(email);
+        //인증코드체크
+        int codecheck = admin_codechk(model);
+
+        switch (codecheck) {
+            case 0:
+                if (id != "" && email != "" && pw != "") {
+                    // 가입가능여부 확인 (아이디, 이메일 중복확인)
+                    if (idcheck >= 1 && emailcheck >= 1) {
+                        System.out.println("아이디와 이메일이 중복됩니다.");
+                    } else if (idcheck == 0 && emailcheck >= 1) {
+                        System.out.println("이메일이 중복됩니다.");
+                    } else if (idcheck >= 1 && emailcheck == 0) {
+                        System.out.println("아이디가 중복됩니다.");
+                    } else {
+                        // 가입가능여부 확인 (비밀번호와 비밀번호 확인 같은지 확인)
+                        if (pw.equals(pw2)) {
+                            System.out.println("관리자 가입 완료.");
+                            dao.admin_join(id, shpwd, bcpwd, email);
+                            result = "redirect:loginform";
+                        } else {
+                            System.out.println("비밀번호를 확인해주세요.");
+                        }
+                    }
+                }
+                break;
+            case -1:
+                System.out.println("인증코드가 틀렸습니다");
+            default:
+                System.out.println("인증코드를 확인해주세요");
+                break;
+        }
+
+        return result;
+    }
+
+    @Override
+    public void member_list(Model model, PageVO pageVo) {
+        Map<String, Object> map = model.asMap();
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+        AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
+
+        pageVo = get_pagevo(model, pageVo);
+        int rowStart = pageVo.getRowStart();
+        int rowEnd = pageVo.getRowEnd();
+        set_search_dto(model, pageVo);
+        //
+//		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
+        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
+//		ArrayList<AdminInquiryDto> list = null;
+        ArrayList<MemberDto> memberDtos = memberDao.getMembers();
+        ArrayList<AdminMemberDto> adminMemberDtos = adminMemberDao.getAdminMembers();
+        ArrayList<MemberDto> totalDto = new ArrayList<>(memberDtos);
+
+        for (AdminMemberDto d : adminMemberDtos) {
+            MemberDto tmp = new MemberDto();
+            tmp.setUser_id(d.getUser_id());
+            tmp.setUser_email(d.getUser_email());
+            tmp.setUser_grade("관리자");
+            totalDto.add(tmp);
+        }
+        int a = totalDto.get(0).getUser_join_date().indexOf(" ");
+        String b = totalDto.get(0).getUser_join_date().substring(0, totalDto.get(0).getUser_join_date().indexOf(" "));
+        System.out.println(b);
+
+        String date = "";
+        String charsToRemove = "-";
+        for (char c : charsToRemove.toCharArray()) {
+            date = b.replace(String.valueOf(c), "");
+        }
+        System.out.println(date+"//Afadgasg");
+//        System.out.println("getUser_join_date" + totalDto.get(0).getUser_join_date().split(" "));
+        System.out.println("getUser_last_login" + totalDto.get(0).getUser_last_login());
+		totalDto.stream().filter(x ->
+            x.getUser_id().equals(dto.getSearch_content()) &&
+                    Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" "))) > 11
+        ).collect(Collectors.toList());
+
+        if (rowStart == 0 && rowEnd == 0) {
+            System.out.println("get_pagevo 문제발생");
+
+        } else {
+//			try {
+//				list = totalDto;
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+        }
+
+        model.addAttribute("search", dto);
+        model.addAttribute("list", totalDto);
+    }
+
+    public PageVO get_pagevo(Model model, PageVO pageVo) {
+        int page = 0; // 현재 페이지
+        int total = 0; // 모든 게시물 갯수
+        int displayRowCount = 6; // 보여질 페이지 갯수
+
+        Map<String, Object> map = model.asMap();
+        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        String currPage = request.getParameter("currPage");
+
+        // 토탈페이지 먼저 구하기
+        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
+
+        try {
+            total = memberDao.getMembers().size() + adminMemberDao.getAdminMembers().size();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("전체 목록개수" + total);
+        // 현재페이지 경우의수
+        if (currPage == null) { // strPage 가 뷰에서 전달되지 않은경우(첫화면)
+            currPage = "1";
+            page = Integer.parseInt(currPage);
+        } else { // strPage값이 뷰에서 현재로 전달된경우
+            page = Integer.parseInt(currPage);
+            if (page > total / displayRowCount) {// 현재페이지 값이 총 페이지 갯수보다 클경우 시작페이지= 총페이지 갯수
+                page = total / displayRowCount + (total % displayRowCount == 0 ? 0 : 1);
+            } else if (page <= 0) {// 시작페이지 값이 음수일경우 page =1
+                page = 1;
+            }
+        }
+
+        pageVo.setDisplayRowCount(displayRowCount);// 보여질 페이지 갯수 적용
+        pageVo.setPage(page);// 시작페이지 적용
+
+        pageVo.pageCalculate(total);
+
+        System.out.println("전달받은 현재페이지" + currPage);
+
+        return pageVo;
+    }
+
+    public void set_search_dto(Model model, PageVO pageVo) {
+        Map<String, Object> map = model.asMap();
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
+        AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
+        // 만들어진 PageVo로 글목록의 star와 end를 가져옴
+        int rowStart = pageVo.getRowStart();
+        int rowEnd = pageVo.getRowEnd();
+        dto.setRowEnd(rowEnd);
+        dto.setRowStart(rowStart);
+
+        //param-> null 이면 최초 화면
+
+        //param -> null이 아니면 검색조건 추가한 창
+        String JOIN_START_YMD = request.getParameter("JOIN_START_YMD");
+        String JOIN_END_YMD = request.getParameter("JOIN_END_YMD");
+        String START_YMD = request.getParameter("START_YMD");
+        String END_YMD = request.getParameter("END_YMD");
+        String member_grade = request.getParameter("member_grade");
+        String search_type = request.getParameter("search_type");
+        String search_content = request.getParameter("search_content");
+
+        System.out.println("JOIN_START_YMD : " + JOIN_START_YMD);
+        System.out.println("JOIN_END_YMD : " + JOIN_END_YMD);
+        System.out.println("START_YMD : " + START_YMD);
+        System.out.println("END_YMD : " + END_YMD);
+        System.out.println("member_grade : " + member_grade);
+        System.out.println("search_type : " + search_type);
+        System.out.println("search_content : " + search_content);
+
+        dto.setJOIN_START_YMD(JOIN_START_YMD);
+        dto.setJOIN_END_YMD(JOIN_END_YMD);
+        dto.setSTART_YMD(START_YMD);
+        dto.setEND_YMD(END_YMD);
+        dto.setMember_grade(member_grade);
+        dto.setSearch_type(search_type);
+        dto.setSearch_content(search_content);
+
+    }
 }

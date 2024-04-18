@@ -72,11 +72,52 @@
     <!-- 검색창과 검색결과 -->
     <div class="searchbar-container">
 
-        <form action="admin_inquiry_list_page" id="inquiry-form">
+        <form action="admin_member_management_page" id="management-form">
             <!-- 서치바 셀렉 그룹시작 -->
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
                     <span>가입 기간</span>
+                </div>
+                <div class="searchbar-content">
+                    <input type="date" name="JOIN_START_YMD" id="JOIN_START_YMD"
+                           <c:if test="${search ne null}">value="${search.JOIN_START_YMD }"</c:if>> <span>~</span>
+                    <input type="date" name="JOIN_END_YMD" id="JOIN_END_YMD"
+                           <c:if test="${search ne null}">value="${search.JOIN_END_YMD }"</c:if>>
+                    <div class="form-date-btn" id="join-date-today">
+                        <div class="div-placeholder">
+                            <div class="div">오늘</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="join-date-1week">
+                        <div class="div-placeholder">
+                            <div class="div">1주일</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="join-date-1month">
+                        <div class="div-placeholder">
+                            <div class="div">1개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="join-date-3month">
+                        <div class="div-placeholder">
+                            <div class="div">3개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="join-date-6month">
+                        <div class="div-placeholder">
+                            <div class="div">6개월</div>
+                        </div>
+                    </div>
+                    <div class="form-date-btn" id="join-date-all">
+                        <div class="div-placeholder">
+                            <div class="div">전체</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar-select-group">
+                <div class="searchbar-title">
+                    <span>최근 로그인 날짜</span>
                 </div>
                 <div class="searchbar-content">
                     <input type="date" name="START_YMD" id="START_YMD"
@@ -115,21 +156,20 @@
                     </div>
                 </div>
             </div>
-
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
                     <span>등급</span>
                 </div>
                 <div class="searchbar-content">
-                    <select name="reply_status" id="reply_status">
+                    <select name="member_grade" id="reply_status">
                         <option value="all"
-                                <c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체
+                                <c:if test="${search.member_grade eq 'all'}">selected</c:if>>전체
                         </option>
                         <option value="member"
-                                <c:if test="${search.reply_status eq 'member'}">selected</c:if>>일반회원
+                                <c:if test="${search.member_grade eq 'member'}">selected</c:if>>일반회원
                         </option>
                         <option value="admin"
-                                <c:if test="${search.reply_status eq 'admin'}">selected</c:if>>관리자
+                                <c:if test="${search.member_grade eq 'admin'}">selected</c:if>>관리자
                         </option>
                     </select>
                 </div>
@@ -145,7 +185,7 @@
                         <%--                                <c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자--%>
                         <%--                        </option>--%>
                         <option value="id"
-                                <c:if test="${search.search_type eq 'admin'}">selected</c:if>>아이디
+                                <c:if test="${search.search_type eq 'id'}">selected</c:if>>아이디
                         </option>
                     </select>
                 </div>
@@ -157,7 +197,7 @@
 
             <!-- form 조회용 버튼 -->
             <div class="search-btn-block">
-                <button type="submit" form="inquiry-form">
+                <button type="submit" form="management-form">
                     조회<img src="resources/img/searchIcon.png" alt="">
                 </button>
                 <button class="reset" onclick="resetForm()">
@@ -208,7 +248,7 @@
                         <td>${memeber.getUser_address() }</td>
                         <td>${memeber.getUser_tel() }</td>
                         <td>${memeber.getUser_join_date() }</td>
-                        <td style="padding-left: 10px; padding-right: 10px">${memeber.getUser_last_login() }</td>
+                        <td>${memeber.getUser_last_login() }</td>
                     </tr>
                 </c:forEach>
 
@@ -268,8 +308,8 @@
         }
         var newPath = window.location.pathname + '?currPage=' + currpage;
 
-        // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
-        var form = document.getElementById("inquiry-form");
+        // management-form의 모든 매개변수를 가져와서 URL에 추가
+        var form = document.getElementById("management-form");
         var formData = new FormData(form);
         formData.append('currPage', currpage); // currPage를 추가
         for (var pair of formData.entries()) {
@@ -279,6 +319,50 @@
         window.location.href = newPath; // 새 경로로 페이지 이동
 
     }
+</script>
+<!-- 가입 날짜 제한 -->
+<script>
+    var now_utc = Date.now() // 지금 날짜를 밀리초로
+    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+    var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+    // new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+    var today = new Date(now_utc - timeOff).toISOString()
+        .split("T")[0];
+    var today2 = new Date(now_utc - timeOff)//.getFullYear()등을 쓰기위한 today2
+    $(document).ready(
+        function () {//로드완료시
+            document.getElementById("JOIN_START_YMD").setAttribute("max",
+                today); //시작날짜 최대값 오늘날짜로 제한
+            document.getElementById("JOIN_END_YMD").setAttribute("max",
+                today);//종료날짜 오늘날짜로 제한
+        });
+    /*날짜선택버튼*/
+    document.getElementById('join-date-today').addEventListener('click', function () {
+        document.getElementById('JOIN_START_YMD').value = today;
+        document.getElementById('JOIN_END_YMD').value = today;
+    });
+
+    document.getElementById('join-date-1week').addEventListener('click', function () {
+        const lastWeek = new Date(today2.getFullYear(), today2.getMonth(), today2.getDate() - 7);
+        document.getElementById('JOIN_START_YMD').value = lastWeek.toISOString().substring(0, 10); // 일주일 전 날짜
+        document.getElementById('JOIN_END_YMD').value = today.toISOString().substring(0, 10); // 오늘 날짜
+    });
+
+    document.getElementById('join-date-1month').addEventListener('click', setJoinPastDate.bind(null, 1));
+    document.getElementById('join-date-3month').addEventListener('click', setJoinPastDate.bind(null, 3));
+    document.getElementById('join-date-6month').addEventListener('click', setJoinPastDate.bind(null, 6));
+
+    function setJoinPastDate(months) {
+        const pastDate = new Date(today2.getFullYear(), today2.getMonth() - months, today2.getDate());
+        document.getElementById('JOIN_START_YMD').value = pastDate.toISOString().substring(0, 10);
+        document.getElementById('JOIN_END_YMD').value = today2.toISOString().substring(0, 10);
+    }
+
+    document.getElementById('join-date-all').addEventListener('click', function () {
+        document.getElementById('JOIN_START_YMD').value = ""; // 입력 필드를 비웁니다
+        document.getElementById('JOIN_END_YMD').value = ""; // 입력 필드를 비웁니다
+    });
+
 </script>
 <!-- 날짜 제한 -->
 <script>
@@ -330,10 +414,10 @@
         $(".reset").click(function (event) {
             event.preventDefault(); // 폼의 기본 동작 중지
             // form 안의 input 요소의 값을 빈 문자열로 설정
-            $('#inquiry-form input').val('');
+            $('#management-form input').val('');
 
             // form 안의 select 요소의 selectedIndex를 0으로 설정하여 첫 번째 옵션을 선택
-            $('#inquiry-form select').prop('selectedIndex', 0);
+            $('#management-form select').prop('selectedIndex', 0);
         });
     });
 </script>
