@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Title</title>
@@ -16,18 +17,20 @@
             <span>소중한 반려동물이 실종되었습니다. 아래와 같은 동물을 발견하셨다면 관할기관에 맡겨주세요.</span>
         </div>
         <div class="btn-top-container">
-            <button class="btn-list" id="btn-top-list-edit">게시물 수정</button>
-            <button class="btn-list" id="btn-top-list-delete">게시물 삭제</button>
-            <button class="btn-list" id="btn-top-list-report">게시물 신고</button>
-            <button class="btn-list" id="btn-top-missing-list">목록으로</button>
-        </div>
+				<button class="btn-list" id="btn-top-rescue-list" onclick="location.href='missing_ani_search_page';"
+					style="cursor: pointer;">목록으로</button>
+			</div>
     </div>
 
     <div class="image-selection">
         <div class="image-container">
-            <img src="resources/img/chevron-left.png" alt="" id="chevron-left">
-            <img src="resources/img/media.png" alt="" id="ani-image">
-            <img src="resources/img/chevron-right.png" alt="" id="chevron-right">
+           <c:forEach var="i" begin="0" end="${imgDtos.size()-1}">
+					<div class="mySlides fade">
+						<img src="resources/img/chevron-left.png" id="chevron-left" style="cursor: pointer;" onclick="plusSlides(-1)"> 
+						<img src="${imgDtos.get(i).getFilename()}" id="ani-image"> 
+						<img src="resources/img/chevron-right.png" id="chevron-right" style="cursor: pointer;" onclick="plusSlides(1)">
+					</div>
+				</c:forEach>
         </div>
 
     </div>
@@ -36,53 +39,44 @@
         <div class="info-name-container">
             <img src="resources/img/clipboard.png" alt="" class="info-icon">
             <span class="info-name">동물정보</span>
+            <button class="btn-map" onclick="location.href='lost_item_detail_map?address=${dto.address}';" style="cursor: pointer;">지도로 위치 찾기</button>
         </div>
         <table class="info-table">
             <tr>
                 <th class="info-table-name">이름</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="ani-name">하루</div>
+                    <div class="table-value-container" id="ani-name">${dto.animal_name }</div>
                 </td>
                 <th class="info-table-name">동물종류</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="kind">개</div>
+                    <div class="table-value-container" id="kind">${dto.upkind }</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">품종</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="kind_cd">믹스견</div>
+                    <div class="table-value-container" id="kind_cd">${dto.upr_cd }</div>
                 </td>
-                <th class="info-table-name">색상</th>
-                <td class="info-table-value">
-                    <div class="table-value-container" id="color_cd">흰색</div>
-                </td>
-            </tr>
-            <tr>
                 <th class="info-table-name">성별</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="sex_cd">암컷</div>
-                </td>
-                <th class="info-table-name">중성화 여부</th>
-                <td class="info-table-value">
-                    <div class="table-value-container" id="neuter_yn">아니오</div>
+                    <div class="table-value-container" id="sexcd">${dto.sexcd }</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">체중</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="weight">2.3kg</div>
+                    <div class="table-value-container" id="weight">${dto.weight } Kg</div>
                 </td>
                 <th class="info-table-name">나이</th>
                 <td class="info-table-value">
-                    <div class="table-value-container" id="age">2개월</div>
+                    <div class="table-value-container" id="age">${dto.age } 살</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">특징</th>
                 <td class="info-table-value" colspan="3">
                     <div class="table-value-container" id="special_mark">
-                        adsfsdfasdfasdfasdfasdfasdfasdfadsfasdfasdfasdfasdfasdfasdfasdfasdfasdfsadfasdfasdfasdfasdfasdf
+                        ${dto.sepcialmark }
                     </div>
                 </td>
             </tr>
@@ -99,27 +93,84 @@
             <tr>
                 <th class="info-table-name">실종일</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="missing_dt">2024-03-15</div>
+                    <div class="table-value-container" id="missing_dt">${dto.missingday }</div>
                 </td>
             </tr>
             <tr>
                 <th class="info-table-name">실종장소</th>
                 <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="missing_place">의창구 덕산리 131-14</div>
+                    <div class="table-value-container" id="missing_place">${dto.address }</div>
                 </td>
             </tr>
             <tr>
-                <th class="info-table-name">연락처</th>
-                <td class="info-table-value" colspan="3">
-                    <div class="table-value-container" id="user_tel">010-0311-1111</div>
-                </td>
+               <th class="info-table-name">연락처</th>
+					<td class="info-table-value" colspan="3">
+					<c:if test="${dto.openclose eq 'true'}">
+						<div class="table-value-container" id="user_tel">010-1111-1111</div>
+					</c:if>
+					<c:if test="${dto.openclose eq 'false'}">
+						<div class="table-value-container" id="user_tel">***-***-****</div>
+					</c:if>
+					</td>
             </tr>
 
         </table>
     </div>
 
     <div class="btn-bottom-container">
-        <button class="btn-list" id="btn-bottom-list">목록으로</button>
-    </div>
+			<button class="btn-list" id="btn-bottom-list"
+				onclick="location.href='missing_ani_search_page';"
+				style="cursor: pointer;">목록으로</button>
+		</div>
+		<div>
+			<c:if test="${userId eq dto.user_id}">
+				<button class="btn-list" id="btn-bottom-list" onclick="modify('${dto.total_id}')" style="cursor: pointer;"> 수정하기</button>
+				<button class="btn-list" id="btn-bottom-list" onclick="deletes('${dto.total_id}')" style="cursor: pointer;">삭제하기</button>
+				</c:if>
+		</div>
 </div>
 </html>
+<script>
+function deletes(total_id){
+	if(window.confirm("게시물을 삭제하시겠습니까?")){
+		location.href='missing_ani_delete?total_id='+total_id;
+	}
+}
+</script>
+<script>
+function modify(total_id) {
+	if(window.confirm("게시물을 수정하시겠습니까?")){
+		location.href='missing_ani_modify_page?total_id='+total_id;
+	}
+}
+</script>
+</html>
+<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	function plusSlides(n) {
+		showSlides(slideIndex += n);
+	}
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+	function showSlides(n) {
+		var i;
+		var slides = document.getElementsByClassName("mySlides");
+		var dots = document.getElementsByClassName("dot");
+		if (n > slides.length) {
+			slideIndex = 1
+		}
+		if (n < 1) {
+			slideIndex = slides.length
+		}
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " active";
+	}
+</script>

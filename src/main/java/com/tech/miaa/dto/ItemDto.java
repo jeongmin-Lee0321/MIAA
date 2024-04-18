@@ -19,7 +19,6 @@ import lombok.Setter;
 public class ItemDto {
 	private String total_id;
 	private String item_id;
-	private String user_tel;
 	private String openclose;
 	private String lostday;
 	private String address;

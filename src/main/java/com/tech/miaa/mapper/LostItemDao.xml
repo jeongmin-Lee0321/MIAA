@@ -6,7 +6,7 @@
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.LostItemDao">
 <insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4}, 
-						#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE, #{param11}) 
+						#{param5},#{param6},#{param7},#{param8},#{param9}, SYSDATE, #{param10}) 
 </insert>
 
 <insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3} AND UPR_CD=#{param5}), 
@@ -93,8 +93,8 @@
 	DELETE FROM ITEM WHERE TOTAL_ID= #{param1}
 </update>
 <update id="lost_item_modify">
-	UPDATE ITEM SET USER_TEL=#{param1},OPENCLOSE=#{param2},LOSTDAY=#{param3},ADDRESS=#{param4},ITEM_NAME=#{param5},UPKIND=#{param6},
-	UPR_CD=#{param7},COLORCD=#{param8},SEPCIALMARK=#{param9},ITEM_DATE=SYSDATE,ADDRESSCODE=#{param10} WHERE TOTAL_ID=#{param11}
+	UPDATE ITEM SET OPENCLOSE=#{param1},LOSTDAY=#{param2},ADDRESS=#{param3},ITEM_NAME=#{param4},UPKIND=#{param5},
+	UPR_CD=#{param6},UPKIND=#{param7},UPR_CD=#{param8},ITEM_DATE=SYSDATE,AGE=#{param9} WHERE TOTAL_ID=#{param10}
 </update>
 	<select id="get_lost_items" resultType="com.tech.miaa.dto.ItemDto">
 		SELECT * FROM ITEM WHERE USER_ID= #{PARAM1}

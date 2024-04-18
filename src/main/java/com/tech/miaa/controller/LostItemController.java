@@ -26,7 +26,7 @@ public class LostItemController {
 	LostItemServiceInter itemService;
 
 	@RequestMapping("lost_item_search_page")
-	public String rescue_ani_search_page(HttpServletRequest request, Model model) {
+	public String lost_item_search_page(HttpServletRequest request, Model model) {
 		model.addAttribute("sqlSession", sqlSession); model.addAttribute("request", request);
 
 		itemService = new LostItemService();

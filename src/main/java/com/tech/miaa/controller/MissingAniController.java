@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,16 +57,36 @@ public class MissingAniController {
 		return result;
 	}
 	
-//	김영빈 실종동물 수정페이지
 	@RequestMapping("missing_ani_modify_page")
-	public String missing_ani_modify_page(Model model, @SessionAttribute(name = "userId", required = false) String userId){
-		String result = "";
-				result = "missing_ani.modify_page.실종동물 수정.2";
+	public String missing_ani_modify_page(HttpServletRequest request, Model model){
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		
+		animalService = new MissingAnimalService();
+		animalService.missing_ani_modify_page(model);
+		return "missing_ani.modify_page.실종동물 수정.2";
+	}
+	@RequestMapping("missing_ani_modify")
+	public String missing_ani_modify(HttpServletRequest request, Model model, @RequestParam("files") ArrayList<MultipartFile> files){
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("files", files);
+		
+		animalService = new MissingAnimalService();
+		String result=animalService.missing_ani_modify(model);
+		
 		return result;
+	}
+	@RequestMapping("missing_ani_delete")
+	public String missing_ani_modify(HttpServletRequest request, Model model){
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		
+		animalService = new MissingAnimalService();
+		animalService.missing_ani_delete(model);
+		
+		return "redirect:missing_ani_search_page";
 	}
 	
 	//JeongMin
-	@RequestMapping(value = "/missing_ani_detail_page", method = RequestMethod.GET)
+	@RequestMapping("missing_ani_detail_page")
 	public String missing_ani_detail_page(HttpServletRequest request, Model model ) {
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
 		animalService = new MissingAnimalService();

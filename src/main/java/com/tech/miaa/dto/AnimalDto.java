@@ -14,15 +14,15 @@ import lombok.Setter;
 public class AnimalDto {
 	private String total_id;
 	private String animal_id;
-	private String user_tel;
 	private String openclose;
 	private String missingday;
 	private String address;
 	private String animal_name;
 	private String upkind;
 	private String upr_cd;
-	private String colorcd;
-	private int age;
+	private String sexcd;
+	private String weight;
+	private String age;
 	private String sepcialmark;
 	private String user_id;
 	private Date animal_date;

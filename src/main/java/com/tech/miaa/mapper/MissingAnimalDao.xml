@@ -7,7 +7,7 @@
 <mapper namespace="com.tech.miaa.dao.MissingAnimalDao">
 	<insert id="animalWrite">
 		INSERT INTO ANIMAL VALUES(TOTAL_SEQ.NEXTVAL, ANIMAL_SEQ.NEXTVAL,#{param1},#{param2},#{param3}, 
-		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},SYSDATE,#{param11},#{param12})
+		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},SYSDATE,#{param12},#{param13})
 	</insert>
 	
 	<insert id="imgUpLoad"> 
@@ -98,4 +98,15 @@
 	<select id="get_missing_animals" resultType="com.tech.miaa.dto.AnimalDto">
 		SELECT * FROM ANIMAL WHERE USER_ID= #{PARAM1}
 	</select>
+	<delete id="missing_ani_delete_content">
+		DELETE FROM ANIMAL WHERE TOTAL_ID=#{param1}
+	</delete>
+	<delete id="missing_ani_delete_img">
+		DELETE FROM ANIMAL_IMG WHERE TOTAL_ID=#{param1}
+	</delete>
+	<update id="missing_ani_modify">
+		UPDATE ANIMAL SET OPENCLOSE=#{param1},MISSINGDAY=#{param2},ADDRESS=#{param3},ANIMAL_NAME=#{param4},UPKIND=#{param5},
+	UPR_CD=#{param6},SEXCD=#{param7},WEIGHT=#{param8},ANIMAL_DATE=SYSDATE,AGE=#{param9},SEPCIALMARK=#{param10}, 
+	ADDRESSCODE1=#{param11},ADDRESSCODE2=#{param12} WHERE TOTAL_ID=#{param13}
+	</update>
 </mapper>

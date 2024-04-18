@@ -17,6 +17,8 @@ import com.tech.miaa.dao.LostItemDao;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.ItemImgDto;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
+
+
 import com.tech.miaa.util.PrdCode;
 import com.tech.miaa.vopage.PageVO;
 
@@ -120,7 +122,6 @@ public class LostItemService implements LostItemServiceInter {
 		
 		String result=""; LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
-		String tel=request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
 		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
@@ -136,7 +137,7 @@ public class LostItemService implements LostItemServiceInter {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_write_page";
 		}else {
-			dao.itemWrite(tel, openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId,addressCode);
+			dao.itemWrite(openclose, lostday, address, itemname, itemkind1, itemkind2, colorCd, sepcialMark, userId,addressCode);
 			for (int i = 0; i < files.size(); i++) {
 				if(files.get(i).getOriginalFilename()=="") {
 					continue;
@@ -165,12 +166,13 @@ public class LostItemService implements LostItemServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		
 		String total_id = request.getParameter("total_id");
 		
-		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		ItemDto dto=dao.lost_item_detail_page(total_id);
 		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
+		
 			//사진이 없을 때 기본아이콘 대체
 			if (imgDtos.size()==0) {
 				if(dto.getUpkind().equals("PRI000")) {
@@ -257,19 +259,7 @@ public class LostItemService implements LostItemServiceInter {
 		LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		ItemDto dto = dao.lost_item_detail_page(total_id);
 		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
-		PrdCode pc = new PrdCode();
 		
-		ArrayList<String> kind = new ArrayList<>();
-		kind.add(0, pc.getPrdNameByCode(dto.getUpkind()));
-		kind.add(1, pc.getPrdNameByCode(dto.getUpr_cd()));
-		kind.add(2, pc.getPrdNameByCode(dto.getColorcd()));
-		kind.add(3, pc.getPrdNameByCode(dto.getAddressCode()));
-		
-		String userTel=dto.getUser_tel();
-		String[]userTels=userTel.split("-");
-		
-		model.addAttribute("kind", kind);
-		model.addAttribute("userTels", userTels);
 		model.addAttribute("dto", dto);
 		model.addAttribute("imgDtos", imgDtos);
 	}
@@ -277,26 +267,19 @@ public class LostItemService implements LostItemServiceInter {
 	@Override
 	public String lost_item_modify(Model model) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
 		String result=null; LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 
-		String tel=request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
-		String openclose=request.getParameter("openclose");
-		String lostday=request.getParameter("lostday");
-		String address=request.getParameter("address");
-		String itemname=request.getParameter("itemname");
-		String itemkind1=request.getParameter("itemkind1");
-		String itemkind2=request.getParameter("itemkind2");
+		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
+		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
+		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
 		String colorCd="";
 		if(request.getParameter("colorCd")!=null) {
 			colorCd=request.getParameter("colorCd"); 
 		}
-		String sepcialMark = request.getParameter("sepcialMark");
-		String total_id = request.getParameter("total_id");
-		String user_id = request.getParameter("user_id");
-		String addressCode=request.getParameter("addressCode");
+		String sepcialMark = request.getParameter("sepcialMark"); String total_id = request.getParameter("total_id");
+		String user_id = request.getParameter("user_id"); String addressCode=request.getParameter("addressCode");
 		//기존 업로드 사진 삭제
 		int cnt=0;
 		for (int i = 0; i < files.size(); i++) {
@@ -320,7 +303,7 @@ public class LostItemService implements LostItemServiceInter {
 			System.out.println("필수 입력란을 모두 기입하세요.");
 			result="redirect:lost_item_modify_page?total_id="+total_id;
 		}else {
-			dao.lost_item_modify(tel,openclose,lostday,address,itemname,itemkind1,itemkind2,colorCd,sepcialMark,addressCode,total_id);
+			dao.lost_item_modify(openclose,lostday,address,itemname,itemkind1,itemkind2,colorCd,sepcialMark,addressCode,total_id);
 			if(cnt>0) {
 				for (int i = 0; i < files.size(); i++) {
 					if(files.get(i).getOriginalFilename()=="") {
