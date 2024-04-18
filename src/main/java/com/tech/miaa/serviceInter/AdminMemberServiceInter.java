@@ -1,5 +1,6 @@
 package com.tech.miaa.serviceInter;
 
+import com.tech.miaa.vopage.PageVO;
 import org.springframework.ui.Model;
 
 public interface AdminMemberServiceInter {
@@ -7,4 +8,5 @@ public interface AdminMemberServiceInter {
 	public int admin_idchek(Model model);
 	public int admin_emailchk(Model model);
 	public int admin_codechk(Model model);
+	public void member_list(Model model,PageVO pageVo);
 }

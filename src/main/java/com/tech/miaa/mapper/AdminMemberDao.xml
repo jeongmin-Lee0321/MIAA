@@ -20,4 +20,7 @@
 	<select id="admin_login2" resultType="com.tech.miaa.dto.AdminMemberDto">
 		SELECT * FROM MIAA_ADMIN WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
 	</select>
+	<select id="getAdminMembers" resultType="com.tech.miaa.dto.AdminMemberDto">
+		SELECT * FROM MIAA_ADMIN
+	</select>
 </mapper>
