@@ -19,18 +19,18 @@ import lombok.Setter;
 public class ItemDto {
 	private String total_id;
 	private String item_id;
-	private String user_tel;
-	private String openclose;
-	private String lostday;
-	private String address;
-	private String item_name;
-	private String upkind;
-	private String upr_cd;
-	private String colorcd;
-	private String sepcialmark;
+	private String user_tel; // 연략처
+	private String openclose; // 공개여부
+	private String lostday; // 분실날짜
+	private String address; // 분실장소
+	private String item_name; // 분실물 : 물품명
+	private String upkind; // 분실물 : 대분류
+	private String upr_cd; // 분실물 : 소분류
+	private String colorcd; // 색상
+	private String sepcialmark; // 특징
 	private String user_id;
-	private Date item_date;
-	private String addressCode;
+	private Date item_date; // 
+	private String addressCode; 
 	private String total_id1;
 	private String filename;
 }

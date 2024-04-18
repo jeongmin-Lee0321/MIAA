@@ -1,5 +1,7 @@
 package com.tech.miaa.dto;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,11 @@ public class MemberDto {
 	private int user_postcode;
 	private String user_address;
 	private String user_detailaddress;
+	
+	private String user_grade;
+	private String user_join_date;
+	private String user_last_login;
+	
 	
 	
 	

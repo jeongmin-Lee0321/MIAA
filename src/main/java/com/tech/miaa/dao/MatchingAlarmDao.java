@@ -2,9 +2,8 @@ package com.tech.miaa.dao;
 
 import java.util.ArrayList;
 
-import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.dto.ItemDto;
-import org.apache.ibatis.annotations.Param;
+import com.tech.miaa.dto.matchingAlarmDto;
 
 /* 원진호_0403_matching_alarm_list(String id)추가 */
 public interface MatchingAlarmDao {
@@ -33,4 +32,6 @@ public interface MatchingAlarmDao {
                                    String neuterYn, String specialMark,String careNm, String careTel,
                                    String careAddr, String orgNm,String chargeNm, String officetel,
                                    String noticeComment);
+	public ArrayList<matchingAlarmDto> alert_item_list(String id);
+
 }

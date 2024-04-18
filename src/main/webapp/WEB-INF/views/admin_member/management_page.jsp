@@ -91,9 +91,12 @@
                                      id="allCheck" class="table-check-box"></span></th>
                     <th><span>아이디</span></th>
 <%--                    <th class="table-title"><span>제목</span></th>--%>
+                    <th><span>회원등급</span></th>
                     <th><span>이메일</span></th>
                     <th><span>우편 번호</span></th>
                     <th><span>주소</span></th>
+                    <th><span>가입일</span></th>
+                    <th><span>마지막로그인날짜</span></th>
 <%--                    <th><span>답변 날짜</span></th>--%>
 <%--                    <th><span>답변자</span></th>--%>
 
@@ -104,9 +107,12 @@
                         <td><input type="checkbox" name="RowCheck"
                                    value="list.board_num" class="table-check-box"></td>
                         <td>${memeber.getUser_id() }</td>
+                        <td>${memeber.getUser_grade() }</td>
                         <td class="table-title">${memeber.getUser_email() }</td>
                         <td>${memeber.getUser_postcode() }</td>
                         <td>${memeber.getUser_address() }</td>
+                        <td>${memeber.getUser_join_date() }</td>
+                        <td>${memeber.getUser_last_login() }</td>
 <%--                        <td>${list.userInquiry.board_registration_date}</td>--%>
 <%--                        <td>${list.board_reply }</td>--%>
 <%--                        <td>${list.admin_id }</td>--%>

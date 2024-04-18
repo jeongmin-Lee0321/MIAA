@@ -104,6 +104,9 @@ public class AdminMemberController {
 		for (MemberDto a : memberDtoList){
 			System.out.println(a.getUser_id());
 			System.out.println(a.getUser_address());
+			System.out.println(a.getUser_grade());
+			System.out.println(a.getUser_join_date());
+			System.out.println(a.getUser_last_login());
 		}
 
 		model.addAttribute("list",memberDtoList);

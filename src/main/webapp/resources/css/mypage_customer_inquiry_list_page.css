@@ -7,14 +7,53 @@ a:hover{
 	color: #0066ff;
 }
 /* 검색창 프레임 */
+
 .searchbar-container {
   /* background-color: aquamarine; */
   padding-top: 1rem;
+  align-self: stretch;
+  padding: 0px 30px;
 }
 
 .searchbar-container form {
   display: flex;
   flex-direction: column;
+}
+/*날짜 선택 버튼  */
+.form-date-btn:hover {
+  cursor: pointer;
+}
+.form-date-btn {
+  background: #fafafa;
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #d6e6fe;
+  border-width: 1px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  cursor: poninter;
+}
+.div-placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.div {
+  color: #000000;
+  text-align: left;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  position: relative;
 }
 
 .searchbar-mutil-group {
@@ -45,6 +84,7 @@ a:hover{
   align-items: center;
   flex-wrap: wrap;
   margin-right: 1rem;
+  gap: 10px;
   /* justify-content: flex-start; */
 }
 
@@ -69,6 +109,14 @@ a:hover{
   font-family: "Noto Sans KR", sans-serif;
   border-width: 0.0625rem;
 }
+.searchbar-title>select {
+  padding: 0.5rem 1rem 0.5rem 0.2rem ;
+  margin-left: 1rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-family: "Noto Sans KR", sans-serif;
+  border-width: 0.0625rem;
+}
 
 .search-btn-block {
   margin-top: 1rem;
@@ -76,13 +124,14 @@ a:hover{
   padding: 0.5rem 0;
   display: flex;
   justify-content: center;
+  gap: 15px;
 }
 
 .search-btn-block>button:hover {
   cursor: pointer;
 }
 
-.search-btn-block>button {
+.search-btn-block>button:not([class]) {
   background: #0066ff;
   border-radius: 8px;
   padding: 10px 16px;
@@ -98,8 +147,28 @@ a:hover{
   line-height: 18px;
   font-weight: 400;
 }
-
-/* 검색 결과프레임 */
+	/*검색 초기화 버튼  */
+	.reset {
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  border: 1px solid #D0D5DD;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.div {
+  color: #606060;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 400;
+  position: relative;
+  align-items: center;
+}
 
 /* table */
 .content-wrapper {

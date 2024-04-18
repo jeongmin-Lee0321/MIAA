@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.miaa.dao.InquiryDao;
 import com.tech.miaa.dto.AdminInquiryDto;
+import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.dto.InquiryDto;
 import com.tech.miaa.serviceInter.MypageCustomerInquiryServiceInter;
 import com.tech.miaa.vopage.PageVO2;
@@ -172,7 +173,7 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		String id = (String) map.get("userId");
 
 		// 페이징 처리를 위한 pageVo 가져오기-(현재페이지를 가져와서 현재페이지경우의수를 정한후 PageVo를 셋팅)
@@ -183,7 +184,13 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
 		int rowStart = pageVo.getRowStart();
 		int rowEnd = pageVo.getRowEnd();
-
+		
+		//전달받은 검색 조건 세팅
+		set_search_dto(model,pageVo);
+		
+		Map<String,Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("id", id);
+		daoMap.put("dto", dto);
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 		ArrayList<AdminInquiryDto> list = null;
 		if (rowStart == 0 && rowEnd == 0) {
@@ -191,14 +198,26 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 
 		} else {
 			try {
-				list = dao.inquiry_list(id, rowStart, rowEnd);
+				list = dao.inquiry_list(daoMap);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}		
+			model.addAttribute("search", dto);
 			model.addAttribute("list", list);
 
+	}
+
+	private void set_search_dto(Model model, PageVO2 pageVo) {
+		Map<String, Object> map = model.asMap();
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
+		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
+		int rowStart = pageVo.getRowStart();
+		int rowEnd = pageVo.getRowEnd();
+		dto.setRowEnd(rowEnd);
+		dto.setRowStart(rowStart);
+		
 	}
 
 	@Override
@@ -210,13 +229,18 @@ public class InquiryService implements MypageCustomerInquiryServiceInter {
 		Map<String, Object> map = model.asMap();
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		String currPage = request.getParameter("currPage");
 
 		// 토탈페이지 먼저 구하기
+		Map<String,Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("id", id);
+		daoMap.put("dto", dto);
+		
 		InquiryDao dao = sqlSession.getMapper(InquiryDao.class);
 
 		try {
-			total = dao.get_total(id);
+			total = dao.get_total(daoMap);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
