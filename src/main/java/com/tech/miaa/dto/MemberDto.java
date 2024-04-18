@@ -23,6 +23,7 @@ public class MemberDto {
 	private String user_detailaddress;
 	
 	private String user_grade;
+	private String user_tel;
 	private String user_join_date;
 	private String user_last_login;
 	
