@@ -133,6 +133,21 @@
 			</if>
 		</trim>
 	</select>
+	<select id="inquiry_detail_page" resultMap="adminInquiry">
+		SELECT USER_ID ,
+		U.BOARD_NUM ,
+		BOARD_TITLE ,
+		BOARD_CONTENT ,
+		TO_CHAR(BOARD_REGISTRATION_DATE,'YYYY-MM-DD') BOARD_REGISTRATION_DATE ,
+		BOARD_REPLY_STATUS ,
+		BOARD_FILESRC,
+		NVL(TO_CHAR(BOARD_REPLY_DATE,'YYYY-MM-DD'),'-') BOARD_REPLY_DATE
+		,NVL(BOARD_REPLY,'-') BOARD_REPLY
+		,NVL(ADMIN_ID,'-') ADMIN_ID
+		,A.BOARD_NUM AS A_BOARD_NUM
+		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
+		ON U.BOARD_NUM = A.BOARD_NUM WHERE U.BOARD_NUM=#{param1}
+	</select>
 	<select id="inquiry_write_page" resultMap="adminInquiry">
 		SELECT USER_ID ,
 		U.BOARD_NUM ,
@@ -148,4 +163,13 @@
 		FROM USER_INQUIRY_BOARD U FULL OUTER JOIN ADMIN_INQUIRY_BOARD A
 		ON U.BOARD_NUM = A.BOARD_NUM WHERE U.BOARD_NUM=#{param1}
 	</select>
+	<update id="inquiry_write1">
+		UPDATE ADMIN_INQUIRY_BOARD SET BOARD_REPLY_DATE = SYSTIMESTAMP, BOARD_REPLY = #{param3} ,ADMIN_ID=#{param2}  WHERE BOARD_NUM = #{param1}
+	</update>
+	<update id="inquiry_write2">
+		UPDATE USER_INQUIRY_BOARD SET BOARD_REPLY_STATUS = '답변완료' WHERE BOARD_NUM = #{param1}
+	</update>
+	<delete id="inquiry_delete">
+		DELETE FROM USER_INQUIRY_BOARD WHERE BOARD_NUM = #{param1}
+	</delete>
 </mapper>

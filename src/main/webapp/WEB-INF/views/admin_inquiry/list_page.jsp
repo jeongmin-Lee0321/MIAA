@@ -8,65 +8,63 @@
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	var chkObj = document.getElementsByName("RowCheck");
-	var rowCnt = chkObj.length;
-	
-	$("input[name='allCheck']").click(function(){
-		var chk_listArr = $("input[name='RowCheck']");
-		for (var i=0; i<chk_listArr.length; i++){
-			chk_listArr[i].checked = this.checked;
-		}
-	});
-	$("input[name='RowCheck']").click(function(){
-		if($("input[name='RowCheck']:checked").length == rowCnt){
-			$("input[name='allCheck']")[0].checked = true;
-		}
-		else{
-			$("input[name='allCheck']")[0].checked = false;
-		}
-	});
-});
-function deleteValue(){
-	var url = "delete";    // Controller로 보내고자 하는 URL
-	var valueArr = new Array();
-    var list = $("input[name='RowCheck']");
-    for(var i = 0; i < list.length; i++){
-        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
-            valueArr.push(list[i].value);
+
+$(document).ready(function(){
+    let checkedList = $("input[name='RowCheck']");
+    let allCheck = $("input[name='allCheck']");
+    
+    //allcheck에 따라 rowcheck의 체크박스 상태 변화(해체와 체크가 둘다 true false로 각각 적용됨)
+    allCheck.click(function(){
+        checkedList.each(function(){
+        	// jquery 객체인 allCheck의 dom요소에 접근 allCheck[0]
+        	// allCheck[0]의 체크상태를 각 rowCheck 체크박스의 상태에 적용
+            this.checked = allCheck[0].checked;
+        });
+    }); 
+    
+    //rowcheck의 체크박스가 하나라도 해제되면 allcheck도 해제,전체 선택일때만 allcheck가 체크됨
+    checkedList.click(function(){
+    	if($("input[name='RowCheck']:checked").length == checkedList.length){
+    		allCheck[0].checked = true;
+    	}else{
+    		allCheck[0].checked = false;
+    	}
+    });
+    
+    //삭제버튼
+    $("#btn-delete").click(function() {
+        // 선택된 체크박스의 값을 담을 배열을 생성
+        let checkedValues = [];
+
+        // 선택된 체크박스의 값을 배열에 추가
+        $("input[name='RowCheck']:checked").each(function() {
+            checkedValues.push($(this).val());
+        });
+				
+        // 만약 선택된 체크박스가 없는 경우 아무 작업도 수행하지 않음
+        if (checkedValues.length === 0) {
+            alert("삭제할 항목을 선택해주세요.");
+            return;
         }
-    }
-    if (valueArr.length == 0){
-    	alert("선택된 글이 없습니다.");
-    }
-    else{
-		var chk = confirm("정말 삭제하시겠습니까?");
-		
-		if(chk)
-			{
-		$.ajax({
-		    url : url,                    // 전송 URL
-		    type : 'POST',                // POST 방식
-		    traditional : true,
-		    data : {
-		    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
-		    },
-            success: function(jdata){
-                if(jdata = 1) {
-                    alert("삭제 성공");
-                    location.replace("mypage_customer_inquiry_list_page") //페이지 새로고침
-                }
-                else{
-                    alert("삭제 실패");
-                }
-            }
-		});
-			}
-		else{
-			alert("삭제 취소");
-		}
-	}
-}
+        console.log(checkedValues);
+        // 삭제를 확인하는 경고창을 띄우고, 확인 시 서버로 선택된 항목을 전송
+        let confirmDelete = confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            // 서버로 데이터를 전송합니다.
+        	$.ajax({
+        	    url: "admin_inquiry_delete_ajax",
+        	    method: "POST",
+        	    data: {chkVal : checkedValues},
+        	    success: function() {
+        	        // 서버로부터 응답을 받은 후 실행할 코드를 작성합니다.
+        	        // 예를 들어, 삭제가 성공했을 때 다시 로드하거나 리다이렉트할 수 있습니다.
+        	    }
+        	});
+        }
+    });
+    
+});
+
 </script>
 <body>
 	<div class="main-body">
@@ -84,9 +82,9 @@ function deleteValue(){
 						</div>
 						<div class="searchbar-content">
 							<input type="date" name="START_YMD" id="START_YMD"
-							<c:if test="${search ne null}">value="${search.START_YMD }"</c:if>> <span>~</span>
-							<input type="date" name="END_YMD" id="END_YMD"
-							<c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
+								<c:if test="${search ne null}">value="${search.START_YMD }"</c:if>>
+							<span>~</span> <input type="date" name="END_YMD" id="END_YMD"
+								<c:if test="${search ne null}">value="${search.END_YMD }"</c:if>>
 							<div class="form-date-btn" id="date-today">
 								<div class="div-placeholder">
 									<div class="div">오늘</div>
@@ -126,12 +124,12 @@ function deleteValue(){
 						</div>
 						<div class="searchbar-content">
 							<select name="reply_status" id="reply_status">
-								<option value="all" 
-								<c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체</option>
-								<option value="ing" 
-								<c:if test="${search.reply_status eq 'ing'}">selected</c:if>>처리중</option>
-								<option value="done" 
-								<c:if test="${search.reply_status eq 'done'}">selected</c:if>>답변완료</option>
+								<option value="all"
+									<c:if test="${search.reply_status eq 'all'}">selected</c:if>>전체</option>
+								<option value="ing"
+									<c:if test="${search.reply_status eq 'ing'}">selected</c:if>>처리중</option>
+								<option value="done"
+									<c:if test="${search.reply_status eq 'done'}">selected</c:if>>답변완료</option>
 							</select>
 						</div>
 					</div>
@@ -140,16 +138,17 @@ function deleteValue(){
 						<div class="searchbar-title">
 							<select name="search_type" id="search_type">
 								<option value="title"
-								<c:if test="${search.search_type eq 'title'}">selected</c:if>>제목</option>
-								<option value="user" 
-								<c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자</option>
-								<option value="admin" 
-								<c:if test="${search.search_type eq 'admin'}">selected</c:if>>답변자</option>
+									<c:if test="${search.search_type eq 'title'}">selected</c:if>>제목</option>
+								<option value="user"
+									<c:if test="${search.search_type eq 'user'}">selected</c:if>>문의자</option>
+								<option value="admin"
+									<c:if test="${search.search_type eq 'admin'}">selected</c:if>>답변자</option>
 							</select>
 						</div>
 						<div class="searchbar-content">
-							<input type="search" name="search_content" id="search_content" style="min-width: 300px;"
-							<c:if test="${search ne null or search.search_content ne ''}">value="${search.search_content}"</c:if>>
+							<input type="search" name="search_content" id="search_content"
+								style="min-width: 300px;"
+								<c:if test="${search ne null or search.search_content ne ''}">value="${search.search_content}"</c:if>>
 						</div>
 					</div>
 
@@ -174,8 +173,7 @@ function deleteValue(){
 						</div>
 					</div>
 					<div class="list-control-container">
-						<button class="btn-list" id="btn-delete" onclick="deleteValue();"
-							style="cursor: pointer;">삭제하기</button>
+						<button class="btn-list" id="btn-delete" style="cursor: pointer;">삭제하기</button>
 					</div>
 
 				</div>
@@ -198,11 +196,29 @@ function deleteValue(){
 							<td><input type="checkbox" name="RowCheck"
 								value="${list.userInquiry.board_num}" class="table-check-box"></td>
 							<td>${list.userInquiry.board_num}</td>
-							<td class="table-title"><a href="admin_inquiry_write_page?board_num=${list.userInquiry.board_num}">${list.userInquiry.board_title}</a></td>
+							<td class="table-title" id="detail-page"><c:choose>
+									<c:when test="${search ne null }">
+										<a
+											href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}&START_YMD=${search.START_YMD }&END_YMD=${search.END_YMD }&reply_status=${search.reply_status}&search_type=${search.search_type}&search_content=${search.search_content}">
+											${list.userInquiry.board_title}</a>
+									</c:when>
+									<c:otherwise>
+										<a
+											href="admin_inquiry_detail_page?board_num=${list.userInquiry.board_num}&currPage=${pageVo.page}">
+											${list.userInquiry.board_title}</a>
+									</c:otherwise>
+								</c:choose></td>
 							<td>${list.userInquiry.user_id}</td>
-							<td>${list.userInquiry.board_reply_status}</td>
+							<c:choose>
+								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+									<td style="color: #0066ff">${list.userInquiry.board_reply_status}</td>
+								</c:when>
+								<c:otherwise>
+									<td>${list.userInquiry.board_reply_status}</td>
+								</c:otherwise>
+							</c:choose>
 							<td>${list.userInquiry.board_registration_date}</td>
-							<td>${list.board_reply }</td>
+							<td>${list.board_reply_date }</td>
 							<td>${list.admin_id }</td>
 						</tr>
 					</c:forEach>
@@ -267,11 +283,15 @@ function deleteValue(){
 			
 		    // inquiry-form의 모든 매개변수를 가져와서 URL에 추가
 		    var form = document.getElementById("inquiry-form");
+		    
+		 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+	      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+	      
 		    var formData = new FormData(form);
-		    formData.append('currPage', currpage); // currPage를 추가
-		    for (var pair of formData.entries()) {
-		        newPath += '&' + pair[0] + '=' + pair[1];
-		    }
+	      // FormData의 각 항목에 대해 반복
+	        formData.forEach(function(value, key) {
+	            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+	        });
 		    
 			window.location.href = newPath; // 새 경로로 페이지 이동
 			
@@ -321,7 +341,7 @@ function deleteValue(){
 	
 	</script>
 
-<script>
+	<script>
     $(document).ready(function() {
         $(".reset").click(function(event) {
             event.preventDefault(); // 폼의 기본 동작 중지
@@ -332,6 +352,8 @@ function deleteValue(){
             $('#inquiry-form select').prop('selectedIndex', 0);
         });
     });
+    
 </script>
+
 </body>
 </html>
