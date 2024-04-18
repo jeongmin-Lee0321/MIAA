@@ -56,7 +56,7 @@ $(document).ready(function(){
         	    method: "POST",
         	    dataType : "json",
         	   traditional: true,
-         	   data: {chkVal : checkedValues},
+         	   data: {"chkVal" : checkedValues},
         	    success: function(resultCnt) {
         	    	if(resultCnt >= 1) {
         	    		//url 주소설정
