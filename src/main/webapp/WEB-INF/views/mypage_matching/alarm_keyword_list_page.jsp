@@ -16,29 +16,29 @@
 	 <!-- 검색창과 검색결과 -->
         
 			<div class="searchbar-container">
-				<form action="mypage_post_list_page">				
+				<!-- <form action=""> -->				
 					<div class="searchbar-select-group">
 					<div style="display: flex;">
-					<button class="btn-list" id="btn-search" onclick="#"
+					<button class="btn-list" id="btn-search-all" onclick="location.href='mypage_matching_alarm_list_page'"
 							style="cursor: pointer;">
-							조회<img src="resources/img/search.png" alt="">
+							전체보기
 						</button>
-					<button class="btn-list" id="btn-search" onclick="#"
+					<button class="btn-list" id="btn-search-item" onclick="location.href='mypage_matching_alarm_item_list_page'"
 							style="cursor: pointer;">
-							조회<img src="resources/img/search.png" alt="">
+							물건
 						</button>
-					<button class="btn-list" id="btn-search" onclick="#"
+					<button class="btn-list" id="btn-search-ani" onclick="location.href='mypage_matching_alarm_ani_list_page'"
 							style="cursor: pointer;">
-							조회<img src="resources/img/search.png" alt="">
+							동물
 						</button>
-					<button class="btn-list" id="btn-search" onclick="#"
+					<button class="btn-list" id="btn-search-key" onclick="location.href='mypage_matching_alarm_keyword_list_page'"
 							style="cursor: pointer;">
-							조회<img src="resources/img/search.png" alt="">
+							키워드목록
 						</button>
 					</div>
 						<div style="display: flex;">
 						<div class="searchbar-content">
-							<select name="reply_status" id="reply_status" style="border: 1px solid #D8D8D8;">
+							<select id="reply_status" style="border: 1px solid #D8D8D8;">
 								<option>제목+내용</option> 
 								<option>제목</option> 
 								<option>내용</option> 								
@@ -47,6 +47,10 @@
 						<div class="searchbar-content">
 							<input type="text" style="border: 1px solid #D8D8D8; width: 300px;" placeholder="Search">
 						</div>
+						<button class="btn-list" id="btn-search-alarm" onclick="#"
+							style="cursor: pointer;">
+							<img src="resources/img/bell-off.png" alt="">알림제거
+						</button>
 						<button class="btn-list" id="btn-search" onclick="#"
 							style="cursor: pointer;">
 							조회<img src="resources/img/search.png" alt="">
@@ -54,7 +58,7 @@
 						</div>
 						
 					</div>
-				</form>
+				<!-- </form> -->
 			</div>
 			
 			<!-- 검색창과 검색결과 끝 -->
@@ -110,7 +114,7 @@
 					
 				
 					<div class="registrationed_alarm">
-					<span><strong>에어팟 3세대</strong></span>
+					<span><strong><a href="mypage_matching_alarm_detail_list_page">에어팟 3세대</a></strong></span>
 						</div>
 					<div class="registrationed_alarm_keywords_list">
 							<span class="item_tag_01">물건</span>
@@ -132,7 +136,7 @@
 					
 				
 					<div class="registrationed_alarm">
-					<span><strong>에어팟 3세대</strong></span>
+					<span><strong><a href="mypage_matching_alarm_detail_list_page">에어팟 3세대</a></strong></span>
 						</div>
 					<div class="registrationed_alarm_keywords_list">
 							<span class="item_tag_01">물건</span>
@@ -154,7 +158,7 @@
 					
 				
 					<div class="registrationed_alarm">
-					<span><strong>에어팟 3세대</strong></span>
+					<span><strong><a href="mypage_matching_alarm_detail_list_page">에어팟 3세대</a></strong></span>
 						</div>
 					<div class="registrationed_alarm_keywords_list">
 							<span class="item_tag_01">물건</span>

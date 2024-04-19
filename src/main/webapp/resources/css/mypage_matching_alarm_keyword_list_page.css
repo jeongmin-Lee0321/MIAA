@@ -280,7 +280,7 @@ span.caption-total{
 }
 
 .btn-list {
-	border-radius: 8px;
+	/* border-radius: 8px; */
 	padding: 10px 16px;
 	display: flex;
 	flex-direction: row;
@@ -294,6 +294,7 @@ span.caption-total{
 }
 
 #btn-delete {
+	border-radius: 8px;
 	margin-right: 10px;
 	background-color: #7F56D9;
 	color: white;
@@ -301,6 +302,7 @@ span.caption-total{
 }
 
 #btn-write {
+	border-radius: 8px;
 	margin-right: 10px;
 	background-color: white;
 	color: black;
@@ -460,6 +462,97 @@ ul.pagelist-container>li:not([class]) span.currpage {
     padding: 0.5em;
 }
 #btn-search {
+	border-radius: 8px;
+	padding: 6px 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	color: #ffffff;
+	border-style: none;
+	background-color: white;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+}
+#btn-search-all {
+	border-bottom-left-radius: 8px;
+	border-top-left-radius: 8px;
+	padding: 6px 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	color: #ffffff;
+	/* border-style: none; */
+	background-color: white;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+	border-right: none;
+}
+#btn-search-item {
+	
+	padding: 6px 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	color: #ffffff;
+	/* border-style: none; */
+	background-color: white;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+	border-right: none;
+}
+#btn-search-ani {
+	
+	padding: 6px 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	color: #ffffff;
+	/* border-style: none; */	
+	background-color: white;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+	border-right: none;
+}
+#btn-search-key {
+	
+	border-bottom-right-radius: 8px;
+	border-top-right-radius: 8px;
+	padding: 6px 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	color: #ffffff;
+	border-style: none;	
+	background-color: #FAFAFA;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+}
+#btn-search-alarm {
 	border-radius: 8px;
 	padding: 6px 14px;
 	display: flex;
