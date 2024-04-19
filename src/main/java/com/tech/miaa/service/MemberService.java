@@ -155,10 +155,11 @@ public class MemberService implements MemberServiceInter {
 		String pw2 = request.getParameter("pw2");
 		String shpwd = ""; String bcpwd = "";
 		String email = request.getParameter("email");
+		String tel = request.getParameter("tel");
 		String postcode = request.getParameter("postcode");
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
-		String tel = request.getParameter("tel");
+		System.out.println(id);
 		String result = "redirect:mypageform";
 		
 		try {
@@ -167,7 +168,7 @@ public class MemberService implements MemberServiceInter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(bcpwd);
+
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		dao.modify_account(id, shpwd, bcpwd, email, postcode, address, detailAddress,tel);
 		

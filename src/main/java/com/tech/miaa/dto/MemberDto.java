@@ -21,7 +21,6 @@ public class MemberDto {
 	private int user_postcode;
 	private String user_address;
 	private String user_detailaddress;
-	
 	private String user_grade;
 	private String user_tel;
 	private String user_join_date;
