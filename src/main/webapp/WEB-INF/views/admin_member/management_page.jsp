@@ -161,15 +161,15 @@
                     <span>등급</span>
                 </div>
                 <div class="searchbar-content">
-                    <select name="member_grade" id="reply_status">
+                    <select name="member_grade" id="member_grade">
                         <option value="all"
                                 <c:if test="${search.member_grade eq 'all'}">selected</c:if>>전체
                         </option>
-                        <option value="member"
-                                <c:if test="${search.member_grade eq 'member'}">selected</c:if>>일반회원
+                        <option value="일반회원"
+                                <c:if test="${search.member_grade eq '일반회원'}">selected</c:if>>일반회원
                         </option>
-                        <option value="admin"
-                                <c:if test="${search.member_grade eq 'admin'}">selected</c:if>>관리자
+                        <option value="관리자"
+                                <c:if test="${search.member_grade eq '관리자'}">selected</c:if>>관리자
                         </option>
                     </select>
                 </div>
@@ -213,7 +213,7 @@
             <div class="table-caption-wrapper">
                 <div class="talbe-caption-container">
                     <div class="table-caption">
-                        <span class="caption-total">${pageVo.totRow}개</span><span>의 문의내역이 있습니다</span>
+                        <span class="caption-total">총 ${pageVo.totRow}개</span><span>의 아이디가 있습니다</span>
                     </div>
                 </div>
                 <div class="list-control-container">
