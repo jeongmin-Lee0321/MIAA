@@ -1,4 +1,3 @@
-
 package com.tech.miaa.service;
 
 import java.net.URLEncoder;
@@ -150,15 +149,11 @@ public class AdminMemberService implements AdminMemberServiceInter {
         SqlSession sqlSession = (SqlSession) map.get("sqlSession");
         AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
 
-        pageVo = get_pagevo(model, pageVo);
-        int rowStart = pageVo.getRowStart();
-        int rowEnd = pageVo.getRowEnd();
+//        pageVo = get_pagevo(model, pageVo);
         set_search_dto(model, pageVo);
-        //
-//		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
         MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
         AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
-//		ArrayList<AdminInquiryDto> list = null;
+
         ArrayList<MemberDto> memberDtos = memberDao.getMembers();
         ArrayList<AdminMemberDto> adminMemberDtos = adminMemberDao.getAdminMembers();
         ArrayList<MemberDto> totalDto = new ArrayList<>(memberDtos);
@@ -170,40 +165,29 @@ public class AdminMemberService implements AdminMemberServiceInter {
             tmp.setUser_grade("관리자");
             totalDto.add(tmp);
         }
-        if (dto.getJOIN_START_YMD() != null && dto.getJOIN_END_YMD() != null &&
-                dto.getSTART_YMD() != null && dto.getEND_YMD() != null && dto.getMember_grade() != null &&
-                dto.getSearch_type() != null && dto.getSearch_content() != null) {
+
+        if (dto.getJOIN_START_YMD() != null && dto.getJOIN_END_YMD() != null && dto.getSTART_YMD() != null && dto.getEND_YMD() != null && dto.getMember_grade() != null && dto.getSearch_type() != null && dto.getSearch_content() != null) {
             List<MemberDto> tmp = new ArrayList<>();
             List<MemberDto> membertmp = totalDto.stream().filter(x -> x.getUser_grade().equals("일반회원")).collect(Collectors.toList());
             List<MemberDto> admintmp = totalDto.stream().filter(x -> x.getUser_grade().equals("관리자")).collect(Collectors.toList());
 
 
             if (!dto.getSearch_content().isEmpty()) {
-                membertmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
-                admintmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
+                membertmp = membertmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
+                admintmp = admintmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
             }
 
             if (!dto.getJOIN_START_YMD().isEmpty() && !dto.getJOIN_END_YMD().isEmpty()) {
-                membertmp.stream().filter(x ->
-                        Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) >=
-                                Integer.parseInt(dto.getJOIN_START_YMD().replace("-", "")) &&
-                                Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) <=
-                                        Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList());
+                membertmp = membertmp.stream().filter(x -> Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) >= Integer.parseInt(dto.getJOIN_START_YMD().replace("-", "")) && Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) <= Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList());
             }
 
             if (!dto.getSTART_YMD().isEmpty() && !dto.getEND_YMD().isEmpty()) {
-                membertmp.stream().filter(x ->
-                        Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >=
-                                Integer.parseInt(dto.getSTART_YMD().replace("-", "")) &&
-                                Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <=
-                                        Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList());
+                membertmp = membertmp.stream().filter(x -> Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >= Integer.parseInt(dto.getSTART_YMD().replace("-", "")) && Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <= Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList());
             }
 
             if (!dto.getMember_grade().isEmpty()) {
-                if (dto.getMember_grade().equals("일반회원"))
-                    tmp.addAll(membertmp);
-                else if (dto.getMember_grade().equals("관리자"))
-                    tmp.addAll(admintmp);
+                if (dto.getMember_grade().equals("일반회원")) tmp.addAll(membertmp);
+                else if (dto.getMember_grade().equals("관리자")) tmp.addAll(admintmp);
                 else {
                     tmp.addAll(admintmp);
                     tmp.addAll(membertmp);
@@ -213,23 +197,25 @@ public class AdminMemberService implements AdminMemberServiceInter {
             totalDto.clear();
             totalDto.addAll(tmp);
         }
-        if (rowStart == 0 && rowEnd == 0) {
-            System.out.println("get_pagevo 문제발생");
-
-        } else {
-//			try {
-//				list = totalDto;
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+        pageVo = get_pagevo(totalDto, model, pageVo);
+        List<MemberDto> displayDto = new ArrayList<>();
+        System.out.println("totalDto.size()"+totalDto.size());
+        System.out.println("totalDto.size()"+pageVo.getPage());
+        System.out.println("totalDto.size()"+totalDto.size());
+        System.out.println("totalDto.size()"+totalDto.size());
+        if (totalDto.size()< pageVo.getPage()*pageVo.getDisplayRowCount()){
+            displayDto = totalDto.subList((pageVo.getPage()-1)*pageVo.getDisplayRowCount(), totalDto.size());
+        }else {
+            displayDto = totalDto.subList((pageVo.getPage()-1)*pageVo.getDisplayRowCount(),pageVo.getPage()*pageVo.getDisplayRowCount()-1);
         }
+        dto.setRowEnd(pageVo.getRowEnd());
+        dto.setRowStart(pageVo.getRowStart());
 
         model.addAttribute("search", dto);
-        model.addAttribute("list", totalDto);
+        model.addAttribute("list", displayDto);
     }
 
-    public PageVO get_pagevo(Model model, PageVO pageVo) {
+    public PageVO get_pagevo(ArrayList<MemberDto> dto,Model model, PageVO pageVo) {
         int page = 0; // 현재 페이지
         int total = 0; // 모든 게시물 갯수
         int displayRowCount = 6; // 보여질 페이지 갯수
@@ -240,11 +226,11 @@ public class AdminMemberService implements AdminMemberServiceInter {
         String currPage = request.getParameter("currPage");
 
         // 토탈페이지 먼저 구하기
-        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
+//        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+//        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
 
         try {
-            total = memberDao.getMembers().size() + adminMemberDao.getAdminMembers().size();
+            total = dto.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -268,7 +254,6 @@ public class AdminMemberService implements AdminMemberServiceInter {
         pageVo.pageCalculate(total);
 
         System.out.println("전달받은 현재페이지" + currPage);
-
         return pageVo;
     }
 
@@ -277,10 +262,10 @@ public class AdminMemberService implements AdminMemberServiceInter {
         HttpServletRequest request = (HttpServletRequest) map.get("request");
         AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
         // 만들어진 PageVo로 글목록의 star와 end를 가져옴
-        int rowStart = pageVo.getRowStart();
-        int rowEnd = pageVo.getRowEnd();
-        dto.setRowEnd(rowEnd);
-        dto.setRowStart(rowStart);
+//        int rowStart = pageVo.getRowStart();
+//        int rowEnd = pageVo.getRowEnd();
+//        dto.setRowEnd(rowEnd);
+//        dto.setRowStart(rowStart);
 
         //param-> null 이면 최초 화면
 
@@ -292,14 +277,6 @@ public class AdminMemberService implements AdminMemberServiceInter {
         String member_grade = request.getParameter("member_grade");
         String search_type = request.getParameter("search_type");
         String search_content = request.getParameter("search_content");
-
-        System.out.println("JOIN_START_YMD : " + JOIN_START_YMD);
-        System.out.println("JOIN_END_YMD : " + JOIN_END_YMD);
-        System.out.println("START_YMD : " + START_YMD);
-        System.out.println("END_YMD : " + END_YMD);
-        System.out.println("member_grade : " + member_grade);
-        System.out.println("search_type : " + search_type);
-        System.out.println("search_content : " + search_content);
 
         dto.setJOIN_START_YMD(JOIN_START_YMD);
         dto.setJOIN_END_YMD(JOIN_END_YMD);
