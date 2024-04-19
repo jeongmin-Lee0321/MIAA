@@ -18,7 +18,7 @@ public interface MemberDao {
 	public String searchpw2(String id, String email);
 	public int login1(String id, String bcpwd);
 	public MemberDto login2(String id, String bcpwd);
+	public MemberDto getMember(String id);
 	public ArrayList<MemberDto> getMembers();
 	public void login_date_update(String id);
-
 }

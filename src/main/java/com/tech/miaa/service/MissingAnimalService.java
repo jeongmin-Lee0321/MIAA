@@ -153,7 +153,6 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 			String upr_cd="C"+dto.getUpr_cd();
 			dto.setUpr_cd(pc.getPrdNameByCode(upr_cd));
 		}
-		
 		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos);
 	}
 	

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.tech.miaa.dao.MemberDao;
+import com.tech.miaa.dto.MemberDto;
 import com.tech.miaa.service.MemberService;
 import com.tech.miaa.serviceInter.MemberServiceInter;
 
@@ -50,6 +52,10 @@ public class MemberController {
 	}
 	@RequestMapping("mypage_modify_account_page")
 	public String mypage_modify_account_page(HttpServletRequest request, Model model) {
+		String userid=request.getParameter("user_id");
+		System.out.println(userid);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); MemberDto dto = dao.getMember(userid);
+		model.addAttribute("dto", dto);
 		return "login.mypage_modify_account_page.회원정보수정.3";
 	}
 
@@ -108,9 +114,7 @@ public class MemberController {
 	}
 	@RequestMapping("modify_account")
 	public String modify_account(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
-		model.addAttribute("request", request); 
-		model.addAttribute("sqlSession", sqlSession);
-		model.addAttribute("userId",userId);
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
 		memberServiceInter=new MemberService();
 		
 		String result=memberServiceInter.modify_account(model);

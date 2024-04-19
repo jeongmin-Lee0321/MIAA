@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link rel="stylesheet" href="resources/css/mypage_delete_account_page.css" />
 </head>
 <body>
