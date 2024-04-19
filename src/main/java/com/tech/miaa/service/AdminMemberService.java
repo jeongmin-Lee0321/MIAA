@@ -176,46 +176,42 @@ public class AdminMemberService implements AdminMemberServiceInter {
             List<MemberDto> tmp = new ArrayList<>();
             List<MemberDto> membertmp = totalDto.stream().filter(x -> x.getUser_grade().equals("일반회원")).collect(Collectors.toList());
             List<MemberDto> admintmp = totalDto.stream().filter(x -> x.getUser_grade().equals("관리자")).collect(Collectors.toList());
-//
-//            if (!dto.getMember_grade().isEmpty()) {
-//                if (dto.getMember_grade().equals("일반회원"))
-//                    membertmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
-//                else if (dto.getMember_grade().equals("관리자"))
-//                    admintmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
-//                else
-//                    tmp.addAll(totalDto.stream().filter(x -> x.getUser_grade().equals(dto.getMember_grade())).collect(Collectors.toList()));
-//
-//            }
+
 
             if (!dto.getSearch_content().isEmpty()) {
-                Boolean a = tmp.addAll(totalDto.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList()));
-                System.out.println("check1:" + a);
+                membertmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
+                admintmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
             }
-//
-            if (!dto.getJOIN_START_YMD().isEmpty() && !dto.getJOIN_END_YMD().isEmpty()) {
 
-                Boolean a = tmp.addAll(totalDto.stream().filter(x ->
+            if (!dto.getJOIN_START_YMD().isEmpty() && !dto.getJOIN_END_YMD().isEmpty()) {
+                membertmp.stream().filter(x ->
                         Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) >=
                                 Integer.parseInt(dto.getJOIN_START_YMD().replace("-", "")) &&
                                 Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) <=
-                                        Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList()));
-                System.out.println("check2:"+a);
-
+                                        Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList());
             }
-//            System.out.println("222222222222222222222222");
-//
-//            if (!dto.getSTART_YMD().isEmpty() && !dto.getEND_YMD().isEmpty()) {
-//                Boolean a =tmp.addAll(totalDto.stream().filter(x ->
-//                        Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >=
-//                                Integer.parseInt(dto.getSTART_YMD().replace("-", "")) &&
-//                                Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <=
-//                                        Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList()));
-//                System.out.println("check3:"+a);
-//            }
-//            System.out.println("333333333333333");
+
+            if (!dto.getSTART_YMD().isEmpty() && !dto.getEND_YMD().isEmpty()) {
+                membertmp.stream().filter(x ->
+                        Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >=
+                                Integer.parseInt(dto.getSTART_YMD().replace("-", "")) &&
+                                Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <=
+                                        Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList());
+            }
+
+            if (!dto.getMember_grade().isEmpty()) {
+                if (dto.getMember_grade().equals("일반회원"))
+                    tmp.addAll(membertmp);
+                else if (dto.getMember_grade().equals("관리자"))
+                    tmp.addAll(admintmp);
+                else {
+                    tmp.addAll(admintmp);
+                    tmp.addAll(membertmp);
+                }
+            }
+
             totalDto.clear();
-            totalDto.addAll(membertmp);
-            totalDto.addAll(admintmp);
+            totalDto.addAll(tmp);
         }
         if (rowStart == 0 && rowEnd == 0) {
             System.out.println("get_pagevo 문제발생");
