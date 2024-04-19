@@ -1,12 +1,10 @@
 package com.tech.miaa.dao;
 
 import java.util.ArrayList;
-
-import org.springframework.ui.Model;
+import java.util.List;
 
 import com.tech.miaa.dto.AdminInquiryDto;
 import com.tech.miaa.dto.AdminInquirySearchDto;
-import com.tech.miaa.vopage.PageVO;
 
 public interface AdminInquiryDao {
 
@@ -17,4 +15,5 @@ public interface AdminInquiryDao {
 	public int inquiry_write1(String board_num, String id, String board_reply);
 	public int inquiry_write2(String board_num);
 	public int inquiry_delete(String board_num);
+	public int inquiry_delete_for_ajax(List<String> chkValList);
 }

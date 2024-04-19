@@ -10,6 +10,7 @@ public interface AdminInquiryServiceInter {
 	public PageVO get_pagevo(Model model,PageVO pageVo);
 	public void set_search_dto(Model model, PageVO pageVo);
 	public void inquiry_delete(Model model);
+	public int inquiry_delete_for_ajax(Model model);
 	public void inquiry_write_page(Model model);
 	public void inquiry_write(Model model);
 	public void inquiry_detail_page(Model model);
