@@ -23,4 +23,109 @@
 	<select id="getAdminMembers" resultType="com.tech.miaa.dto.AdminMemberDto">
 		SELECT * FROM MIAA_ADMIN
 	</select>
+	
+		<resultMap id="JoinedMember"
+		type="com.tech.miaa.dto.AdminMemberDto">
+		<id property="user_id" column="A_USER_ID" />
+		<result property="user_email" column="A_USER_EMAIL" />
+		<association property="memeber"
+			javaType="com.tech.miaa.dto.MemberDto">
+			<id property="user_id" column="USER_ID" />
+			<result property="user_email" column="USER_EMAIL" />
+			<result property="user_postcode" column="USER_POSTCODE" />
+			<result property="user_address" column="USER_ADDRESS" />
+			<result property="user_grade" column="USER_GRADE" />
+			<result property="user_tel" column="USER_TEL" />
+			<result property="user_join_date" column="USER_JOIN_DATE" />
+			<result property="user_last_login" column="USER_LAST_LOGIN" />
+		</association>
+	</resultMap>
+
+	<sql id="login_date_select">
+		<trim prefix="AND (" suffix=")">
+			<choose>
+				<when test="START_YMD != '' and END_YMD != ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					BETWEEN
+					#{START_YMD} AND #{END_YMD}
+				</when>
+				<when test="START_YMD == '' and END_YMD != ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&lt;=
+					#{END_YMD}
+				</when>
+				<when test="START_YMD != '' and END_YMD == ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&gt;=
+					#{START_YMD}
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<sql id="join_date_select">
+		<trim prefix="AND (" suffix=")">
+			<choose>
+				<when test="START_YMD != '' and END_YMD != ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					BETWEEN
+					#{START_YMD} AND #{END_YMD}
+				</when>
+				<when test="START_YMD == '' and END_YMD != ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&lt;=
+					#{END_YMD}
+				</when>
+				<when test="START_YMD != '' and END_YMD == ''">
+					TO_CHAR(U.BOARD_REGISTRATION_DATE,'YYYY-MM-DD')
+					&gt;=
+					#{START_YMD}
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<sql id="grad_select">
+		<trim prefix="AND (" suffix=")">
+			<choose>
+				<when test="reply_status == 'ing'">
+					BOARD_REPLY_STATUS = '처리중'
+				</when>
+				<when test="reply_status == 'done'">
+					BOARD_REPLY_STATUS = '답변완료'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<sql id="search_select">
+		<trim prefix="AND (" suffix=")">
+			<choose>
+				<when test="search_type == 'id'">
+					BOARD_TITLE like '%'||#{search_content}||'%'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<select id="getAdminMembers" resultMap="JoinedMember"
+		parameterType="com.tech.miaa.dto.AdminMemberSearchDto">
+		SELECT A.USER_ID AS A_USER_ID, A.USER_EMAIL AS
+		A_USER_EMAIL, M.USER_ID,
+		M.USER_EMAIL, USER_POSTCODE, USER_ADDRESS,
+		USER_DETAILADDRESS,
+		NVL(USER_GRADE,'관리자') USER_GRADE, USER_TEL,
+		NVL(TO_CHAR(USER_JOIN_DATE,'YYYY-MM-DD'),'-') USER_JOIN_DATE,
+		NVL(TO_CHAR(USER_LAST_LOGIN,'YYYY-MM-DD HH:MM:SS'),'-')
+		USER_LAST_LOGIN FROM MIAA_ADMIN A FULL OUTER JOIN MEMBER M ON
+		A.USER_ID = M.USER_ID
+	</select>
+	<select id="get_total" resultType="Integer" parameterType="com.tech.miaa.dto.AdminMemberSearchDto">
+	WITH A AS(SELECT USER_ID AS A_USER_ID, USER_EMAIL AS A_USER_EMAIL FROM
+	MIAA_ADMIN),
+	M AS(SELECT USER_ID, USER_EMAIL, USER_POSTCODE, USER_ADDRESS,
+	USER_DETAILADDRESS, USER_GRADE, USER_TEL, USER_JOIN_DATE,
+	USER_LAST_LOGIN FROM MEMBER)
+	SELECT COUNT(*) FROM A FULL OUTER JOIN M ON A_USER_ID = M.USER_ID
+	</select>
 </mapper>
