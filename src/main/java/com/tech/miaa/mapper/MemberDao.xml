@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MemberDao">
+<<<<<<< HEAD
     <insert id="join">
         INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',#{param8},SYSDATE,TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
     </insert>
@@ -41,4 +42,51 @@
     <update id="login_date_update">
         UPDATE MEMBER SET USER_LAST_LOGIN=SYSDATE WHERE USER_ID=#{param1}
     </update>
+=======
+	<insert id="join">
+		INSERT INTO MEMBER
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',SYSTIMESTAMP,SYSTIMESTAMP)
+	</insert>
+	<delete id="del_account">
+		DELETE FROM MEMBER WHERE USER_BCPWD = #{param1} AND USER_ID = #{param2}
+	</delete>
+	<update id="modify_account">
+		UPDATE MEMBER SET
+		USER_SHPWD=#{param2},USER_BCPWD=#{param3},USER_EMAIL=#{param4},USER_POSTCODE=#{param5},USER_ADDRESS=#{param6},USER_DETAILADDRESS=#{param7}
+		WHERE USER_ID = #{param1}
+	</update>
+	<select id="idcheck" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1}
+	</select>
+	<select id="emailcheck" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL=#{param1}
+	</select>
+	<select id="searchid" resultType="String">
+		SELECT USER_ID FROM MEMBER WHERE USER_EMAIL=#{param2}
+	</select>
+	<select id="searchpw1" resultType="String">
+		SELECT USER_BCPWD FROM MEMBER WHERE USER_ID=#{param1} AND
+		USER_EMAIL=#{param2}
+	</select>
+	<select id="searchpw2" resultType="String">
+		SELECT USER_SHPWD FROM MEMBER WHERE USER_ID=#{param1} AND
+		USER_EMAIL=#{param2}
+	</select>
+	<select id="login1" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
+	</select>
+	<select id="login2" resultType="com.tech.miaa.dto.MemberDto">
+		SELECT * FROM MEMBER WHERE USER_ID=#{param1} AND USER_BCPWD=#{param2}
+	</select>
+	<select id="getMembers" resultType="com.tech.miaa.dto.MemberDto">
+		SELECT USER_ID ,USER_SHPWD ,USER_BCPWD ,USER_EMAIL ,USER_POSTCODE
+		,USER_ADDRESS ,USER_DETAILADDRESS,USER_GRADE,
+		TO_CHAR(USER_JOIN_DATE, 'YYYY-MM-DD') USER_JOIN_DATE,
+		TO_CHAR(USER_LAST_LOGIN, 'YYYY-MM-DD HH:MM:SS') USER_LAST_LOGIN
+		FROM MEMBER
+	</select>
+	<update id="login_date_update">
+		UPDATE MEMBER SET USER_LAST_LOGIN=SYSTIMESTAMP WHERE USER_ID=#{param1}
+	</update>
+>>>>>>> release/MSW
 </mapper>

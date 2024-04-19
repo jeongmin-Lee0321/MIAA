@@ -88,6 +88,9 @@ public class MypageCustomerInquiryController {
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
 		String currpage=request.getParameter("currPage");
+		String START_YMD=request.getParameter("START_YMD");
+		String END_YMD=request.getParameter("END_YMD");
+		String reply_status=request.getParameter("reply_status");
 		
 
 		mypageCustomerInquiryServiceInter = new InquiryService();
@@ -95,6 +98,9 @@ public class MypageCustomerInquiryController {
 			AdminInquiryDto list = mypageCustomerInquiryServiceInter.detail_list(model);
 			model.addAttribute("list", list);
 			model.addAttribute("currPage",currpage);
+			model.addAttribute("START_YMD",START_YMD);
+			model.addAttribute("END_YMD",END_YMD);
+			model.addAttribute("reply_status",reply_status);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
