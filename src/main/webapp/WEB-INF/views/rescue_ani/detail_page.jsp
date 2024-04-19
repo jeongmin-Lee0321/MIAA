@@ -133,7 +133,7 @@
         <div class="info-name-container">
             <img src="resources/img/clipboard.png" alt="" class="info-icon">
             <span class="info-name">동물보호센터</span>
-            <button class="btn-map">지도로 위치 찾기</button>
+            <button class="btn-map" onclick="location.href='rescue_ani_detail_map?address=${dto.item.getCareAddr()}'">지도로 위치 찾기</button>
         </div>
         <table class="info-table">
             <tr>

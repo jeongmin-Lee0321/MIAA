@@ -35,12 +35,9 @@ public class RescueAniController {
 
     private PageVO current_pageVO;
 
-    @RequestMapping(value = "/rescue_ani_search_page")
-    public String rescue_ani_search_page(HttpServletRequest request, Model model, AnimalSearchDto dto, PageVO page_VO) {
-        if (dto.getSearch_str_date() != null || dto.getSearch_end_date() != null ||
-                dto.getSidoSelectBox() != null || dto.getSigunguSelectBox() != null ||
-                dto.getUpKindSelectBox() != null || dto.getKindSelectedBox() != null ||
-                dto.getSexSelectedBox() != null) {
+    @RequestMapping(value = "rescue_ani_search_page")
+    public String rescue_ani_search_page(HttpServletRequest request, Model model,AnimalSearchDto dto, PageVO page_VO) {
+        if (dto.getSearch_str_date() != null || dto.getSearch_end_date() != null || dto.getSidoSelectBox() != null || dto.getSigunguSelectBox() != null || dto.getUpKindSelectBox() != null || dto.getKindSelectedBox() != null) {
             current_dto = dto;
         }
         String strPage = request.getParameter("page");
@@ -49,39 +46,36 @@ public class RescueAniController {
         }
         int page = Integer.parseInt(strPage);
         //페이지 초과문제 해결
-        if (current_pageVO != null && current_pageVO.getTotPage() < page)
-            page = current_pageVO.getTotPage();
+        if (current_pageVO != null && current_pageVO.getTotPage() < page) page = current_pageVO.getTotPage();
         page_VO.setPage(page);
-        if (isFirst) {
+        if (current_dto == null) {
             abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(page_VO.getPage());
-            isFirst = false;
         } else {
             abdmPublic = AbandonmentPublicSrvc.abandonmentPublic(current_dto, page_VO.getPage());
         }
 
         int totalCount = 0;
         itemList = abdmPublic.getItems();
-        System.out.println(current_dto);
         if (abdmPublic.getTotalCount() != null) {
             totalCount = Integer.parseInt(abdmPublic.getTotalCount());
         }
         //성별 filtering
-        if (current_dto != null) {
-            if (!current_dto.getSexSelectedBox().isEmpty()) {
-                System.out.println(current_dto.getSexSelectedBox());
-                List<AbdmPublicItem> filterItems = itemList.stream().filter(x -> x.getSexCd().equals(current_dto.getSexSelectedBox())).collect(Collectors.toList());
-                itemList = filterItems;
-            }
-        }
+//        if (current_dto != null) {
+//            if (!current_dto.getSexSelectedBox().isEmpty()) {
+//                System.out.println(current_dto.getSexSelectedBox());
+//                List<AbdmPublicItem> filterItems = itemList.stream().filter(x -> x.getSexCd().equals(current_dto.getSexSelectedBox())).collect(Collectors.toList());
+//                itemList = filterItems;
+//            }
+//        }
+//        SexEnum[] sexEnum = SexEnum.values();
         page_VO.pageCalculate(totalCount);
-        SexEnum[] sexEnum = SexEnum.values();
         current_pageVO = page_VO;
         for (int i = 0; i < itemList.size(); i++) {
             System.out.println(itemList.get(i).getNoticeNo());
         }
         model.addAttribute("itemList", itemList);
         model.addAttribute("dto", current_dto);
-        model.addAttribute("sexEnum", sexEnum);
+//        model.addAttribute("sexEnum", sexEnum);
         model.addAttribute("abdmKindItems", abdmKindItems);
         model.addAttribute("pageVO", page_VO);
         return "rescue_ani.search_page.보호동물 검색.3";
@@ -97,5 +91,14 @@ public class RescueAniController {
         AnimalDetailDto dto = new AnimalDetailDto(item);
         model.addAttribute("dto", dto);
         return "rescue_ani.detail_page.보호동물 상세페이지.2";
+    }
+
+    @RequestMapping("rescue_ani_detail_map")
+    public String lost_item_detail_map(HttpServletRequest request, Model model) {
+        System.out.println("rescue_ani_detail_map");
+        model.addAttribute("request", request);
+        String address = request.getParameter("address");
+        model.addAttribute("address", address);
+        return "rescue_ani/detail_map";
     }
 }

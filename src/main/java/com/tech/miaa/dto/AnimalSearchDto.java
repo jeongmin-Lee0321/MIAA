@@ -20,7 +20,7 @@ public class AnimalSearchDto {
 	private String shelterSelectBox;
 	private String upKindSelectBox;
 	private String kindSelectedBox;
-	private String sexSelectedBox;
+//	private String sexSelectedBox;
 //	private PageVO pageVO;
 //	private String pageNo;
 //	private String pageShift;

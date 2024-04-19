@@ -597,10 +597,8 @@
 </head>
 <body>
 <div class="main-contents">
-    <c:out value="${dto.upKindSelectBox}"></c:out>
-    <c:out value="${dto.kindSelectedBox}"></c:out>
     <!-- 검색창과 검색결과 -->
-    <form action="/rescue_ani_search_page" method="post">
+    <form action="rescue_ani_search_page" method="post">
         <div class="searchbar-container">
             <!-- 서치바 셀렉 그룹시작 -->
             <div class="searchbar-select-group">
@@ -724,20 +722,20 @@
                         </select>
                     </div>
                 </div>
-                <div class="searchbar-select-group">
-                    <div class="searchbar-title">
-                        <span>성별</span>
-                    </div>
-                    <div class="searchbar-content">
-                        <select name="sexSelectedBox" id="sexSelectedBox">
-                            <c:forEach items="${sexEnum }" var="sex">
-                                <option value="${sex.getCodeValue()}"
-                                        <c:if test="${sex.getCodeValue() == dto.sexSelectedBox}">selected="selected"</c:if>>
-                                        ${sex.getValue()}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
+<%--                <div class="searchbar-select-group">--%>
+<%--                    <div class="searchbar-title">--%>
+<%--                        <span>성별</span>--%>
+<%--                    </div>--%>
+<%--                    <div class="searchbar-content">--%>
+<%--                        <select name="sexSelectedBox" id="sexSelectedBox">--%>
+<%--                            <c:forEach items="${sexEnum }" var="sex">--%>
+<%--                                <option value="${sex.getCodeValue()}"--%>
+<%--                                        <c:if test="${sex.getCodeValue() == dto.sexSelectedBox}">selected="selected"</c:if>>--%>
+<%--                                        ${sex.getValue()}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
 
             <!-- form 조회용 버튼 -->
