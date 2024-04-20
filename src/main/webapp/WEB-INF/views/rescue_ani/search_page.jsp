@@ -740,7 +740,7 @@
 
             <!-- form 조회용 버튼 -->
             <div class="search-btn-block">
-                <button type="submit" id="btn_search">
+                <button type="submit" id="btn_search" style="font-family: inherit;">
                     조회<img src="resources/img/searchIcon.png" alt="">
                 </button>
             </div>
@@ -821,7 +821,7 @@
                         <c:choose>
                             <c:when test="${i eq pageVO.page}">
                                 <%--                                <li>${i}</li>--%>
-                                <li><a href="#" style="color: red">${i}</a></li>
+                                <li><a href="#" style="color: #0066ff">${i}</a></li>
                                 <%--                                <li>--%>
                                 <%--                                    <button type="submit" name="pageVO.page" value="${pageVO.page = i}"--%>
                                 <%--                                            style="color: red;">${i}</button>--%>
