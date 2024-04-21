@@ -306,5 +306,27 @@ public class AbandonmentPublicSrvc {
         }
         return abdmPublic;
     }
+    
+    //스케줄러 때문에 오버라이딩 했습니다. - 04-20 마한슬
+    public static AbdmPublic abandonmentPublic() {
+        AbdmPublic abdmPublic = new AbdmPublic();
+        String page = "1";
+        String page_numOfRows = "100";
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(page, "UTF-8")); /*페이지 번호 (기본값 : 1)*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode(page_numOfRows, "UTF-8")); /*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
+            urlBuilder.append("&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*xml(기본값) 또는 json*/
+
+            XmlParser xmlParser = new XmlParser();
+
+            abdmPublic = (AbdmPublic) xmlParser.parsing(urlBuilder.toString(), XmlParser.GETABDMPUBLIC);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return abdmPublic;
+    }
 }
 
