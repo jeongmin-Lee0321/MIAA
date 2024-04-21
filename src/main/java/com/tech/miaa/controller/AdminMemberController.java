@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.tech.miaa.service.AdminInquiryService;
 import com.tech.miaa.service.AdminMemberService;
 import com.tech.miaa.service.MemberService;
 import com.tech.miaa.serviceInter.AdminMemberServiceInter;
@@ -97,7 +98,7 @@ public class AdminMemberController {
 	}
 
 	//jeongmin
-	@RequestMapping("/admin_member_management_page")
+	@RequestMapping("admin_member_management_page")
 	public String admin_member_management_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
 			@SessionAttribute(name = "isAdmin", required = false) String isAdmin ,
 	PageVO pageVo, @ModelAttribute("dto") AdminMemberSearchDto dto) {
@@ -126,4 +127,24 @@ public class AdminMemberController {
 
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/admin_member_management_delete_ajax")
+    public int admin_member_management_delete_ajax(HttpServletRequest request, Model model) {
+		int resultCnt = 0;
+		//싱글톤위한 값 전달
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		
+		//inquiry 조인 테이블 가져오와서 모델에 넘기기
+		adminMemberServiceInter = new AdminMemberService();
+				try {
+					resultCnt = adminMemberServiceInter.joined_member_delete_for_ajax(model);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("resultCnt : "+resultCnt);
+        return resultCnt;
+    }
 }

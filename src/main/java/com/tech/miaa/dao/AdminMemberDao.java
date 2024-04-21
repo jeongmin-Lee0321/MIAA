@@ -14,7 +14,10 @@ public interface AdminMemberDao {
 	public int admin_emailcheck(String email);
 	public int admin_login1(String id, String bcpwd);
 	public AdminMemberDto admin_login2(String id, String bcpwd);
-	public ArrayList<MemberDto> getMembers();
-	public List<AdminMemberDto> getAdminMembers();
+	public ArrayList<MemberDto> getAdminMembers();
+	public List<AdminMemberDto> getJoinedMembers(AdminMemberSearchDto dto);
 	public int get_total(AdminMemberSearchDto dto);
+	public void login_date_update(String id);
+	public int joined_member_delete_for_ajax(List<String> chkValList);
+	public int joined_member_delete2_for_ajax(List<String> chkValList);
 }

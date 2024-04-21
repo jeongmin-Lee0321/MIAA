@@ -51,7 +51,7 @@ $(document).ready(function(){
         if (confirmDelete) {
             // 서버로 데이터를 전송합니다.
         	$.ajax({
-        	    url: "admin_inquiry_delete_ajax",
+        	    url: "admin_member_management_delete_ajax",
         	    method: "POST",
         	    dataType : "json",
         	   traditional: true,
@@ -60,10 +60,10 @@ $(document).ready(function(){
         	    	if(resultCnt >= 1) {
         	    		//url 주소설정
 	        	    		let currpage = $(".current-page").text();
-	        	    		let newPath = "admin_inquiry_list_page?currPage="+currpage;
+	        	    		let newPath = "admin_member_management_page?currPage="+currpage;
 	        	    		
 	        	    		// inquiry-form의 모든 매개변수를 가져와서 URL에 추가
-	        			    let form = document.getElementById("inquiry-form");
+	        			    let form = document.getElementById("management-form");
 	        			    
 	        			 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
 	        		      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
@@ -186,11 +186,11 @@ $(document).ready(function(){
                         <option value="all"
                                 <c:if test="${search.member_grade eq 'all'}">selected</c:if>>전체
                         </option>
-                        <option value="일반회원"
-                                <c:if test="${search.member_grade eq '일반회원'}">selected</c:if>>일반회원
+                        <option value="actMember"
+                                <c:if test="${search.member_grade eq 'actMember'}">selected</c:if>>일반회원
                         </option>
-                        <option value="관리자"
-                                <c:if test="${search.member_grade eq '관리자'}">selected</c:if>>관리자
+                        <option value="amdin"
+                                <c:if test="${search.member_grade eq 'amdin'}">selected</c:if>>관리자
                         </option>
                     </select>
                 </div>
@@ -258,32 +258,32 @@ $(document).ready(function(){
                     <th><span>마지막로그인날짜</span></th>
                 </tr>
 
-                <c:forEach items="${list}" var="memeber">
+                	<c:forEach items="${list }" var="list">
                    <c:choose>
-                   <c:when test="${list.memeber.user_id eq nell}">
+                   <c:when test="${list.member.user_id eq nell}">
                         <td><input type="checkbox" name="RowCheck"
                                    value="${list.user_id }" class="table-check-box"></td>
                         <td>${list.user_id }</td>
-                        <td>${list.memeber.user_grade }</td>
-                        <td class="table-title">-</td>
+                        <td>${list.member.user_grade }</td>
+                        <td class="table-title">${list.user_email }</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>${list.member.user_join_date }</td>
+                        <td>${list.member.user_last_login }</td>
                    </c:when>                    
                    <c:otherwise>
                     <tr>
                         <td><input type="checkbox" name="RowCheck"
-                                   value="${list.memeber.user_id }" class="table-check-box"></td>
-                        <td>${list.memeber.user_id }</td>
-                        <td>${list.memeber.user_grade }</td>
-                        <td class="table-title">${list.memeber.user_email }</td>
-                        <td>${list.memeber.user_postcode }</td>
-                        <td>${list.memeber.user_address }</td>
-                        <td>${list.memeber.user_tel }</td>
-                        <td>${list.memeber.user_join_date }</td>
-                        <td>${list.memeber.user_last_login }</td>
+                                   value="${list.member.user_id }" class="table-check-box"></td>
+                        <td>${list.member.user_id }</td>
+                        <td>${list.member.user_grade }</td>
+                        <td class="table-title">${list.member.user_email }</td>
+                        <td>${list.member.user_postcode }</td>
+                        <td>${list.member.user_address }</td>
+                        <td>${list.member.user_tel }</td>
+                        <td>${list.member.user_join_date }</td>
+                        <td>${list.member.user_last_login }</td>
                     </tr> 
                    </c:otherwise>
                    </c:choose>
@@ -346,15 +346,17 @@ $(document).ready(function(){
         var newPath = window.location.pathname + '?currPage=' + currpage;
 
         // management-form의 모든 매개변수를 가져와서 URL에 추가
-        var form = document.getElementById("management-form");
-        var formData = new FormData(form);
-        formData.append('currPage', currpage); // currPage를 추가
-        for (var pair of formData.entries()) {
-            newPath += '&' + pair[0] + '=' + pair[1];
-        }
-
-        window.location.href = newPath; // 새 경로로 페이지 이동
-
+        var form = document.getElementById("management-form");    
+	 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+      
+	    var formData = new FormData(form);
+      // FormData의 각 항목에 대해 반복
+        formData.forEach(function(value, key) {
+            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+        });
+	    
+		window.location.href = newPath; // 새 경로로 페이지 이동
     }
 </script>
 <!-- 가입 날짜 제한 -->

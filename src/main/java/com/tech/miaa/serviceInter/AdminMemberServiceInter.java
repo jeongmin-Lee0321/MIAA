@@ -9,4 +9,5 @@ public interface AdminMemberServiceInter {
 	public int admin_emailchk(Model model);
 	public int admin_codechk(Model model);
 	public void member_list(Model model,PageVO pageVo);
+	public int joined_member_delete_for_ajax(Model model);
 }

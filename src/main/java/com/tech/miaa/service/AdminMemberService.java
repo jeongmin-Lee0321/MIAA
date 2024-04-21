@@ -1,13 +1,16 @@
 package com.tech.miaa.service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.tech.miaa.dao.AdminInquiryDao;
 import com.tech.miaa.dao.AdminMemberDao;
 import com.tech.miaa.dto.AdminMemberDto;
 import com.tech.miaa.dto.AdminMemberSearchDto;
@@ -159,13 +162,13 @@ public class AdminMemberService implements AdminMemberServiceInter {
 		System.out.println("search_type12312321:" + dto.getSearch_type());
 		// db에서 list가져오기
 		AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
-		ArrayList<AdminMemberDto> list = null;
+		List<AdminMemberDto> list = null;
 		if (rowStart == 0 && rowEnd == 0) {
 			System.out.println("get_pagevo 문제발생");
 
 		} else {
 			try {
-//				list = dao.getAdminMembers(dto);
+				list = dao.getJoinedMembers(dto);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -229,9 +232,34 @@ public class AdminMemberService implements AdminMemberServiceInter {
 		int rowEnd = pageVo.getRowEnd();
 		dto.setRowEnd(rowEnd);
 		dto.setRowStart(rowStart);
-
+		
 		System.out.println("search_type:" + dto.getSearch_type());
 
 
     }
+
+	@Override
+	public int joined_member_delete_for_ajax(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		// 클라이언트로부터 받은 숫자 배열을 처리합니다.
+		String[] chkValues= request.getParameterValues("chkVal");
+		List<String> chkValList = Arrays.asList(chkValues);
+		System.out.println("가져온 리스트내용 : "+chkValList.toString());
+        int deletecount = 0;
+        AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+		try {
+			System.out.println("DEL실행직전" );
+			//member에서 삭제
+			deletecount = dao.joined_member_delete_for_ajax(chkValList);
+			//miaa_admin에서 삭제
+			deletecount += dao.joined_member_delete2_for_ajax(chkValList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(deletecount);
+		return deletecount;
+	}
 }

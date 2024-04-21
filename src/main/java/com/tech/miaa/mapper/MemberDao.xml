@@ -5,9 +5,12 @@
 
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MemberDao">
-
+		<!--join에서 마지막 로그인날짜 임의로 넣는것 없앰-> 가입후 로그인 안할시 null 0421 수정 <김영빈>  -->
     <insert id="join">
-        INSERT INTO MEMBER VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',#{param8},SYSDATE,TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	INSERT INTO MEMBER(USER_ID, USER_SHPWD, USER_BCPWD, USER_EMAIL,
+	USER_POSTCODE, USER_ADDRESS, USER_DETAILADDRESS, USER_GRADE, USER_TEL,
+	USER_JOIN_DATE)
+	VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},'일반회원',#{param8},SYSTIMESTAMP)
     </insert>
     <delete id="del_account">
         DELETE FROM MEMBER WHERE USER_BCPWD = #{param1} AND USER_ID = #{param2}
