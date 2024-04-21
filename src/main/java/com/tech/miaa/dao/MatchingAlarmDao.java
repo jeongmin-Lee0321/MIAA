@@ -8,9 +8,15 @@ import com.tech.miaa.dto.matchingAlarmDto;
 
 /* 원진호_0403_matching_alarm_list(String id)추가 */
 public interface MatchingAlarmDao {
+	/*키워드-리스트(id) 뽑아오기*/
 	public ArrayList<ItemDto> matching_alarm_list(String id);
 
+	public void set_matching_alarm_list(String User_id,String total_id,String Lostday,String Upr_cd);
+	
+	
+	
 	/* 원진호_0412_원글삭제기능추가 */
+	
 	public void mypage_alarm_delete(String string, String id);
 	
 	public void total_item_write(String atcid, String clrNm, String depPlace, String fdFilePathImg, String fdPrdtNm,

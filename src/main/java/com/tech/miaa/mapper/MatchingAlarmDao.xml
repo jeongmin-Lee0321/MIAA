@@ -50,6 +50,7 @@
 		#{param18}, #{param19}, #{param20}, #{param21}, #{param22},
 		#{param23})
 	</insert>
+	
 	<insert id="alert_item_write"> INSERT INTO ALERT_ITEM
 		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
 		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
@@ -116,7 +117,15 @@
 		UPDATE LAST_CHK SET STATUS = #{param1} WHERE TYPE =
 		#{param2}
 	</update>
-
+	
+	<insert id="set_matching_alarm_list">
+    <![CDATA[
+    INSERT INTO MATCHINGALARM (USER_ID, TOTAL_ID, PRIMEID, TYPE, ALARM_CHECK)
+    SELECT #{param1} AS USER_ID,#{param2} AS TOTAL_ID,ITEM.ATCID AS PRIMEID,'ATCID' AS TYPE,'Y' AS ALARM_CHECK 
+    FROM TOTALITEM ITEM WHERE ITEM.PRDTCLNM LIKE '%' || #{param4} || '%' AND 
+    TO_DATE(ITEM.FDYMD, 'YYYY-MM-DD') >= TO_DATE(#{param3}, 'YYYY-MM-DD')
+    ]]>
+</insert>
 
 
 

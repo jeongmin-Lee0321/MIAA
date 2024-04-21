@@ -16,7 +16,5 @@ public class matchingAlarmDto {
    private String primeid;  // 관리ID
    private String type;
    private String alarm_check;
-
-   
    
 }

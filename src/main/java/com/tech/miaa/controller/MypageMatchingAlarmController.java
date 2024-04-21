@@ -41,8 +41,11 @@ public class MypageMatchingAlarmController {
       model.addAttribute("userId", userId);
       mypageMatchingAlarmServiceInter = new MatchingAlarmService();      
       try {
-         ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);      
+         ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
+         
+         
          ArrayList<matchingAlarmDto> alert_item_list = mypageMatchingAlarmServiceInter.alert_item_list(model);
+         
          model.addAttribute("list", list);
          model.addAttribute("alert_item_list", alert_item_list);
      
