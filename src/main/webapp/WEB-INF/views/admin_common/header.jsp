@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="header_wrapper">
-      <div id="logo_container" onclick="location.href='/miaa';" style="cursor: pointer;">
+      <div id="logo_container" onclick="location.href='admin_main_page';" style="cursor: pointer;">
         <img src="resources/img/logo.png" alt="">
       </div>
       <div class="admin_title">

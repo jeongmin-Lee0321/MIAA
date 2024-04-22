@@ -159,7 +159,6 @@ public class AdminMemberService implements AdminMemberServiceInter {
 
 		// 전달받은 검색 조건 세팅
 		set_search_dto(model, pageVo);
-		System.out.println("search_type12312321:" + dto.getSearch_type());
 		// db에서 list가져오기
 		AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
 		List<AdminMemberDto> list = null;

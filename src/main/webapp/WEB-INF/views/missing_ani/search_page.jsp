@@ -14,6 +14,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
+	<link rel="stylesheet" href="resources/css/main_contents.css">
 <title>실종동물 상세검색</title>
 </head>
 <body>
