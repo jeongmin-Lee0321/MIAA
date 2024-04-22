@@ -259,8 +259,8 @@ public class MemberService implements MemberServiceInter {
 						e.printStackTrace();
 					}
 					
-					
-					result = "redirect:/";
+					//어드민일경우 어드민 관리 페이지로 이동 <추가 24.04.22 김영빈>
+					result = "redirect:/admin_main_page";
 				} else if (isAdmin == 0) {
 					System.out.println("아이디와 비밀번호를 확인하세요.");
 				}
