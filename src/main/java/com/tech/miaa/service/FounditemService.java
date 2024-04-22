@@ -456,4 +456,44 @@ public class FounditemService implements FounditemServiceInter {
 		return result_code;
 
 	}
+	
+	
+	public String found_item_search_AreaPd(int search_page) {
+		String result_code = ""; // 전체 결과값
+
+		try {
+			StringBuilder urlBuilder = new StringBuilder(
+					"http://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd"); /* URL */
+			urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + ServiceKey); /* Service Key 서비스키 */
+			urlBuilder.append(
+					"&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(search_page), "UTF-8")); /* 페이지 번호 */
+			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
+					+ URLEncoder.encode("100", "UTF-8")); /* 목록 건수 우선 10으로 설정 */
+			URL url = new URL(urlBuilder.toString());
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
+			BufferedReader rd;
+			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			} else {
+				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			}
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+			rd.close();
+			conn.disconnect();
+			result_code = sb.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result_code;
+
+	}
+	
+	
 }

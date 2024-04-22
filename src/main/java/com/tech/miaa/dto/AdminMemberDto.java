@@ -14,7 +14,7 @@ public class AdminMemberDto {
 	private String user_shpwd;	
 	private String user_bcpwd;
 	private String user_email;
-
+	private MemberDto member;
 	
 	
 	
@@ -42,5 +42,12 @@ public class AdminMemberDto {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
+	public MemberDto getMember() {
+		return member;
+	}
+	public void setMember(MemberDto member) {
+		this.member = member;
+	}
 
+	
 }

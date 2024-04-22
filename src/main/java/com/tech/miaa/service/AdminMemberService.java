@@ -1,25 +1,22 @@
 package com.tech.miaa.service;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import com.tech.miaa.dao.AdminInquiryDao;
-import com.tech.miaa.dto.*;
-import com.tech.miaa.vopage.PageVO;
+import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.tech.miaa.dao.AdminInquiryDao;
 import com.tech.miaa.dao.AdminMemberDao;
-import com.tech.miaa.dao.MemberDao;
+import com.tech.miaa.dto.AdminMemberDto;
+import com.tech.miaa.dto.AdminMemberSearchDto;
 import com.tech.miaa.serviceInter.AdminMemberServiceInter;
 import com.tech.miaa.util.CryptoUtil;
+import com.tech.miaa.vopage.PageVO;
 
 public class AdminMemberService implements AdminMemberServiceInter {
 
@@ -145,146 +142,124 @@ public class AdminMemberService implements AdminMemberServiceInter {
 
     @Override
     public void member_list(Model model, PageVO pageVo) {
-        Map<String, Object> map = model.asMap();
-        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-        AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
+    	Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
+		String id = (String) map.get("userId");
 
-//        pageVo = get_pagevo(model, pageVo);
-        set_search_dto(model, pageVo);
-        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
+		// 페이징 처리를 위한 pageVo 가져오기-(현재페이지를 가져와서 현재페이지경우의수를 정한후 PageVo를 셋팅)
+		pageVo = get_pagevo(model, pageVo);
 
-        ArrayList<MemberDto> memberDtos = memberDao.getMembers();
-        ArrayList<AdminMemberDto> adminMemberDtos = adminMemberDao.getAdminMembers();
-        ArrayList<MemberDto> totalDto = new ArrayList<>(memberDtos);
+		model.addAttribute("pageVo", pageVo);
 
-        for (AdminMemberDto d : adminMemberDtos) {
-            MemberDto tmp = new MemberDto();
-            tmp.setUser_id(d.getUser_id());
-            tmp.setUser_email(d.getUser_email());
-            tmp.setUser_grade("관리자");
-            totalDto.add(tmp);
-        }
+		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
+		int rowStart = pageVo.getRowStart();
+		int rowEnd = pageVo.getRowEnd();
 
-        if (dto.getJOIN_START_YMD() != null && dto.getJOIN_END_YMD() != null && dto.getSTART_YMD() != null && dto.getEND_YMD() != null && dto.getMember_grade() != null && dto.getSearch_type() != null && dto.getSearch_content() != null) {
-            List<MemberDto> tmp = new ArrayList<>();
-            List<MemberDto> membertmp = totalDto.stream().filter(x -> x.getUser_grade().equals("일반회원")).collect(Collectors.toList());
-            List<MemberDto> admintmp = totalDto.stream().filter(x -> x.getUser_grade().equals("관리자")).collect(Collectors.toList());
+		// 전달받은 검색 조건 세팅
+		set_search_dto(model, pageVo);
+		System.out.println("search_type12312321:" + dto.getSearch_type());
+		// db에서 list가져오기
+		AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+		List<AdminMemberDto> list = null;
+		if (rowStart == 0 && rowEnd == 0) {
+			System.out.println("get_pagevo 문제발생");
 
+		} else {
+			try {
+				list = dao.getJoinedMembers(dto);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-            if (!dto.getSearch_content().isEmpty()) {
-                membertmp = membertmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
-                admintmp = admintmp.stream().filter(x -> x.getUser_id().equals(dto.getSearch_content())).collect(Collectors.toList());
-            }
+		model.addAttribute("search", dto);
+		model.addAttribute("list", list);
 
-            if (!dto.getJOIN_START_YMD().isEmpty() && !dto.getJOIN_END_YMD().isEmpty()) {
-                membertmp = membertmp.stream().filter(x -> Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) >= Integer.parseInt(dto.getJOIN_START_YMD().replace("-", "")) && Integer.parseInt(x.getUser_join_date().substring(0, x.getUser_join_date().indexOf(" ")).replace("-", "")) <= Integer.parseInt(dto.getJOIN_END_YMD().replace("-", ""))).collect(Collectors.toList());
-            }
-
-            if (!dto.getSTART_YMD().isEmpty() && !dto.getEND_YMD().isEmpty()) {
-                membertmp = membertmp.stream().filter(x -> Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) >= Integer.parseInt(dto.getSTART_YMD().replace("-", "")) && Integer.parseInt(x.getUser_last_login().substring(0, x.getUser_last_login().indexOf(" ")).replace("-", "")) <= Integer.parseInt(dto.getEND_YMD().replace("-", ""))).collect(Collectors.toList());
-            }
-
-            if (!dto.getMember_grade().isEmpty()) {
-                if (dto.getMember_grade().equals("일반회원")) tmp.addAll(membertmp);
-                else if (dto.getMember_grade().equals("관리자")) tmp.addAll(admintmp);
-                else {
-                    tmp.addAll(admintmp);
-                    tmp.addAll(membertmp);
-                }
-            }
-
-            totalDto.clear();
-            totalDto.addAll(tmp);
-        }
-        pageVo = get_pagevo(totalDto, model, pageVo);
-        List<MemberDto> displayDto = new ArrayList<>();
-        System.out.println("totalDto.size()"+totalDto.size());
-        System.out.println("totalDto.size()"+pageVo.getPage());
-        System.out.println("totalDto.size()"+totalDto.size());
-        System.out.println("totalDto.size()"+totalDto.size());
-        if (totalDto.size()< pageVo.getPage()*pageVo.getDisplayRowCount()){
-            displayDto = totalDto.subList((pageVo.getPage()-1)*pageVo.getDisplayRowCount(), totalDto.size());
-        }else {
-            displayDto = totalDto.subList((pageVo.getPage()-1)*pageVo.getDisplayRowCount(),pageVo.getPage()*pageVo.getDisplayRowCount()-1);
-        }
-        dto.setRowEnd(pageVo.getRowEnd());
-        dto.setRowStart(pageVo.getRowStart());
-
-        model.addAttribute("search", dto);
-        model.addAttribute("list", displayDto);
     }
 
-    public PageVO get_pagevo(ArrayList<MemberDto> dto,Model model, PageVO pageVo) {
-        int page = 0; // 현재 페이지
-        int total = 0; // 모든 게시물 갯수
-        int displayRowCount = 6; // 보여질 페이지 갯수
+    public PageVO get_pagevo(Model model, PageVO pageVo) {
+		int page = 0; // 현재 페이지
+		int total = 0; // 모든 게시물 갯수
+		int displayRowCount = 6; // 보여질 페이지 갯수
 
-        Map<String, Object> map = model.asMap();
-        SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-        HttpServletRequest request = (HttpServletRequest) map.get("request");
-        String currPage = request.getParameter("currPage");
+		Map<String, Object> map = model.asMap();
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
+		String currPage = request.getParameter("currPage");
 
-        // 토탈페이지 먼저 구하기
-//        MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-//        AdminMemberDao adminMemberDao = sqlSession.getMapper(AdminMemberDao.class);
+		// 토탈페이지 먼저 구하기
+		AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
 
-        try {
-            total = dto.size();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("전체 목록개수" + total);
-        // 현재페이지 경우의수
-        if (currPage == null) { // strPage 가 뷰에서 전달되지 않은경우(첫화면)
-            currPage = "1";
-            page = Integer.parseInt(currPage);
-        } else { // strPage값이 뷰에서 현재로 전달된경우
-            page = Integer.parseInt(currPage);
-            if (page > total / displayRowCount) {// 현재페이지 값이 총 페이지 갯수보다 클경우 시작페이지= 총페이지 갯수
-                page = total / displayRowCount + (total % displayRowCount == 0 ? 0 : 1);
-            } else if (page <= 0) {// 시작페이지 값이 음수일경우 page =1
-                page = 1;
-            }
-        }
+		try {
+			total = dao.get_total(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("전체 목록개수" + total);
+		// 현재페이지 경우의수
+		if (currPage == null) { // strPage 가 뷰에서 전달되지 않은경우(첫화면)
+			currPage = "1";
+			page = Integer.parseInt(currPage);
+		} else { // strPage값이 뷰에서 현재로 전달된경우
+			page = Integer.parseInt(currPage);
+			if (page > total / displayRowCount) {// 현재페이지 값이 총 페이지 갯수보다 클경우 시작페이지= 총페이지 갯수
+				page = total / displayRowCount + (total % displayRowCount == 0 ? 0 : 1);
+			} else if (page <= 0) {// 시작페이지 값이 음수일경우 page =1
+				page = 1;
+			}
+		}
 
-        pageVo.setDisplayRowCount(displayRowCount);// 보여질 페이지 갯수 적용
-        pageVo.setPage(page);// 시작페이지 적용
+		pageVo.setDisplayRowCount(displayRowCount);// 보여질 페이지 갯수 적용
+		pageVo.setPage(page);// 시작페이지 적용
 
-        pageVo.pageCalculate(total);
+		pageVo.pageCalculate(total);
 
-        System.out.println("전달받은 현재페이지" + currPage);
-        return pageVo;
+		System.out.println("전달받은 현재페이지" + currPage);
+
+		return pageVo;
     }
 
     public void set_search_dto(Model model, PageVO pageVo) {
         Map<String, Object> map = model.asMap();
-        HttpServletRequest request = (HttpServletRequest) map.get("request");
         AdminMemberSearchDto dto = (AdminMemberSearchDto) map.get("dto");
-        // 만들어진 PageVo로 글목록의 star와 end를 가져옴
-//        int rowStart = pageVo.getRowStart();
-//        int rowEnd = pageVo.getRowEnd();
-//        dto.setRowEnd(rowEnd);
-//        dto.setRowStart(rowStart);
+		// 만들어진 PageVo로 글목록의 star와 end를 가져옴
+		int rowStart = pageVo.getRowStart();
+		int rowEnd = pageVo.getRowEnd();
+		dto.setRowEnd(rowEnd);
+		dto.setRowStart(rowStart);
+		
+		System.out.println("search_type:" + dto.getSearch_type());
 
-        //param-> null 이면 최초 화면
-
-        //param -> null이 아니면 검색조건 추가한 창
-        String JOIN_START_YMD = request.getParameter("JOIN_START_YMD");
-        String JOIN_END_YMD = request.getParameter("JOIN_END_YMD");
-        String START_YMD = request.getParameter("START_YMD");
-        String END_YMD = request.getParameter("END_YMD");
-        String member_grade = request.getParameter("member_grade");
-        String search_type = request.getParameter("search_type");
-        String search_content = request.getParameter("search_content");
-
-        dto.setJOIN_START_YMD(JOIN_START_YMD);
-        dto.setJOIN_END_YMD(JOIN_END_YMD);
-        dto.setSTART_YMD(START_YMD);
-        dto.setEND_YMD(END_YMD);
-        dto.setMember_grade(member_grade);
-        dto.setSearch_type(search_type);
-        dto.setSearch_content(search_content);
 
     }
+
+	@Override
+	public int joined_member_delete_for_ajax(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		// 클라이언트로부터 받은 숫자 배열을 처리합니다.
+		String[] chkValues= request.getParameterValues("chkVal");
+		List<String> chkValList = Arrays.asList(chkValues);
+		System.out.println("가져온 리스트내용 : "+chkValList.toString());
+        int deletecount = 0;
+        AdminMemberDao dao = sqlSession.getMapper(AdminMemberDao.class);
+		try {
+			System.out.println("DEL실행직전" );
+			//member에서 삭제
+			deletecount = dao.joined_member_delete_for_ajax(chkValList);
+			//miaa_admin에서 삭제
+			deletecount += dao.joined_member_delete2_for_ajax(chkValList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(deletecount);
+		return deletecount;
+	}
 }

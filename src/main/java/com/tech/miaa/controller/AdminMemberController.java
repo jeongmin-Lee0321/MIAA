@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.tech.miaa.service.AdminInquiryService;
 import com.tech.miaa.service.AdminMemberService;
 import com.tech.miaa.service.MemberService;
 import com.tech.miaa.serviceInter.AdminMemberServiceInter;
@@ -97,26 +98,53 @@ public class AdminMemberController {
 	}
 
 	//jeongmin
-	@RequestMapping("/admin_member_management_page")
-	public String admin_member_management_page(HttpServletRequest request, Model model,
-	PageVO pageVo,@ModelAttribute("dto") AdminMemberSearchDto dto) {
-//		MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-//		List<MemberDto> memberDtoList = memberDao.getMembers();
-//		for (MemberDto a : memberDtoList){
-//			System.out.println(a.getUser_id());
-//			System.out.println(a.getUser_address());
-//			System.out.println(a.getUser_grade());
-//			System.out.println(a.getUser_join_date());
-//			System.out.println(a.getUser_last_login());
-//		}
-//		model.addAttribute("list",memberDtoList);
+	@RequestMapping("admin_member_management_page")
+	public String admin_member_management_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin ,
+	PageVO pageVo, @ModelAttribute("dto") AdminMemberSearchDto dto) {
+		String result = "redirect:/";
+		
+		//접속자가 관리자인지 확인 후 뷰단경로 처리
+		if (isAdmin == null) {		
+			if (userId != null) {
+				System.out.println("관리자아이디가 아닙니다");
+				System.out.println("로그인 유저의 id : " + userId);
+			} else if (userId == null) {
+				System.out.println("로그인 하지 않았습니다.");
+			}
+		}
+		else if (isAdmin.equals("admin")) {
+			System.out.println("관리자입니다.");
+			result = "admin_member.management_page.회원 관리 게시판.3a";
+		}
+		//싱글톤위한 값 전달
 		model.addAttribute("request", request);
-		model.addAttribute("sqlSession",sqlSession);
+		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("pageVo",pageVo);
-
+		
 		adminMemberServiceInter = new AdminMemberService();
 		adminMemberServiceInter.member_list(model, pageVo);
 
-		return "admin_member.management_page.회원 관리 게시판.3a";
+		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/admin_member_management_delete_ajax")
+    public int admin_member_management_delete_ajax(HttpServletRequest request, Model model) {
+		int resultCnt = 0;
+		//싱글톤위한 값 전달
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		
+		//inquiry 조인 테이블 가져오와서 모델에 넘기기
+		adminMemberServiceInter = new AdminMemberService();
+				try {
+					resultCnt = adminMemberServiceInter.joined_member_delete_for_ajax(model);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("resultCnt : "+resultCnt);
+        return resultCnt;
+    }
 }

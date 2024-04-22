@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/main_contents.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script
@@ -98,7 +97,7 @@
 
 				<!-- form 조회용 버튼 -->
 				<div class="search-btn-block">
-					<button>
+					<button style="font-family: inherit;">
 						조회<img src="resources/img/searchIcon.png" alt="">
 					</button>
 				</div>
@@ -156,7 +155,7 @@
 						var="i">
 						<c:choose>
 							<c:when test="${i eq pageVo.page}">
-								<li><a href="#" style="color: red">${i}</a></li>
+								<li><a href="#" style="color: #0066ff">${i}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a href="missing_ani_search_page?page=${i}">${i}</a></li>

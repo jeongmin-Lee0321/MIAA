@@ -3,69 +3,90 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/admin_inquiry_list_page.css"/>
+    <link rel="stylesheet" href="resources/css/admin_member_management_page.css"/>
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-    $(function () {
-        var chkObj = document.getElementsByName("RowCheck");
-        var rowCnt = chkObj.length;
 
-        $("input[name='allCheck']").click(function () {
-            var chk_listArr = $("input[name='RowCheck']");
-            for (var i = 0; i < chk_listArr.length; i++) {
-                chk_listArr[i].checked = this.checked;
-            }
+$(document).ready(function(){
+    let checkedList = $("input[name='RowCheck']");
+    let allCheck = $("input[name='allCheck']");
+    
+    //allcheck에 따라 rowcheck의 체크박스 상태 변화(해체와 체크가 둘다 true false로 각각 적용됨)
+    allCheck.click(function(){
+        checkedList.each(function(){
+        	// jquery 객체인 allCheck의 dom요소에 접근 allCheck[0]
+        	// allCheck[0]의 체크상태를 각 rowCheck 체크박스의 상태에 적용
+            this.checked = allCheck[0].checked;
         });
-        $("input[name='RowCheck']").click(function () {
-            if ($("input[name='RowCheck']:checked").length == rowCnt) {
-                $("input[name='allCheck']")[0].checked = true;
-            } else {
-                $("input[name='allCheck']")[0].checked = false;
-            }
-        });
+    }); 
+    
+    //rowcheck의 체크박스가 하나라도 해제되면 allcheck도 해제,전체 선택일때만 allcheck가 체크됨
+    checkedList.click(function(){
+    	if($("input[name='RowCheck']:checked").length == checkedList.length){
+    		allCheck[0].checked = true;
+    	}else{
+    		allCheck[0].checked = false;
+    	}
     });
+    
+    //삭제버튼
+    $("#btn-delete").click(function() {
+        // 선택된 체크박스의 값을 담을 배열을 생성
+        let checkedValues = [];
 
-    function deleteValue() {
-        var url = "delete"; // Controller로 보내고자 하는 URL
-        var valueArr = new Array();
-        var list = $("input[name='RowCheck']");
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].checked) { //선택되어 있으면 배열에 값을 저장함
-                valueArr.push(list[i].value);
-            }
+        // 선택된 체크박스의 값을 배열에 추가
+        $("input[name='RowCheck']:checked").each(function() {
+            checkedValues.push($(this).val());
+        });
+				
+        // 만약 선택된 체크박스가 없는 경우 아무 작업도 수행하지 않음
+        if (checkedValues.length === 0) {
+            alert("삭제할 항목을 선택해주세요.");
+            return;
         }
-        if (valueArr.length == 0) {
-            alert("선택된 글이 없습니다.");
-        } else {
-            var chk = confirm("정말 삭제하시겠습니까?");
-
-            if (chk) {
-                $
-                    .ajax({
-                        url: url, // 전송 URL
-                        type: 'POST', // POST 방식
-                        traditional: true,
-                        data: {
-                            valueArr: valueArr
-                            // 보내고자 하는 data 변수 설정
-                        },
-                        success: function (jdata) {
-                            if (jdata = 1) {
-
-                                alert("삭제 성공");
-                                location
-                                    .replace("mypage_customer_inquiry_list_page") //페이지 새로고침
-                            } else {
-                                alert("삭제 실패");
-                            }
-                        }
-                    });
-            } else {
-                alert("삭제 취소");
-            }
+        console.log(checkedValues);
+        // 삭제를 확인하는 경고창을 띄우고, 확인 시 서버로 선택된 항목을 전송
+        let confirmDelete = confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            // 서버로 데이터를 전송합니다.
+        	$.ajax({
+        	    url: "admin_member_management_delete_ajax",
+        	    method: "POST",
+        	    dataType : "json",
+        	   traditional: true,
+         	   data: {"chkVal" : checkedValues},
+        	    success: function(resultCnt) {
+        	    	if(resultCnt >= 1) {
+        	    		//url 주소설정
+	        	    		let currpage = $(".current-page").text();
+	        	    		let newPath = "admin_member_management_page?currPage="+currpage;
+	        	    		
+	        	    		// inquiry-form의 모든 매개변수를 가져와서 URL에 추가
+	        			    let form = document.getElementById("management-form");
+	        			    
+	        			 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+	        		      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+	        		      
+	        			    let formData = new FormData(form);
+	        		      // FormData의 각 항목에 대해 반복
+	        		        formData.forEach(function(value, key) {
+	        		            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+	        		        });
+        		      
+                        alert("삭제 성공");
+                        location.replace(newPath) //페이지 새로고침
+                    }
+                    else{
+                        alert("삭제 실패");
+                    }
+                } 
+        	});
         }
-    }
+    });
+    
+});
+
 </script>
 <body>
 <div class="main-body">
@@ -76,7 +97,7 @@
             <!-- 서치바 셀렉 그룹시작 -->
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
-                    <span>가입 기간</span>
+                    <span>가입 날짜</span>
                 </div>
                 <div class="searchbar-content">
                     <input type="date" name="JOIN_START_YMD" id="JOIN_START_YMD"
@@ -117,7 +138,7 @@
             </div>
             <div class="searchbar-select-group">
                 <div class="searchbar-title">
-                    <span>최근 로그인 날짜</span>
+                    <span>최근 로그인</span>
                 </div>
                 <div class="searchbar-content">
                     <input type="date" name="START_YMD" id="START_YMD"
@@ -165,11 +186,11 @@
                         <option value="all"
                                 <c:if test="${search.member_grade eq 'all'}">selected</c:if>>전체
                         </option>
-                        <option value="일반회원"
-                                <c:if test="${search.member_grade eq '일반회원'}">selected</c:if>>일반회원
+                        <option value="actMember"
+                                <c:if test="${search.member_grade eq 'actMember'}">selected</c:if>>일반회원
                         </option>
-                        <option value="관리자"
-                                <c:if test="${search.member_grade eq '관리자'}">selected</c:if>>관리자
+                        <option value="amdin"
+                                <c:if test="${search.member_grade eq 'amdin'}">selected</c:if>>관리자
                         </option>
                     </select>
                 </div>
@@ -217,7 +238,7 @@
                     </div>
                 </div>
                 <div class="list-control-container">
-                    <button class="btn-list" id="btn-delete" onclick="deleteValue();"
+                    <button class="btn-list" id="btn-delete"
                             style="cursor: pointer;">삭제하기
                     </button>
                 </div>
@@ -237,19 +258,35 @@
                     <th><span>마지막로그인날짜</span></th>
                 </tr>
 
-                <c:forEach items="${list}" var="memeber">
+                	<c:forEach items="${list }" var="list">
+                   <c:choose>
+                   <c:when test="${list.member.user_id eq nell}">
+                        <td><input type="checkbox" name="RowCheck"
+                                   value="${list.user_id }" class="table-check-box"></td>
+                        <td>${list.user_id }</td>
+                        <td>${list.member.user_grade }</td>
+                        <td class="table-title">${list.user_email }</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>${list.member.user_join_date }</td>
+                        <td>${list.member.user_last_login }</td>
+                   </c:when>                    
+                   <c:otherwise>
                     <tr>
                         <td><input type="checkbox" name="RowCheck"
-                                   value="list.board_num" class="table-check-box"></td>
-                        <td>${memeber.getUser_id() }</td>
-                        <td>${memeber.getUser_grade() }</td>
-                        <td class="table-title">${memeber.getUser_email() }</td>
-                        <td>${memeber.getUser_postcode() }</td>
-                        <td>${memeber.getUser_address() }</td>
-                        <td>${memeber.getUser_tel() }</td>
-                        <td>${memeber.getUser_join_date() }</td>
-                        <td>${memeber.getUser_last_login() }</td>
-                    </tr>
+                                   value="${list.member.user_id }" class="table-check-box"></td>
+                        <td>${list.member.user_id }</td>
+                        <td>${list.member.user_grade }</td>
+                        <td class="table-title">${list.member.user_email }</td>
+                        <td>${list.member.user_postcode }</td>
+                        <td>${list.member.user_address }</td>
+                        <td>${list.member.user_tel }</td>
+                        <td>${list.member.user_join_date }</td>
+                        <td>${list.member.user_last_login }</td>
+                    </tr> 
+                   </c:otherwise>
+                   </c:choose>
                 </c:forEach>
 
             </table>
@@ -309,15 +346,17 @@
         var newPath = window.location.pathname + '?currPage=' + currpage;
 
         // management-form의 모든 매개변수를 가져와서 URL에 추가
-        var form = document.getElementById("management-form");
-        var formData = new FormData(form);
-        formData.append('currPage', currpage); // currPage를 추가
-        for (var pair of formData.entries()) {
-            newPath += '&' + pair[0] + '=' + pair[1];
-        }
-
-        window.location.href = newPath; // 새 경로로 페이지 이동
-
+        var form = document.getElementById("management-form");    
+	 		// 폼을 초기화하는 코드 작성=====> 안넣으면 검색 조건 변경한 후 페이지버튼 누르면  검색조건 변경된 페이지가 호출됨
+      form.reset(); // 폼 초기화(현재페이지 렌더링기준)
+      
+	    var formData = new FormData(form);
+      // FormData의 각 항목에 대해 반복
+        formData.forEach(function(value, key) {
+            newPath += '&' + key + '=' + value; // 새로운 경로에 항목 추가
+        });
+	    
+		window.location.href = newPath; // 새 경로로 페이지 이동
     }
 </script>
 <!-- 가입 날짜 제한 -->

@@ -183,7 +183,7 @@ public class FoundItemController {
 		model.addAttribute("fdPlaceTel",fdPlaceTel);
 		model.addAttribute("fdPlace",fdPlace);
 
-		return "found_item/detail_map";
+		return "found_item.detail_map.지도상세보기.1";
 	}
 
 

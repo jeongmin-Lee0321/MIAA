@@ -447,3 +447,9 @@ ul.pagelist-container>li:not([class]) span.currpage {
     color: #0066ff;
     padding: 0.5em;
 }
+.list-control-container>a{
+	color : #0066ff;
+}
+.list-control-container>a:hover{
+	color : gold;
+}

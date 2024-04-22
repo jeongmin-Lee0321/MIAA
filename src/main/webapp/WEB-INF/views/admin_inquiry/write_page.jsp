@@ -47,6 +47,14 @@ body {
 				<li><button type="button" id="list">목록으로</button></li>
 				<li><button type="button" id="delete">삭제하기</button></li>
 			</ul>
+			<div class="image-selection">
+				<div class="image-container">
+					<img src="resources/inquiry_img/${list.userInquiry.board_filesrc}"
+						onerror="this.onerror=null; this.src='resources/img/image_no.png'"
+						id="inquiry-image" style="cursor: pointer;"
+						onclick="window.open(this.src)">
+				</div>
+			</div>
 			<!-- form 시작 -->
 			<form action="admin_inquiry_write" id="inquiry_write_form" method="post">
 				<!-- table1 -->
