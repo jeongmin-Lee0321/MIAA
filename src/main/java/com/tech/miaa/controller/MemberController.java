@@ -3,8 +3,11 @@ package com.tech.miaa.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.tech.miaa.email.Email;
+import com.tech.miaa.email.EmailSender;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +24,13 @@ import com.tech.miaa.serviceInter.MemberServiceInter;
 public class MemberController {
 	@Autowired
 	private SqlSession sqlSession;
-	
 	MemberServiceInter memberServiceInter;
-	
+	@Autowired
+	private Email setemail;
+	@Autowired
+	private EmailSender emailSender;
+	@Autowired
+	private JavaMailSender mailSender;
 	@RequestMapping("loginform")
 	public String loginform(HttpServletRequest request, Model model) {
 		return "login.loginform_page.로그인 페이지.1";
@@ -93,7 +100,11 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("searchpw")
 	public String searchpw(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("setemail",setemail);
+		model.addAttribute("emailSender",emailSender);
+		model.addAttribute("mailSender",mailSender);
 		memberServiceInter=new MemberService();
 		
 		String finepw = memberServiceInter.searchpw(model);
