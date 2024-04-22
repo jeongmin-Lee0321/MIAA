@@ -30,6 +30,7 @@
     </delete>
 
 
+<<<<<<< HEAD
     <insert id="total_item_write">
         MERGE INTO TOTALITEM T
         USING DUAL
@@ -101,6 +102,79 @@
         FROM ALERT_ITEM
         WHERE USER_ID=#{param1}
         ORDER BY TOTAL_ID DESC
+=======
+	<insert id="total_item_write">
+		MERGE INTO TOTALITEM T
+		USING DUAL
+		ON (T.ATCID =
+		#{param1})
+		WHEN NOT MATCHED THEN
+		INSERT (ATCID, CLRNM, DEPPLACE,
+		FDFILEPATHIMG, FDPRDTNM, FDSBJT, FDSN,
+		FDYMD, PRDTCLNM, RNUM, ADDR)
+		VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5},
+		#{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11})
+	</insert>
+	<insert id="total_animal_write">
+		MERGE INTO TOTALANIMAL T
+		USING DUAL
+		ON (T.DESERTIONNO = #{param1})
+		WHEN NOT MATCHED THEN
+		INSERT (DESERTIONNO, FILENAME, HAPPENDT, HAPPENPLACE, KINDCD, COLORCD, AGE,
+		WEIGHT,
+		NOTICENO, NOTICESDT, NOTICEEDT, POPFILE, PROCESSSTATE, SEXCD, NEUTERYN,
+		SPECIALMARK, CARENM, CARETEL, CAREADDR, ORGNM, CHARGENM, OFFICETEL,
+		NOTICECOMMENT)
+		VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5},
+		#{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11},
+		#{param12}, #{param13}, #{param14}, #{param15}, #{param16}, #{param17},
+		#{param18}, #{param19}, #{param20}, #{param21}, #{param22},
+		#{param23})
+	</insert>
+	
+	<insert id="alert_item_write"> INSERT INTO ALERT_ITEM
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12}, #{param13})
+	</insert>
+	<insert id="alert_item_write2"> MERGE INTO ALERT_ITEM
+		USING DUAL ON (ATCID =
+		#{param3})
+		WHEN NOT MATCHED THEN INSERT (TOTAL_ID, USER_ID, ATCID,
+		FDSBJT, FDSN,
+		PRDTCLNM,FDPRDTNM,FDYMD,DEPPLACE,RNUM,CLRNM,FDFILEPATHIMG,ADDR)
+		VALUES
+		(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12}, #{param13})
+	</insert>
+	<insert id="alert_animal_write"> INSERT INTO ALERT_ANIMAL
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12}, #{param13},
+		#{param14},#{param15},#{param16},#{param17},#{param18},#{param19},#{param20},#{param21},
+		#{param22},#{param23},#{param24},#{param25})
+	</insert>
+	<insert id="alert_animal_write2"> MERGE INTO ALERT_ANIMAL
+		USING DUAL ON (DESERTIONNO =
+		#{param3})
+		WHEN NOT MATCHED THEN INSERT (TOTAL_ID,
+		USER_ID,DESERTIONNO,FILENAME,HAPPENDT,
+		HAPPENPLACE,KINDCD,COLORCD,AGE,WEIGHT,NOTICENO,NOTICESDT,NOTICEEDT,POPFILE,PROCESSSTATE,
+		SEXCD,NEUTERYN,SPECIALMARK,CARENM,CARETEL,CAREADDR,ORGNM,CHARGENM,OFFICETEL,NOTICECOMMENT)
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},
+		#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},
+		#{param12}, #{param13},
+		#{param14},#{param15},#{param16},#{param17},#{param18},#{param19},#{param20},#{param21},
+		#{param22},#{param23},#{param24},#{param25})
+	</insert>
+	<select id="alert_item_list" resultType="com.tech.miaa.dto.matchingAlarmDto">
+		SELECT *
+		FROM MATCHINGALARM
+		WHERE USER_ID=#{param1}
+		ORDER BY TOTAL_ID DESC
+	</select>
+>>>>>>> release/MHS
 
         <!-- SELECT AITEM.PRDTCLNM ,ITEM.UPR_CD FROM ALERT_ITEM AITEM FULL OUTER
             JOIN ITEM ITEM ON AITEM.USER_ID=ITEM.USER_ID WHERE USER_ID=#{param1} ORDER
@@ -159,6 +233,17 @@
         VALUES (SOURCE.USER_ID, SOURCE.TOTAL_ID, SOURCE.PRIMEID, SOURCE.TYPE, SOURCE.ALARM_CHECK)
     ]]>
     </insert>
+
+<select id="matching_DB_items" resultType="com.tech.miaa.dto.FounditemDto">
+		SELECT *
+		FROM TOTALITEM
+		WHERE ATCID=#{param1}
+</select>
+<select id="matching_DB_animals" resultType="com.tech.miaa.abdmApi.AbdmPublicItem">
+		SELECT *
+		FROM TOTALANIMAL
+		WHERE DESERTIONNO=#{param1}
+</select>
 
 
     <select id="get_user_alarm_list"

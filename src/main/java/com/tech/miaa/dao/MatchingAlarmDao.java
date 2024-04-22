@@ -3,7 +3,15 @@ package com.tech.miaa.dao;
 import java.util.ArrayList;
 
 import com.tech.miaa.abdmApi.AbdmPublicItem;
+<<<<<<< HEAD
 import com.tech.miaa.dto.*;
+=======
+import com.tech.miaa.dto.AnimalDto;
+import com.tech.miaa.dto.FounditemDto;
+import com.tech.miaa.dto.ItemDto;
+import com.tech.miaa.dto.LastDataCheckDto;
+import com.tech.miaa.dto.matchingAlarmDto;
+>>>>>>> release/MHS
 
 /* 원진호_0403_matching_alarm_list(String id)추가 */
 public interface MatchingAlarmDao {
@@ -12,6 +20,10 @@ public interface MatchingAlarmDao {
 	public ArrayList<AnimalDto> matching_alarm_anilist(String id);
 	
 	
+	
+	/*매칭테이블이랑 db테이블 atcid,deNo서로 맞물려주기*/
+	public ArrayList<FounditemDto> matching_DB_items(String atcId);
+	public ArrayList<AbdmPublicItem> matching_DB_animals(String desertionNo);
 
 	public void set_matching_alarm_list(String User_id,String total_id,String Lostday,String Upr_cd);
 	public void set_matching_alarm_anilist(String User_id,String total_id,String missingday,String Upr_cd);
