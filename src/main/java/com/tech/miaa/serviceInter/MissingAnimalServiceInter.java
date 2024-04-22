@@ -13,4 +13,5 @@ public interface MissingAnimalServiceInter {
 	public void missing_ani_modify_page(Model model);
 	public String missing_ani_modify(Model model);
 	public void missing_ani_delete(Model model);
+	public String mypage_ani_modify(Model model);
 }

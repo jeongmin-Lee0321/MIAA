@@ -423,8 +423,8 @@
 			</div>
 
 			<!-- form 조회용 버튼 -->
-			<div class="search-btn-block">
-				<button>
+			<div class="search-btn-block" >
+				<button style="font-family: inherit;">
 					조회<img src="resources/img/searchIcon.png" alt="">
 				</button>
 			</div>
@@ -581,7 +581,7 @@
 								<li>
 									<c:choose>
 									<c:when test="${i eq pageNum}">
-									<a href="#" onclick="paging_Form('${i}')" style="color: red">
+									<a href="#" onclick="paging_Form('${i}')" style="color: #0066ff">
 										</c:when>
 										<c:otherwise>
 										<a href="#" onclick="paging_Form('${i}')">
@@ -620,7 +620,7 @@
 								<li>
 									<c:choose>
 									<c:when test="${i eq pageNum}">
-									<a href="#" onclick="paging_Form('${i}')" style="color: red">
+									<a href="#" onclick="paging_Form('${i}')" style="color: #0066ff">
 										</c:when>
 										<c:otherwise>
 										<a href="#" onclick="paging_Form('${i}')">

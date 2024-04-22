@@ -161,7 +161,7 @@ public class MemberService implements MemberServiceInter {
 		String detailAddress = request.getParameter("detailAddress");
 		System.out.println(id);
 		String result = "redirect:mypageform";
-		
+		System.out.println(id);
 		try {
 			shpwd = CryptoUtil.sha512(pw);
 			bcpwd = CryptoUtil.encryptAES256(pw, shpwd);

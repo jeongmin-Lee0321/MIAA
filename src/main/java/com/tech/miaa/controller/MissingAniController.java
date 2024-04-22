@@ -92,7 +92,7 @@ public class MissingAniController {
 		model.addAttribute("files", files);
 		
 		animalService = new MissingAnimalService();
-		String result=animalService.missing_ani_modify(model);
+		String result=animalService.mypage_ani_modify(model);
 		
 		return result;
 	}
