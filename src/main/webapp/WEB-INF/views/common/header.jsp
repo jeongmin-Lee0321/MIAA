@@ -11,14 +11,14 @@
 <style>
 
 /* 모달창 */
-
 * {
 	box-sizing: border-box;
 }
 
 .modal {
+	font-size: 15px;
 	/* 스타일 - customize */
-	background-color: rgba(0, 0, 0, 0.7);
+	/* background-color: rgba(0, 0, 0, 0.7); */
 	pointer-events: none;
 	padding: 20px;
 	/* 트랜지션 효과 */
@@ -26,8 +26,8 @@
 	opacity: 0;
 	/* 화면 전체를 덮게하는 코드 */
 	position: fixed;
-	top: 0;
-	left: 0;
+	top: -88px;
+	left: 350px;
 	width: 100%;
 	height: 100%;
 	/* 중앙에 오게하는 코드 */
@@ -40,9 +40,9 @@
 	/* 스타일 - customize */
 	max-width: 350px;
 	width: 100%;
-	height: 600px;
+	height: 750px;
 	background-color: white;
-	padding: 20px;
+	/* padding: 15px; */
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	/* 트랜지션 효과 */
@@ -76,21 +76,36 @@
 }
 
 /* 떨림 효과 */
-
 .bell:hover {
 	animation: vibration 0.5s infinite;
 }
 
-@keyframes vibration {
-
-from {
-	transform:rotate(5deg);	
+@keyframes vibration {from { transform:rotate(5deg);
+	
 }
 
 to {
 	transform: rotate(-5deg);
 }
 
+}
+/* 모달창 CSS */
+.modal-content-view {
+	margin-top: 20px;
+	padding: 8px;
+	border-radius: 8px;
+	flex-shrink: 0;
+	color: #ffffff;
+	border-style: none;
+	background-color: #fafafa;
+	color: black;
+	font-family: inherit;
+	border: 1px solid #D8D8D8;
+	/* 글넘침 방지 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-spacing: break-all;
 }
 </style>
 <body>
@@ -151,21 +166,62 @@ to {
 	<!-- 모달 창 -->
 	<div id="myModal" class="modal">
 		<div class="modal-content">
-			<span class="close" id="closeBtn">&times;</span>
-		<div>
-		<p>임시 링크</p>
-		<a href="mypage_matching_alarm_list_page">매칭 알림 목록(전체목록)</a>
-		<a href="rescue_ani_detail_page">rescue_ani_detail_page</a><br>
-		<a href="missing_ani_detail_page">missing_ani_detail_page</a><br>
-		<a href="found_item_detail_page">found_item_detail_page</a><br>
-		<a href="lost_item_detail_page">lost_item_detail_page</a><br>
-		<!--관리자페이지 테스트링크  -->
-		<a href="admin_inquiry_list_page">admin_inquiry_list_page</a><br>
-		<a href="admin">admin_joinform</a><br>
-		<a href="admin_member_management_page">admin_member_management_page
-		</a><br>
+
+			<div style="height: 20px;">
+				<!-- 닫기창 -->
+				<span class="close" id="closeBtn">&times;</span>
+			</div>
+			<div style="margin: 20px;">
+				<div style="text-align: center; font-size: 18px; color: #0066ff;"><strong>습득물</strong></div>
+				<div>
+					<div>
+						<div class="modal-content-view">
+							<span>물품명 : </span><span>메종마르지엘라 반지갑</span><br /> <span>보관장소
+								: </span><span>신정2지구대</span> <br /> <span>습득날짜 : </span><span>2024-04-22</span><br />
+						</div>
+						<div class="modal-content-view">
+							<span>물품명 : </span><span>남성용지갑, 운전면허증 1매,우리은행카드1매, 농협카드1매,</span><br />
+							<span>보관장소 : </span><span>장전지구대</span> <br /> <span>습득날짜
+								: </span><span>2024-04-21</span><br />
+						</div>
+						<div class="modal-content-view">
+							<span>물품명 : </span><span>남성용지갑, 운전면허증 1매,우리은행카드1매, 농협카드1매,</span><br />
+							<span>보관장소 : </span><span>장전지구대</span> <br /> <span>습득날짜
+								: </span><span>2024-04-21</span><br />
+						</div>
+
+					</div>
+				</div>
+				<div style="margin-top: 20px; text-align: center; font-size: 18px; color: #0066ff;"><strong>보호동물</strong></div>
+				<div>
+					<div>
+						<div class="modal-content-view">
+							<span>동물명 : </span><span>sgsdg</span><br /> <span>발견장소 :
+							</span><span>sgsdg</span> <br /> <span>구조날짜 : </span><span>sgsdg</span><br />
+						</div>
+						<div class="modal-content-view">
+							<span>동물명 : </span><span>sgsdg</span><br /> <span>발견장소 :
+							</span><span>sgsdg</span> <br /> <span>구조날짜 : </span><span>sgsdg</span><br />
+						</div>
+						<div class="modal-content-view">
+							<span>동물명 : </span><span>sgsdg</span><br /> <span>발견장소 :
+							</span><span>sgsdg</span> <br /> <span>구조날짜 : </span><span>sgsdg</span><br />
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div
+				style="height: 50px; background-color: #0066ff; text-align: center; line-height: 50px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+
+				<span><a style="color: #ffffff; font-size: 18px;"
+					href="mypage_matching_alarm_list_page">모두보기</a></span>
+			</div>
+
 		</div>
-		</div>
+
 	</div>
 
 </body>
