@@ -26,7 +26,7 @@
 	opacity: 0;
 	/* 화면 전체를 덮게하는 코드 */
 	position: fixed;
-	top: -88px;
+	top: -58px;
 	left: 350px;
 	width: 100%;
 	height: 100%;
