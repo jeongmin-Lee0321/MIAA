@@ -51,10 +51,8 @@ public class MemberController {
 		return "login.mypage_delete_account_page.마이 페이지.3";
 	}
 	@RequestMapping("mypage_modify_account_page")
-	public String mypage_modify_account_page(HttpServletRequest request, Model model) {
-		String userid=request.getParameter("user_id");
-		System.out.println(userid);
-		MemberDao dao = sqlSession.getMapper(MemberDao.class); MemberDto dto = dao.getMember(userid);
+	public String mypage_modify_account_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); MemberDto dto = dao.getMember(userId);
 		model.addAttribute("dto", dto);
 		return "login.mypage_modify_account_page.회원정보수정.3";
 	}

@@ -44,7 +44,7 @@
 
 	<div class="content-wrapper">
 		<div class="content-container">
-
+			
 			<div class="table-caption-wrapper">
 				<div class="talbe-caption-container">
 					<div class="table-caption">
@@ -59,9 +59,7 @@
 						</div>
 					</div>
 					<div class="table-caption">
-						
 					</div>
-
 				</div>
 				<div class="list-control-container">
 				<button class="btn-list" id="btn-write" onclick="#"
@@ -75,10 +73,8 @@
 					<button id="btn-delete" onclick="#"
 						style="cursor: pointer;">삭제하기</button>
 				</div>
-
 			</div>
 			
-
 			<table class="info-table">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="allCheck"
@@ -86,22 +82,23 @@
 					<th>분류</th>
 					<th>사진</th>
 					<th class="table-title">게시 제목</th>
-					<th>분실/습득일자</th>
-					<th>실종 분실 장소</th>
+					<th>분실/실종일자</th>
+					<th>분실/실종 장소</th>
 					<th>알람설정</th>
 					<th class="table-image"></th>
 					<th class="table-image"></th>
 				</tr>
-
+				<c:forEach items="${dtos }" var="dtos">
+				<input type="hidden" name="kind" id="kind" value="">
 				<tr>
 					<td><input type="checkbox" name="RowCheck" value=""
 						class="table-check-box"></td>
-					<td>물건</td>
-					<td><input type="image" src="resources/img/image_no.png"
+					<td>${dtos.kind }</td>
+					<td><input type="image" src="${dtos.filename }"
 						id="item-image-value" onclick="" style="cursor: pointer;" /></td>
-					<td class="table-title"><a href="#">에어팟 3세대</a></td>
-					<td>2018-06-01</td>
-					<td>서울 은평구 버스정류장</td>
+					<td class="table-title"><a href="#">${dtos.name }</a></td>
+					<td>${dtos.day }</td>
+					<td>${dtos.address }</td>
 					<td>
 					
 					<!-- 벨 ON OFF 설정 -->
@@ -113,51 +110,29 @@
 					<input type="image" src="resources/img/bell-off.png"
 						onclick="" style="cursor: pointer;" />
 					</c:if> --%>
-					
 					</td>
+					<c:if test="${dtos.kind eq '동물' }">
 					<td class="table-image"><input type="image" src="resources/img/trash_icon.png"
-						onclick="" style="cursor: pointer;" />
+						onclick="deletes_an('${dtos.total_id}')" 
+						style="cursor: pointer;" />
 						</td>
 					<td class="table-image"><input type="image" src="resources/img/write_icon.png"
-						onclick="" style="cursor: pointer; margin-top: 10px;"/></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="RowCheck" value=""
-						class="table-check-box"></td>
-					<td>동물</td>
-					<td><input type="image" src="resources/img/image_no.png"
-						id="item-image-value" onclick="" style="cursor: pointer;" /></td>
-					<td class="table-title"><a href="#">푸들</a></td>
-					<td>2018-06-01</td>
-					<td>서울은평경찰서 근처</td>
-					<td>
-					
-					<!-- 벨 ON OFF 설정 -->
-					<%-- <c:if test="${들어오는값 eq 'Y'}"> --%>
-					<!-- <input type="image" src="resources/img/bell-on.png"
-						onclick="" style="cursor: pointer;" /> -->
-					<%-- </c:if> --%>	
-					<%-- <c:if test="${들어오는값 eq 'N'}"> --%>
-					<input type="image" src="resources/img/bell-off.png"
-						onclick="" style="cursor: pointer;" />
-					<%-- </c:if> --%>
-					
-					</td>
+						onclick="modify_an('${dtos.total_id}')" style="cursor: pointer; margin-top: 10px;"/></td>
+					</c:if>
+					<c:if test="${dtos.kind eq '물건' }">
 					<td class="table-image"><input type="image" src="resources/img/trash_icon.png"
-						onclick="" style="cursor: pointer;" />
+						onclick="deletes_it('${dtos.total_id}')" 
+						style="cursor: pointer;" />
 						</td>
 					<td class="table-image"><input type="image" src="resources/img/write_icon.png"
-						onclick="" style="cursor: pointer; margin-top: 10px;"/></td>
+						onclick="modify_it('${dtos.total_id}')" style="cursor: pointer; margin-top: 10px;"/></td>
+					</c:if>
 				</tr>
-				
-				
+				</c:forEach>
 			</table>
 		</div>
 	</div>
-
-
 	<!-- page -->
-
 	<div class="result-container">
 		<div class="page-container">
 			<div class="currentOftotal">
@@ -192,9 +167,28 @@
 			</ul>
 		</div>
 	</div>
-
 </div>
-
-
+<script>
+function deletes_an(total_id){
+	if(window.confirm("게시물을 삭제하시겠습니까?")){
+		location.href='mypage_ani_delete?total_id='+total_id;
+	}
+};
+function deletes_it(total_id){
+	if(window.confirm("게시물을 삭제하시겠습니까?")){
+		location.href='mypage_item_delete?total_id='+total_id;
+	}
+};
+function modify_an(total_id) {
+	if(window.confirm("게시물을 수정하시겠습니까?")){
+		location.href='mypage_ani_modify_page?total_id='+total_id;
+	}
+};
+function modify_it(total_id) {
+	if(window.confirm("게시물을 수정하시겠습니까?")){
+		location.href='mypage_item_modify_page?total_id='+total_id;
+	}
+};
+</script>
 </body>
 </html>
