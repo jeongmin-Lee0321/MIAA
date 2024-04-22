@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.tech.miaa.dao.MatchingAlarmDao;
+import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.matchingAlarmDto;
 import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
@@ -34,6 +35,27 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		}
 		return list;
 	}
+	
+	@Override
+	public ArrayList<AnimalDto> matching_alarm_anilist(Model model) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpSession session = request.getSession();
+
+		String id = (String) session.getAttribute("userId");
+		MatchingAlarmDao dao = sqlSession.getMapper(MatchingAlarmDao.class);
+		ArrayList<AnimalDto> list = null;
+		try {
+			list = dao.matching_alarm_anilist(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
+	
+	
 
 	// weon_0416추가
 	@Override
@@ -89,6 +111,10 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		MatchingAlarmDao dao = sqlSession.getMapper(MatchingAlarmDao.class);
 		dao.mypage_alarm_delete(string, id);
 	}
+
+
+
+	
 
 	
 

@@ -2,6 +2,7 @@ package com.tech.miaa.dao;
 
 import java.util.ArrayList;
 
+import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.LastDataCheckDto;
 import com.tech.miaa.dto.matchingAlarmDto;
@@ -10,10 +11,12 @@ import com.tech.miaa.dto.matchingAlarmDto;
 public interface MatchingAlarmDao {
 	/*키워드-리스트(id) 뽑아오기*/
 	public ArrayList<ItemDto> matching_alarm_list(String id);
+	public ArrayList<AnimalDto> matching_alarm_anilist(String id);
+	
+	
 
 	public void set_matching_alarm_list(String User_id,String total_id,String Lostday,String Upr_cd);
-	
-	
+	public void set_matching_alarm_anilist(String User_id,String total_id,String missingday,String Upr_cd);
 	
 	/* 원진호_0412_원글삭제기능추가 */
 	
