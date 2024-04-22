@@ -98,16 +98,11 @@
 		#{param14},#{param15},#{param16},#{param17},#{param18},#{param19},#{param20},#{param21},
 		#{param22},#{param23},#{param24},#{param25})
 	</insert>
-	<select id="alert_item_list"
-		resultType="com.tech.miaa.dto.matchingAlarmDto">
+	<select id="alert_item_list" resultType="com.tech.miaa.dto.matchingAlarmDto">
 		SELECT *
-		FROM ALERT_ITEM
+		FROM MATCHINGALARM
 		WHERE USER_ID=#{param1}
 		ORDER BY TOTAL_ID DESC
-
-		<!-- SELECT AITEM.PRDTCLNM ,ITEM.UPR_CD FROM ALERT_ITEM AITEM FULL OUTER 
-			JOIN ITEM ITEM ON AITEM.USER_ID=ITEM.USER_ID WHERE USER_ID=#{param1} ORDER 
-			BY TOTAL_ID DESC -->
 	</select>
 
 	<select id="getlastcheck"
@@ -164,6 +159,17 @@
     ]]>
 </insert>
 
+
+<select id="matching_DB_items" resultType="com.tech.miaa.dto.FounditemDto">
+		SELECT *
+		FROM TOTALITEM
+		WHERE ATCID=#{param1}
+</select>
+<select id="matching_DB_animals" resultType="com.tech.miaa.abdmApi.AbdmPublicItem">
+		SELECT *
+		FROM TOTALANIMAL
+		WHERE DESERTIONNO=#{param1}
+</select>
 
 
 
