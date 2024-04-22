@@ -30,6 +30,7 @@
     </delete>
 
 
+<<<<<<< HEAD
     <insert id="total_item_write">
         MERGE INTO TOTALITEM T
         USING DUAL
@@ -101,10 +102,6 @@
         FROM ALERT_ITEM
         WHERE USER_ID=#{param1}
         ORDER BY TOTAL_ID DESC
-
-        <!-- SELECT AITEM.PRDTCLNM ,ITEM.UPR_CD FROM ALERT_ITEM AITEM FULL OUTER
-            JOIN ITEM ITEM ON AITEM.USER_ID=ITEM.USER_ID WHERE USER_ID=#{param1} ORDER
-            BY TOTAL_ID DESC -->
     </select>
 
     <select id="getlastcheck"
@@ -159,6 +156,17 @@
         VALUES (SOURCE.USER_ID, SOURCE.TOTAL_ID, SOURCE.PRIMEID, SOURCE.TYPE, SOURCE.ALARM_CHECK)
     ]]>
     </insert>
+
+<select id="matching_DB_items" resultType="com.tech.miaa.dto.FounditemDto">
+		SELECT *
+		FROM TOTALITEM
+		WHERE ATCID=#{param1}
+</select>
+<select id="matching_DB_animals" resultType="com.tech.miaa.abdmApi.AbdmPublicItem">
+		SELECT *
+		FROM TOTALANIMAL
+		WHERE DESERTIONNO=#{param1}
+</select>
 
 
     <select id="get_user_alarm_list"

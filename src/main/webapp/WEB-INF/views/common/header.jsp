@@ -195,11 +195,6 @@
                             <%--								<span>보관장소 : </span><span>장전지구대</span> <br /> <span>습득날짜--%>
                             <%--								: </span><span>2024-04-21</span><br />--%>
                             <%--							</div>--%>
-                            <%--							<div class="modal-content-view">--%>
-                            <%--								<span>물품명 : </span><span>남성용지갑, 운전면허증 1매,우리은행카드1매, 농협카드1매,</span><br />--%>
-                            <%--								<span>보관장소 : </span><span>장전지구대</span> <br /> <span>습득날짜--%>
-                            <%--								: </span><span>2024-04-21</span><br />--%>
-                            <%--							</div>--%>
 
                         </div>
                     </div>
@@ -208,15 +203,12 @@
                     <div>
                         <div>
                             <c:forEach items="${animals}" var="animal" end="3">
+
                                 <div class="modal-content-view">
                                     <span>동물명 : </span><span>${animal.getKindCd()}</span><br/> <span>발견장소 :
 							</span><span>${animal.getHappenPlace()}</span> <br/> <span>구조날짜 : </span><span>${animal.getHappenDt()}</span><br/>
                                 </div>
                             </c:forEach>
-<%--                            <div class="modal-content-view">--%>
-<%--                                <span>동물명 : </span><span>sgsdg</span><br/> <span>발견장소 :--%>
-<%--							</span><span>sgsdg</span> <br/> <span>구조날짜 : </span><span>sgsdg</span><br/>--%>
-<%--                            </div>--%>
 <%--                            <div class="modal-content-view">--%>
 <%--                                <span>동물명 : </span><span>sgsdg</span><br/> <span>발견장소 :--%>
 <%--							</span><span>sgsdg</span> <br/> <span>구조날짜 : </span><span>sgsdg</span><br/>--%>
