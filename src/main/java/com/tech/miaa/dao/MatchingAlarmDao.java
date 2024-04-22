@@ -2,10 +2,8 @@ package com.tech.miaa.dao;
 
 import java.util.ArrayList;
 
-import com.tech.miaa.dto.AnimalDto;
-import com.tech.miaa.dto.ItemDto;
-import com.tech.miaa.dto.LastDataCheckDto;
-import com.tech.miaa.dto.matchingAlarmDto;
+import com.tech.miaa.abdmApi.AbdmPublicItem;
+import com.tech.miaa.dto.*;
 
 /* 원진호_0403_matching_alarm_list(String id)추가 */
 public interface MatchingAlarmDao {
@@ -59,9 +57,7 @@ public interface MatchingAlarmDao {
 	
 	public void updateStatus(String status,String type);
 	
-	
-	
-	
-	
-
+	public ArrayList<matchingAlarmDto> get_user_alarm_list(String user_id);
+	public FounditemDto get_item_data(String atcid);
+	public AbdmPublicItem get_animal_data(String desertionNo);
 }

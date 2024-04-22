@@ -10,6 +10,7 @@ import com.tech.miaa.email.Email;
 import com.tech.miaa.email.EmailSender;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -21,10 +22,7 @@ import com.tech.miaa.serviceInter.MemberServiceInter;
 import com.tech.miaa.util.CryptoUtil;
 
 public class MemberService implements MemberServiceInter {
-	@Autowired
-	private EmailSender emailSender;
-	@Autowired
-	private Email set_email;
+
 	@Override
 	public int idchek(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -71,6 +69,7 @@ public class MemberService implements MemberServiceInter {
 
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		String fineid = dao.searchid(email);
+		model.addAttribute("fineid",fineid);
 		return fineid;
 	}
 
@@ -93,11 +92,17 @@ public class MemberService implements MemberServiceInter {
 			e.printStackTrace();
 		}
 		//
+		Email set_email = (Email) map.get("setemail");
+		EmailSender emailSender = (EmailSender) map.get("emailSender");
+		JavaMailSender mailSender = (JavaMailSender) map.get("mailSender");
+		System.out.println("set_email:"+set_email);
+		System.out.println("emailSender:"+emailSender);
+		System.out.println("mailSender:"+mailSender);
 		if (pw != null){
 			set_email.setContent("비밀번호는 "+pw+"입니다.");
 			set_email.setReceiver(email);
 			set_email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
-			emailSender.SendMail(set_email);
+			emailSender.SendMail(mailSender,set_email);
 		}
 		return pw;
 	}

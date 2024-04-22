@@ -10,9 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
 
-    @Autowired
-    protected JavaMailSender mailSender;
-    public void SendMail(Email email){
+    public void SendMail(JavaMailSender mailSender,Email email){
         MimeMessage msg = mailSender.createMimeMessage();
         try {
             msg.setSubject(email.getSubject());
