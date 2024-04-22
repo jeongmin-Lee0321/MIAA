@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/admin_inquiry_list_page.css"/>
+    <link rel="stylesheet" href="resources/css/admin_member_management_page.css"/>
 </head>
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">

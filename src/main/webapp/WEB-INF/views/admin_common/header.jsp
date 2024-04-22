@@ -21,6 +21,9 @@
           <div class="menu_title" onclick="location.href='admin_inquiry_list_page';" style="cursor: pointer;">
             1대1문의 관리
           </div>
+          <div class="menu_title" onclick="location.href='admin_member_management_page';" style="cursor: pointer;">
+            회원 관리
+          </div>
         </div>
         <!-- 로그인 전 -->
 <c:if test= "${userId == null}">
@@ -36,9 +39,6 @@
 		<!-- 로그인 후 -->
 <c:if test="${userId != null}">
         <div class="header-btn-container">
-          <button class="bell-img-container">
-            <img class="bell" src="resources/img/Bell.png" />
-          </button>
           <div class="verticalbar-container">
             <div class="nav-list-item"></div>
           </div>

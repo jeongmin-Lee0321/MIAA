@@ -47,111 +47,120 @@ body {
 				<li><button type="button" id="list">목록으로</button></li>
 				<li><button type="button" id="delete">삭제하기</button></li>
 			</ul>
-			<!-- table1 -->
-			<div class="table-container">
-				<div class="table-title">
-					<img src="resources/img/clipboard.png" alt=""><span>회원
-						문의내용</span>
+			<div class="image-selection">
+				<div class="image-container" >
+					<img src="resources/inquiry_img/${list.userInquiry.board_filesrc}"
+						onerror="this.onerror=null; this.src='resources/img/image_no.png'"
+						id="inquiry-image" style="cursor: pointer;"
+						onclick="window.open(this.src)">
 				</div>
-				<div class="table">
-
-					<div class="table-row">
-						<div class="row-title">
-							<span>관리번호</span>
-						</div>
-						<div class="row-content">${list.userInquiry.board_num}</div>
-					</div>
-					<div class="table-row">
-						<div class="row-title">
-							<span>제목</span>
-						</div>
-						<div class="row-content">${list.userInquiry.board_title}</div>
-					</div>
-					<div class="table-row" id="lg-content">
-						<div class="row-title">
-							<span>내용</span>
-						</div>
-						<div class="row-content" id="lg-content">${list.userInquiry.board_content}</div>
-					</div>
-					<div class="table-row">
-						<div class="row-title">
-							<span>등록일자</span>
-						</div>
-						<div class="row-content">${list.userInquiry.board_registration_date}</div>
-					</div>
-					<div class="table-row">
-						<div class="row-title">
-							<span>첨부파일</span>
-						</div>
-						<div class="row-content">
-							<%-- ${list.userInquiry.board_filesrc} --%>
-						</div>
-					</div>
-					<div class="table-row">
-						<div class="row-title">
-							<span>처리상태</span>
-						</div>
-						<c:choose>
-							<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
-								<div class="row-content" style="color: #0066ff">${list.userInquiry.board_reply_status}</div>
-							</c:when>
-							<c:otherwise>
-								<div class="row-content">${list.userInquiry.board_reply_status}</div>
-							</c:otherwise>
-						</c:choose>
-					</div>
 				</div>
-			</div>
-			<c:if test="${list.userInquiry.board_reply_status eq '답변완료'}">
-				<!-- table2 -->
+				<!-- table1 -->
 				<div class="table-container">
 					<div class="table-title">
-						<img src="resources/img/clipboard.png" alt=""><span>관리자
-							답변</span>
+						<img src="resources/img/clipboard.png" alt=""><span>회원
+							문의내용</span>
 					</div>
 					<div class="table">
+
 						<div class="table-row">
 							<div class="row-title">
-								<span>처리일자</span>
+								<span>관리번호</span>
 							</div>
-							<div class="row-content">${list.board_reply_date}</div>
+							<div class="row-content">${list.userInquiry.board_num}</div>
 						</div>
 						<div class="table-row">
 							<div class="row-title">
-								<span>답변내용</span>
+								<span>제목</span>
 							</div>
-							<div class="row-content" id="lg-content">
-								${list.board_reply}</div>
+							<div class="row-content">${list.userInquiry.board_title}</div>
+						</div>
+						<div class="table-row" id="lg-content">
+							<div class="row-title">
+								<span>내용</span>
+							</div>
+							<div class="row-content" id="lg-content">${list.userInquiry.board_content}</div>
+						</div>
+						<div class="table-row">
+							<div class="row-title">
+								<span>등록일자</span>
+							</div>
+							<div class="row-content">${list.userInquiry.board_registration_date}</div>
+						</div>
+						<div class="table-row">
+							<div class="row-title">
+								<span>첨부파일</span>
+							</div>
+							<div class="row-content">
+								<%-- ${list.userInquiry.board_filesrc} --%>
+							</div>
+						</div>
+						<div class="table-row">
+							<div class="row-title">
+								<span>처리상태</span>
+							</div>
+							<c:choose>
+								<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+									<div class="row-content" style="color: #0066ff">${list.userInquiry.board_reply_status}</div>
+								</c:when>
+								<c:otherwise>
+									<div class="row-content">${list.userInquiry.board_reply_status}</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>
-			</c:if>
-			<ul class="bottom-btns">
-				<c:choose>
-					<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
-						<li><button type="button" id="to-write-page">답변수정</button></li>
-					</c:when>
-					<c:otherwise>
-						<li><button type="button" id="to-write-page">답변작성</button></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-			<!-- form 시작 -->
-			<form action="admin_inquiry_write_page" method="get" id="get_form">
-				<!-- hidden 보드넘 , 검색조건-->
-				<input type="hidden" name="board_num"
-					value="${list.userInquiry.board_num}"> <input type="hidden"
-					name="currPage" value="${currPage}"> <input type="hidden"
-					name="START_YMD" value="${search.START_YMD}"> <input
-					type="hidden" name="END_YMD" value="${search.END_YMD}"> <input
-					type="hidden" name="reply_status" value="${search.reply_status}">
-				<input type="hidden" name="search_type"
-					value="${search.search_type}"> <input type="hidden"
-					name="search_content" value="${search.search_content}">
-			</form>
-			<!-- form 끝 -->
+				<c:if test="${list.userInquiry.board_reply_status eq '답변완료'}">
+					<!-- table2 -->
+					<div class="table-container">
+						<div class="table-title">
+							<img src="resources/img/clipboard.png" alt=""><span>관리자
+								답변</span>
+						</div>
+						<div class="table">
+							<div class="table-row">
+								<div class="row-title">
+									<span>처리일자</span>
+								</div>
+								<div class="row-content">${list.board_reply_date}</div>
+							</div>
+							<div class="table-row">
+								<div class="row-title">
+									<span>답변내용</span>
+								</div>
+								<div class="row-content" id="lg-content">
+									${list.board_reply}</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<ul class="bottom-btns">
+					<c:choose>
+						<c:when test="${list.userInquiry.board_reply_status eq '답변완료'}">
+							<li><button type="button" id="to-write-page">답변수정</button></li>
+						</c:when>
+						<c:otherwise>
+							<li><button type="button" id="to-write-page">답변작성</button></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+				<!-- form 시작 -->
+				<form action="admin_inquiry_write_page" method="get" id="get_form">
+					<!-- hidden 보드넘 , 검색조건-->
+					<input type="hidden" name="board_num"
+						value="${list.userInquiry.board_num}"> <input
+						type="hidden" name="currPage" value="${currPage}"> <input
+						type="hidden" name="START_YMD" value="${search.START_YMD}">
+					<input type="hidden" name="END_YMD" value="${search.END_YMD}">
+					<input type="hidden" name="reply_status"
+						value="${search.reply_status}"> <input type="hidden"
+						name="search_type" value="${search.search_type}"> <input
+						type="hidden" name="search_content"
+						value="${search.search_content}">
+				</form>
+				<!-- form 끝 -->
+			</div>
 		</div>
-	</div>
 </body>
 <script>
 	$(document).ready(function() {
