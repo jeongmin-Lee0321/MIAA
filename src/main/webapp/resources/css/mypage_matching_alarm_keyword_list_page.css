@@ -132,6 +132,7 @@ a:hover{
   /* position: relative; */
   justify-content: space-between; 
   margin-bottom: 30px;
+  width: 1160px;
 }
 
 .searchbar-title {
