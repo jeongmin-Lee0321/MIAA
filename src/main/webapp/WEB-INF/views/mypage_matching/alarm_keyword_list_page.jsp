@@ -45,7 +45,7 @@
 							</select>
 						</div>
 						<div class="searchbar-content">
-							<input type="text" style="border: 1px solid #D8D8D8; width: 300px;" placeholder="Search">
+							<input type="text" style="border: 1px solid #D8D8D8; width: 334px;" placeholder="Search">
 						</div>
 						<button class="btn-list" id="btn-search-alarm" onclick="#"
 							style="cursor: pointer;">
