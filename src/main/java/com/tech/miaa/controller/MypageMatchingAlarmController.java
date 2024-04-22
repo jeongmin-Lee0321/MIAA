@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.tech.miaa.dto.AnimalDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.matchingAlarmDto;
+import com.tech.miaa.dto.matchingAlarmListDto;
 import com.tech.miaa.service.LostItemService;
 import com.tech.miaa.service.MatchingAlarmService;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
@@ -46,7 +47,32 @@ public class MypageMatchingAlarmController {
 			ArrayList<AnimalDto> ani_list = mypageMatchingAlarmServiceInter.matching_alarm_anilist(model);
 			
 			ArrayList<matchingAlarmDto> alert_item_list = mypageMatchingAlarmServiceInter.alert_item_list(model);
-
+			
+			ArrayList<matchingAlarmListDto> master_list = new ArrayList<matchingAlarmListDto>();
+			System.out.println("컨트롤러실행확인");
+			for(matchingAlarmDto list : alert_item_list) {
+				for(ItemDto ilist : item_list) {
+					if(ilist.equals(list.getTotal_id())) {
+						matchingAlarmListDto dto = new matchingAlarmListDto();
+						dto.setTotal_id(list.getTotal_id());
+						System.out.println("아이템 토탈 아이디 : "+dto.getTotal_id());
+						dto.setItem_dto(ilist);
+						master_list.add(dto);
+						
+					}
+				}
+				for(AnimalDto anilist : ani_list) {
+					if(anilist.equals(list.getTotal_id())) {
+						matchingAlarmListDto dto = new matchingAlarmListDto();
+						dto.setTotal_id(list.getTotal_id());
+						System.out.println("아이템 토탈 아이디 : "+dto.getTotal_id());
+						dto.setAnimal_dto(anilist);
+						master_list.add(dto);
+					}
+				}
+			}
+			model.addAttribute("list", master_list);
+			
 //         model.addAttribute("list", list);
 //         model.addAttribute("alert_item_list", alert_item_list);
 

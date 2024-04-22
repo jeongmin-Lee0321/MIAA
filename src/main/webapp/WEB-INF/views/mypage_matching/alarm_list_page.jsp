@@ -72,14 +72,14 @@
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!--등록게시물 키워드 시작 1  -->
 			
-			<%-- <c:forEach> --%>
+			<c:forEach items="${list }" var="dto">
 			
 				<div class="content-wrapper">
 					<div class="talbe-caption-container">
 						<div class="table-caption-item">
 							<div style="display: flex;">
 								<input type="checkbox" class="table-check-box" /> &nbsp; <span
-									id="item-name-text">분실물명 :</span> <span id="item-name-value"><strong>&nbsp;에어팟</strong></span>
+									id="item-name-text">분실물명 :</span> <span id="item-name-value"><strong>&nbsp;${dto.item_dto.item_name }</strong></span>
 							</div>
 
 						</div>
@@ -120,7 +120,7 @@
 					<!-- list-card 1개 끝 -->
 				</div>
 				
-			<%-- </c:forEach> --%>
+			</c:forEach>
 			
 			<!-- 검색 결과 리스트프레임 끝-->
 

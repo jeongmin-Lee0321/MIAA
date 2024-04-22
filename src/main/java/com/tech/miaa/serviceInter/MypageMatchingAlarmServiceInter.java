@@ -12,6 +12,7 @@ public interface MypageMatchingAlarmServiceInter {
    /* public String mypage_matching_alarm(Model model); */
    /* 원진호_0409_추가 */
    ArrayList<ItemDto> matching_alarm_list(Model model);
+//   ItemDto matching_alarm_dto(t)
    ArrayList<AnimalDto> matching_alarm_anilist(Model model);
    public void mypage_alarm_delete(String string, Model model);
    ArrayList<matchingAlarmDto> alert_item_list(Model model);
