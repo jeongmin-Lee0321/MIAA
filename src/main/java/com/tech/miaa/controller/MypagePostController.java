@@ -33,7 +33,8 @@ public class MypagePostController {
 
 	@RequestMapping("mypage_post_list_page")
 	public String mypage_post_list_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
-		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession); model.addAttribute("userId", userId);
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession); 
+		model.addAttribute("userId", userId);
 		mypagePostService=new MypagePostService();
 		
 		mypagePostService.MypagyPost_list(model);
@@ -71,5 +72,21 @@ public class MypagePostController {
 		
 		return result;
 	}
-	
+	@RequestMapping("mypage_item_modify_page")
+	public String mypage_item_modify_page(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		itemService = new LostItemService();
+		itemService.lost_item_modify_page(model);
+		
+		return "lost_item.modify_page2.분실물 수정.2";
+	}
+	@RequestMapping("mypage_item_modify")
+	public String mypage_item_modify(HttpServletRequest request, Model model,@RequestParam("files") ArrayList<MultipartFile> files) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("files", files);
+		itemService = new LostItemService();
+		String result=itemService.mypage_item_modify(model);
+		
+		return result;
+	}
 }

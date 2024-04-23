@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.tech.miaa.dao.MypagePostDao;
 import com.tech.miaa.dto.MypagePostDto;
 import com.tech.miaa.serviceInter.MypagePostServiceInter;
+import com.tech.miaa.vopage.PageVO3;
 
 public class MypagePostService implements MypagePostServiceInter{
 
@@ -19,8 +20,20 @@ public class MypagePostService implements MypagePostServiceInter{
 		Map<String, Object> map = model.asMap(); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		HttpServletRequest request = (HttpServletRequest) map.get("request"); String userId=(String) map.get("userId");
 		MypagePostDao dao = sqlSession.getMapper(MypagePostDao.class);
-		ArrayList<MypagePostDto> dtos = dao.mypage_post_list_page(userId);
-
+		String reply_status="전체";
+		if(request.getParameter("reply_status")!=null) reply_status=request.getParameter("reply_status");
+		
+		PageVO3 pageVo = new PageVO3();
+		
+		int totalCount=dao.totalCount(userId,reply_status);
+		String strPage=request.getParameter("page");
+		if(strPage==null) strPage="1";
+		int page=Integer.parseInt(strPage);
+		pageVo.setPage(page); pageVo.pageCalculate(totalCount);
+		int rowStart=pageVo.getRowStart(); int rowEnd=pageVo.getRowEnd();
+		
+		ArrayList<MypagePostDto> dtos = dao.mypage_post_list_page(userId,rowStart,rowEnd,reply_status);
+		
 		for (int i = 0; i < dtos.size(); i++) {
 			if(dtos.get(i).getItem_id()!=null) {
 				dtos.get(i).setKind("물건");
@@ -77,6 +90,8 @@ public class MypagePostService implements MypagePostServiceInter{
 				}
 			}
 		}
-		model.addAttribute("dtos", dtos);
+		
+		model.addAttribute("dtos", dtos); model.addAttribute("status", reply_status);
+		model.addAttribute("totalCount", totalCount); model.addAttribute("pageVo", pageVo);
 	}
 }

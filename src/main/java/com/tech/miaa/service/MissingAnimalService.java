@@ -132,7 +132,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class); PrdCode pc = new PrdCode();
-		String total_id = request.getParameter("total_id"); 
+		String total_id = request.getParameter("total_id"); String kind=request.getParameter("kind");
 		
 		AnimalDto dto = dao.missing_ani_detail_page(total_id);
 		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
@@ -153,7 +153,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 			String upr_cd="C"+dto.getUpr_cd();
 			dto.setUpr_cd(pc.getPrdNameByCode(upr_cd));
 		}
-		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos);
+		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos); model.addAttribute("kind", kind);
 	}
 	
 	@Override

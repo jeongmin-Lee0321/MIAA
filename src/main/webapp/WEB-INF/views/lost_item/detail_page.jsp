@@ -20,9 +20,16 @@
 					바랍니다.</span>
 			</div>
 			<div class="btn-top-container">
+				<c:if test="${kind==null }">
 				<button class="btn-list" id="btn-top-rescue-list"
 					onclick="location.href='lost_item_search_page';"
 					style="cursor: pointer;">목록으로</button>
+				</c:if>
+				<c:if test="${kind!=null }">
+				<button class="btn-list" id="btn-top-rescue-list"
+					onclick="location.href='mypage_post_list_page';"
+					style="cursor: pointer;">목록으로</button>
+				</c:if>
 			</div>
 		</div>
 
@@ -95,12 +102,19 @@
 		</div>
 
 		<div class="btn-bottom-container">
+			<c:if test="${kind==null }">
 			<button class="btn-list" id="btn-bottom-list"
 				onclick="location.href='lost_item_search_page';"
 				style="cursor: pointer;">목록으로</button>
+			</c:if>
+			<c:if test="${kind!=null }">
+			<button class="btn-list" id="btn-bottom-list"
+				onclick="location.href='mypage_post_list_page';"
+				style="cursor: pointer;">목록으로</button>
+			</c:if>
 		</div>
 		<div>
-			<c:if test="${userId eq dto.user_id}">
+			<c:if test="${userId eq dto.user_id and kind==null}">
 				<button class="btn-list" id="btn-bottom-list" onclick="modify('${dto.total_id}')" style="cursor: pointer;"> 수정하기</button>
 				<button class="btn-list" id="btn-bottom-list" onclick="deletes('${dto.total_id}')" style="cursor: pointer;">삭제하기</button>
 				</c:if>
