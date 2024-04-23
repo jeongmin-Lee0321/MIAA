@@ -5,8 +5,17 @@
     
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.LostItemDao">
-<insert id="itemWrite"> INSERT INTO ITEM VALUES(TOTAL_SEQ.NEXTVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4}, 
-						#{param5},#{param6},#{param7},#{param8},#{param9},#{param10}, SYSDATE,#{param11} ) 
+<!-- 최신 db변경에 따른 삭제로직 수정 04-23 마한슬  -->
+<insert id="itemWrite">
+	INSERT ALL
+	INTO TOT_BOARD(TOTAL_ID,TYPE,USER_ID) VALUES
+	(TOTAL_SEQ.NEXTVAL,'ITEM',#{param10})
+	INTO ITEM(TOTAL_ID, ITEM_ID, USER_TEL, OPENCLOSE, LOSTDAY, ADDRESS,
+	ITEM_NAME, UPKIND, UPR_CD, COLORCD, SEPCIALMARK, USER_ID, ITEM_DATE,
+	ADDRESSCODE) VALUES
+	(TOTAL_SEQ.CURRVAL, ITEM_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4},
+	#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},
+	SYSDATE,#{param11}) SELECT * FROM DUAL
 </insert>
 
 <insert id="imgUpLoad"> INSERT INTO ITEM_IMG VALUES((SELECT TOTAL_ID FROM ITEM WHERE USER_ID=#{param1} AND ITEM_NAME=#{param3} AND UPR_CD=#{param5}), 
@@ -89,8 +98,9 @@
 <update id="lost_item_delete_img">
 	DELETE FROM ITEM_IMG WHERE TOTAL_ID= #{param1}
 </update>
+<!-- 최신 db변경에 따른 삭제로직 수정 04-23 마한슬  -->
 <update id="lost_item_delete_content">
-	DELETE FROM ITEM WHERE TOTAL_ID= #{param1}
+	DELETE FROM TOT_BOARD WHERE TOTAL_ID= #{param1}
 </update>
 <update id="lost_item_modify">
 	UPDATE ITEM SET OPENCLOSE=#{param1},LOSTDAY=#{param2},ADDRESS=#{param3},ITEM_NAME=#{param4},UPKIND=#{param5},
