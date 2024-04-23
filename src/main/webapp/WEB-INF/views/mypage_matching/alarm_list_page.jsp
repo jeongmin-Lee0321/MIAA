@@ -72,8 +72,8 @@
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!--등록게시물 키워드 시작 1  -->
 
-			<c:forEach items="${list }" var="dto" begin="${(pageNum*6)}"
-				end="${(pageNum*6)+5}">
+			<c:forEach items="${list }" var="dto" begin="${(pageNum*2)}"
+				end="${(pageNum*2)+1}">
 				<%-- <c:if test="${not empty dto.item_dto}"> --%>
 				<div class="content-wrapper">
 					<div class="talbe-caption-container">
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="list-control-container">
-						<a href="#">모두 보기(49개)</a>
+						<a href="#" onclick="de">모두 보기(${dto.matching_item_dto.size()}개)</a>
 					</div>
 				</div>
 
