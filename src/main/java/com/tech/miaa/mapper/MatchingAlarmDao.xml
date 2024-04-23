@@ -28,9 +28,6 @@
         WHERE ITEM_ID=#{param1} AND
         USER_ID=#{param2}
     </delete>
-
-
-<<<<<<< HEAD
     <insert id="total_item_write">
         MERGE INTO TOTALITEM T
         USING DUAL
