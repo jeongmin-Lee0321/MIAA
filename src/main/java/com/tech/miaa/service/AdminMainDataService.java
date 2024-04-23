@@ -1,7 +1,7 @@
 
 package com.tech.miaa.service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.tech.miaa.dao.AdminInquiryDao;
-import com.tech.miaa.dto.AdminInquiryDto;
-import com.tech.miaa.dto.AdminInquirySearchDto;
+import com.google.gson.Gson;
+import com.tech.miaa.dao.AdminMainDataDao;
+import com.tech.miaa.dto.AdminDataDto1;
 import com.tech.miaa.serviceInter.AdminMainDataServiceInter;
 
 public class AdminMainDataService implements AdminMainDataServiceInter {
@@ -21,24 +21,31 @@ public class AdminMainDataService implements AdminMainDataServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		AdminInquirySearchDto dto = (AdminInquirySearchDto) map.get("dto");
 		String id = (String) map.get("userId");
 
 
 
 		// db에서 list가져오기
-		AdminInquiryDao dao = sqlSession.getMapper(AdminInquiryDao.class);
-		ArrayList<AdminInquiryDto> list = null;
+		AdminMainDataDao dao = sqlSession.getMapper(AdminMainDataDao.class);
+		List<AdminDataDto1> list1 = null;
+	
 
 			try {
-				list = dao.join_inquiry_list(dto);
+				list1 = dao.get_count_anikind_by_date();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-		model.addAttribute("search", dto);
-		model.addAttribute("list", list);
+			// Gson 객체 생성
+			Gson gson = new Gson();
+
+			// Java 객체를 JSON 형식의 문자열로 변환
+			String json1 = gson.toJson(list1);
+			
+			
+			System.out.println(json1);
+			model.addAttribute("list1", json1);
 
 	}
 

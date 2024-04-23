@@ -5,8 +5,13 @@
 <head>
 <title>Title</title>
 <link rel="stylesheet" href="resources/css/admin_inquiry_list_page.css" />
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+</head>
 <script type="text/javascript">
 
 $(document).ready(function(){

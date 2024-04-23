@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tech.miaa.dto.AdminDataDto1;
 import com.tech.miaa.dto.AdminInquirySearchDto;
 import com.tech.miaa.service.AdminInquiryService;
+import com.tech.miaa.service.AdminMainDataService;
 import com.tech.miaa.serviceInter.AdminInquiryServiceInter;
+import com.tech.miaa.serviceInter.AdminMainDataServiceInter;
 import com.tech.miaa.vopage.PageVO;
 
 @Controller
@@ -27,13 +30,13 @@ public class AdminMainController {
 	@Autowired
 	private SqlSession sqlSession;
 
-	AdminInquiryServiceInter adminInquiryInter;
+	AdminMainDataServiceInter adminMainDataServiceInter;
 	
 
 //	문의내역 페이지
 	@RequestMapping("admin_main_page")
 	public String admin_main_page(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId,
-			@SessionAttribute(name = "isAdmin", required = false) String isAdmin , PageVO pageVo, @ModelAttribute("dto") AdminInquirySearchDto dto) {
+			@SessionAttribute(name = "isAdmin", required = false) String isAdmin) {
 		String result = "redirect:/";
 		
 		//접속자가 관리자인지 확인 후 뷰단경로 처리
@@ -54,13 +57,12 @@ public class AdminMainController {
 		model.addAttribute("IsAdmin", isAdmin);
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
-		model.addAttribute("pageVo",pageVo);
+
 		
 		//inquiry 조인 테이블 가져오와서 모델에 넘기기
-		adminInquiryInter=new AdminInquiryService();
+		adminMainDataServiceInter=new AdminMainDataService();
 		try {
-			adminInquiryInter.inquiry_list(model,pageVo);
-			
+			adminMainDataServiceInter.get_main_data(model);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

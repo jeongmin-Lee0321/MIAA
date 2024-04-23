@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/css/admin_header.css" />
 <title>Insert title here</title>
   <style>
@@ -84,6 +90,8 @@ select {
 			<div class="content-caption">
 				<div class="list-title">지역별 분실물 등록수</div>
 			</div>
+			<div class="content">
+			</div>
 		</div>
 		<div class="content-list">
 			<div class="content-caption">
@@ -91,17 +99,35 @@ select {
 			</div>
 		</div>
 	</div>
-	  <script>
+<script>
+	// list1에서 가져온 데이터 (JSON 형식)
+	   let list1 = JSON.parse('${list1}'); // json 문자열을 JS객체화
+
+	   // 레이블과 데이터 배열 초기화
+	   let labels1 = [];
+	   let data1 = [];
+
+
+	// list1 배열을 순회하며 각 요소의 upkind와 upkind_count를 추출하여 배열에 추가
+	   $.each(list1, function(index, item) {
+	       // 각 객체에서 upkind와 upkind_count 속성의 값 가져오기
+	       let upkind = item.upkind;
+	       let upkind_count = item.upkind_count;
+
+	       // 가져온 값들을 레이블과 데이터 배열에 추가
+	       labels1.push(upkind); // upkind를 레이블 배열에 추가
+	       data1.push(upkind_count); // upkind_count를 데이터 배열에 추가
+	   });
   const ctx = document.getElementById('myChart1');
   const ctx2 = document.getElementById('myChart2');
 
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: labels1,
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '등록수',
+        data: data1,
         borderWidth: 1
       }]
     },
@@ -145,8 +171,7 @@ select {
 						}
 					}
 				}
-			}
-	);
+			});
 </script>
 </body>
 </html>
