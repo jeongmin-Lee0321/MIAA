@@ -41,11 +41,16 @@ public class MainController {
 			ArrayList<AbdmPublicItem> abdmPublicItems = new ArrayList<>();
 			ArrayList<matchingAlarmDto> dtos =matchingAlarmDao.get_user_alarm_list(userId);
 			for (matchingAlarmDto dto: dtos){
-				if (dto.getType()=="atcid"){
-					founditemDtos.add(matchingAlarmDao.get_item_data(dto.getPrimeid()));
-				}else if (dto.getType() == "desertionNo"){
-					abdmPublicItems.add(matchingAlarmDao.get_animal_data(dto.getPrimeid()));
-				}
+//				dto.getTotal_id();
+				//matcingAlarmDto에 totalid를 가지고와서 모든 db에있는 api호출
+				founditemDtos.addAll(matchingAlarmDao.matching_DB_items(dto.getTotal_id()));
+				abdmPublicItems.addAll(matchingAlarmDao.matching_DB_animals(dto.getTotal_id()));
+//
+//				if (dto.getType()=="atcid"){
+//					founditemDtos.add(matchingAlarmDao.get_item_data(dto.getPrimeid()));
+//				}else if (dto.getType() == "desertionNo"){
+//					abdmPublicItems.add(matchingAlarmDao.get_animal_data(dto.getPrimeid()));
+//				}
 			}
 			model.addAttribute("items",founditemDtos);
 			model.addAttribute("animals",founditemDtos);
