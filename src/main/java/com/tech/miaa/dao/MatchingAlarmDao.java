@@ -19,8 +19,8 @@ public interface MatchingAlarmDao {
 	
 	
 	/*매칭테이블이랑 db테이블 atcid,deNo서로 맞물려주기*/
-	public ArrayList<FounditemDto> matching_DB_items(String atcId);
-	public ArrayList<AbdmPublicItem> matching_DB_animals(String desertionNo);
+	public ArrayList<FounditemDto> matching_DB_items(int total_id);
+	public ArrayList<AbdmPublicItem> matching_DB_animals(int total_id);
 
 	public void set_matching_alarm_list(String User_id,String total_id,String Lostday,String Upr_cd);
 	public void set_matching_alarm_anilist(String User_id,String total_id,String missingday,String Upr_cd);

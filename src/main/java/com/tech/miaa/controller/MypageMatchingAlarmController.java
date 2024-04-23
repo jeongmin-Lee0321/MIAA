@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.tech.miaa.abdmApi.AbdmPublicItem;
 import com.tech.miaa.dao.MatchingAlarmDao;
 import com.tech.miaa.dto.AnimalDto;
+import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.matchingAlarmDto;
 import com.tech.miaa.dto.matchingAlarmListDto;
-import com.tech.miaa.service.LostItemService;
 import com.tech.miaa.service.MatchingAlarmService;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
@@ -47,8 +48,8 @@ public class MypageMatchingAlarmController {
 			/* 현재 session에 있는 id에 해당하는 키워드글들 가져오기 */
 			ArrayList<ItemDto> item_list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
 			ArrayList<AnimalDto> ani_list = mypageMatchingAlarmServiceInter.matching_alarm_anilist(model);
-			
-			//total+userid + 결과값100개이상 + 타입
+
+			// total+userid + 결과값100개이상 + 타입
 			ArrayList<matchingAlarmDto> alert_item_list = mypageMatchingAlarmServiceInter.alert_item_list(model);
 
 			ArrayList<matchingAlarmListDto> master_list = new ArrayList<matchingAlarmListDto>();
@@ -56,53 +57,38 @@ public class MypageMatchingAlarmController {
 			System.out.println(ani_list);
 			System.out.println(alert_item_list);
 			System.out.println("컨트롤러실행확인");
-			//조건item갯수만큼 반복(분실물게시글갯수)
+			// 조건item갯수만큼 반복(분실물게시글갯수)
 			for (ItemDto ilist : item_list) {
 				matchingAlarmListDto dto = new matchingAlarmListDto();
 				dto.setTotal_id(Integer.parseInt(ilist.getTotal_id()));
-				dto.setAnimal_dto(null);
+				System.out.println("아이템 토탈 아이디 : " + dto.getTotal_id());
+//				dto.setAnimal_dto(null);
 				dto.setItem_dto(ilist);
-				//키워드+리스트드들의 집합
-				for (matchingAlarmDto list : alert_item_list) {
-					if (ilist.getTotal_id().equals(Integer.toString(list.getTotal_id()))) {
-						dto.setTotal_id(list.getTotal_id());
-						System.out.println("아이템 토탈 아이디 : " + dto.getTotal_id());
-						dto.setItem_dto(ilist);
-						dto.setMatching_item_dto(matchingAlarmDao.matching_DB_items(list.getPrimeid()));
-						master_list.add(dto);
-					}
-				}
+				// 키워드+리스트드들의 집합
+				dto.setMatching_item_dto(matchingAlarmDao.matching_DB_items(dto.getTotal_id()));
+				master_list.add(dto);
 			}
 
 			for (AnimalDto anilist : ani_list) {
-				for (matchingAlarmDto list : alert_item_list) {
-					if (anilist.getTotal_id().equals(Integer.toString(list.getTotal_id()))) {
-						matchingAlarmListDto dto = new matchingAlarmListDto();
-						dto.setTotal_id(list.getTotal_id());
-						System.out.println("아이템 토탈 아이디 : " + dto.getTotal_id());
-						dto.setAnimal_dto(anilist);
-						dto.setMatching_animal_dto(matchingAlarmDao.matching_DB_animals(list.getPrimeid()));
-						master_list.add(dto);
-					}
-				}
+				matchingAlarmListDto dto = new matchingAlarmListDto();
+				dto.setTotal_id(Integer.parseInt(anilist.getTotal_id()));
+				System.out.println("동물 토탈 아이디 : " + dto.getTotal_id());
+//				dto.setItem_dto(null);
+				dto.setAnimal_dto(anilist);
+				// 키워드+리스트드들의 집합
+				dto.setMatching_animal_dto(matchingAlarmDao.matching_DB_animals(dto.getTotal_id()));
+				master_list.add(dto);
 			}
-
-			for (matchingAlarmListDto list : master_list) {
-				System.out.println("-----------------------------------------------------------------");
-				System.out.println(userId + " : " + list.getTotal_id());
-				System.out.println(userId + " : " + list.getItem_dto());
-				System.out.println(userId + " : " + list.getTotal_id());
-				System.out.println("-----------------------------------------------------------------");
-
-			}
+			
 			model.addAttribute("list", master_list);
-
-//         model.addAttribute("list", list);
-//         model.addAttribute("alert_item_list", alert_item_list);
-
+			model.addAttribute("pageNum", 0);
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
+		
+		
 		return "mypage_matching.alarm_list_page.알림 목록.3";
 	}
 

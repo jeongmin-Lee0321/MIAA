@@ -66,56 +66,63 @@
 			<!-- 검색창과 검색결과 끝 -->
 
 			<div class="result-totnum-container">
-				<span>등록된 알림 키워드(5개)</span>
+				<span>등록된 알림 키워드(${list.size()})</span>
 			</div>
 			<!--           </div> -->
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!--등록게시물 키워드 시작 1  -->
-			<div class="content-wrapper">
-				<div class="talbe-caption-container">
-					<div class="table-caption-item">
-						<div style="display: flex;">
-							<input type="checkbox" class="table-check-box" /> &nbsp; <span
-								id="item-name-text">분실물명 :</span> <span id="item-name-value"><strong>&nbsp;에어팟</strong></span>
-						</div>
+			<c:forEach items="${list }" var="dto" begin="${(pageNum*3)}"
+				end="${(pageNum*3)+2}">
+				<div class="content-wrapper">
+					<div class="talbe-caption-container">
+						<div class="table-caption-item">
+							<div style="display: flex;">
+								<input type="checkbox" class="table-check-box" /> &nbsp; <span
+									id="item-name-text">분실물명 :</span>${dto.itemDto.item_name}<span
+									id="item-name-value"><strong>&nbsp;에어팟</strong></span>
+							</div>
 
-					</div>
-					<div class="table-caption">
-						<div class="registrationed_alarm_keywords_list">
-							<span class="item_tag_01">물건</span> <span class="item_tag_02">에어팟</span>
-							<span class="item_tag_03">2024-03-01시경</span> <span
-								class="item_tag_04">전자기기 > 무선이어폰</span> <span
-								class="item_tag_05">월게,이마트,트레이더스</span>
 						</div>
+						<div class="table-caption">
+							<div class="registrationed_alarm_keywords_list">
+								<span class="item_tag_01">물건</span> <span class="item_tag_02">${dto.itemDto.item_name}</span>
+								<span class="item_tag_03">${dto.itemDto.lostday}</span> <span
+									class="item_tag_04">${dto.itemDto.upr_cd}</span> <span
+									class="item_tag_05">${dto.itemDto.address}</span>
+							</div>
+						</div>
+					</div>
+					<div class="list-control-container">
+						<a href="#">모두 보기(49개)</a>
 					</div>
 				</div>
-				<div class="list-control-container">
-					<a href="#">모두 보기(49개)</a>
-				</div>
-			</div>
 
 
-			<!-- 검색 결과 리스트프레임 -->
-			<div class="result-list">
-				<!-- 목록1개가 list-card -->
-				<div class="list-card" style="cursor: pointer">
-					<div class="card-photo">
-						<img src="resources/img/image_no.png" alt="">
-					</div>
-					<div class="content-items">
-						<div class="item-title">
-							<span>dgdgsd</span>
+				<!-- 검색 결과 리스트프레임 -->
+				<c:forEach items="${list.matching_item_dto }" var="dto2" begin="0"
+					end="3">
+					<div class="result-list">
+						<!-- 목록1개가 list-card -->
+						<div class="list-card" style="cursor: pointer">
+							<div class="card-photo">
+								<img src="resources/img/image_no.png" alt="">
+							</div>
+							<div class="content-items">
+								<div class="item-title">
+									<span>${dto2.atcid  }</span>
+								</div>
+								<ul class="item-details">
+									<li><span class="detail-title">구조날짜:</span><span>sgsdg</span></li>
+									<li><span class="detail-title">공고번호:</span><span>gdss</span></li>
+									<li><span class="detail-title">성별:</span><span>dsg</span></li>
+									<li><span class="detail-title">발견장소:</span><span>sdgsw</span></li>
+								</ul>
+							</div>
 						</div>
-						<ul class="item-details">
-							<li><span class="detail-title">구조날짜:</span><span>sgsdg</span></li>
-							<li><span class="detail-title">공고번호:</span><span>gdss</span></li>
-							<li><span class="detail-title">성별:</span><span>dsg</span></li>
-							<li><span class="detail-title">발견장소:</span><span>sdgsw</span></li>
-						</ul>
+						<!-- list-card 1개 끝 -->
 					</div>
-				</div>
-				<!-- list-card 1개 끝 -->
-			</div>
+				</c:forEach>
+			</c:forEach>
 			<!-- 검색 결과 리스트프레임 끝-->
 
 			<!-- page -->
@@ -154,6 +161,7 @@
 					</ul>
 				</div>
 			</div>
+
 
 
 		</div>
