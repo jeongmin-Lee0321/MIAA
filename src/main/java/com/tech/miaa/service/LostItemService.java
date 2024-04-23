@@ -52,6 +52,7 @@ public class LostItemService implements LostItemServiceInter {
 		int page=Integer.parseInt(strPage);
 		pageVo.setPage(page); pageVo.pageCalculate(totalCount);
 		int rowStart=pageVo.getRowStart(); int rowEnd=pageVo.getRowEnd();
+		
 		ArrayList<ItemDto> itemList = dao.itemlistview(searchday1,searchday2,addressCode,itemkind1,itemkind2,colorCd,rowStart,rowEnd);
 		
 		//검색조건 저장하기
@@ -154,7 +155,7 @@ public class LostItemService implements LostItemServiceInter {
 		Map<String, Object> map = model.asMap(); HttpServletRequest request = (HttpServletRequest) map.get("request"); 
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession"); LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
 		String total_id = request.getParameter("total_id"); PrdCode pc = new PrdCode();
-		
+		String kind=request.getParameter("kind");
 		ItemDto dto=dao.lost_item_detail_page(total_id);
 		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
 		
@@ -203,7 +204,7 @@ public class LostItemService implements LostItemServiceInter {
 				}}
 			
 		dto.setUpkind(pc.getPrdNameByCode(dto.getUpkind())); dto.setUpr_cd(pc.getPrdNameByCode(dto.getUpr_cd()));
-		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos);
+		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos); model.addAttribute("kind", kind);
 	}
 	
 	@Override
@@ -286,4 +287,59 @@ public class LostItemService implements LostItemServiceInter {
 			result="redirect:lost_item_search_page";
 		}
 		return result;}
+
+	@Override
+	public String mypage_item_modify(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
+		String result=""; LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
+
+		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
+		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
+		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
+		String colorCd="";
+		if(request.getParameter("colorCd")!=null) {
+			colorCd=request.getParameter("colorCd"); 
+		}
+		String sepcialMark = request.getParameter("sepcialMark"); String total_id = request.getParameter("total_id");
+		String user_id = request.getParameter("user_id"); String addressCode=request.getParameter("addressCode");
+		//기존 업로드 사진 삭제
+		int cnt=0;
+		for (int i = 0; i < files.size(); i++) {
+			if(files.get(i).getOriginalFilename()!="") cnt=cnt+1;
+		}
+		if(cnt>0) {
+			ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
+			if(imgDtos.size()!=0) {
+				for (int i = 0; i < imgDtos.size(); i++) {
+					String fileName=imgDtos.get(i).getFilename();
+					File file = new File(filePath, fileName);
+					file.delete();
+					dao.lost_item_delete_img(total_id);}}}
+		//수정
+		if(lostday.equals("")|| address.equals("")|| itemname.equals("") || itemkind2.equals("분류를 선택하세요") || 
+				addressCode.equals("지역을 선택하세요")) {
+			result="redirect:mypage_item_modify_page?total_id="+total_id;
+		}else {
+			dao.lost_item_modify(openclose,lostday,address,itemname,itemkind1,itemkind2,colorCd,sepcialMark,addressCode,total_id);
+			if(cnt>0) {
+				for (int i = 0; i < files.size(); i++) {
+					if(files.get(i).getOriginalFilename()=="") {
+						continue;
+					}else if(files.get(i).getOriginalFilename()!=""){
+						try {
+							UUID uuid=UUID.randomUUID();
+							String fileName="resources/item_img/"+uuid+"_"+files.get(i).getOriginalFilename();
+							File saveFile = new File(filePath, fileName);
+							files.get(i).transferTo(saveFile);
+							dao.imgUpLoad(user_id,(i+1),itemname,fileName,itemkind2);
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();}}}}
+			result="redirect:mypage_post_list_page";
+		}
+		return result;
+	}
 }

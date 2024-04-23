@@ -94,6 +94,7 @@ public class LostItemController {
 		itemService.lost_item_modify_page(model);
 
 		return "lost_item.modify_page.분실물 수정.2";}
+	
 	@RequestMapping("lost_item_modify")
 	public String mypage_post(HttpServletRequest request, Model model,
 			@RequestParam("files") ArrayList<MultipartFile> files) {
