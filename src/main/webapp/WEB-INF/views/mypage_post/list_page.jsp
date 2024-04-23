@@ -21,7 +21,7 @@
 	<!-- main -->
 			
         <!-- 검색창과 검색결과 -->
-        
+
 			<div class="searchbar-container">
 				<form action="mypage_post_list_page">				
 					<div class="searchbar-select-group">
