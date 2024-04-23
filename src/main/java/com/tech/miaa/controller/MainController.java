@@ -36,23 +36,23 @@ public class MainController {
 	public String home(HttpServletRequest request, Model model, @SessionAttribute(name = "userId", required = false) String userId) {
 		if(userId != null){
 			System.out.println("로그인 유저의 id : "+userId);
+			MatchingAlarmDao matchingAlarmDao = sqlSession.getMapper(MatchingAlarmDao.class);
+			ArrayList<FounditemDto> founditemDtos = new ArrayList<>();
+			ArrayList<AbdmPublicItem> abdmPublicItems = new ArrayList<>();
+			ArrayList<matchingAlarmDto> dtos =matchingAlarmDao.get_user_alarm_list(userId);
+			for (matchingAlarmDto dto: dtos){
+				if (dto.getType()=="atcid"){
+					founditemDtos.add(matchingAlarmDao.get_item_data(dto.getPrimeid()));
+				}else if (dto.getType() == "desertionNo"){
+					abdmPublicItems.add(matchingAlarmDao.get_animal_data(dto.getPrimeid()));
+				}
+			}
+			model.addAttribute("items",founditemDtos);
+			model.addAttribute("animals",founditemDtos);
 		}else if(userId == null){
 			System.out.println("로그인 하지 않았습니다.");
 		}
 
-		MatchingAlarmDao matchingAlarmDao = sqlSession.getMapper(MatchingAlarmDao.class);
-		ArrayList<FounditemDto> founditemDtos = new ArrayList<>();
-		ArrayList<AbdmPublicItem> abdmPublicItems = new ArrayList<>();
-		ArrayList<matchingAlarmDto> dtos =matchingAlarmDao.get_user_alarm_list(userId);
-		for (matchingAlarmDto dto: dtos){
-			if (dto.getType()=="atcid"){
-				founditemDtos.add(matchingAlarmDao.get_item_data(dto.getPrimeid()));
-			}else if (dto.getType() == "desertionNo"){
-				abdmPublicItems.add(matchingAlarmDao.get_animal_data(dto.getPrimeid()));
-			}
-		}
-		model.addAttribute("items",founditemDtos);
-		model.addAttribute("animals",founditemDtos);
 		model.addAttribute("userId", userId);
 		return "main_page.메인페이지.1";
 	}
