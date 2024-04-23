@@ -219,7 +219,8 @@ public class LostItemService implements LostItemServiceInter {
 				String fileName=imgDtos.get(i).getFilename();
 				File file = new File(filePath, fileName);
 				file.delete();}}
-		dao.lost_item_delete_img(total_id); dao.lost_item_delete_content(total_id);
+//		dao.lost_item_delete_img(total_id); 
+		dao.lost_item_delete_content(total_id);
 	}
 	
 	@Override

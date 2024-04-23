@@ -170,7 +170,8 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 				File file = new File(filePath, fileName);
 				file.delete();
 		}}
-		dao.missing_ani_delete_img(total_id); dao.missing_ani_delete_content(total_id);
+//		dao.missing_ani_delete_img(total_id); 
+		dao.missing_ani_delete_content(total_id);
 	}
 
 	@Override
