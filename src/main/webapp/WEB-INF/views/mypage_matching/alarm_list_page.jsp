@@ -126,44 +126,42 @@
 			<!-- 검색 결과 리스트프레임 끝-->
 
 			<!-- page -->
-			<c:forEach items="${list }" var="dto" begin="${pagevo.rowStart}"
-				end="${pagevo.rowEnd}">
-				<div class="result-container">
-					<div class="page-container">
-						<div class="currentOftotal">
-							<span>Page</span><span class="current-page">1</span><span>of</span><span
-								class="total-page">1</span>
-						</div>
-						<ul class="pagelist-container">
-							<li class="btn-prev"><a href="javascript:void(0);"
-								onclick="goToPage(${pageVo.page}-1)"><img
-									src="resources/img/chevron-left.png" alt=""></a></li>
-							<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
-								var="i">
-								<c:choose>
-									<c:when test="${i eq pageVo.page}">
-										<li><span class="currpage">${i}</span></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="javascript:void(0);"
-											onc05lick="goToPage(${i})">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<li class="btn-next"><a href="javascript:void(0);"
-								onclick="goToPage(${pageVo.page}+1)"><img
-									src="resources/img/chevron-left.png" alt=""></a></li>
-						</ul>
 
-						<ul class="switchBtn-container">
-							<li class="btn-prev-group"><a href="javascript:void(0);"
-								onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
-							<li class="btn-next-group"><a href="javascript:void(0);"
-								onclick="goToPage(${pageVo.page}+10)">Next</a></li>
-						</ul>
+			<div class="result-container">
+				<div class="page-container">
+					<div class="currentOftotal">
+						<span>Page</span><span class="current-page">1</span><span>of</span><span
+							class="total-page">1</span>
 					</div>
+					<ul class="pagelist-container">
+						<li class="btn-prev"><a href="javascript:void(0);"
+							onclick="goToPage(${pageVo.page}-1)"><img
+								src="resources/img/chevron-left.png" alt=""></a></li>
+						<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
+							var="i">
+							<c:choose>
+								<c:when test="${i eq pageVo.page}">
+									<li><span class="currpage">${i}</span></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="javascript:void(0);"
+										onc05lick="goToPage(${i})">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="btn-next"><a href="javascript:void(0);"
+							onclick="goToPage(${pageVo.page}+1)"><img
+								src="resources/img/chevron-left.png" alt=""></a></li>
+					</ul>
+
+					<ul class="switchBtn-container">
+						<li class="btn-prev-group"><a href="javascript:void(0);"
+							onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
+						<li class="btn-next-group"><a href="javascript:void(0);"
+							onclick="goToPage(${pageVo.page}+10)">Next</a></li>
+					</ul>
 				</div>
-			</c:forEach>
+			</div>
 
 
 		</div>
