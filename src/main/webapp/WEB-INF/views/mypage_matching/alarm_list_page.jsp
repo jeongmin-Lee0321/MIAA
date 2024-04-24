@@ -16,8 +16,8 @@
 
 			<!-- 검색창과 검색결과 -->
 
-			<div class="searchbar-container">
-				<!-- <form action=""> -->
+			<!-- <div class="searchbar-container">
+				<form action="">
 				<div class="searchbar-select-group">
 					<div style="display: flex;">
 						<button class="btn-list" id="btn-search-all"
@@ -57,11 +57,8 @@
 					</div>
 
 				</div>
-				<!-- </form> -->
-
-
-
-			</div>
+				</form>
+			</div> -->
 
 			<!-- 검색창과 검색결과 끝 -->
 
@@ -72,15 +69,16 @@
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!--등록게시물 키워드 시작 1  -->
 
-			<c:forEach items="${list }" var="dto" begin="${(pageNum*2)}"
-				end="${(pageNum*2)+1}">
+			<c:forEach items="${list }" var="dto" begin="${pagevo.rowStart}"
+				end="${pagevo.rowEnd}">
 				<%-- <c:if test="${not empty dto.item_dto}"> --%>
 				<div class="content-wrapper">
 					<div class="talbe-caption-container">
 						<div class="table-caption-item">
 							<div style="display: flex;">
-								<input type="checkbox" class="table-check-box" /> &nbsp; <span
-									id="item-name-text">분실물명 :</span> <span id="item-name-value"><strong>&nbsp;${dto.item_dto.item_name }</strong></span>
+								<!-- <input type="checkbox" class="table-check-box" /> -->
+								&nbsp; <span id="item-name-text">분실물명 :</span> <span
+									id="item-name-value"><strong>&nbsp;${dto.item_dto.item_name }</strong></span>
 							</div>
 
 						</div>
@@ -94,14 +92,15 @@
 						</div>
 					</div>
 					<div class="list-control-container">
-						<a href="#" onclick="de">모두 보기(${dto.matching_item_dto.size()}개)</a>
+						<a href="#" onclick="de">모두
+							보기(${dto.matching_item_dto.size()}개)</a>
 					</div>
 				</div>
 
 				<!-- 검색 결과 리스트프레임 -->
 				<div class="result-list">
 					<c:forEach items="${dto.matching_item_dto}" var="dto2" begin="0"
-						end="3">
+						end="4">
 						<!-- 목록1개가 list-card -->
 						<div class="list-card" style="cursor: pointer">
 							<div class="card-photo">
@@ -127,42 +126,44 @@
 			<!-- 검색 결과 리스트프레임 끝-->
 
 			<!-- page -->
+			<c:forEach items="${list }" var="dto" begin="${pagevo.rowStart}"
+				end="${pagevo.rowEnd}">
+				<div class="result-container">
+					<div class="page-container">
+						<div class="currentOftotal">
+							<span>Page</span><span class="current-page">1</span><span>of</span><span
+								class="total-page">1</span>
+						</div>
+						<ul class="pagelist-container">
+							<li class="btn-prev"><a href="javascript:void(0);"
+								onclick="goToPage(${pageVo.page}-1)"><img
+									src="resources/img/chevron-left.png" alt=""></a></li>
+							<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
+								var="i">
+								<c:choose>
+									<c:when test="${i eq pageVo.page}">
+										<li><span class="currpage">${i}</span></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="javascript:void(0);"
+											onc05lick="goToPage(${i})">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="btn-next"><a href="javascript:void(0);"
+								onclick="goToPage(${pageVo.page}+1)"><img
+									src="resources/img/chevron-left.png" alt=""></a></li>
+						</ul>
 
-			<div class="result-container">
-				<div class="page-container">
-					<div class="currentOftotal">
-						<span>Page</span><span class="current-page">1</span><span>of</span><span
-							class="total-page">1</span>
+						<ul class="switchBtn-container">
+							<li class="btn-prev-group"><a href="javascript:void(0);"
+								onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
+							<li class="btn-next-group"><a href="javascript:void(0);"
+								onclick="goToPage(${pageVo.page}+10)">Next</a></li>
+						</ul>
 					</div>
-					<ul class="pagelist-container">
-						<li class="btn-prev"><a href="javascript:void(0);"
-							onclick="goToPage(${pageVo.page}-1)"><img
-								src="resources/img/chevron-left.png" alt=""></a></li>
-						<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
-							var="i">
-							<c:choose>
-								<c:when test="${i eq pageVo.page}">
-									<li><span class="currpage">${i}</span></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="javascript:void(0);"
-										onc05lick="goToPage(${i})">${i}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<li class="btn-next"><a href="javascript:void(0);"
-							onclick="goToPage(${pageVo.page}+1)"><img
-								src="resources/img/chevron-left.png" alt=""></a></li>
-					</ul>
-
-					<ul class="switchBtn-container">
-						<li class="btn-prev-group"><a href="javascript:void(0);"
-							onclick="goToPage(${pageVo.page}-10)">Previous</a></li>
-						<li class="btn-next-group"><a href="javascript:void(0);"
-							onclick="goToPage(${pageVo.page}+10)">Next</a></li>
-					</ul>
 				</div>
-			</div>
+			</c:forEach>
 
 
 		</div>
