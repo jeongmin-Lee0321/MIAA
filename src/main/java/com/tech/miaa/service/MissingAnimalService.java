@@ -26,13 +26,13 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 	
 	@Override
 	public ArrayList<AnimalDto> missing_ani_search(Model model) {
-		Map<String, Object> map = model.asMap();
-		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		PrdCode pc = new PrdCode();
+		Map<String, Object> map = model.asMap();SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		HttpServletRequest request = (HttpServletRequest) map.get("request"); PrdCode pc = new PrdCode();
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
+		
 		String searchday1=""; String searchday2=""; String addressCode1=""; String addressCode2="";
 		String animalkind1=""; String animalkind2="";
+		
 		if(request.getParameter("searchday1")!=null) searchday1=request.getParameter("searchday1");
 		if(request.getParameter("searchday2")!=null) searchday2=request.getParameter("searchday2");
 		if(request.getParameter("addressCode1")!=null) addressCode1=request.getParameter("addressCode1");
@@ -42,15 +42,12 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		
 		//페이징 처리
 		PageVO pageVo = new PageVO();
-		int totalCount=dao.totalCount(searchday1,searchday2,addressCode1,addressCode2,
-				animalkind1,animalkind2);
+		int totalCount=dao.totalCount(searchday1,searchday2,addressCode1,addressCode2, animalkind1,animalkind2);
 		String strPage=request.getParameter("page");
 		if(strPage==null) {strPage="1";}
 		int page=Integer.parseInt(strPage);
-		pageVo.setPage(page);
-		pageVo.pageCalculate(totalCount);
-		int rowStart=pageVo.getRowStart();
-		int rowEnd=pageVo.getRowEnd();
+		pageVo.setPage(page); pageVo.pageCalculate(totalCount);
+		int rowStart=pageVo.getRowStart(); int rowEnd=pageVo.getRowEnd();
 		
 		ArrayList<AnimalDto> animalList = dao.animalListView(searchday1,searchday2,addressCode1,addressCode2,
 				animalkind1,animalkind2,rowStart,rowEnd);
@@ -81,8 +78,8 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		}
 		
 		model.addAttribute("searchContent", searchContent);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("pageVo", pageVo);
+		model.addAttribute("totalCount", totalCount); model.addAttribute("pageVo", pageVo);
+		
 		return animalList;
 	}
 	
@@ -132,7 +129,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class); PrdCode pc = new PrdCode();
-		String total_id = request.getParameter("total_id"); 
+		String total_id = request.getParameter("total_id"); String kind=request.getParameter("kind");
 		
 		AnimalDto dto = dao.missing_ani_detail_page(total_id);
 		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
@@ -153,7 +150,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 			String upr_cd="C"+dto.getUpr_cd();
 			dto.setUpr_cd(pc.getPrdNameByCode(upr_cd));
 		}
-		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos);
+		model.addAttribute("dto", dto); model.addAttribute("imgDtos", imgDtos); model.addAttribute("kind", kind);
 	}
 	
 	@Override
@@ -162,7 +159,9 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
 		String total_id=request.getParameter("total_id");
-		
+		if((String) map.get("total_id")!=null) {
+			total_id=(String) map.get("total_id");
+		}
 		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
 		if(imgDtos.size()!=0) {
 			for (int i = 0; i < imgDtos.size(); i++) {
@@ -170,7 +169,7 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 				File file = new File(filePath, fileName);
 				file.delete();
 		}}
-		dao.missing_ani_delete_img(total_id); dao.missing_ani_delete_content(total_id);
+		dao.missing_ani_delete_content(total_id);
 	}
 
 	@Override

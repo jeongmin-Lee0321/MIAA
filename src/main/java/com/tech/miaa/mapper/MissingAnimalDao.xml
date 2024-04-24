@@ -5,9 +5,19 @@
     
 <!-- dao의 인터페이스 주소 -->
 <mapper namespace="com.tech.miaa.dao.MissingAnimalDao">
+<!-- 최신 db변경에 따른 삭제로직 수정 04-23 마한슬  -->
 	<insert id="animalWrite">
-		INSERT INTO ANIMAL VALUES(TOTAL_SEQ.NEXTVAL, ANIMAL_SEQ.NEXTVAL,#{param1},#{param2},#{param3}, 
-		#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12}, SYSDATE,#{param13},#{param14})
+	INSERT ALL
+	INTO TOT_BOARD(TOTAL_ID,TYPE,USER_ID) VALUES
+	(TOTAL_SEQ.NEXTVAL,'animal',#{param12})
+	INTO
+	ANIMAL(TOTAL_ID,ANIMAL_ID,USER_TEL,OPENCLOSE,MISSINGDAY,ADDRESS,ANIMAL_NAME,UPKIND,UPR_CD,SEXCD
+	,WEIGHT,AGE,SEPCIALMARK,USER_ID,ANIMAL_DATE
+	,ADDRESSCODE1
+	,ADDRESSCODE2) VALUES
+	(TOTAL_SEQ.CURRVAL, ANIMAL_SEQ.NEXTVAL,#{param1},#{param2},#{param3},
+	#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},
+	SYSDATE,#{param13},#{param14}) SELECT * FROM DUAL
 	</insert>
 	
 	<insert id="imgUpLoad"> 
@@ -98,8 +108,9 @@
 	<select id="get_missing_animals" resultType="com.tech.miaa.dto.AnimalDto">
 		SELECT * FROM ANIMAL WHERE USER_ID= #{PARAM1}
 	</select>
+	<!-- 최신 db변경에 따른 삭제로직 수정 04-23 마한슬  -->
 	<delete id="missing_ani_delete_content">
-		DELETE FROM ANIMAL WHERE TOTAL_ID=#{param1}
+		DELETE FROM TOT_BOARD WHERE TOTAL_ID=#{param1}
 	</delete>
 	<delete id="missing_ani_delete_img">
 		DELETE FROM ANIMAL_IMG WHERE TOTAL_ID=#{param1}

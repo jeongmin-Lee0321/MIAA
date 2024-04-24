@@ -185,7 +185,7 @@ public class Scheduler {
 	}
 
 	// 지정된 시간마다 member의 갯수만큼 member가 작성한 분실물키워드를 db와 매칭해 alarm테이블에 삽입
-//	@Scheduled(cron = "0 32 * * * *")
+//	@Scheduled(cron = "0 * * * * *")
 	public void updatematchingAlarm() {
 		MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
@@ -196,28 +196,53 @@ public class Scheduler {
 
 		for (MemberDto m_dto : member_list) {
 			ArrayList<ItemDto> list = matchingAlarmDao.matching_alarm_list(m_dto.getUser_id());
-			ArrayList<AnimalDto> anilist = matchingAlarmDao.matching_alarm_anilist(m_dto.getUser_id());
 			for (ItemDto item_dto : list) {
-				String kind = item_dto.getUpr_cd() == null ? prd.getPrdNameByCode(item_dto.getUpkind())
-						: item_dto.getUpr_cd();
-				matchingAlarmDao.set_matching_alarm_list(m_dto.getUser_id(), item_dto.getTotal_id(),
-						item_dto.getLostday(), kind);
+				String kind = item_dto.getUpr_cd() == null ? item_dto.getUpkind() : item_dto.getUpr_cd();
 				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
-				}
-			}
 
+					String totalID = item_dto.getTotal_id();
+					String userID = item_dto.getUser_id();
+					String lostday = item_dto.getLostday();
+
+					System.out.println("userID:" + userID);
+					System.out.println("totalID:" + totalID);
+					System.out.println("lostday:" + lostday);
+					System.out.println("kind:" + kind);
+
+					matchingAlarmDao.set_matching_alarm_list(userID, totalID,lostday, kind);
+
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+
+				}
+
+			}
+			
+			ArrayList<AnimalDto> anilist = matchingAlarmDao.matching_alarm_anilist(m_dto.getUser_id());
 			for (AnimalDto ani_dto : anilist) {
-				String kind = ani_dto.getUpr_cd() == null ? prd.getPrdNameByCode(ani_dto.getUpkind())
-						: ani_dto.getUpr_cd();
-				matchingAlarmDao.set_matching_alarm_anilist(m_dto.getUser_id(), ani_dto.getTotal_id(),
-						ani_dto.getMissingday(), kind);
+				String kind = ani_dto.getUpr_cd() == null ? prd.getPrdNameByCode(("P"+ani_dto.getUpkind()))
+						: prd.getPrdNameByCode("C"+ani_dto.getUpr_cd());
+				System.out.println("품종:"+kind);
+				String totalID = ani_dto.getTotal_id();
+				String userID = m_dto.getUser_id();
+				String missingday = ani_dto.getMissingday();
+				
+				matchingAlarmDao.set_matching_alarm_anilist(userID,totalID,missingday,kind);
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					throw new RuntimeException(e);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+
 				}
 			}
 
