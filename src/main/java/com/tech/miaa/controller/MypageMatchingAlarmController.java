@@ -22,6 +22,7 @@ import com.tech.miaa.dto.matchingAlarmListDto;
 import com.tech.miaa.service.MatchingAlarmService;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
+import com.tech.miaa.vopage.PageVO3;
 
 //원진호_알림목록_0401추가
 @Controller
@@ -57,6 +58,8 @@ public class MypageMatchingAlarmController {
 			System.out.println(ani_list);
 			System.out.println(alert_item_list);
 			System.out.println("컨트롤러실행확인");
+	
+			
 			// 조건item갯수만큼 반복(분실물게시글갯수)
 			for (ItemDto ilist : item_list) {
 				matchingAlarmListDto dto = new matchingAlarmListDto();
@@ -80,6 +83,12 @@ public class MypageMatchingAlarmController {
 				master_list.add(dto);
 			}
 			
+			int page = Integer.parseInt(request.getParameter("page"));
+			PageVO3 pagevo = new PageVO3();
+			pagevo.setPage(page);
+			pagevo.pageCalculate(master_list.size());
+			
+			model.addAttribute("pagevo",pagevo);
 			model.addAttribute("list", master_list);
 			model.addAttribute("pageNum", 0);
 			

@@ -185,7 +185,7 @@ public class Scheduler {
 	}
 
 	// 지정된 시간마다 member의 갯수만큼 member가 작성한 분실물키워드를 db와 매칭해 alarm테이블에 삽입
-	@Scheduled(cron = "0 * * * * *")
+//	@Scheduled(cron = "0 * * * * *")
 	public void updatematchingAlarm() {
 		MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
