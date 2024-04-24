@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/css/main_contents.css"/>
+    <link rel="stylesheet" href="resources/css/main_contents.css"/>
     <script src="<c:url value="/resources/js/jquery-3.7.1.min.js"/>" type="text/javascript"></script>
     <script type="text/javascript">
         function getSigungu(val) {

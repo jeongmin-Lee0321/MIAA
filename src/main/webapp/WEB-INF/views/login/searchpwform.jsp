@@ -52,7 +52,7 @@
         /* 스타일 - customize */
         max-width: 350px;
         width: 100%;
-        height: 300px;
+        height: 200px;
         background-color: white;
         /* padding: 15px; */
         border-radius: 5px;
@@ -61,6 +61,11 @@
         opacity: 0;
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         transform: scale(0.8);
+        /* 중앙에 오게하는 코드 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .pw_modal.show {
@@ -142,7 +147,8 @@
             success: function (finepw) {
                 if (finepw != null) {
                     if (finepw == "") {
-                        alert("아이디,이름,이메일을 다시 입력하세요.");
+                        // alert("아이디,이름,이메일을 다시 입력하세요.");
+                        document.getElementById("pw_content").innerHTML="아이디,이름,이메일을 다시 입력하세요.";
                     } else {
                         // alert("해당 메일로 비밀번호가 발송되었습니다.");
                         document.getElementById("pw_content").innerHTML="해당 메일로 비밀번호가 발송되었습니다.";
@@ -158,14 +164,13 @@
 <div id="pwModal" class="pw_modal">
     <div class="pw-modal-content">
 
-        <div id="pw_content" style="display: flex; justify-content: center; align-items: center; height: 200px">
+        <div id="pw_content" style="display: flex; justify-content: center; align-items: center; height: 100px">
 
         </div>
 
-        <div style="height: 50px; width: 100px; background-color: #0066ff; text-align: center; line-height: 50px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
-
-				<span><a style="color: #ffffff; font-size: 18px;"
-                         href="mypage_matching_alarm_list_page">확인</a></span>
+        <div style="height: 50px; width: 100px; background-color: #0066ff;
+        text-align: center; line-height: 50px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+				<span><a style="color: #ffffff; font-size: 18px;" href="searchpwform">확인</a></span>
         </div>
 
     </div>

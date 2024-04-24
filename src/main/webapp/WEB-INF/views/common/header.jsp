@@ -183,7 +183,7 @@
                     <div>
                         <div>
 
-                            <c:forEach items="${items}" var="item" end="3">
+                            <c:forEach items="${items}" var="item" end="2">
                                 <div class="modal-content-view">
                                     <span>물품명 : </span><span>${item.getFdPrdtNm()}</span><br/> <span>보관장소
 								: </span><span>${item.getDepPlace()}</span> <br/>
@@ -202,7 +202,7 @@
                         <strong>보호동물</strong></div>
                     <div>
                         <div>
-                            <c:forEach items="${animals}" var="animal" end="3">
+                            <c:forEach items="${animals}" var="animal" end="2">
 
                                 <div class="modal-content-view">
                                     <span>동물명 : </span><span>${animal.getKindCd()}</span><br/> <span>발견장소 :
