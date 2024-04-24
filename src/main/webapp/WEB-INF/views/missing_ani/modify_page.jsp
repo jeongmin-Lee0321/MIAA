@@ -49,7 +49,7 @@
       <ul class="top-btns">
         <li><button type="submit">수정완료</button></li>
         <li><button type="button"
-        onclick="location.href='missing_ani_detail_page?total_id=${dto.total_id }';">취소하기</button></li>
+        onclick="history.back()">취소하기</button></li>
       </ul>
       <div class="essential">
         <span>*는 필수 입력사항 입니다</span>
@@ -255,7 +255,7 @@
 				<ul class="bottom-btns">
 					<li><button type="submit">수정하기</button></li>
 					<li><button type="button"
-        				onclick="location.href='missing_ani_detail_page?total_id=${dto.total_id }';">취소하기</button></li>
+        				onclick="history.back()">취소하기</button></li>
 				</ul>
 				<!-- hidden 세션로그인 id -->
 				<input type="hidden" name="userId" value="${userId }">
