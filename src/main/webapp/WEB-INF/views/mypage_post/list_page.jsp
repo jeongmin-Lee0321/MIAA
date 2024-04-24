@@ -115,6 +115,9 @@
 					<li class="btn-prev"><a class="test"
 						href="mypage_post_list_page?page=${pageVo.page - 1}&reply_status=${status}"><img
 							src="resources/img/chevron-left.png" alt=""></a></li>
+						<c:if test="${pageVo.totPage == 0 }">
+								<li><a href="#" style="color: #0066ff">1</a></li>
+						</c:if>
 					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
 						var="i">
 						<c:choose>
@@ -127,10 +130,10 @@
 						</c:choose>
 					</c:forEach>
 					<li class="btn-next">
-					<c:if test="${pageVo.page == pageVo.totPage}">
+					<c:if test="${pageVo.page >= pageVo.totPage}">
 					<a href="mypage_post_list_page?page=${pageVo.page }&reply_status=${status}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
-					<c:if test="${pageVo.page != pageVo.totPage}">
+					<c:if test="${pageVo.page <= pageVo.totPage}">
 					<a href="mypage_post_list_page?page=${pageVo.page + 1}&reply_status=${status}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
 					</li>
@@ -224,7 +227,7 @@ function deleteValue(){
             success: function(jdata){
                 if(jdata = 1) {
                     alert("삭제 성공");
-                    location.replace("mypage_customer_inquiry_write_page") //페이지 새로고침
+                    location.replace("mypage_post_list_page") //페이지 새로고침
                 }
                 else{
                     alert("삭제 실패");

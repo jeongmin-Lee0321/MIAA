@@ -187,6 +187,8 @@
 						&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
 						&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img
 						src="resources/img/chevron-left.png" alt=""></a></li>
+					<c:if test="${pageVo.totPage == 0 }">
+					<li><a href="#" style="color: #0066ff">1</a></li></c:if>
 					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
 						var="i">
 						<c:choose>
@@ -201,12 +203,12 @@
 						</c:choose>
 					</c:forEach>
 					<li class="btn-next">
-					<c:if test="${pageVo.page == pageVo.totPage}">
+					<c:if test="${pageVo.page >= pageVo.totPage}">
 					<a href="lost_item_search_page?page=${pageVo.page}&searchday1=${searchContent.get(0)}
 					&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
 					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
-					<c:if test="${pageVo.page != pageVo.totPage}">
+					<c:if test="${pageVo.page <= pageVo.totPage}">
 					<a href="lost_item_search_page?page=${pageVo.page + 1}&searchday1=${searchContent.get(0)}
 					&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
 					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
