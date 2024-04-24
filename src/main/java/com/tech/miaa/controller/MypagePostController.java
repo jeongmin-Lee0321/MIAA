@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,15 +90,18 @@ public class MypagePostController {
 		
 		return result;
 	}
+	@ResponseBody
 	@RequestMapping(value ="/mypage_total_delete")
-	public void mypage_total_delete(HttpServletRequest request, Model model) {
+	public int mypage_total_delete(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
-		String[] ajaxMsg = request.getParameterValues("valueArr");
+		String[] ajaxMsg = request.getParameterValues("valueArr"); int result=0;
 		itemService = new LostItemService(); animalService = new MissingAnimalService();
 		for (int i = 0; i < ajaxMsg.length; i++) {
 			model.addAttribute("total_id", ajaxMsg[i]);
 			itemService.lost_item_delete(model);
 			animalService.missing_ani_delete(model);
+			result=1;
 		}
+		return result;
 	}
 }
