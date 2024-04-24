@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.tech.miaa.abdmApi.AbdmPublicItem;
 import com.tech.miaa.dao.MatchingAlarmDao;
 import com.tech.miaa.dto.AnimalDto;
+import com.tech.miaa.dto.FounddetailDto;
 import com.tech.miaa.dto.FounditemDto;
 import com.tech.miaa.dto.ItemDto;
 import com.tech.miaa.dto.matchingAlarmDto;
 import com.tech.miaa.dto.matchingAlarmListDto;
+import com.tech.miaa.service.FounditemService;
 import com.tech.miaa.service.MatchingAlarmService;
 import com.tech.miaa.serviceInter.LostItemServiceInter;
 import com.tech.miaa.serviceInter.MypageMatchingAlarmServiceInter;
@@ -30,16 +32,12 @@ public class MypageMatchingAlarmController {
 	@Autowired
 	private SqlSession sqlSession;
 	MypageMatchingAlarmServiceInter mypageMatchingAlarmServiceInter;
-	/* 원진호_0409추가 */
-	LostItemServiceInter itemService;
-	/* 원진호_0415_추가 */
 
-	/* 원진호_0401추가 */
-	/* 원진호_0409_수정 */
+	LostItemServiceInter itemService;
+
 	@RequestMapping(value = "mypage_matching_alarm_list_page", method = RequestMethod.GET)
 	public String mypage_matching_alarm_list_page(HttpServletRequest request, Model model,
 			@SessionAttribute(name = "userId", required = false) String userId) {
-		/* 원진호_0409추가 */
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
@@ -58,8 +56,7 @@ public class MypageMatchingAlarmController {
 			System.out.println(ani_list);
 			System.out.println(alert_item_list);
 			System.out.println("컨트롤러실행확인");
-	
-			
+
 			// 조건item갯수만큼 반복(분실물게시글갯수)
 			for (ItemDto ilist : item_list) {
 				matchingAlarmListDto dto = new matchingAlarmListDto();
@@ -82,23 +79,47 @@ public class MypageMatchingAlarmController {
 				dto.setMatching_animal_dto(matchingAlarmDao.matching_DB_animals(dto.getTotal_id()));
 				master_list.add(dto);
 			}
-			
-			int page = Integer.parseInt(request.getParameter("page"));
+			int page = 1;
+
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
 			PageVO3 pagevo = new PageVO3();
 			pagevo.setPage(page);
+			System.out.println("토탈데이터값 : " + master_list.size());
 			pagevo.pageCalculate(master_list.size());
-			
-			model.addAttribute("pagevo",pagevo);
+			System.out.println("-------------------------");
+			System.out.println("토탈데이터Input여부 : " + pagevo.getTotRow());
+			System.out.println("현재 페이지값 : " + pagevo.getPage());
+			System.out.println("현재 rowstart : " + (pagevo.getRowStart()));
+			System.out.println("현재 rowend : " + (pagevo.getRowEnd()));
+			System.out.println("전체페이지 : " + pagevo.getTotPage());
+			System.out.println("시작페이지 : " + (pagevo.getPageStart()));
+			System.out.println("끝페이지 : " + (pagevo.getPageEnd()));
+
+			model.addAttribute("pagevo", pagevo);
 			model.addAttribute("list", master_list);
-			model.addAttribute("pageNum", 0);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 		}
-		
-		
+
 		return "mypage_matching.alarm_list_page.알림 목록.3";
+	}
+
+	@RequestMapping(value = "mypage_matching_item_detail", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mypage_matching_item_detail(HttpServletRequest request, Model model,
+			@SessionAttribute(name = "userId", required = false) String userId) {
+		model.addAttribute("request", request);
+		model.addAttribute("sqlSession", sqlSession);
+		model.addAttribute("userId", userId);
+		String atcid = request.getParameter("atcid");
+		String fdSn = request.getParameter("fdSn");
+		FounditemService fservice = new FounditemService();
+		FounddetailDto dto = fservice.found_item_detailview(atcid, fdSn);
+		model.addAttribute("dto", dto);
+		return "mypage_matching.alarm_item_detail.상세보기.2";
 	}
 
 	/* 원진호_0409_수정 */
@@ -120,21 +141,74 @@ public class MypageMatchingAlarmController {
 		return "mypage_matching.alarm_keyword_list_page.알림 목록.3";
 	}
 
-	/* 원진호_0409_수정 */
-	@RequestMapping("mypage_matching_alarm_detail_list_page")
+	/* 모두보기 눌렀을때 실행 */
+	@RequestMapping(value = "mypage_matching_alarm_detail_list_page", method = RequestMethod.GET)
 	public String mypage_matching_alarm_detail_list_page(HttpServletRequest request, Model model,
 			@SessionAttribute(name = "userId", required = false) String userId) {
 		model.addAttribute("request", request);
 		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("userId", userId);
 		mypageMatchingAlarmServiceInter = new MatchingAlarmService();
-		/* 원진호_0409추가 */
+		MatchingAlarmDao matchingAlarmDao = sqlSession.getMapper(MatchingAlarmDao.class);
+		String total_id = request.getParameter("total_id");
+		System.out.println("토탈아이디 여부 - 디테일리스트 "+total_id);
+		ArrayList<ItemDto> item_list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
+		ArrayList<AnimalDto> ani_list = mypageMatchingAlarmServiceInter.matching_alarm_anilist(model);
+		matchingAlarmListDto dto = new matchingAlarmListDto();
 		try {
-			ArrayList<ItemDto> list = mypageMatchingAlarmServiceInter.matching_alarm_list(model);
-			model.addAttribute("list", list);
+			// 조건item갯수만큼 반복(분실물게시글갯수)
+			for (ItemDto ilist : item_list) {
+				if(ilist.getTotal_id().equals(total_id)){
+					dto.setTotal_id(Integer.parseInt(total_id));
+					dto.setItem_dto(ilist);
+					dto.setMatching_item_dto(matchingAlarmDao.matching_DB_items(dto.getTotal_id()));
+				}
+			}
+			for (AnimalDto anilist : ani_list) {
+				if(anilist.getTotal_id().equals(total_id)){
+					dto.setTotal_id(Integer.parseInt(total_id));
+					dto.setAnimal_dto(anilist);
+					dto.setMatching_animal_dto(matchingAlarmDao.matching_DB_animals(dto.getTotal_id()));
+				}
+			}
+			
+			
+			int page = 1;
+
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				System.out.println("페이지확인-----------");
+			}
+			PageVO3 pagevo = new PageVO3();
+			pagevo.setPage(page);
+			pagevo.setDisplayRowCount(10);
+			int size=0;
+			if(dto.getMatching_animal_dto()!=null) {
+				size = dto.getMatching_animal_dto().size();
+			}else if(dto.getMatching_item_dto()!=null) {
+				size = dto.getMatching_item_dto().size();
+			}
+			System.out.println("토탈데이터값 : " + size);
+			pagevo.pageCalculate(size);
+			System.out.println("-------------------------");
+			System.out.println("토탈데이터Input여부 : " + pagevo.getTotRow());
+			System.out.println("현재 페이지값 : " + pagevo.getPage());
+			System.out.println("현재 rowstart : " + (pagevo.getRowStart()));
+			System.out.println("현재 rowend : " + (pagevo.getRowEnd()));
+			System.out.println("전체페이지 : " + pagevo.getTotPage());
+			System.out.println("시작페이지 : " + (pagevo.getPageStart()));
+			System.out.println("끝페이지 : " + (pagevo.getPageEnd()));
+
+			model.addAttribute("pagevo", pagevo);
+				
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
+		
+		model.addAttribute("dto",dto);
+		System.out.println("최종 dto 토탈아이디 확인 : "+dto.getTotal_id());
+		
 		return "mypage_matching.alarm_detail_list_page.알림 목록.3";
 	}
 

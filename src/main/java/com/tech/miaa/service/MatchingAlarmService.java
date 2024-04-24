@@ -30,6 +30,8 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		ArrayList<ItemDto> list = null;
 		try {
 			list = dao.matching_alarm_list(id);
+			System.out.println("itemdto리스트 개수 : " +list.size());
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
