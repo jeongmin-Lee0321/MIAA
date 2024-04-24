@@ -47,45 +47,45 @@ public class MypagePostService implements MypagePostServiceInter{
 					dtos.get(i).setFilename("resources/ani_default/고양이.png");
 				}else if(dtos.get(i).getUpkind().equals("429900")) {
 					dtos.get(i).setFilename("resources/ani_default/기타.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRI000")) {
+				}else if(dtos.get(i).getUpkind().equals("컴퓨터")) {
 					dtos.get(i).setFilename("resources/item_default/노트북.png");
-				}else if(dtos.get(i).getUpkind().equals("PRJ000")) {
+				}else if(dtos.get(i).getUpkind().equals("휴대폰")) {
 					dtos.get(i).setFilename("resources/item_default/휴대폰.png");
-				}else if(dtos.get(i).getUpkind().equals("PRH000")) {
+				}else if(dtos.get(i).getUpkind().equals("지갑")) {
 					dtos.get(i).setFilename("resources/item_default/지갑.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRG000")) {
+				}else if(dtos.get(i).getUpkind().equals("전자기기")) {
 					dtos.get(i).setFilename("resources/item_default/전자기기.png");
-				}else if(dtos.get(i).getUpkind().equals("PRD000")) {
+				}else if(dtos.get(i).getUpkind().equals("산업용품")) {
 					dtos.get(i).setFilename("resources/item_default/산업.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRO000")) {
+				}else if(dtos.get(i).getUpkind().equals("귀금속")) {
 					dtos.get(i).setFilename("resources/item_default/보석.png");
-				}else if(dtos.get(i).getUpkind().equals("PRZ000")) {
+				}else if(dtos.get(i).getUpkind().equals("기타물품")) {
 					dtos.get(i).setFilename("resources/item_default/기타물품.png");
-				}else if(dtos.get(i).getUpkind().equals("PRC000")) {
+				}else if(dtos.get(i).getUpkind().equals("서류")) {
 					dtos.get(i).setFilename("resources/item_default/서류.png");
-				}else if(dtos.get(i).getUpkind().equals("PRE000")) {
+				}else if(dtos.get(i).getUpkind().equals("스포츠용품")) {
 					dtos.get(i).setFilename("resources/item_default/스포츠.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRF000")) {
+				}else if(dtos.get(i).getUpkind().equals("자동차")) {
 					dtos.get(i).setFilename("resources/item_default/자동차.png");
-				}else if(dtos.get(i).getUpkind().equals("PRL000")) {
+				}else if(dtos.get(i).getUpkind().equals("현금")) {
 					dtos.get(i).setFilename("resources/item_default/현금.png");
-				}else if(dtos.get(i).getUpkind().equals("PRK000")) {
+				}else if(dtos.get(i).getUpkind().equals("의류")) {
 					dtos.get(i).setFilename("resources/item_default/의류.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRQ000")) {
+				}else if(dtos.get(i).getUpkind().equals("쇼핑백")) {
 					dtos.get(i).setFilename("resources/item_default/쇼핑백.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRR000")) {
+				}else if(dtos.get(i).getUpkind().equals("악기")) {
 					dtos.get(i).setFilename("resources/item_default/악기.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRP000")) {
+				}else if(dtos.get(i).getUpkind().equals("카드")) {
 					dtos.get(i).setFilename("resources/item_default/카드.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRM000")) {
+				}else if(dtos.get(i).getUpkind().equals("유가증권")) {
 					dtos.get(i).setFilename("resources/item_default/증권.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRN000")) {
+				}else if(dtos.get(i).getUpkind().equals("증명서")) {
 					dtos.get(i).setFilename("resources/item_default/증명서.png");
-				}else if(dtos.get(i).getUpkind().equals("PRA000")) {
+				}else if(dtos.get(i).getUpkind().equals("가방")) {
 					dtos.get(i).setFilename("resources/item_default/가방.png"); 
-				}else if(dtos.get(i).getUpkind().equals("PRB000")) {
+				}else if(dtos.get(i).getUpkind().equals("도서용품")) {
 					dtos.get(i).setFilename("resources/item_default/책.png");
-				}else if(dtos.get(i).getUpkind().equals("PRX000")) {
+				}else if(dtos.get(i).getUpkind().equals("유류품")) {
 					dtos.get(i).setFilename("resources/item_default/유류물품.png");
 				}
 			}

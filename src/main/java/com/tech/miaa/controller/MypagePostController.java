@@ -89,4 +89,15 @@ public class MypagePostController {
 		
 		return result;
 	}
+	@RequestMapping(value ="/mypage_total_delete")
+	public void mypage_total_delete(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		itemService = new LostItemService(); animalService = new MissingAnimalService();
+		for (int i = 0; i < ajaxMsg.length; i++) {
+			model.addAttribute("total_id", ajaxMsg[i]);
+			itemService.lost_item_delete(model);
+			animalService.missing_ani_delete(model);
+		}
+	}
 }
