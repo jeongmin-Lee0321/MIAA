@@ -209,8 +209,7 @@ public class Scheduler {
 					System.out.println("lostday:" + lostday);
 					System.out.println("kind:" + kind);
 
-					matchingAlarmDao.set_matching_alarm_list(m_dto.getUser_id(), item_dto.getTotal_id(),
-							item_dto.getLostday(), prd.getPrdNameByCode(item_dto.getUpr_cd()));
+					matchingAlarmDao.set_matching_alarm_list(userID, totalID,lostday, kind);
 
 				} catch (Exception e) {
 					// TODO: handle exception
