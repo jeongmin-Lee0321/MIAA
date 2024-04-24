@@ -22,8 +22,8 @@ public interface MatchingAlarmDao {
 	public ArrayList<FounditemDto> matching_DB_items(int total_id);
 	public ArrayList<AbdmPublicItem> matching_DB_animals(int total_id);
 
-	public void set_matching_alarm_list(String User_id,String total_id,String Lostday,String Upr_cd);
-	public void set_matching_alarm_anilist(String User_id,String total_id,String missingday,String Upr_cd);
+	public void set_matching_alarm_list(String User_id, int total_id, String Lostday, String Upr_cd);
+	public void set_matching_alarm_anilist(String User_id, int total_id, String missingday, String Upr_cd);
 	
 	/* 원진호_0412_원글삭제기능추가 */
 	

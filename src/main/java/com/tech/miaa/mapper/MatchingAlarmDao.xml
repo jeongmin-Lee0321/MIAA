@@ -128,18 +128,25 @@
 	</update>
 
 	<insert id="set_matching_alarm_list">
-        <![CDATA[
+    <![CDATA[
     MERGE INTO MATCHINGALARM MA
-    USING (SELECT #{param1} AS USER_ID, #{param2} AS TOTAL_ID, ITEM.ATCID AS PRIMEID, 'ATCID' AS TYPE, 'Y' AS ALARM_CHECK
-           FROM TOTALITEM ITEM 
-           WHERE ITEM.PRDTCLNM LIKE '%' || #{param4} || '%' 
-           AND TO_DATE(ITEM.FDYMD, 'YYYY-MM-DD') >= TO_DATE(#{param3}, 'YYYY-MM-DD')) SOURCE
+    USING (SELECT #{param1} AS USER_ID, #{param2} AS TOTAL_ID, ATCID AS PRIMEID, 'ATCID' AS TYPE, 'Y' AS ALARM_CHECK
+           FROM TOTALITEM 
+           WHERE PRDTCLNM LIKE '%' || #{param4} || '%' 
+           AND TO_DATE(FDYMD, 'YYYY-MM-DD') >= TO_DATE(#{param3}, 'YYYY-MM-DD')) SOURCE
     ON (MA.USER_ID = SOURCE.USER_ID AND MA.TOTAL_ID = SOURCE.TOTAL_ID) 
     WHEN NOT MATCHED THEN
-        INSERT (USER_ID, TOTAL_ID, PRIMEID, TYPE, ALARM_CHECK)
-        VALUES (SOURCE.USER_ID, SOURCE.TOTAL_ID, SOURCE.PRIMEID, SOURCE.TYPE, SOURCE.ALARM_CHECK)
+        INSERT (TOTAL_ID, USER_ID, PRIMEID, TYPE, ALARM_CHECK)
+        VALUES (SOURCE.TOTAL_ID, SOURCE.USER_ID, SOURCE.PRIMEID, SOURCE.TYPE, SOURCE.ALARM_CHECK)
     ]]>
 	</insert>
+<!-- 	<select id="set_matching_alarm_list" resultType="Integer">
+<![CDATA[
+	SELECT COUNT(MV.USER_ID) FROM (SELECT #{param1} AS USER_ID, #{param2} AS TOTAL_ID, ATCID AS PRIMEID, 'ATCID' AS TYPE, 'Y' AS ALARM_CHECK
+           FROM TOTALITEM WHERE PRDTCLNM LIKE '%'||#{param4}||'%'
+           AND TO_DATE(FDYMD, 'YYYY-MM-DD') >= TO_DATE(#{param3}, 'YYYY-MM-DD')) MV
+	]]>
+	</select> -->
 
 	<insert id="set_matching_alarm_anilist">
         <![CDATA[
