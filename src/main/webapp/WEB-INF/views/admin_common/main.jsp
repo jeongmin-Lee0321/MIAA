@@ -132,12 +132,12 @@ select {
       }]
     },
     options: {
-      scales: {
-        y: {
-          beginAtZero: true
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
   });
 	const myChart2= new Chart(ctx2,
 			{

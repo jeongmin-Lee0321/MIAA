@@ -91,14 +91,6 @@ body {
 						</div>
 						<div class="table-row">
 							<div class="row-title">
-								<span>첨부파일</span>
-							</div>
-							<div class="row-content">
-								<%-- ${list.userInquiry.board_filesrc} --%>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="row-title">
 								<span>처리상태</span>
 							</div>
 							<div class="row-content">${list.userInquiry.board_reply_status}</div>

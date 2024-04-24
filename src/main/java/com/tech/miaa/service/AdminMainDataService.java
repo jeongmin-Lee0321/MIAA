@@ -44,7 +44,7 @@ public class AdminMainDataService implements AdminMainDataServiceInter {
 			String json1 = gson.toJson(list1);
 			
 			
-			System.out.println(json1);
+//			System.out.println(json1);
 			model.addAttribute("list1", json1);
 
 	}
