@@ -196,44 +196,45 @@ public class Scheduler {
 
 		for (MemberDto m_dto : member_list) {
 			ArrayList<ItemDto> list = matchingAlarmDao.matching_alarm_list(m_dto.getUser_id());
-			ArrayList<AnimalDto> anilist = matchingAlarmDao.matching_alarm_anilist(m_dto.getUser_id());
 			for (ItemDto item_dto : list) {
-				String kind = item_dto.getUpr_cd() == null ? prd.getPrdNameByCode(item_dto.getUpkind())
-						: prd.getPrdNameByCode(item_dto.getUpr_cd());
-				
-				
+				String kind = item_dto.getUpr_cd() == null ? item_dto.getUpkind() : item_dto.getUpr_cd();
 				try {
-					System.out.println("------------------------------------------------");
-					System.out.println("대분류 : "+item_dto.getUpkind());
-					System.out.println("중분류 : "+item_dto.getUpr_cd());
-					System.out.println("prd함수 실행 후 : "+prd.getPrdNameByCode(item_dto.getUpkind()));
-					System.out.println("kind값 : "+kind);
-					System.out.println("유저이이디 : " + m_dto.getUser_id());
-					System.out.println("토탈아이디 : " + Integer.parseInt(item_dto.getTotal_id()));
-					System.out.println("잃어버린날짜 : " + item_dto.getLostday());
-					System.out.println("------------------------------------------------");
-					matchingAlarmDao.set_matching_alarm_list(m_dto.getUser_id(), Integer.parseInt(item_dto.getTotal_id()),item_dto.getLostday(), prd.getPrdNameByCode(item_dto.getUpr_cd()));
-//					System.out.println("작동"+aa);
-					
+
+					String totalID = item_dto.getTotal_id();
+					String userID = item_dto.getUser_id();
+					String lostday = item_dto.getLostday();
+
+					System.out.println("userID:" + userID);
+					System.out.println("totalID:" + totalID);
+					System.out.println("lostday:" + lostday);
+					System.out.println("kind:" + kind);
+
+					matchingAlarmDao.set_matching_alarm_list(userID, totalID,lostday, kind);
+
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
-				
+
 				try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
+					e.printStackTrace();
 
 				}
 
 			}
-
+			
+			ArrayList<AnimalDto> anilist = matchingAlarmDao.matching_alarm_anilist(m_dto.getUser_id());
 			for (AnimalDto ani_dto : anilist) {
-				String kind = ani_dto.getUpr_cd() == null ? prd.getPrdNameByCode(ani_dto.getUpkind())
-						: ani_dto.getUpr_cd();
-				matchingAlarmDao.set_matching_alarm_anilist(m_dto.getUser_id(), Integer.parseInt(ani_dto.getTotal_id()),
-						ani_dto.getMissingday(), kind);
+				String kind = ani_dto.getUpr_cd() == null ? prd.getPrdNameByCode(("P"+ani_dto.getUpkind()))
+						: prd.getPrdNameByCode("C"+ani_dto.getUpr_cd());
+				System.out.println("품종:"+kind);
+				String totalID = ani_dto.getTotal_id();
+				String userID = m_dto.getUser_id();
+				String missingday = ani_dto.getMissingday();
+				
+				matchingAlarmDao.set_matching_alarm_anilist(userID,totalID,missingday,kind);
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {

@@ -79,26 +79,26 @@
 							<select name="itemkind1" id="itemkind1"
 								onchange="getSubCategories(this.value)">
 								<option value="">전체분류(all)</option>
-								<option value="PRI000">컴퓨터</option>
-								<option value="PRJ000">휴대폰</option>
-								<option value="PRH000">지갑</option>
-								<option value="PRG000">전자기기</option>
-								<option value="PRD000">산업용품</option>
-								<option value="PRO000">귀금속</option>
-								<option value="PRZ000">기타물품</option>
-								<option value="PRC000">서류</option>
-								<option value="PRE000">스포츠용품</option>
-								<option value="PRF000">자동차</option>
-								<option value="PRL000">현금</option>
-								<option value="PRK000">의류</option>
-								<option value="PRQ000">쇼핑백</option>
-								<option value="PRR000">악기</option>
-								<option value="PRP000">카드</option>
-								<option value="PRM000">유가증권</option>
-								<option value="PRN000">증명서</option>
-								<option value="PRA000">가방</option>
-								<option value="PRB000">도서용품</option>
-								<option value="PRX000">유류품</option>
+								<option value="컴퓨터">컴퓨터</option>
+								<option value="휴대폰">휴대폰</option>
+								<option value="지갑">지갑</option>
+								<option value="전자기기">전자기기</option>
+								<option value="산업용품">산업용품</option>
+								<option value="귀금속">귀금속</option>
+								<option value="기타물품">기타물품</option>
+								<option value="서류">서류</option>
+								<option value="스포츠용품">스포츠용품</option>
+								<option value="자동차">자동차</option>
+								<option value="현금">현금</option>
+								<option value="의류">의류</option>
+								<option value="쇼핑백">쇼핑백</option>
+								<option value="악기">악기</option>
+								<option value="카드">카드</option>
+								<option value="유가증권">유가증권</option>
+								<option value="증명서">증명서</option>
+								<option value="가방">가방</option>
+								<option value="도서용품">도서용품</option>
+								<option value="유류품">유류품</option>
 							</select> <span>-</span> <select name="itemkind2" id="itemkind2">
 								<option value=""></option>
 							</select>
@@ -171,7 +171,6 @@
 						</div>
 					</div>
 				</c:forEach>
-
 			</div>
 			<!-- 검색결과 리스트 프레임 끝 -->
 			<!-- 페이징 프레임시작 -->
@@ -184,8 +183,10 @@
 				</div>
 				<ul class="pagelist-container">
 					<li class="btn-prev"><a class="test"
-						href="lost_item_search_page?page=${pageVo.page - 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
+						href="lost_item_search_page?page=${pageVo.page - 1}&searchday1=${searchContent.get(0)}
+						&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+						&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img
+						src="resources/img/chevron-left.png" alt=""></a></li>
 					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
 						var="i">
 						<c:choose>
@@ -193,20 +194,37 @@
 								<li><a href="#" style="color: #0066ff">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="lost_item_search_page?page=${i}">${i}</a></li>
+								<li><a href="lost_item_search_page?page=${i}&searchday1=${searchContent.get(0)}
+								&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+								&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<li class="btn-next"><a
-						href="lost_item_search_page?page=${pageVo.page + 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
+					<li class="btn-next">
+					<c:if test="${pageVo.page == pageVo.totPage}">
+					<a href="lost_item_search_page?page=${pageVo.page}&searchday1=${searchContent.get(0)}
+					&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
+					</c:if>
+					<c:if test="${pageVo.page != pageVo.totPage}">
+					<a href="lost_item_search_page?page=${pageVo.page + 1}&searchday1=${searchContent.get(0)}
+					&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
+					</c:if>
+					</li>
 				</ul>
 
 				<ul class="switchBtn-container">
 					<li class="btn-prev-group"><a
-						href="lost_item_search_page?page=${pageVo.page - 1}">Previous</a></li>
-					<li class="btn-next-group"><a
-						href="lost_item_search_page?page=${pageVo.page + 1}">Next</a></li>
+						href="lost_item_search_page?page=${pageVo.page - 10}&searchday1=${searchContent.get(0)}
+					&searchday2=${searchContent.get(1)}&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}">Previous</a></li>
+					<li class="btn-next-group">
+					<a href="lost_item_search_page?page=
+					<c:if test="${pageVo.totPage<10 }">${pageVo.pageEnd}</c:if>
+					&searchday1=${searchContent.get(0)}&searchday2=${searchContent.get(1)}
+					&addressCode=${searchContent.get(2)}&itemkind1=${searchContent.get(3)}
+					&itemkind2=${searchContent.get(4)}&colorCd=${searchContent.get(5)}">Next</a></li>
 				</ul>
 			</div>
 			<!-- 페이징 프레임 끝 -->
@@ -242,65 +260,65 @@
 		function getSubCategories(mainCategory) {
 			var prd_subCategory = document.getElementById("itemkind2");
 			switch (mainCategory) {
-			case 'PRI000': // 컴퓨터
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRI100">삼성 노트북</option><option value="PRI200">LG노트북</option><option value="PRI300">삼보 노트북</option><option value="PRI400">기타</option><option value="PRI500">HP노트북</option><option value="PRI600">애플 노트북</option>';
+			case '컴퓨터': // 컴퓨터
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="삼성노트북">삼성노트북</option><option value="LG노트북">LG노트북</option><option value="삼보노트북">삼보 노트북</option><option value="기타">기타</option><option value="HP노트북">HP노트북</option><option value="애플노트북">애플 노트북</option>';
 				break;
-			case 'PRJ000': // 휴대폰
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRJ100">삼성 휴대폰</option><option value="PRJ200">LG휴대폰</option><option value="PRJ300">스카이휴대폰</option><option value="PRJ400">아이폰</option><option value="PRJ500">기타통신기기</option><option value="PRJ600">모토로라 휴대폰</option><option value="PRJ900">기타 휴대폰</option>';
+			case '휴대폰': // 휴대폰
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="삼성휴대폰">삼성 휴대폰</option><option value="LG휴대폰">LG휴대폰</option><option value="스카이휴대폰">스카이휴대폰</option><option value="아이폰">아이폰</option><option value="기타통신기기">기타통신기기</option><option value="모토로라휴대폰">모토로라 휴대폰</option><option value="기타휴대폰">기타 휴대폰</option>';
 				break;
-			case 'PRH000': // 지갑
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRH100">여성용 지갑</option><option value="PRH200">남성용 지갑</option><option value="PRH300">기타 지갑</option>';
+			case '지갑': // 지갑
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="여성용 지갑">여성용 지갑</option><option value="남성용 지갑">남성용 지갑</option><option value="기타 지갑">기타 지갑</option>';
 				break;
-			case 'PRG000': // 전자기기
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRG100">PMP</option><option value="PRG200">MP3</option><option value="PRG300">PDA</option><option value="PRG400">카메라</option><option value="PRG500">전자수첩</option><option value="PRG600">기타용품</option><option value="PRG700">태블릿</option><option value="PRG800">스마트워치</option><option value="PRG900">무선이어폰</option>';
+			case '전자기기': // 전자기기
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="PMP">PMP</option><option value="MP3">MP3</option><option value="PDA">PDA</option><option value="카메라">카메라</option><option value="전자수첩">전자수첩</option><option value="기타용품">기타용품</option><option value="태블릿">태블릿</option><option value="스마트워치">스마트워치</option><option value="무선이어폰">무선이어폰</option>';
 				break;
-			case 'PRD000': // 산업용품
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRD100">기타물품</option>';
+			case '산업용품': // 산업용품
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="기타물품">기타물품</option>';
 				break;
-			case 'PRO000': // 귀금속
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRO100">반지</option><option value="PRO200">목걸이</option><option value="PRO300">귀걸이</option><option value="PRO400">시계</option><option value="PRO500">기타</option>';
+			case '귀금속': // 귀금속
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="반지">반지</option><option value="목걸이">목걸이</option><option value="귀걸이">귀걸이</option><option value="시계">시계</option><option value="기타">기타</option>';
 				break;
-			case 'PRZ000': // 기타물품
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRZ100">기타</option><option value="PRZ200">매장문화재</option><option value="PRZ600">선글라스</option><option value="PRZ700">안경</option>';
+			case '기타물품': // 기타물품
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="기타">기타</option><option value="매장문화재">매장문화재</option><option value="선글라스">선글라스</option><option value="안경">안경</option>';
 				break;
-			case 'PRC000': // 서류
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRC100">서류</option><option value="PRC200">기타물품</option>';
+			case '서류': // 서류
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="서류">서류</option><option value="기타물품">기타물품</option>';
 				break;
-			case 'PRE000': // 스포츠용품
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRE100">스포츠용품</option><option value="PRE200">수영복</option><option value="PRE300">수영물품</option>';
+			case '스포츠용품': // 스포츠용품
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="스포츠용품">스포츠용품</option><option value="수영복">수영복</option><option value="수영물품">수영물품</option>';
 				break;
-			case 'PRF000': // 자동차
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRF100">자동차열쇠</option><option value="PRF200">네비게이션</option><option value="PRF300">자동차번호판</option><option value="PRF400">기타용품</option><option value="PRF500">임시번호판</option>';
+			case '자동차': // 자동차
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="자동차열쇠">자동차열쇠</option><option value="네비게이션">네비게이션</option><option value="자동차번호판">자동차번호판</option><option value="기타용품">기타용품</option><option value="임시번호판">임시번호판</option>';
 				break;
-			case 'PRL000': // 현금
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRL100">현금</option><option value="PRL200">수표</option><option value="PRL300">기타</option><option value="PRL400">외화</option>';
+			case '현금': // 현금
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="현금">현금</option><option value="수표">수표</option><option value="기타">기타</option><option value="외화">외화</option>';
 				break;
-			case 'PRK000': // 의류
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRK100">여성의류</option><option value="PRK200">남성의류</option><option value="PRK300">아기의류</option><option value="PRK400">기타의류</option><option value="PRK500">모자</option><option value="PRK600">신발</option>';
+			case '의류': // 의류
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="여성의류">여성의류</option><option value="남성의류">남성의류</option><option value="아기의류">아기의류</option><option value="기타의류">기타의류</option><option value="모자">모자</option><option value="신발">신발</option>';
 				break;
-			case 'PRQ000': // 쇼핑백
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRQ100">쇼핑백</option>';
+			case '쇼핑백': // 쇼핑백
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="쇼핑백">쇼핑백</option>';
 				break;
-			case 'PRR000': // 악기
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRR100">건반악기</option><option value="PRR200">관악기</option><option value="PRR300">타악기</option><option value="PRR400">현악기</option><option value="PRR900">기타악기</option>';
+			case '악기': // 악기
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="건반악기">건반악기</option><option value="관악기">관악기</option><option value="타악기">타악기</option><option value="현악기">현악기</option><option value="기타악기">기타악기</option>';
 				break;
-			case 'PRP000': // 카드
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRP100">신용(체크)카드</option><option value="PRP200">일반카드</option><option value="PRP300">기타카드</option>';
+			case '카드': // 카드
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="신용(체크)카드">신용(체크)카드</option><option value="일반카드">일반카드</option><option value="기타카드">기타카드</option>';
 				break;
-			case 'PRM000': // 유가증권
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRM100">어음</option><option value="PRM200">상품권</option><option value="PRM300">채권</option><option value="PRM400">기타</option>';
+			case '유가증권': // 유가증권
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="어음">어음</option><option value="상품권">상품권</option><option value="채권">채권</option><option value="기타">기타</option>';
 				break;
-			case 'PRN000': // 증명서
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRN100">신분증</option><option value="PRN200">면허증</option><option value="PRN300">여권</option><option value="PRN400">기타</option><option value="PRN500">판결문</option>';
+			case '증명서': // 증명서
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="신분증">신분증</option><option value="면허증">면허증</option><option value="여권">여권</option><option value="기타">기타</option><option value="판결문">판결문</option>';
 				break;
-			case 'PRA000': // 가방
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRA100">여성용가방</option><option value="PRA200">남성용가방</option><option value="PRA300">기타가방</option>';
+			case '가방': // 가방
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="여성용가방">여성용가방</option><option value="남성용가방">남성용가방</option><option value="기타가방">기타가방</option>';
 				break;
-			case 'PRB000': // 도서용품
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRB100">학습서적</option><option value="PRB200">소설</option><option value="PRB300">컴퓨터서적</option><option value="PRB400">만화책</option><option value="PRB500">기타서적</option>';
+			case '도서용품': // 도서용품
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="학습서적">학습서적</option><option value="소설">소설</option><option value="컴퓨터서적">컴퓨터서적</option><option value="만화책">만화책</option><option value="기타서적">기타서적</option>';
 				break;
-			case 'PRX000': // 유류품
-				itemkind2.innerHTML = '<option value="all">전체검색</option><option value="PRX100">유류품</option>';
+			case '유류품': // 유류품
+				itemkind2.innerHTML = '<option value="all">전체검색(all)</option><option value="유류품">유류품</option>';
 				break;
 			default:
 				itemkind2.innerHTML = ''; //초기화
