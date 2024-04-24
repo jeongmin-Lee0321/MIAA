@@ -140,13 +140,6 @@
         VALUES (SOURCE.TOTAL_ID, SOURCE.USER_ID, SOURCE.PRIMEID, SOURCE.TYPE, SOURCE.ALARM_CHECK)
     ]]>
 	</insert>
-<!-- 	<select id="set_matching_alarm_list" resultType="Integer">
-<![CDATA[
-	SELECT COUNT(MV.USER_ID) FROM (SELECT #{param1} AS USER_ID, #{param2} AS TOTAL_ID, ATCID AS PRIMEID, 'ATCID' AS TYPE, 'Y' AS ALARM_CHECK
-           FROM TOTALITEM WHERE PRDTCLNM LIKE '%'||#{param4}||'%'
-           AND TO_DATE(FDYMD, 'YYYY-MM-DD') >= TO_DATE(#{param3}, 'YYYY-MM-DD')) MV
-	]]>
-	</select> -->
 
 	<insert id="set_matching_alarm_anilist">
         <![CDATA[
