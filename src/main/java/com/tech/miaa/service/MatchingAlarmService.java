@@ -30,14 +30,14 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		ArrayList<ItemDto> list = null;
 		try {
 			list = dao.matching_alarm_list(id);
-			System.out.println("itemdto리스트 개수 : " +list.size());
-			
+			System.out.println("itemdto리스트 개수 : " + list.size());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return list;
 	}
-	
+
 	@Override
 	public ArrayList<AnimalDto> matching_alarm_anilist(Model model) {
 		// TODO Auto-generated method stub
@@ -56,8 +56,6 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		}
 		return list;
 	}
-	
-	
 
 	// weon_0416추가
 	@Override
@@ -97,12 +95,6 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 //		return lost_item_upr_cd;
 //	}
 
-	
-	
-	
-	
-	
-	/* 원진호_0412_원글삭제기능추가 */
 	@Override
 	public void mypage_alarm_delete(String string, Model model) {
 		Map<String, Object> map = model.asMap();
@@ -111,13 +103,13 @@ public class MatchingAlarmService implements MypageMatchingAlarmServiceInter {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("userId");
 		MatchingAlarmDao dao = sqlSession.getMapper(MatchingAlarmDao.class);
-		dao.mypage_alarm_delete(string, id);
+		if (string != null) {
+			String[] parts = string.split(",");
+			String atc_id = parts[0];
+			String total_id = parts[1];
+			System.out.println("ㅁ"+id+" 현재 행 atc_id = "+atc_id+" total_id = "+total_id);
+//			dao.mypage_alarm_delete(atc_id,total_id, id);
+		}
 	}
-
-
-
-	
-
-	
 
 }
