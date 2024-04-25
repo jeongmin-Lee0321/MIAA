@@ -24,6 +24,10 @@
     <select id="emailcheck" resultType="Integer">
         SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL=#{param1}
     </select>
+   <!-- 회원정보 수정시의 emailchk2 추가 0425 김영빈 -->
+    <select id="emailcheck2" resultType="Integer">
+        SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL=#{param1} AND USER_ID != #{param2}
+    </select>
     <select id="searchid" resultType="String">
         SELECT USER_ID FROM MEMBER WHERE USER_EMAIL=#{param2}
     </select>
