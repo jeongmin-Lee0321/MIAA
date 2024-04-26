@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -149,30 +148,57 @@
 						class="total-page">${pageVo.totPage}</span>
 				</div>
 				<ul class="pagelist-container">
-					<li class="btn-prev"><a class="test"
-						href="missing_ani_search_page?page=${pageVo.page - 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
-					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}"
-						var="i">
+					<li class="btn-prev">
+					<a class="test" href="missing_ani_search_page?page=${pageVo.page - 1}&searchday1=${searchContent.get(0)}
+								&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+								&animalkind2=${searchContent.get(5)}">
+					<img src="resources/img/chevron-left.png" alt=""></a>
+					</li>
+					<c:if test="${pageVo.totPage == 0 }">
+					<li><a href="#" style="color: #0066ff">1</a></li></c:if>
+					<c:forEach begin="${pageVo.pageStart}" end="${pageVo.pageEnd}" var="i">
 						<c:choose>
 							<c:when test="${i eq pageVo.page}">
 								<li><a href="#" style="color: #0066ff">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="missing_ani_search_page?page=${i}">${i}</a></li>
+								<li><a href="missing_ani_search_page?page=${i}&searchday1=${searchContent.get(0)}
+								&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+								&animalkind2=${searchContent.get(5)}">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<li class="btn-next"><a
-						href="missing_ani_search_page?page=${pageVo.page + 1}"><img
-							src="resources/img/chevron-left.png" alt=""></a></li>
+					<li class="btn-next">
+					<c:if test="${pageVo.page >= pageVo.totPage}">
+					<a href="missing_ani_search_page?page=${pageVo.page}&searchday1=${searchContent.get(0)}
+								&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+								&animalkind2=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
+					</c:if>
+					<c:if test="${pageVo.page <= pageVo.totPage}">
+					<a href="missing_ani_search_page?page=${pageVo.page + 1}&searchday1=${searchContent.get(0)}
+								&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+								&animalkind2=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
+					</c:if>
+					</li>
 				</ul>
 
 				<ul class="switchBtn-container">
 					<li class="btn-prev-group"><a
-						href="missing_ani_search_page?page=${pageVo.page - 1}">Previous</a></li>
-					<li class="btn-next-group"><a
-						href="missing_ani_search_page?page=${pageVo.page + 1}">Next</a></li>
+						href="missing_ani_search_page?page=${pageVo.page - 10}&searchday1=${searchContent.get(0)}
+						&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+						&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+						&animalkind2=${searchContent.get(5)}">Previous</a></li>
+					<li class="btn-next-group">
+					<c:if test="${pageVo.totPage<10}">
+					<a href="missing_ani_search_page?page=${pageVo.pageEnd}&searchday1=${searchContent.get(0)}
+						&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
+						&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
+						&animalkind2=${searchContent.get(5)}">Next</a></li>
+					</c:if>
 				</ul>
 			</div>
 			<!-- 페이징 프레임 끝 -->

@@ -15,4 +15,6 @@ public interface MemberServiceInter {
 	public String searchid(Model model);
 	public String searchpw(Model model);
 	public String login(Model model);
+	//회원정보 수정시의 emailchk2 추가 0425 김영빈
+	public int emailchk2(Model model);
 }

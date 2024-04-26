@@ -260,6 +260,7 @@
 				<!-- hidden 세션로그인 id -->
 				<input type="hidden" name="userId" value="${userId }">
 				<input type="hidden" name="total_id" value="${dto.total_id }">
+				<input type="hidden" name="reply_status" value="${status }">
 				</form>
 			</div>
 	</div>	

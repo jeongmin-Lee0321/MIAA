@@ -48,7 +48,7 @@ body {
 
 		<div class="main-contents">
 			<ul class="top-btns">
-				<li><button type="submit">수정완료</button></li>
+				<li><button type="submit">수정하기</button></li>
 				<li><button type="button"
 						onclick="history.back()">취소하기</button></li>
 			</ul>
@@ -56,7 +56,7 @@ body {
 				<span>*는 필수 입력사항 입니다</span>
 			</div>
 			<!-- form 시작 -->
-			<form action="lost_item_modify" method="post"
+			<form action="mypage_item_modify" method="post"
 				enctype="multipart/form-data">
 				<!-- table1 -->
 				<div class="table-container">

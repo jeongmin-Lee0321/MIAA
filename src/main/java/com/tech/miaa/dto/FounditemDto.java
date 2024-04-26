@@ -1,5 +1,7 @@
 package com.tech.miaa.dto;
 
+import lombok.AllArgsConstructor;
+
 public class FounditemDto {
 
 	/*기본값 8개 */
