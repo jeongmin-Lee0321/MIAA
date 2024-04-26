@@ -136,9 +136,8 @@
 		
 		
 
-		<div
-			style="width: 100%; height: 65%;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; margin-top: 80px; margin-bottom: 80px; ">
-			<button onclick="location.href='found_item_search_page'"
+		<div style="width: 100%; height: 65%;  display: flex; justify-content: center; align-items: center; margin: auto; margin-top: 20px; margin-top: 80px; margin-bottom: 80px; ">	
+			<button onclick="location.href='found_item_search_page?cityname=&allsearchPage=1&prd_mainCategory=&prd_subCategory=&color=&START_YMD=&END_YMD=';"
 				class="item_find" style="cursor: pointer;">
 				<img src="resources/img/item_find.png" alt="" />
 				<p style="font-weight: bold; font-size: x-large;">습득물 찾기</p>
