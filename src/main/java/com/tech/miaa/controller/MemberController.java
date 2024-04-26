@@ -85,6 +85,17 @@ public class MemberController {
 		
 		return num;
 	}
+	//회원정보 수정시의 emailchk2 추가 0425 김영빈
+	@ResponseBody
+	@RequestMapping("emailchk2")
+	public int emailchk2(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
+		memberServiceInter=new MemberService();
+		
+		int num=memberServiceInter.emailchk2(model);
+		
+		return num;
+	}
 
 	@ResponseBody
 	@RequestMapping("searchid")

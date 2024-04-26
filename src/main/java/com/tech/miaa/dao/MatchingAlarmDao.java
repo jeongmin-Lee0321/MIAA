@@ -27,7 +27,7 @@ public interface MatchingAlarmDao {
 	
 	/* 원진호_0412_원글삭제기능추가 */
 	
-	public void mypage_alarm_delete(String string, String id);
+	public void mypage_alarm_delete(String atc_id,String total_id, String id);
 	
 	public void total_item_write(String atcid, String clrNm, String depPlace, String fdFilePathImg, String fdPrdtNm,
 			String fdSbjt, String fdSn, String fdYmd, String prdtClNm, String rnum, String addr);

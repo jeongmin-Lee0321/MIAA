@@ -39,7 +39,8 @@ public class PageVO3 {
 		}
 		if (page == null || page == 0 || page < 0) {
 			page = 1;
-		} else if (page > pageEnd) {
+		} //totalPage 가  0인경우 page가 0 이되어 rowStrat가 음수값이 나오는 문제처리 /0425 김영빈 추가
+		else if (page > pageEnd && totPage>=1) {
 			page = pageEnd;
 		}
 

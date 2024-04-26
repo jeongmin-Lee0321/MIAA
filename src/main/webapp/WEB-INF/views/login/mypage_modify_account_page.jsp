@@ -130,7 +130,7 @@
             var pwdCheck = 0; var emailCheck = 0;	
                     $("#emailchk").click(function () {
                     	$.ajax({
-                            url: "emailchk",
+                            url: "emailchk2",
                             type: "post",
                             dataType: "json",
                             data: {

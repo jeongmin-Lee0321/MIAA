@@ -28,6 +28,14 @@ function goToDetailListPage(total_id) {
     let url = "mypage_matching_alarm_detail_list_page?total_id=" + total_id+"&page=1";
     window.location.href = url;
 }
+function goToDetailPage_ani(desertionNo) {
+	let url = "mypage_matching_ani_detail?desertionNo="+desertionNo;
+    window.location.href = url;
+}
+function goToItemListpage() {
+	let url = "mypage_matching_alarm_item_list_page?page=1";
+    window.location.href = url;
+}
 
 </script>
 <body>
@@ -39,20 +47,22 @@ function goToDetailListPage(total_id) {
 			<!-- 검색창과 검색결과 -->
 
 			<div class="searchbar-container">
-				<form action="">
 					<div class="searchbar-select-group">
 						<div style="display: flex;">
 							<button class="btn-list" id="btn-search-all"
-								onclick="location.href='mypage_matching_alarm_list_page'"
+								onclick="location.href='mypage_matching_alarm_list_page?page=1'"
 								style="cursor: pointer;">전체보기</button>
 							<button class="btn-list" id="btn-search-item"
-								onclick="location.href='mypage_matching_alarm_item_list_page'"
+								onclick="location.href='mypage_matching_alarm_item_list_page?page=1'"
 								style="cursor: pointer;">물건</button>
+<!-- 							<button class="btn-list" id="btn-search-item"
+								onclick="goToItemListpage()"
+								style="cursor: pointer;">물건</button> -->
 							<button class="btn-list" id="btn-search-ani"
-								onclick="location.href='mypage_matching_alarm_ani_list_page'"
+								onclick="location.href='mypage_matching_alarm_ani_list_page?page=1'"
 								style="cursor: pointer;">동물</button>
 							<button class="btn-list" id="btn-search-key"
-								onclick="location.href='mypage_matching_alarm_keyword_list_page'"
+								onclick="location.href='mypage_matching_alarm_keyword_list_page?page=1'"
 								style="cursor: pointer;">키워드목록</button>
 						</div>
 						<!-- <div style="display: flex;">
@@ -79,7 +89,6 @@ function goToDetailListPage(total_id) {
 					</div> -->
 
 					</div>
-				</form>
 			</div>
 
 			<!-- 검색창과 검색결과 끝 -->
@@ -170,16 +179,16 @@ function goToDetailListPage(total_id) {
 							</div>
 						</div>
 						<div class="list-control-container">
-							<a href="#" onclick="de">모두 보기(${dto.matching_animal_dto.size()}개)</a>
+							<a href="#" onclick="goToDetailListPage(${dto.total_id})">모두 보기(${dto.matching_animal_dto.size()}개)</a>
 						</div>
 					</div>
-
 					<!-- 검색 결과 리스트프레임 -->
 					<div class="result-list">
 						<c:forEach items="${dto.matching_animal_dto}" var="dto2" begin="0"
 							end="4">
 							<!-- 목록1개가 list-card -->
-							<div class="list-card" style="cursor: pointer">
+							<div class="list-card" style="cursor: pointer"
+							onclick="goToDetailPage_ani('${dto2.desertionNo}')">
 								<div class="card-photo">
 									<img src="${dto2.filename}" alt="">
 								</div>
