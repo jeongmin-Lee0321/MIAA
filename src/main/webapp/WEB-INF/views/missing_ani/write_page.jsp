@@ -68,7 +68,7 @@ body {
 					<div class="table">
 						<div class="table-row">
 							<div class="row-title">
-								<span>연락처 공개여부*</span>
+								<span>연락처<br />공개여부*</span>
 							</div>
 							<div class="row-content">
 								<div class="radio-container">
