@@ -53,7 +53,12 @@
 <p align="center">
   <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/36b0e331-afea-433d-9f84-6d3def286eaf">
 </p>
+<br/>
 
+## 사이트 프로세스
+<p align="center">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/f70ac1bc-53a3-4038-b04a-ea7a859b7a39">
+</p>
 <br/>
 
 ## 프로젝트 주요 기능
