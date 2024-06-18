@@ -1,7 +1,7 @@
 # 프로젝트명 : MIAA (Missing ITEM and ANIMAL Alarm)
 <br/>
 <p align="center">
-  <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/7a436044-8976-4548-97fa-d149c65d027f">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/d4218bb2-2664-45b9-ab5e-673f04e784cc">
 </p>
 <br/>
 
