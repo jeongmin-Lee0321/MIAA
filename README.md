@@ -75,9 +75,9 @@
 
 <br/>
 
-### [버스정류소 노선정보 및 버스경로 열람기능]
+### [분실물 및 실종동물 게시물 등록기능]
 <p align="center">
-  <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/14b2c8bf-3d30-48ac-a0f6-a26a08a65da1">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/616bc599-e1e3-4848-8596-58713d53bd02">
 </p>
 
 * 버스정류소를 클릭하면 해당 버스정류장 위치가 카카오맵에 마커로 표시되게 구현했습니다.
@@ -87,7 +87,7 @@
 
 <br/>
 
-### [지하철역 선택 및 역별 지하철 정보]
+### [분실물 및 실종동물 등록게시물 수정,삭제기능]
 <p align="center">
   <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/8d78f988-00b0-47d2-8ccc-81e7a20cfc9c">
 </p>
@@ -98,7 +98,7 @@
 
 <br/>
 
-### [버스/지하철 행정구역 별 승하차 통계 열람기능]
+### [내정보 등록게시물 관리기능]
 <p align="center">
   <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/c968216d-c54b-417c-823a-b23b1d7763ac">
 </p>
