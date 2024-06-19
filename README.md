@@ -85,7 +85,7 @@
 
 ### [분실물 및 실종동물 등록게시물 수정,삭제기능]
 <p align="center">
-  <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/8d78f988-00b0-47d2-8ccc-81e7a20cfc9c">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/c9c7fedb-6216-4794-8760-245782c98f61">
 </p>
 
 * 행정구역 클릭 시 클릭한 행정구역의 중심좌표를 DB에서 가져와 카카오맵을 출력하고 해당 중심위치 기준 주위의 지하철역이 마커로 표시되게 구현했습니다.
