@@ -177,7 +177,7 @@
 								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}
 								&animalkind2=${searchContent.get(5)}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
-					<c:if test="${pageVo.page <= pageVo.totPage}">
+					<c:if test="${pageVo.page < pageVo.totPage}">
 					<a href="missing_ani_search_page?page=${pageVo.page + 1}&searchday1=${searchContent.get(0)}
 								&searchday2=${searchContent.get(1)}&addressCode1=${searchContent.get(2)}
 								&addressCode2=${searchContent.get(3)}&animalkind1=${searchContent.get(4)}

@@ -159,10 +159,17 @@ public class MissingAnimalService implements MissingAnimalServiceInter {
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		MissingAnimalDao dao = sqlSession.getMapper(MissingAnimalDao.class);
 		String total_id=request.getParameter("total_id");
+		
 		if((String) map.get("total_id")!=null) {
 			total_id=(String) map.get("total_id");
 		}
+		System.out.println("애니멀 totalid:"+total_id);
 		ArrayList<AnimalImgDto> imgDtos=dao.missing_ani_detail_img(total_id);
+		if(imgDtos.size()!=0) {
+			System.out.println(imgDtos.get(0).getFilename());
+		}else {
+			System.out.println("이미지 없음");
+		}
 		if(imgDtos.size()!=0) {
 			for (int i = 0; i < imgDtos.size(); i++) {
 				String fileName=imgDtos.get(i).getFilename();

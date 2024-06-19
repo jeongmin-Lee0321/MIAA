@@ -290,14 +290,13 @@ public class MemberService implements MemberServiceInter {
 				//아이디와 비밀번호 일치하는지 확인
 				int num = dao.login1(id, bcpwd);
 				if (num > 0) {
-					//일치하면 dto에 회원정보 저장 후 세션에 유저아이디를 저장
+					//일치하면 dto에 회원정보 저장 후 세션에 유저아이디 및 전화번호 저장
 					dto = dao.login2(id, bcpwd);
 					session = request.getSession(false);
 					session.setAttribute("userId", dto.getUser_id());
 					session.setAttribute("userTel", dto.getUser_tel());
 					session.setMaxInactiveInterval(1800);
-					
-					//최근로그인날짜 추가 마한슬
+					//최근로그인날짜 추가
 					dao.login_date_update(id);
 					
 					result = "redirect:/";

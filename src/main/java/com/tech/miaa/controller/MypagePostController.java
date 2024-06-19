@@ -44,6 +44,7 @@ public class MypagePostController {
 	}
 	@RequestMapping("mypage_ani_delete")
 	public String mypage_ani_delete(HttpServletRequest request, Model model) {
+		
 		model.addAttribute("request", request); model.addAttribute("sqlSession", sqlSession);
 		animalService = new MissingAnimalService();
 		animalService.missing_ani_delete(model);
@@ -90,6 +91,7 @@ public class MypagePostController {
 		
 		return result;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value ="/mypage_total_delete")
 	public int mypage_total_delete(HttpServletRequest request, Model model) {
@@ -98,8 +100,8 @@ public class MypagePostController {
 		itemService = new LostItemService(); animalService = new MissingAnimalService();
 		for (int i = 0; i < ajaxMsg.length; i++) {
 			model.addAttribute("total_id", ajaxMsg[i]);
-			itemService.lost_item_delete(model);
 			animalService.missing_ani_delete(model);
+			itemService.lost_item_delete(model);
 			result=1;
 		}
 		return result;
