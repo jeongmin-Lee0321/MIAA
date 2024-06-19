@@ -62,17 +62,12 @@
 <br/>
 
 ## 주요 기능 상세설명
-### [메인화면]
  전체 영상 : https://youtu.be/tvcSdTwA2cM?si=cBgy41U-UUKb2WNl
-
-* 서비스 접속 시 초기화면으로 타일즈를 활용하여 header, main, footer로 구성된 화면입니다.
-* header에 버스 교통정보, 지하철 교통정보, 경로검색 3개의 버튼으로 사용자가 원하는 기능을 사용 할 수 있게 구성했습니다.
-
 <br/>
 
-### [행정구역 선택화면 및 버스정류소 선택기능]
+### [분실물 및 실종동물 검색기능]
 <p align="center">
-  <img src="https://github.com/kimgeen/SeoulTransport/assets/146930254/9853d293-a0b4-4683-9636-edbb563d7379">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/aea79398-fa47-4dd4-9f35-34c5e5c60254">
 </p>
 
 * 카카오API를 활용해 서울시 행정구역 별 폴리곤으로 구역을 나누어 지도에 표시했습니다, 버스와 지하철 모두 동일한 방식으로 자치구를 선택 할 수 있습니다.
