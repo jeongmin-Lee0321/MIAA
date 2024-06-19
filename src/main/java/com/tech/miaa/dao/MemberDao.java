@@ -12,6 +12,8 @@ public interface MemberDao {
 			String email, String postcode, String address, String detailAddress,String tel);
 	public int idcheck(String id);
 	public int emailcheck(String email);
+	//회원정보 수정시의 emailchk2 추가 0425 김영빈
+	public int emailcheck2(String email, String id);
 	public String searchid(String email);
 	public void del_account(String bcpwd,String id);
 	public String searchpw1(String id, String email);

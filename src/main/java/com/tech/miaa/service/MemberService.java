@@ -45,7 +45,6 @@ public class MemberService implements MemberServiceInter {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
-
 		String email = request.getParameter("email");
 		int num = 0;
 
@@ -56,6 +55,34 @@ public class MemberService implements MemberServiceInter {
 			num = dao.emailcheck(email);
 		}
 
+		return num;
+	}
+	//회원정보 수정시의 emailchk2 추가 0425 김영빈
+	@Override
+	public int emailchk2(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		SqlSession sqlSession = (SqlSession) map.get("sqlSession");
+		String id = null;
+		try {
+			HttpSession session = request.getSession(false);
+			id = (String) session.getAttribute("userId");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String email = request.getParameter("email");
+		int num = 0;
+		
+		if (email == "") {
+			num = -1;
+		} else if(id != null){
+			MemberDao dao = sqlSession.getMapper(MemberDao.class);
+			num = dao.emailcheck2(email,id);
+		} else if(id == null){
+			System.out.println("로그인 세션오류, timeout 확인");
+		}
+		
 		return num;
 	}
 	

@@ -310,8 +310,8 @@ public class AbandonmentPublicSrvc {
     //스케줄러 때문에 오버라이딩 했습니다. - 04-20 마한슬
     public static AbdmPublic abandonmentPublic() {
         AbdmPublic abdmPublic = new AbdmPublic();
-        String page = "1";
-        String page_numOfRows = "100";
+        String page = "2";
+        String page_numOfRows = "1000";
         try {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + API_KEY); /*Service Key*/
