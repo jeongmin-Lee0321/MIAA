@@ -133,7 +133,7 @@
 					<c:if test="${pageVo.page >= pageVo.totPage}">
 					<a href="mypage_post_list_page?page=${pageVo.page }&reply_status=${status}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
-					<c:if test="${pageVo.page <= pageVo.totPage}">
+					<c:if test="${pageVo.page < pageVo.totPage}">
 					<a href="mypage_post_list_page?page=${pageVo.page + 1}&reply_status=${status}"><img src="resources/img/chevron-left.png" alt=""></a>
 					</c:if>
 					</li>

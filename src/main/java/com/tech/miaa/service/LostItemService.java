@@ -123,7 +123,8 @@ public class LostItemService implements LostItemServiceInter {
 		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
 		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
-		String colorCd=""; String user_tel=request.getParameter("userTel");
+		String colorCd=""; 
+		String user_tel=request.getParameter("userTel");
 		if(!request.getParameter("colorCd").equals("색상을 선택하세요")) colorCd=request.getParameter("colorCd");
 		String sepcialMark=request.getParameter("sepcialMark");
 		String userId=request.getParameter("userId"); String addressCode=request.getParameter("addressCode");
@@ -213,7 +214,13 @@ public class LostItemService implements LostItemServiceInter {
 		if((String) map.get("total_id")!=null) {
 			total_id=(String) map.get("total_id");
 		}
+		System.out.println("아이템 totalid:"+total_id);
 		ArrayList<ItemImgDto> imgDtos=dao.lost_item_detail_img(total_id);
+		if(imgDtos.size()!=0) {
+			System.out.println(imgDtos.get(0).getFilename());
+		}else {
+			System.out.println("이미지 없음");
+		}
 		
 		if(imgDtos.size()!=0) {
 			for (int i = 0; i < imgDtos.size(); i++) {
@@ -242,7 +249,7 @@ public class LostItemService implements LostItemServiceInter {
 		HttpServletRequest request = (HttpServletRequest) map.get("request"); SqlSession sqlSession = (SqlSession) map.get("sqlSession");
 		ArrayList<MultipartFile> files = (ArrayList<MultipartFile>) map.get("files");
 		String result=null; LostItemDao dao = sqlSession.getMapper(LostItemDao.class);
-
+		
 		String openclose=request.getParameter("openclose"); String lostday=request.getParameter("lostday");
 		String address=request.getParameter("address"); String itemname=request.getParameter("itemname");
 		String itemkind1=request.getParameter("itemkind1"); String itemkind2=request.getParameter("itemkind2");
