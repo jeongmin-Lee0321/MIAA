@@ -63,7 +63,7 @@
 
 ## 주요 기능 상세설명
 ### [메인화면]
-https://youtu.be/b9qnSJDd5JM?si=rbphKsEkpTql4JqW
+ 전체 영상 : https://youtu.be/b9qnSJDd5JM?si=rbphKsEkpTql4JqW
 
 * 서비스 접속 시 초기화면으로 타일즈를 활용하여 header, main, footer로 구성된 화면입니다.
 * header에 버스 교통정보, 지하철 교통정보, 경로검색 3개의 버튼으로 사용자가 원하는 기능을 사용 할 수 있게 구성했습니다.
