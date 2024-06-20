@@ -95,7 +95,7 @@
 
 ### [내정보 등록게시물 관리기능]
 <p align="center">
-  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/8e695100-7e8f-4ef3-8251-0ac4ce0307a6">
+  <img src="https://github.com/jeongmin-Lee0321/MIAA/assets/146930254/285c260c-70ad-40bb-a93b-da228cc41dbc">
 </p>
 
 * 서울시 행정구역 별 탑승자 통계가 나오는 페이지입니다.
